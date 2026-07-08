@@ -1,0 +1,29 @@
+# Deploy this folder as the Render service root (or set Root Directory to mern-interview-prep).
+services:
+  - type: web
+    name: interviewforge
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVE_FRONTEND
+        value: "true"
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES
+        value: 7d
+      - key: ADMIN_EMAIL
+        value: arun375797
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        value: Arun
+      - key: CLIENT_URL
+        value: ""

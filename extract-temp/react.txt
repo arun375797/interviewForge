@@ -1,0 +1,2109 @@
+React Questions — Topic Wise Arranged
+Source files merged: Pasted text(25).txt, Pasted text (2)(4).txt, Pasted text
+(3)(2).txt
+Cleanup rule: kept all unique questions/tasks and removed only exact repeated
+duplicates after trimming bullets, numbering, and extra spaces.
+SUMMARY
+Total cleaned lines/items found: 2858
+Unique arranged items: 1861
+Exact duplicate items removed: 997
+Topic sections used: 24
+TOPIC INDEX
+01. React Basics, Features, SPA & Setup — 25 items
+02. JSX, Transpilation, Bundling, Vite, Babel & Modules — 53 items
+03. DOM, Virtual DOM, Reconciliation, Diffing, Fiber & Rendering — 60 items
+04. Components: Functional/Class, Props/State, Stateless/Stateful & Pure
+Components — 75 items
+05. State, Props, Immutability, Batching & setState — 32 items
+06. Hooks Rules & Core Hooks: useState, useEffect & useRef — 92 items
+07. Advanced Hooks: useMemo, useCallback, useReducer, useContext, useLayoutEffect,
+useId & Custom Hooks — 103 items
+08. useEffect Lifecycle, Cleanup, Timers & Side Effects — 77 items
+09. Forms, Controlled/Uncontrolled Components, Refs, forwardRef & Inputs — 44
+items
+10. Component Communication: Props Drilling, Lifting State, Parent-Child & Sibling
+Communication — 44 items
+11. Conditional/Dynamic/List Rendering, Keys, Fragments & createElement — 56 items
+12. Events, Synthetic Events, Event Pooling & Event Handling — 25 items
+13. Routing: React Router, Outlet, Params, Navigation & Protected Routes — 49
+items
+14. Context API & Global State Management — 51 items
+15. Redux, Redux Toolkit, Thunk, Saga, Middleware, Store & Persistence — 271 items
+16. Performance Optimization: Memoization, Lazy Loading, Suspense, Code Splitting
+& Profiler — 66 items
+17. Error Boundaries, Portals, HOC, Render Props, Composition & Patterns — 43
+items
+18. CSR, SSR, SSG, Hydration, SEO & Rendering Strategies — 26 items
+19. Authentication, Authorization, JWT, Tokens & Browser Storage Security — 123
+items
+20. API, Axios, Fetch, Interceptors & Project Networking — 27 items
+21. React Practical Tasks, Todo Apps, Counters, Forms & Mini Projects — 106 items
+22. Project Bugs, Validation, UI Improvements, Review Notes & Feedback — 183 items
+23. React 19, Latest Features, Advanced APIs & Misc React Topics — 35 items
+24. JavaScript / Backend / Non-React Overlap Found in Files — 195 items
+01. React Basics, Features, SPA & Setup
+---------------------------------------
+- <StrictMode>
+- Advantages and Disadvantages of React.js
+
+-- 1 of 40 --
+
+- Concept of reusability
+- drawbacks of react
+- enabling/disabling StrictMode
+- Framework vs library
+- How two way binding is possible
+- Latest version of react.
+- Library vs Framework
+- one way binding vs two way binding
+- one way data binding
+- one way data binding - clarity
+- One-Way Data Binding
+- One-way Data Binding (how React enforces it)
+- react drawbacks
+- React follows unidirectional or bi directional flow
+- React.StrictMode
+- strict mode
+- strict mode in react
+- StrictMode
+- StrictMode in react
+- StrictMode in reactjs
+- what is react (give a brief)
+- what is strict mode
+- Why react is declarative.
+02. JSX, Transpilation, Bundling, Vite, Babel & Modules
+-------------------------------------------------------
+- as keyword
+- babel
+- babel (transpilation)
+- can react components be written without JSX?
+- compiler vs transpiler
+- default export vs named export
+- Dependencies, devDependencies
+- Dev dependencies
+- Devdependecies, dependencies
+- Difference between JSX and HTML
+- dynamici imports, ESModules
+- ESModules
+- ESModules import system
+- ESModules, default export, named exports
+- how babel works
+- Import/Export
+- index.html
+- Introduction to Vite
+- is it possible to use React without JSX? *
+- is JSX mandatory for React apps?
+- is JSX mandatory for writing React apps?
+- is JSX mandatory to create ReactJS apps?
+- jsx vs js
+- Key differences between JSX and HTML
+- Named and default exports
+
+-- 2 of 40 --
+
+- named export vs default export
+- Npx
+- pros of vite
+- purpose index.html in a react codebase
+- purpose of using curly braces around named imports
+- ReactJS without JSX *
+- rules of JSX
+- Scripts in package.json
+- Setting up a React project using Vite.
+- Setting Up ReactJS Environment with Vite (Create-react-app is outdated now,
+Don't use it.)
+- syntax difference between html and jsx
+- Transpilation
+- transpiler
+- transpiler vs compiler
+- Transpiling and Bundling examples
+- understand why console message in App.jsx appears twice in console
+- Understanding vite.config.js and basic project structure.
+- using named exports without {}
+- webpack
+- What are Babel and Webpack?
+- What is Babel?
+- What is Jsx? can we able to write Js code inside jsx?
+- What is the use of index.html
+- What is Vite?
+- why "className" is used in jsx
+- Why actions are important
+- why class is changed to className in JSX
+- why there are curly braces around some imports
+03. DOM, Virtual DOM, Reconciliation, Diffing, Fiber & Rendering
+----------------------------------------------------------------
+- Application & Use Cases: Understanding when to use Client-Side Rendering (CSR)
+vs. Server-Side Rendering (SSR).
+- Browser dom node - html structure
+- client-side rendering (CSR)
+- Createroot
+- createRoot method
+- createRoot()
+- createRoot().render()
+- Difference between actual DOM and virtual DOM
+- difference between client-side rendering (CSR) and server-side rendering (SSR)
+- Diffing Algirithm
+- diffing algorithm
+- Diffing Algorithm (key usage, why index is a bad key)
+- diffing, reconciliation
+- DOM direct manipulation
+- fiber
+- Fiber Improvements
+- Fundamentals of React Fiber architecture and its benefits.
+- How react updates the actual Dom
+
+-- 3 of 40 --
+
+- incremental rendering
+- Phases of state updation - (triggering, rendering, committing)
+- purpose of the root DOM element in React
+- purpose of the root DOM element in React?
+- react dom vs virtual dom
+- React Fiber
+- React Fiber (what it is, how it improves rendering)
+- React fiber - reconciliation
+- React Fiber: Understanding its architecture and reconciliation process.
+- React fibre
+- react fibre - need more clarity
+- React Internals & Rendering
+- ReactDOM.createRoot
+- ReactDOM.render
+- ReactDOMClient
+- ReactDOMServer
+- reactfiber
+- Real DOM vs. Virtual DOM
+- Reconciliation
+- Reconciliation & diffing
+- Reconciliation (what happens when state/props change)
+- render(): Need more clarity
+- Rendering
+- root DOM element in React
+- Server Side Rendering
+- server-side rendering (SSR)
+- shadow dom
+- Shadow DOM and Virtual DOM
+- shadow dom vs virtual dom
+- shallow rendering
+- Types of rendering
+- Use case of CSR (Client-Side Rendering) and SSR (Server-Side Rendering)
+- virtual dom
+- Virtual DOM (how it works)
+- virtual dom vs actual dom
+- what is diffing
+- What is React Fiber?
+- What is Reconciliation
+- What is the Virtual DOM?
+- Why are two virtual DOMs needed in React
+- Why are two virtual DOMs needed in React?
+- working of virtual DOM,
+04. Components: Functional/Class, Props/State, Stateless/Stateful & Pure
+Components
+----------------------------------------------------------------------------------
+-
+- Basic component workout
+- class component vs function component
+- Class components
+- class vs functional components
+
+-- 4 of 40 --
+
+- Class-based component implementation
+- component did mount
+- component structure
+- component to display count of completed and pending tasks
+- componentDidCatch
+- Creat a components to add two numbers by clicking a button
+- Create a custom components
+- creating a pure component
+- Custom components
+- difference b/w class and functional components
+- Difference between Functional and Class Components
+- difference between state and local variables
+- Difference of props v/s state
+- different ways to re-render a react component?,
+- display user input from child component in parent component from -P
+- High Order Components - benefits
+- Learn about components
+- Limitations of functional based components
+- limitations of functional components
+- Link props
+- Map state props
+- more on ways to optimise component
+- need more clarity on props
+- normal variables vs state variables
+- passing multiple props
+- print message when component is mounted
+- props
+- props and state
+- Props and state?
+- props immutability,
+- props vs state - mutability.
+- Props.children
+- PropTypes
+- PropTypes in React: How to validate props?
+- PropTypes.array
+- PropTypes.number
+- PropTypes.string
+- pure and unpure components
+- pure component
+- Pure component - in class
+- Pure components
+- re render a component if page resized
+- react memo vs pure components
+- render a component once page resized
+- render the data in component
+- renrender component when page resized
+- State and local variables
+- state variable vs normal variables
+- state vs local variables
+- State vs Props
+- Stateful & stateless component
+
+-- 5 of 40 --
+
+- stateful and stateless components
+- Stateful vs stateless component
+- Stateful vs stateless components
+- Stateless and statefull
+- stateless and statefull component
+- stateless components vs statefull component
+- Stateless vs Stateful components
+- stateless vs statefull component
+- stats vs props
+- super() and super(props)
+- Task: design a component that displays the count of completed todo items
+- update props
+- usage of props
+- Use component-based approach
+- What is a component?
+- Why the component need to be returned under a single parent
+- Why we keep the component name in pascal case in react ?
+- Why we need to keep the components name CamelCase
+- workout: pass data from a child component to parent using props
+- workout: save user data in context & use it in components
+05. State, Props, Immutability, Batching & setState
+---------------------------------------------------
+- automatic batching
+- Batching
+- Batching - readmore
+- Batching in React
+- Difference between prop vs State
+- immutability of state
+- initial state
+- modifying state passed down through context
+- purpose of using spread operator when update(react)
+- React Concurrent Mode (automatic batching)
+- react state
+- replaceState()
+- reset state
+- return statement
+- setState async batching
+- Spread operator
+- State
+- State in react
+- state management
+- State updates
+- state vs prop in re-render
+- State vs variables
+- variable vs state
+- What are the phases state updation ?
+- What is state management
+- what is state?,
+- What is the purpose of the callback function in setStateQ?
+- Why prev state is used for mutation?
+
+-- 6 of 40 --
+
+- why spread operator is used in object updates
+- why spread operator is used to update array state rather than Array.push
+- Why state is immutable
+- why states are immutable
+06. Hooks Rules & Core Hooks: useState, useEffect & useRef
+----------------------------------------------------------
+- [] in useEffect,
+- advantages of useRef
+- behavior of useEffect based on dependency array
+- Change the color of the text using useRef
+- Change the colour of the text dynamically using useRef
+- Change the colour of the text using useRef
+- changing value in useRef
+- Clean up function in useEffect
+- create a time using useEffect
+- customhooks and function diff
+- Dependancy of useEffect
+- Dependencies of useeffect
+- Difference between normal let, const variables and usestate
+- Difference between usestate and normal js variables
+- effect of not providing dependency array in useEffect
+- Explain how the useRef hook can be used in React?
+- Fetch data from the api using useEffect(partially done)
+- Focus the add todo input field upon loading of the page (useEffect + useRef)
+- Functions vs hooks
+- Hook concept
+- Hook concepts
+- hooks
+- Hooks & Advanced Implementations:
+- Hooks in react
+- Hooks inside conditionals
+- How does useEffect() work?
+- How to change the color of the text dynamically using useRef
+- how to update useRef
+- how useEffect handle life cycle method
+- Intermediate Hooks & Performance
+- Learn more about hooks
+- Learn the concept of hooks
+- let [value, setValue] = useState(false);
+- No dependency array in useEffect
+- No dependency array useEffect
+- Passing Async Callbacks in useEffect
+- Practical: Send data from child to parent using useRef.
+- purpose of return statement in useEffect
+- React Basics with Vite, Components, Hooks & To-Do App Project. - Week 18
+- return datatype of useState
+- return datatype of useState()
+- Return in Useeffect
+- return in useEffect hook syntax
+- return value of useRef
+
+-- 7 of 40 --
+
+- Rules of hook
+- Rules of hooks
+- rules of using hooks
+- Syntax of useEffect
+- under stand better on usage of hooks
+- Usage of useeffect
+- useEffect
+- useEffect - return
+- useEffect - sideEffcets
+- useEffect - uses
+- useEffect and useState
+- useEffect arguments
+- useEffect dep arrays
+- useEffect exact concept
+- useEffect vs useState
+- useEffect with no dependencies array
+- useEffect()
+- UseEffect() - P
+- useEffect() → Side effects handling
+- useEffect, if no dependency array
+- useEffect’s behavior when dependency array is empty vs not provided
+- useRef
+- useRef - understand the usecases
+- useref change text color
+- Useref exact concept
+- useRef Hook
+- useRef purpose
+- useRef usage
+- useRef vs forwardRef
+- useref vs regular variable to hold value
+- useRef() → Reference handling
+- useState
+- useState (basics, controlled vs uncontrolled components)
+- usestate -
+- useState async batching
+- useState vs useRef
+- useState() → State handling
+- variable vs useState
+- what is the purpose of dependency array in useeffect
+- what will happen if we not pass dependency array in use effect
+- What will happen if we not pass dependency array in useEffect
+- why can't hooks be used in conditions
+- why can't we use async in useEffect
+- Why can’t hooks be used inside conditional statements or loops
+- Why can’t we declare a hook inside a if condition
+- Why hooks are not inside conditionals
+- why shouldn’t hooks be in conditional blocks
+- Why We can’t use the hooks inside a if case ?
+07. Advanced Hooks: useMemo, useCallback, useReducer, useContext, useLayoutEffect,
+useId & Custom Hooks
+
+-- 8 of 40 --
+
+----------------------------------------------------------------------------------
+---------------------
+- a. useCallback
+- applications of useCallback
+- b. useMemo
+- c. React.memo vs useMemo
+- callback, usememo
+- create a custom hook
+- create a custom hooks
+- Create counter app using using useCallback
+- create custom hook -convert string to capital letter
+- create custom hook(partial)
+- Create custom hook-P
+- Creating a Custom Hook
+- Creating custom hooks
+- custom hook
+- Custom hook scenario
+- custom hook to convert capital letter to small and vice vers
+- custom hook(partial)
+- custom hooks
+- Custom Hooks (why, how to create, difference from functions)
+- custom hooks in react
+- Difference between React.memo and useMemo
+- Difference between useEffect and useLayoutEffect
+- does useMemo prevent re-renders
+- Drawbacks of useMemo & react.memo
+- Example for useCallback
+- Explain the working concept useCallback and useMemo?
+- Function vs custom hook
+- function vs hook,
+- Hook vs function
+- Hooks vs functions
+- How does React.memo work?
+- how React.memo is called
+- Implement useCallback properly
+- Implement useMemo in the movie list fetching api
+- limitations of useCallback & useMemo
+- limitations of useMemo & useCallback
+- Make a component to find the square of a number using useMemo? If we pass same
+value, it shouldn't calculate it.
+- need practical exposure of useMamo an useCallback
+- Practical Implementation of useCallback
+- Practical Implementation of UseMemo
+- Practical: Create a custom hook for increment/decrement counter.
+- Pure component - React.memo
+- pure component vs react.memo
+- Pure Components vs React.memo (when re-renders happen, referential equality)
+- Purpose of useCallback,useMemo,Reat.memo
+- React.memo
+- React.memo (how it works, limitations)
+- React.memo and useMemo
+
+-- 9 of 40 --
+
+- React.memo vs useMemo
+- React.memo()
+- Referential equality
+- Referential Equality problem in React
+- rules of custom hooks
+- Stale closure
+- use callback working
+- Use hook
+- useCallback
+- useCallback (when functions should be memoized, dependency array importance)
+- usecallback example
+- useCallback needs some clarity
+- useCallback vs useMemo
+- usecallback()
+- useCallback() → Performance tuning
+- useCallback, useMemo (practical)
+- useCallback, useMemo, why and how to use
+- useCallback: why should functions be recreated?
+- useEffect vs useLayoutEffect?
+- useEffect,usememo
+- useEfffect vs useLayoutEffect
+- useFormState
+- useId
+- useId (generating unique IDs)
+- useId()
+- useLayoutEffect
+- useLayoutEffect (vs useEffect, sync vs async execution)
+- useLayoutEffect vs useEffect (not clear)
+- useMemo
+- useMemo & useCallback - usecases
+- useMemo (difference with React.memo, prevents recalculation not re-render)
+- useMemo (re-renders?)
+- useMemo (workout)
+- useMemo dependency
+- useMemo dependency list
+- usememo example
+- useMemo example - different scenarios
+- useMemo vs React.memo
+- useMemo vs react.memo()
+- useMemo vs useCallback
+- useMemo()
+- useMemo() → Optimization
+- useMemo, useCallback
+- useTransition
+- useTransition ?
+- What does react.memo check to prevent the re renders
+- What if we pass empty array for useMemo and useCallBack?
+- what is difference between useeffect and useLayoutEffect
+- What is react.memo exactly
+- What will happen if dependencey array is wrong in useMemo and useCallBack?
+- what will happen if we not pass dependency array in useEffect and
+
+-- 10 of 40 --
+
+useLayoutEffect
+- When does useCallback re-render?
+- When should you use useCallback
+- Where can we use Hooks?
+- working of React.memo
+08. useEffect Lifecycle, Cleanup, Timers & Side Effects
+-------------------------------------------------------
+- CimponentWillUnmount
+- Class (basic- lifecycle methods)
+- Cleanup function
+- cleanup function in useEffect,
+- Cleanup function syntax
+- Cleanup function syntax in useEffect
+- clearInterval
+- Code cleanup using us effect
+- component lifecycle
+- Component will unmount using useffect
+- componentDidUnmount
+- componentWillUnmount using useEffect
+- Create a timer using react
+- Create a timer using useEffect
+- Creating a counter - setInterval
+- Error boundary lifecycle (Syntax)
+- handling lifecycle events in functional components
+- Handling unmount in useEffect hook
+- How do u unmount a functional component
+- How is component unmounting handled in functional components
+- how to achieve componentWillUnmount in functional component
+- How to achieve unmounting phase?
+- How to handle componentDidUpdate in a functional component
+- how to handle mounting, updating & unmounting using useEffect
+- how to handle unmounting using useEffect
+- how useEffect handles lifecycle methods
+- how useEffect triggers when unmounted
+- implement a basic stopwatch
+- Learn about lifecycle of a component
+- life cycle method in react
+- Life cycle methods
+- Life cycle methods - clarity
+- Life cycle methods in functional components
+- Life cycle methods in react
+- Life cycle of React Hook?
+- lifecycle
+- lifecycle events
+- lifecycle events (vague)
+- lifecycle events using useEffect
+- lifecycle events using useEffect, how dependency array changes the behavior of
+it
+- lifecycle events, useEffect
+- Lifecycle Methods
+
+-- 11 of 40 --
+
+- lifecycle methods using useEffect
+- lifecycle methods, stages
+- lifecycle of a React component
+- lifecycle stages of a component
+- Memory Leaks in useEffect (how to avoid with cleanup)
+- not able to explain the life cycle phases
+- Optimize application - clearing intervals
+- purpose of using spread when updating state that’s an array rather than using
+Array.push, immutability of state
+- Setinterval
+- setInterval in a useEffect
+- side effects,
+- Timer functions
+- Unmount
+- unmount in functional components
+- unmounted event using useEffect
+- unmounting & cleanup function
+- unmounting in functional component
+- updating props
+- Updating ref , myref.current = “hai
+- Updating ref - useRef
+- updating state passed deep down through context
+- updating state that’s an array
+- useEffect (dependency array, cleanup function, lifecycle simulation)
+- useEffect - lifecycle
+- useEffect cleanup function
+- useEffect handling the lifecycle methods
+- useEffect replace componentDidMount?
+- Useeffect with lifecycle methods
+- useRef (storing values, DOM reference, timer example, forwardRef)
+- useref set timer with start and stop
+- Which lifecycle hooks are replaced by useEffect in functional components?
+- why arrays and objects are copied when updating state
+- why spread operator is used instead of Array.push when updating state that’s an
+array
+- why spread operator is used when updating array state rather than using
+Array.push and calling state update function
+- workout: lifecycle events using useEffect
+09. Forms, Controlled/Uncontrolled Components, Refs, forwardRef & Inputs
+------------------------------------------------------------------------
+- accessing values from uncontrolled elements using ref
+- add a style to each of the title fields
+- All input fields should be validated
+- benefits of uncontrolled elements
+- Check the text entered in 2 input fields are matching or not
+- check whether text entered in 2 inut fields are matching or not
+- Check whether the text entered in input fields are matching or not
+- Check whetherthe text entered in 2 input fields are matching or not
+- Controlled & uncontrolled components
+- controlled & uncontrolled elements
+
+-- 12 of 40 --
+
+- controlled and uncontrolled components
+- controlled component
+- Controlled components
+- Controlled components vs uncontrolled components
+- Controlled components, uncontrolled
+- controlled elements vs uncontrolled elememts
+- controlled vs uncontrolled component
+- controlled vs uncontrolled components
+- Controlled vs Uncontrolled Components (with examples)
+- Convert controlled in to Uncontrolled Components
+- Convert Uncontrolled component into controlled component
+- create input field,
+- Create ref vs forward ref
+- createref
+- difference between controlled and uncontrolled component
+- Example for uncontrolled components
+- forward ref
+- forward refs
+- forwardRef
+- how to access inputref value
+- how to access uncontrolled component in react?,
+- How to get values from uncontrolled component
+- How tp o pull data from an uncontrolled component
+- How will you assign ref variable to dom
+- manipulating uncontrolled components
+- parsing form data
+- ref vs state
+- ref.current.value
+- show the fields in an array of objects using map
+- Techniques to improve react app performace
+- uncontrolled component
+- Uncontrolled components
+- update inputRef
+- usage of refs with any example
+10. Component Communication: Props Drilling, Lifting State, Parent-Child & Sibling
+Communication
+----------------------------------------------------------------------------------
+--------------
+- Child to Parent Component
+- child to parent pass data(practical)
+- child to parent pass props
+- data passing from child to parent using props
+- Disadvantage of prop drilling
+- how to overcome props drilling
+- how to pass a state from parent to child component and vice versa
+- how to pass data from child to parent?,
+- How to send data from child to parent
+- lifting state
+- lifting state up
+- Lifting State Up (best practice)
+
+-- 13 of 40 --
+
+- lifting state up (poor understanding)
+- lifting state-up
+- not able to pass the data child to parent
+- pass data from child component to parent component
+- pass data from child component to parent component?,
+- Pass data from child to parent
+- pass data from child to parent component
+- pass data from child to parents
+- passing data from child to parent
+- passing data from child to parent *
+- passing data from child to parent- scenarios
+- passing data from parent to child
+- Passing data from parent to child and child to parent
+- passing data from parent to child, (child to parent also)
+- passing state from child to parent
+- Practical: Send data from child to parent using callback functions
+- prevent prop drilling
+- prop drilling
+- prop drilling (need clarification)
+- props drilling
+- Props Drilling (what it is, why Context is better)
+- props lifting
+- props lifting vs props drilling
+- Send data from child to parent
+- send data from child to parent component
+- send data from child to parent using context
+- toggle check by button click(parent-child relation).
+- update child component's state from parent componeent
+- What is lifting state up in React?
+- when is prop drilling good?
+- workout: pass data from child to parent using props
+- workout: passing data from child to parent using props
+11. Conditional/Dynamic/List Rendering, Keys, Fragments & createElement
+-----------------------------------------------------------------------
+- advantage of react fragment,
+- advantages of react fragment,
+- can we use index of an array as key props?
+- cloneElement
+- conditional rendering
+- Conditional rendering - P
+- Conditional rendering - ways to do
+- Conditional rendering - ways to do it
+- Conditional rendering syntax
+- conditional rendering using && syntax
+- Create element
+- createElement and cloneElement
+- createRoot(), createElement()
+- createRoot, createElement
+- data rendering using map
+- Div vs fragment
+
+-- 14 of 40 --
+
+- drawbacks of use of div instead of react.fragment
+- Dynamic Rendering
+- empty tags in jsx vs html
+- Empty tags in jxs
+- Fragment
+- Fragment (why we use it, <> shorthand)
+- Fragment vs div
+- Fragments
+- fragments in React
+- giving key to a fragment
+- How does conditional rendering work?
+- Json serialising - fragment
+- Key in listing
+- key prop
+- key prop in list
+- key property
+- key props
+- key-prop
+- keys in array
+- map and forEach in rendering lists
+- map object
+- prop vs fragment
+- purpose of fragments in React
+- React Fragment
+- React fragment (How to pass key to fragment)
+- react fragment vs div,
+- React fragments
+- React.createElement
+- react.createElement vs react.cloneElement
+- React.fragment
+- Using index as key is a good practice
+- What can be a key
+- What is conditional rendering
+- What is react fragments
+- why array index shouldn’t be used as key prop
+- why shouldn’t array index be used as key prop?
+- Why to give key while mapping
+- Why we shouldnt pass index as key value
+- Why we use fragments
+- Why we use fragments - refer more
+12. Events, Synthetic Events, Event Pooling & Event Handling
+------------------------------------------------------------
+- advantages of synthetic events
+- advantages of using synthetic events
+- advantages of using synthetic events in React
+- event pooling
+- Event pooling in React
+- Event.preventDefault
+- Examples of synthetic events
+- Explain about event handlers(eg: handleclick, handle change)
+
+-- 15 of 40 --
+
+- Explain event delegation in React
+- Handling DOM Events in React (P)
+- handling events in react
+- Learn the concept of event handlers
+- Native events
+- Need more clarity on event pooling
+- onChange
+- onClick
+- pointer events
+- Synthetic event
+- Synthetic event's
+- synthetic events
+- Synthetic Events (how React handles events)
+- Synthetic events (Need more clarity )
+- synthetic events in React
+- trickling
+- What is synthetic events
+13. Routing: React Router, Outlet, Params, Navigation & Protected Routes
+------------------------------------------------------------------------
+- <Link/> vs <a>
+- BrowserRouter vs HashRouter
+- BrowserRouter vs MemoryRouter
+- couldn’t complete a workout given regarding route protection
+- Create a route
+- dynamic routing
+- Explain about UseNavigate
+- hash router
+- hash router & memory router
+- hash router, browser router & memory router
+- Hash Routing
+- hashrouters
+- how to handle query/params in react router
+- Implementation of Outlet
+- Implementation of routers in React
+- Learn the concept of React router
+- Link vs NavLink
+- memory router
+- MemoryRouter
+- MemoryRouter, types of routers
+- Nested routing
+- Outlet
+- Outlet vs portal
+- Protecting routes
+- reading current URL
+- reading path params
+- reading query params
+- reading query params and path params
+- redirecting user
+- Router practicals
+- Router-outlet
+
+-- 16 of 40 --
+
+- Routers in react-router-dom
+- Routes vs Route
+- Routing
+- routing and navigation (vague)
+- Switch
+- switching component
+- Theme switcher problem
+- Types of router
+- types of routers
+- usage of path params in APIViews
+- useHistory
+- useHistory b/w useNavigator
+- useHistory vs useNavigate
+- useLocation
+- useNavigate
+- usenavigate exact
+- useNavigate vs useHistory
+- useParams
+14. Context API & Global State Management
+-----------------------------------------
+- Calculator using useContext
+- Can a component have multiple useContext?
+- Can multiple contexts be used in a single app? How?
+- consumers in class component context
+- Context - provider, consumer
+- context and context workflow
+- context API
+- Context api implementation in olx app
+- Context API toggle theme example
+- Context API vs Local storage
+- Create an increment and decrement counter using useContext
+- createContext wrapping
+- d. useContext and context API
+- Difference between difference between Context API and useContext
+- Disadvantages of useContext
+- drawback of useContext
+- drawbacks of Context API
+- How to implement the using context api
+- how to update the context data
+- Implement a counter using useContext
+- Implementation toggle theme functionality using context api
+- implementation using useContext(partial)
+- Limitaions of useContext
+- limitations of the Context API?
+- Limitations of useContext
+- local storage vs context api
+- main components of Context API
+- Need to study more about context API
+- not able to pass data between components with context api
+- Practical: Example of Context API usage?
+
+-- 17 of 40 --
+
+- provider
+- Provider and Consumer
+- Provider: need more clarity
+- React.createContext()
+- Task: Add useContext in task
+- Theme context senario - Context API
+- Toggle theme - done
+- Understand the flow of context api
+- Use cases of useContext
+- useContext
+- useContext & Context API (Provider, Consumer, flow of data, props drilling
+solution)
+- UseContext - practical
+- useContext and context API
+- useContext and createContext needs more clarity.
+- useContext implementation
+- useContext syntax needs some clarity
+- useContext() → Global state sharing
+- What is Context API?
+- What is the purpose of the Provider component?
+- Why we need to use context?
+- Would you use one Context or multiple? Why?
+15. Redux, Redux Toolkit, Thunk, Saga, Middleware, Store & Persistence
+----------------------------------------------------------------------
+- a single react-reducer and context for global state management vs redux
+- accessing and modifying specific states in redux
+- Action Creators
+- action creators and action types in redux
+- action in Redux
+- action types and action creators
+- Actions and Action Creators
+- Actions and reducers
+- actions in redux
+- Add item to list using useReducer hook
+- Add Items to a List Using useReducer
+- add middlewares in redux
+- Advantage of redux over context
+- Advantage of redux over context hooks
+- Advantages and disadvantages of redux..
+- advantages of redux
+- applyMiddleware
+- Basic understanding of Redux theory.
+- Benefits of using slices
+- call and put in redux saga
+- call and put-redux saga
+- can multiple stores be added?
+- can redux be used without toolkit?
+- Can we store data inside useRef
+- Clear redux state
+- Combine reducer
+
+-- 18 of 40 --
+
+- combined reducers
+- combinedReducer
+- combineReducer
+- combineReducers
+- combineReducers function in Redux
+- common performance optimizations for Redux applications
+- Components of Redux
+- Conbine reducer
+- concept of ""immutable state"" and why it is important in Redux
+- Configure store
+- configureStore
+- constants in Redux
+- Context API limitations (when Redux or Zustand is better)
+- context api vs redux
+- Context API vs Redux?
+- context api vs store
+- Context vs Redux
+- core components of Redux
+- core principle of redux
+- Core principles of Redux
+- Correct use of Provider and store setup
+- Counter app using redux toolkit
+- Create a component to add an item to a list by clicking a button using Redux –
+❌ Not done
+- Create a component to add an item to a list using Redux
+- Create a component to add an item to a list using Redux – Code is almost
+correct, but encountered an issue in the slice.
+- Create a component to add items to a list using useReducer
+- create a counter using redux
+- Create a counter using useReducer
+- Create a todo app using redux toolkit
+- Create auto inc/dec counter using redux and range is 0-10
+- Create auto inc/dec counter using useState or useReducer
+- Create auto inc/dec counter with/without range 0-10 using/without using redux
+- createAsyncThunk
+- Difference b/w Context API & Redux
+- difference between context and redux
+- difference between Redux Thunk and Redux Saga
+- Difference between use context and redux,
+- Disadvantages of redux
+- dispatch (reducer)
+- dispatch chaining
+- Dispatch vs subscribe
+- dispatcher
+- e. useReducer
+- extra reducers
+- extraReducer
+- extraReducers
+- getstate and dispatch
+- global state management system using useContext and useReducer
+- handle asynchronous actions in Redux
+
+-- 19 of 40 --
+
+- Handling async actions using Redux Thunk
+- Hooks in Redux
+- How can we handle asynchronous actions in Redux?
+- how did you store the todos?
+- How does React-Redux’s Provider work
+- How does Redux Persist work?
+- How does useReducer work exactly?
+- how other component get data from the redux store
+- how re-render happens in redux
+- How redux ensure the components updated correctly
+- How Redux works internally
+- How should you structure a Redux application?
+- How to dispatch an action
+- how to dispatch an action with payload
+- How to handle asynchronous operations in redux
+- how to handle impure actions in redux?,
+- how to persist redux state in refresh
+- How to store a data to redux store,
+- how to store user input values to useState(practical)
+- How to test Redux reducers?
+- immer, thunk
+- immutability in redux
+- Implement a counter using Redux
+- implement a reducer to handle multiple action types
+- implement createAsyncThunk.
+- Implementing reducers properly
+- init in useReducer
+- Is reducer mutable? (Explain Yes scenario )
+- kearn and practice redux practicals
+- learn about redux folder structure - large scale application
+- Limitations of redux
+- local storage s redux
+- mapDispatchToProps
+- mapstatedispatchtoprops
+- mapStateToProps
+- mapstatetoprops and mapdispatchtoprops
+- mapStateToprops vs mapDispatchToprops
+- mapStateToProps vs mapDispathToProps
+- mapStateToProps() vs mapDispatchToProps()
+- Methods to store and update data using Context API.
+- Middleware in Redux
+- MobX & Zustand
+- mobX vs Z-stand
+- Optimization techniques for redux app
+- practice implementation of combined reducers.
+- principles for redux
+- principles of redux
+- principlies of redux
+- Proper use of useReducer for state management.
+- Pros and cons of redux
+- Provider component work in Redux
+
+-- 20 of 40 --
+
+- Purpose of middleware in redux
+- react context vs redux
+- React redux
+- React Thunks
+- react-redux
+- reducer
+- reducer concept
+- reducer implmentation
+- reducer in Redux
+- reducer with counter
+- reducers
+- Redux
+- redux : to do ( accept an todo task from user and display the tasks in the same
+page )
+- Redux and redux toolkit difference
+- Redux constants
+- Redux Data Flow
+- redux dev Tool
+- Redux dev tools
+- Redux DevTools
+- Redux flow
+- Redux flow (Action → Reducer → Store → UI)
+- redux is not covered
+- redux is unidirectional why?
+- redux limitations
+- Redux middleware
+- redux middleware : gain more clarity
+- redux middlewares
+- redux middlewears
+- Redux Persist
+- Redux Persist (Implement)
+- Redux Persist Syntax
+- Redux persistence
+- Redux Principles
+- Redux Saga
+- Redux saga b/w redux thunk
+- redux saga vs redux thunk?
+- Redux sage
+- redux slice
+- Redux store
+- Redux store core methods
+- redux store methods
+- Redux Thunk
+- Redux Thunk & Redux Saga
+- Redux Thunk and Redux Saga
+- Redux thunk senario
+- redux thunk vs redux library
+- redux thunk vs redux saga
+- redux thunk vs saga
+- redux thunk. vs redux saga
+- redux toolikit
+
+-- 21 of 40 --
+
+- redux toolkit
+- redux toolkit clarity
+- Redux vs Context API
+- Redux vs Flux
+- Redux vs Redux Toolkit
+- redux-react
+- Redux-Saga
+- Redux-Thunk
+- redux-thunk (Need More Clarity )
+- redux-thunk and redux-saga,
+- redux-thunk vs saga,
+- replace useState with useReducer
+- replace usstate by usereducer
+- return value of reducer function
+- selector in redux
+- Send data from child to parent component using redux
+- Simple calculator using useReducer
+- Single source of Truth
+- slice
+- store
+- Store Items to local storage
+- store methods
+- store secrets in environment variables
+- store,dispatch,action reducers
+- Subscribe
+- Synchronous and asynchronous actions in Redux
+- Syntax of useReducer
+- Take a complete understanding of Redux
+- Thunk middleware or Redux think
+- toolkit
+- use dispatch
+- use environment variables to store secrets
+- use redux Devtools
+- useDispatch
+- useDispatch hook
+- useReducer
+- useReducer (how it works, when to use instead of useState)
+- useReducer 3rd arg
+- useReducer action dispatching
+- usereducer example
+- useReducer vs Redux
+- useReducer vs useState
+- useReducer() → Alternative to useState()
+- useReducers
+- useSelector
+- useSelector and useDispatch hooks
+- useState replace useReducer
+- useState vs useReducer
+- Using useDispatch and useSelector
+- Virtual DOM stored where?
+- What are Action Creators?
+
+-- 22 of 40 --
+
+- what are actions in redux?
+- What are Middleware in Redux?
+- What is an Action Creator?
+- What is combineReducers() in Redux?
+- what is combinereducers?
+- What is configureStore in Redux Toolkit?
+- What is createAsyncThunk in Redux Toolkit?
+- What is immer and how is it used in Redux?
+- What is Immer?
+- What is mapStateToProps and mapDispatchToProps?
+- what is redux (need clarity)
+- What is Redux Toolkit
+- What is store
+- What is the dffrnts b/w redux and context api
+- What is the difference between mapStateToProps and useSelector?
+- What is the exact purpose of an Action Creator?
+- What is the exact purpose of Redux DevTools?
+- What is the purpose of selectors in Redux?
+- What is the purpose of the Provider component in React Redux?
+- What is the use of combineReducers?
+- What is useReducer
+- what's a slice & what are the benefits of it
+- Whats the action creator
+- Whats the combined reducers?
+- When should you use useReducer over useState
+- When to use redux
+- when to use redux and context api
+- When to use thunk and saga
+- When to use usereducer
+- Where we should do api call in redux
+- why can’t we use local storage instead of redux
+- Why do we need redux?
+- why immutability important in redux, and how is it achieved
+- why is reducer a pure function,
+- why reducers should be a pure function
+- why redux unidirection dataflow
+- why we can't use browser's 'window' object instead of redux?
+- Why we use Saga for complex applications
+- work flow of redux (reffer more)
+- working of persist in redux?
+- workout: dispatching and accessing state from store.
+- workout: save the user email in redux store &
+- workout: usage of reducers
+- workouts: update the data inside redux store by dispatching an action from a
+component
+16. Performance Optimization: Memoization, Lazy Loading, Suspense, Code Splitting
+& Profiler
+----------------------------------------------------------------------------------
+----------
+- API rate limiting?
+
+-- 23 of 40 --
+
+- Code splitting
+- Code Splitting (dynamic imports, ESModules)
+- cons of memoization
+- Create lazy load component
+- Debouncing
+- Disadvantage of lazy loading
+- Dynamic Import
+- dynamic imports
+- Explain optimisation technic in react
+- f. React.lazy – code splitting
+- fallback
+- How can we reduce the initial load in csr
+- How does initial load time differ between CSR and SSR?
+- How does lazy loading improve application performance?
+- How to improve performance in React
+- How to improve performance of a react app
+- How to improve performance of react application
+- How to improve the performance of react application
+- How to load millions of data smoothly from server side to client side
+- Implement debouncing
+- Implement lazy loading
+- Implement lazy loading. Load the component after 5 sec
+- Implement the search using api with debouncing
+- Implementation of react.lazy with suspense
+- Improve performance of react application
+- Improving initial load time (CSR vs SSR)
+- initial load time differ between CSR and SSR
+- Lazy Loading
+- Lazy Loading (React.lazy, Suspense fallback)
+- Lazy loading code
+- Lazy loading with example
+- lazyload
+- Lazyloading
+- Learn react optimisation technics
+- limitations of react(SEO, initial load)
+- memoization (not clear)
+- Memoization techniques: need more clarity
+- Optimization & Performance
+- Practice standards and optimization
+- React lazy syntax
+- React memoization
+- React.Lazy
+- react.lazy need more clarity
+- React.lazy – code splitting
+- reactJS Performance
+- reduce initial load (code splitting, lazy, Suspense)
+- Refer the implementation of lazy loading.
+- suspense
+- Suspense (with fallback, data fetching future scope)
+- Suspense - fallback
+- Suspense and fallback
+
+-- 24 of 40 --
+
+- Suspense clarity
+- Suspense fallback
+- Suspense, fallback
+- Take deep understanding in improving react performance technics
+- Techniques to improve performance (memoization, virtualization,
+throttling/debouncing, SSR)
+- throttle
+- Throttling
+- Throttling vs debouncing
+- tree shaking
+- Utilizing React.lazy for dynamic component loading.
+- What is code splitting and how is it related to lazy loading?
+- What is code splitting in React?
+- What is the use of React.lazy?
+- Why ssr faster than csr for initial loading
+17. Error Boundaries, Portals, HOC, Render Props, Composition & Patterns
+------------------------------------------------------------------------
+- advantage of HOC
+- advantage of using higher order component
+- Applications of HOC
+- Applications of HOCs.
+- Component composition
+- componet composition
+- Composition
+- Create props for HOC
+- Create props Proxy for HOC
+- Create Props Proxy for HOCForwardref
+- Custom higher order components
+- Error Boundaries
+- Error Boundaries (why we need them, example)
+- error boundaries - learn more,
+- error boundary
+- Error boundary in React
+- Example for Higher Order Component
+- higher order component
+- higher order components
+- Higher Order Components (HOC, use cases)
+- Higher-order Component
+- Higher-Order Components
+- HoC
+- HOC Example
+- Hoc with example
+- method binding
+- Portal (use case, rendering outside parent hierarchy)
+- Portal.
+- Portals
+- Prop Proxy
+- purpose & examples of hoc
+- react mixins
+- react portal
+
+-- 25 of 40 --
+
+- React portals
+- Render props
+- Render Props (example usage)
+- Use case of HOC
+- Usecase of Higher order components
+- usecases of HOC
+- What are error boundaries?
+- What are higher-order components (HOCs)
+- What are React Mixins?
+- What is react portals
+18. CSR, SSR, SSG, Hydration, SEO & Rendering Strategies
+--------------------------------------------------------
+- advantages of CSR
+- benefits of CSR
+- Cons of SPA
+- CSR
+- CSR vs SSR
+- CSR vs. SSR:
+- Difference between SSR and CSR
+- Directives (use client, use server
+- Drawbacks of CSR
+- how CSR affects SEO
+- how SPA loads dynamic data
+- Hydration
+- Hydration (in SSR/Next.js context)
+- impacts of CSR on SEO
+- Limitations of CSR
+- Pros and cons of Single Page Apps (SPA)
+- React server
+- React single page application
+- SEO and CSR
+- Single page app - html file
+- SSG vs ISR
+- What is the span tag
+- why is react not seo friendly
+- Why react is called as single page application
+- why react is called single page application?
+- why react is not SEO friendly
+19. Authentication, Authorization, JWT, Tokens & Browser Storage Security
+-------------------------------------------------------------------------
+- access token and refresh token
+- access token vs refresh token
+- access token vs refresh tokens
+- Access token, refresh tokens
+- Add protected routes
+- ask strong password
+- ask stronger password
+- auth state not properly handled
+- Authentication and authorization
+
+-- 26 of 40 --
+
+- authorization
+- axios canceltoken
+- axios interceptors and cancel tokens
+- Bearer keyword
+- Best practice for storing token
+- can JWT be decoded in the frontend
+- can store items in to localstorage
+- canceltoken
+- components of jwt
+- Components of JWT token
+- composition of JWT
+- contents of JWT headers
+- cookie vs local storage
+- Create a custom hook called useLocalStorage(key, initialValue) that works
+similarly to useState, but persists the value in localStorage
+- Difference between access token and refresh token
+- Different components of JWT
+- disadvantages of localStorage
+- Don't have permission page
+- don’t trim passwords
+- Environment Variables (.env usage, hiding tokens)
+- handle delete of already logged in user
+- How can you detect token expiry in a frontend application?
+- how JWT is protected against forgery
+- how JWT is verified
+- How the server validates a JWT
+- How will you authenticate a jwt token
+- HTTP 401 (vague)
+- HTTP 403, 400, 201
+- HTTP 403, 401, 400, Common HTTP status codes
+- httpOnly cookies
+- httpOnlyCookies
+- If the user is logged in, redirect to login
+- Implement Refresh Token
+- implementing context for parsing the user loggedin state - practical; partially
+completed
+- is JWT encrypted?
+- JWT
+- jwt : header, payload, signature
+- JWT and its working
+- JWT authentication and authorization
+- JWT claims
+- JWT claims, can client decode JWT?
+- Jwt components
+- Jwt decode vs verify (not clear)
+- JWT flow
+- Jwt generation and verification code
+- JWT headers
+- jwt signature,
+- Jwt signth
+- JWT structure
+
+-- 27 of 40 --
+
+- JWT Token generation
+- JWT tokens
+- Jwt verify
+- Jwt verify token
+- JWT vs session-based state
+- jwt.verify arguments
+- Jwt.verify v/s decode
+- jwt.verify()
+- Local Storage vs session storage
+- Local vs session storage
+- localStorage methods
+- localStorage vs redux
+- localstorage vs sessionstorage
+- login request contains a token before login even happens
+- Manage sessions and cookies
+- Need more clarity on: authorization, authentication, middlewares in Redux
+- Need of specifying bearer in token
+- object permissions (ownership)
+- Once the user is logged in restrict the auth pages
+- parts of jwt
+- Parts of token
+- permission classes
+- problems with long lived access tokens
+- Properly understand how redux, JWT and DRF work.
+- protect admin urls using JWT
+- Protected route
+- protected routes
+- purpose of access token and refresh token
+- refresh token
+- refreshtoken in depth
+- remove token from source code
+- Restrict the auth pages once user is authenticated
+- role of JWT signature, how JWT verification works
+- role of store - detail
+- role of token
+- samesite cookies
+- secure browser storages
+- security offered by JWT
+- Session/cookie/local storage
+- sessions vs tokens
+- Structure of JWT
+- Task - implement refresh token
+- token expiry not handled
+- Token storage
+- understand how JWT works
+- Updating expired jwt token
+- use ENV to store tokens
+- Use of refresh token
+- use of secret key in jwt
+- use of signature in jwt
+- what determines the lifetime of access token
+
+-- 28 of 40 --
+
+- What is jwt
+- What is jwt token,
+- What is the exact purpose of an Access Token and Refresh Token?
+- what JWT payload includes
+- Whats the purpose of access token and refresh token?
+- Where should access and refresh tokens be stored on the client side?
+- Which is the ideal place to store jwt token,
+- why can't we use localStorage in redux?
+- Why can't we use localStorage instead of redux
+- why can't we use redux instead of localStorage?
+- why we can't use localStorage for global state management
+- working of jwt
+- Write a middleware to console the Jwt token
+- XSS
+20. API, Axios, Fetch, Interceptors & Project Networking
+--------------------------------------------------------
+- APIS are not protected
+- avoid loose API calls in components; create axios instance
+- Axios interceptor
+- axios interceptors
+- axios vs fetch
+- Axis interceptor and insurances
+- contextapi counter
+- Difference between fetch and axios
+- Differences and use cases for fetch vs axios in making API calls.
+- drawback of contextApi
+- Fetch
+- Fetch data from api using UsEffect
+- fetch working
+- HTTP 200 vs 201
+- HTTP 400, 401, common HTTP status codes
+- HTTP Status Codes (Need More Clarity )
+- implement server side search for users
+- interceptors
+- refer axios instances and interceptors
+- refer OpenAPI examples
+- refer OpenAPI examples to get a clearer idea about how REST APIs work
+- response.json()
+- REST API
+- Understand Request-Response cycle
+- user proper endpoint naming, methods and status codes (refer OpenAPI)
+- What is the exact purpose of Axios Interceptors?
+- Why must React component names start with a capital letter
+21. React Practical Tasks, Todo Apps, Counters, Forms & Mini Projects
+---------------------------------------------------------------------
+- ability to mark a todo as done
+- Add confirmation before deleting an item
+- add edit feature in todo app
+- Add edit option for todo
+
+-- 29 of 40 --
+
+- add form validation for forms
+- Add logging
+- add multiple middleware apply Middleware
+- Add or delete an item at any position
+- Add pagination on the user list
+- Add Product is also pending
+- Add proper error messages
+- add proper form validations
+- add validation for form
+- add validations for todo
+- Additional task: add favorites feature and my listings (ads the logged in user
+added) in OLX app
+- additional task: display how long ago a todo item was added (2h ago, 1m ago etc)
+- Additional task: re-order todo items, display when todo item was added (show 1m
+ago, 1h ago etc)
+- Ask confirmation before deleting
+- ask confirmation for deleting
+- Ask for confirmation before delete
+- avoid secrets in code
+- Avoid using static values in the code
+- Built in components
+- built in components in react
+- built-in components (Fragment, Suspense, StrictMode)
+- change div colour when clicking button
+- checked item should go down on todo
+- Counter Implementation
+- Create a button that shows 0 initially and when we click it will increment by 2
+- Create an action
+- Create an on-off toggle button
+- create context workout not complete
+- Create nested dropdown and map the array of object
+- Create nested dropdown and map the array of objet based on the selection of 1st
+dropdown
+- Create new todo app ( please don’t use any AI tool )
+- Design To-Do App.
+- do proper form validation
+- Duplicates in to-do app
+- Edit option in toDo list
+- Edit Todos could be an addon
+- error messages are overlapping with field names - registration form
+- Find the avg of 2 numbers using ref
+- Form validations are missing
+- Hide the edit button if todo is already done (P)
+- implement a completed button to mark the task as completed and count the number
+of completed tasks in todo application
+- Implement filter
+- implement input validation(Todo)
+- Implement pagination
+- implement server side user search
+- Implement useCallback in netflix project
+- Improve clarity in answers
+
+-- 30 of 40 --
+
+- Improve clarity of answers.
+- improve error handling
+- improve signup input validation
+- improve the UI
+- include signup & login forms in OLX clone
+- increment and decrement
+- Increment problem
+- insert validations of(empty,spaces,capital,duplicate)
+- Make an offer button - OLX
+- Mark todo as completed
+- NETFLIX project not fully completed
+- Netflix signup & login is pending
+- Olx also signup is pending
+- OLX item input validation
+- olx needs to be mob responsive
+- option to add new items - pending OLX.
+- option to edit and mark a TODO as complete
+- option to edit todo
+- option to mark a TODO as complete
+- Persist the todos
+- Practical:
+- prevent default - purpose
+- prevent duplicate task in todo app
+- Prevent duplicates in a Todo application (Live Coding)
+- prevent showing login/ signup if user already logged in
+- prevent the unwanted api calls from admin side (check the useEffect)
+- Render an array of objects (Practical)
+- Restrict admin routes in the frontend
+- Save todos in local storage
+- Show alerts
+- show proper messages
+- show proper messages to users
+- show the count of available tasks in todo list: Practical
+- Stop and start functionality
+- store credentials in ENV
+- Task: implement search
+- unique TODO
+- unique TODOs
+- update data in context
+- Update the todo array like newly added items to the bottom
+- use .env
+- use .env file
+- use .env in FE also
+- Use env for storing credentials or tokens
+- Use imperative handle hook
+- Use logging libraries
+- use navigate
+- Use of express.json ?
+- use of serializers
+- use parms
+- use typescript code in react,
+
+-- 31 of 40 --
+
+- workout: conditionally render the count in red color when the value is an odd
+number in a counter app
+- workout: display current count of todos
+- workout: fetch data from context & render it in UI
+- workout: prevent adding duplicate task in TODO
+22. Project Bugs, Validation, UI Improvements, Review Notes & Feedback
+----------------------------------------------------------------------
+- access and refresh tokens (need clarity)
+- Admin should be able to create and edit users
+- Advantages of Vite over CRA: Fast development server, optimized builds,
+lightweight configuration.
+- After adding the product ,should redirect to product detail page
+- Answers lacks a lot of clarity.
+- App is not completely mobile optimised
+- Assignmnet not completed
+- Atleast clone 4 to 5 pages in each task
+- babel (need clarity)
+- Built-in compoenents examples
+- child to parent communication
+- Child to Parent communication (callback props, useRef approach)
+- child to parent communication using useRef
+- Child to Parent Communication: Using callback functions or state lifting.
+- child to parent communications
+- class vs functional component (need clarity)
+- code test in project -add some feature(count of the active tasks)
+- Communication is fine!
+- communication part is over-all good
+- communication use usRef
+- communication using useRef
+- Component Communication:
+- Conditional Rendering needs clarity
+- Confirm password for signup - OLX
+- Context - P (partially done)
+- controlled vs uncontrolled Component (need clarity)
+- Counter - invalid hook call issue
+- Counter with useContext- partially done.
+- debug a Redux application
+- debug react
+- div vs fragments (need clarity)
+- do more practical workouts
+- Do more practicals
+- Do more practicals by fully understanding the
+- Do not print/log tokens in code
+- don't use JS default alerts
+- Dont use browser alerts
+- Edit Profile is broken in user
+- Edit profile not working
+- edit user in admin side
+- Edit/create user from admin not completed
+- Email should be unique and show proper error messages
+
+-- 32 of 40 --
+
+- error boundaries-need clarity
+- explore axios
+- explore components of redux (store, actions & reducer)
+- explore history object
+- explore life cycle methods
+- Explore ReactJS - 1 in a structured and sequential way.
+- Explore ReactJS - 2 in a structured and sequential way.
+- explore refresh token workflows
+- explore the browser storages & it's usecases
+- explore the usecases of browser storages
+- favorite items
+- Features of React
+- Features of react.js
+- find sum of middle of the 5 elements -child to parent communication
+- Fix bugs with OLX project
+- forward ref(need clarity)
+- Fragments: Needs clarity .
+- functional component vs class component(need clarity)
+- handle errors in Netflix clone
+- HOC - need clarity
+- Hvent prepared well for the review
+- image validation
+- Implementation using useContext(issue existing)
+- Increment and decrement counter using useContext - refer more
+- input validation
+- is JSX mandatory to build React apps
+- issues with JWT with long TTL
+- item input validation
+- JWT working -refer more
+- Latest features in React
+- Lazy loading implementation in Netflix app.
+- Learn all the aspects of redux. Avoid using chatgpt as much as you can while
+learning
+- library vs framework - need clarity,
+- library vs framework(lacks clarity)
+- life cycle method (need clarity)
+- life cycle method in react(need clarity)
+- lifecycle methods in a React class component ( Need clarity)
+- Live Pratical task not completed
+- Location is having some api issue
+- login button issue navigation issue
+- login with email and pasword(olx)
+- logout doesn’t remove cookies
+- Logout option
+- mapStateToProps() and mapDispatchToProps()(need clarity)
+- Move user list search to the backend API instead of handling it on the frontend
+- Movie Detail Page is need to be improve
+- movie details page (netlfix)
+- Need clarity on Error Boundaries
+- need to complete olx
+- Need to improve practical understanding in react & react both (learn how to
+
+-- 33 of 40 --
+
+debug the code)
+- New Features of react version 19
+- No exception handling in Netflix
+- Olx assignment is not done
+- Olx Not Completed
+- OLX project not completed
+- OLX task not done
+- OLX: option to add new items - pending
+- Parent to child communication
+- Parent to Child Communication: Passing props from parent to child.
+- parent-child communication - not done.
+- please do explore more in JWT
+- Practical implementation of UseState and UseEffect not done
+- Practical live coding not done
+- Practice coding without autocomplete to improve syntax
+- Practice more
+- Practice more useReducer problems
+- product details needs to be there
+- Product details page is not working
+- Product Details page is required
+- product input validation
+- profile info edit (optional)
+- Profile placeholder
+- Profile was not defined - error message - bug - OLX
+- Profiler
+- profilers
+- project is incomplete
+- React feature
+- react fiber(need clarity)
+- react fiber-need clarity
+- React fibre (lacks clarity)
+- react latest features
+- React Profiler (finding bottlenecks)
+- react profiler,
+- Redux devtool (need clarity)
+- rerender component when page resized-idea on hook, need clarity on detect
+resizing
+- reset and initialize state-partial completed
+- Role of a store - refer more
+- root DOM element (Need Clarity)
+- Sibling communication (via lifting state up, context)
+- Sibling communication in react
+- siblings communication in react
+- siblings communication using middle ware
+- siblings communication using use Context
+- signup input validation
+- Signup is broken
+- single page application - need clarity,
+- SSR vs CSR (read more)
+- state vs props - need clarity,
+- State- refer more
+
+-- 34 of 40 --
+
+- strictMode in react: need clarity
+- strictMode: need clarity
+- Student is aware about topics only theoretically need to more practice
+- Student need to understand the flow of redux, dispatching the action
+- Subscribe refer more
+- Success/failed msg should be there after register
+- Suppress unwanted error messages
+- Suspense (need clarity)
+- synthetic events-need clarity
+- task is not completed
+- task need to be completed
+- Test the project thoroughly before the review
+- The sell option should not be visible for users who are not logged in
+- Timer using useEffect- refer more
+- todo list Using useReducer(partially done)
+- toggle checkbox by button click(parent-child communication) - not done.
+- useCallback senario in Netflix app
+- useEffect (need clarity)
+- useEffect - need clarity,
+- useMemo example- refer more
+- usememo vs react memo(need clarity)
+- user add error messages not communicated properly
+- user edit failed due to duplicate email but showed success in UI
+- User is still able to access his dashboard after admin deleted his account
+- User listing shows duplicate entries
+- User should not be able to navigate back to the login/logout page after
+successful login.
+- useRef - need clarity,
+- Validation messages
+- Validation msg is not proper in both sign in ang sign up
+- validation on props
+- Video player is not working in netflix
+- virtual dom - need clarity
+- virtual dom vs actual dom(need clarity)
+- virtual dom(understand better)
+- when user profile edited from admin side, its not reflecting in user side
+- Wishlist in OLX
+- working of JWT - lacks clarity
+- working of token - lacks clarity
+- workout: data transfer from child to parent using props - partially done
+- workout: fetch current user name from redux store & render it in component -
+partially done
+- → Partially done, missing the dispatch function in implementation
+⚠	- 	Understand the concept correctly and do more practicals to strengthen Redux
+understanding.
+23. React 19, Latest Features, Advanced APIs & Misc React Topics
+----------------------------------------------------------------
+- advantage and disadvantage of react
+- Atleast do one practical each hook that you have learned
+- Code-splitting in React and its implementation techniques.
+
+-- 35 of 40 --
+
+- Core React Concepts:
+- Current react Version
+- error handling in react
+- Finish the basic tutorial of ReactJS.
+- Flow of react
+- handling memory leaks in react
+- hook
+- how react works
+- in React? How do they work?
+- integrating React into existing application
+- is react library or framework? (library)
+- Key in react
+- last week topics : react
+- Learn the basic concepts of ReactJS defined in the following document
+- optimistic updates
+- optimistic updates ?
+- practical exposure of useMamo , react.mamo etc
+- React 19
+- React Assignment
+- React classes
+- React concurrent
+- react concurrent mode
+- React concurrentmode
+- react drawback
+- React memo
+- rules of using hook
+- useCall back hook
+- What are the rule of hook?
+- what i react (give a brief)
+- What is ErrorBoundary in react
+- Why is using the array index as a key in React lists discouraged
+📌	- 	Priority List of Frequently Asked React Questions
+24. JavaScript / Backend / Non-React Overlap Found in Files
+-----------------------------------------------------------
+- ( emil )
+- (Anbin)
+- (Rahul Ranjan)
+- (shahbas)
+- 204
+- accessing data from uncontrolled element
+- action
+- Actions
+- Advanced & Project-Level
+- An option check box should be there for mark the task is completed
+- And also the page is reloading
+- App is not fully mob optimised
+- App is not mob optimised
+- app should be mob optimised
+- application logs out when the page is refreshed
+- applications of ref
+
+-- 36 of 40 --
+
+- Arrow function
+- arrow functions
+- arrow functions vs regular functions
+- asynchornous operations
+- base64
+- Basics not clear please revisit all topics
+- Boilerplate
+- By understanding the concept
+- call()
+- Complete the given assignment. (Topics shared should be basics and assignment to
+be prepared)
+- Concepts
+- connect
+- connect function
+- const a = [1, 23, 12, 2, 22, 35, 5, 3, 256, 234, 25, 235, 32, 32];
+- constants
+- Controlled and uncontrolled
+- controlled vs uncontrolled
+- Core & Must-Know Basics (Most Asked)
+- core principle
+- CORS
+- cross browser wrapper
+- customize tab title and favicon
+- dangerouslySetInnerHTML
+- Date:7/31/2025 Latest
+- deadcode elminiation
+- Debounce
+- decryption vs decoding
+- defautlProp
+- Destructuring
+- Difference between single Page and multi-page application
+- Differences
+- Disadvantages of using context
+- do more workout.
+- DOM concepts in Javascript
+- E.preventDefault
+- edit items
+- Edit user : should check email existing or not
+- Edit/delete user is not working
+- Email should be unique
+- Ensure the project has enough data for the demo
+- entered text show it in a h1 tag
+- error handling
+- Error should be meaningful
+- event handling
+- event handling exact concept
+- examples for HOF
+- feedback
+- File type and file size
+- File type and size
+- Filter
+
+-- 37 of 40 --
+
+- filter method
+- filter method vs reduce method exact cocnept
+- flux
+- flux architecture
+- follow naming conventions
+- for wardRef
+- forceUpdate()
+- full domain 2nd
+- Functional
+- generator functions
+- generic views in Django(not react)
+- Hot module replacement
+- Hot Module Replacement (HMR)
+- how to update data in context
+- how will you access the input data using ref
+- HTML sanitization
+- htmlFor attrib
+- Implementation of toggle button
+- Implemented use middleware
+- implementing a counter
+- indexedDB
+- Intersection
+- JIT
+- JSON.parse
+- key
+- Key attribute
+- keys - diff algo
+- Learn about es6 versions syntaxes
+- Learn Correct definition
+- Learn proper syntax
+- limitations of context library
+- List ul li implementation
+- list user added itme and edit and delete option
+- Logger middleware
+- MakeObservable vs MakeAutoObservable
+- Map
+- map syntax
+- memo
+- memory leaking
+- middleware
+- Middlewares
+- ModelSerializer
+- modifying values in ref
+- Naming conventions
+- navigator
+- need improvement in practical and theory
+- Need to practice well.
+- Need to understand the concepts clearly and practice well.
+- npm
+- one single element should be returned
+- package.json
+
+-- 38 of 40 --
+
+- package.json vs pakage-lock.json
+- parts of URL
+- Pending Bucket © 2025 | Developed bySujith V S
+- pending:
+- Pendings ( Rahul Ranjan )
+- Pendings:
+- Please check old task
+- png vs jpg
+- polifills
+- Polyfill
+- polyfills
+- Polyflls
+- Practical implementation needs improvement — focus on:
+- Practice workout
+- primitive types vs reference types
+- Pro drilling
+- profiling
+- Project are around 60% completed
+- Promise clarity (resolve, reject)
+- prop lifting
+- proptype
+- pure function
+- purefunction
+- purpose of HOF
+- put()
+- re render a componets when is page is resized
+- reconcilation
+- Reduce
+- Reduce dev tools
+- reduce method
+- reduces
+- Sass styling
+- Seems fine
+- Sell page should be protected
+- semantic kernel
+- ShadowDOM
+- short object notation, destructuring (how they were used in the task)
+- signing algorithm example
+- single page vs multipage
+- starvation
+- storing and changing values in refs
+- suspence
+- Syntheticevent
+- task
+- task-----------
+- Theory:
+- Theory:1
+- Theory:6
+- Tranpiler
+- Understand scripts
+- Understand the applications of each concept
+
+-- 39 of 40 --
+
+- understand the changes that take place when user logs out
+- usage of ref
+- useCalback
+- useDipatch
+- useReucer
+- useValue
+- vector images
+- view vs viewset
+- Viewport
+- viewport size
+- Vishnu GR in Second full domain
+- Web workers
+- What happens when a user logs out
+- What is controlled and uncontrolled combonents
+- what is Cors ?
+- What is forwarding ref
+- What is useImperativeHandle
+- Whats the use of serializers
+- while editing it cannot be null value
+- why can't we use window object instead of context
+- why do we use keys
+- why functions need to be memoized
+- Why to use
+- Work on practical and core concepts
+- working of loop
+- Write the code for auto inc and dec counter with range 0-10
+- You have a large app with user data, theme, and notifications.
+
+-- 40 of 40 --
+

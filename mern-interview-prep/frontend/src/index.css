@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-ink: #0c1222;
+  --color-ink-soft: #1a2336;
+  --color-paper: #f3efe6;
+  --color-paper-2: #e8e1d4;
+  --color-accent: #0f766e;
+  --color-accent-2: #c2410c;
+  --color-line: #d6cfc0;
+  --color-muted: #5c6578;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 min-h-screen font-sans text-ink antialiased;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(15, 118, 110, 0.12), transparent 55%),
+      radial-gradient(900px 500px at 100% 0%, rgba(194, 65, 12, 0.10), transparent 50%),
+      linear-gradient(180deg, #f7f3eb 0%, #efe8db 45%, #e9e2d4 100%);
+  }
+
+  ::selection {
+    background: rgba(15, 118, 110, 0.25);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .glass-panel {
+    background: rgba(255, 252, 246, 0.78);
+    border: 1px solid rgba(214, 207, 192, 0.9);
+    backdrop-filter: blur(14px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-rise {
+    animation: rise 0.55s ease-out both;
+  }
+
+  .animate-fade {
+    animation: fade 0.4s ease-out both;
+  }
+
+  .stagger > * {
+    animation: rise 0.5s ease-out both;
+  }
+
+  .stagger > *:nth-child(1) { animation-delay: 0.05s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.1s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.15s; }
+  .stagger > *:nth-child(4) { animation-delay: 0.2s; }
+  .stagger > *:nth-child(5) { animation-delay: 0.25s; }
+  .stagger > *:nth-child(6) { animation-delay: 0.3s; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e8e1d4 25%, #f3efe6 50%, #e8e1d4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}

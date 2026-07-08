@@ -1,0 +1,3022 @@
+DSA Questions — Topic-wise Arrangement
+======================================
+Source files: DSA - 1, DSA - 2, DSA - 3
+Method: merged all three files, removed only repeated cleaned lines, and arranged
+remaining items by topic.
+Total cleaned items found: 4108
+Unique arranged items: 2711
+Duplicate items removed: 1397
+Topic sections used: 21
+DSA BASICS, ALGORITHMS & DATA STRUCTURE CLASSIFICATION
+------------------------------------------------------
+1. How to write an algorithm - refer and learn
+2. linear and non-linear data structures
+3. Need more Data Structures
+4. What is an Algorithm
+5. algorithms
+6. DSA Basics – including datatypes and different types of data structures.
+7. Algorithms – foundation and applications.
+8. What is data structure
+9. Type of data structures
+10. Primitive v/s non-primitive data types
+11. What is data structure and types
+12. Algorithm
+13. Linear v/s non -linear data structres
+14. Primitive vs. Non-primitive
+15. classification of DS
+16. Linear vs. Non-linear
+17. brute force algorithm
+18. Algorithms:
+19. linear vs no-linear data structure,
+20. Why need algorithm
+21. Guide line to write an algorithm
+22. Study linear vs. non-linear data structures
+23. Types of ds
+24. linear vs non-linear data structure - need clarity,
+25. Types of DS
+26. Linear v/s non-linear ds
+27. Study linear vs. non-linear data structures.
+28. Primitive v/ non-primitive datatypes
+29. Linear vs non-linear data structures
+30. Linear v/s non-linear data structure
+31. Data structure
+32. Algorithms
+33. linear vs non-linear
+34. types of ds
+35. classify ds
+36. Linear vs non-linear
+37. Refer more on how complexities of algorithms are defined
+38. For every data structure, ensure clarity on:
+
+-- 1 of 57 --
+
+39. Best sort algorithm
+40. don’t just memoize applications of data structures; understand how they’re
+used
+41. Linear and non linear datastructure
+42. Linear and Non-Linear Data Structures
+43. Learn about Linear vs Non-linear Data Structures.
+44. Linear v/s non linear DS
+45. Brute force method
+46. Learn how to find complexities of various algorithm
+47. Linear timecomplexcity
+48. Linear and non linear data structure
+49. linear vs non-linear data structure,
+50. digikstras algorithm.
+COMPLEXITY ANALYSIS & ASYMPTOTIC NOTATIONS
+------------------------------------------
+1. theta notation
+2. omega notation
+3. big o notation
+4. best and worst case time complexity
+5. Write a function that time complexity is I(n log n )
+6. Time complexity
+7. Asymptotic notations
+8. Complexity Analysis v/s Asymptotic Analysis
+9. Complexity
+10. Asymptotic Analysis
+11. Need more clarity on Complexity Analysis
+12. complexity of common operations
+13. Omega v/s Theta
+14. Asymptotic Analysis – Big-O, Big-Ω, and Big-Θ notations.
+15. Arrange time complexities in increasing order of growth rate.
+16. Asymptotic analysis
+17. Theta notations
+18. Complexity concept , and calculation
+19. timecomplexity ( get better idea)
+20. types of time complexity
+21. time complexity of BS
+22. Asymptotic analysis - Omega vs theta vs BigO
+23. Theta notation
+24. Complexity for 4 nested loops
+25. Big o notations
+26. time complexity of operations in LL
+27. What are the common notations used in Time Complexity (e.g., Big O)?
+28. What is Θ (Theta) notation?
+29. time complexity - getter better idea
+30. Time & Space Complexity (with code):
+31. Write a loop and explain the complexity.
+32. Space Complexity
+33. Big O notation:
+34. Big o notation-need clarity
+35. Improve c# coding side- Best case, average case, worst case : need more
+
+-- 2 of 57 --
+
+clarity
+. when will you choose space complexity over time complexity	36
+37. complexity - understand better,
+38. complexity for -dor nested for loops
+39. 0(n) vs 0(login)
+40. Complexity analysis
+41. Asymptotic analysis and notations
+42. Time and space complexity calculations
+43. complexity analysis
+44. notations used to represent complexity
+45. Big O notation
+46. O(1) complexity mean
+47. Big-O notation differ from Big-Theta and Big-Omega
+48. Understand logarithmic functions and values.
+49. o(n) vs o(logn)
+50. Big-Theta and Big-Omeg
+51. time complexity of accessing element from ll when index is known
+52. Logarithmc values
+53. Big-O notation
+. Asymptotic analysis	54
+55. O(log n) vs O (n log n)
+56. Understand time and space complexity and its calculations
+57. In asymptotic analysis which one represent
+58. identifying time complexity of programs
+59. what is O long n time complexity means?
+60. Logarithmic values
+61. Big oh, big omega , big theta
+62. asymptotic notation
+63. Omega vs theta vs BigO
+64. git log,
+65. What is an algorithm’s best-case time complexity
+66. try more logical workouts
+67. Space complexity calculation
+68. asymptotic notations
+69. asymtotic notations
+70. Best case in asymptotic analysis
+71. Learn asymptotic analysis with a focus on theta notation.
+72. n log n and log n differences
+73. asymptotic analysis
+74. big oh vs big omega vs big theta
+75. Big-Theta and Big-Omega
+76. Big-O Notation
+77. Big-Theta
+78. Big-Omega
+79. Theta notaions, Big omega
+80. Assymptotic notations for Quadratic equations
+81. space complexity
+82. Common notation used to represent time complexity
+83. Determine how to find complexity of algorithms
+84. what is big O notation?
+85. Theta notation v/s Omega notations
+
+-- 3 of 57 --
+
+86. theta notation *
+87. big-o-notation
+88. logn vs nlogn
+89. Big o notation
+90. Complexity of all Sorting
+91. Supported operations and their complexity
+92. Understand the logic instead of relying on memorising the code
+93. Practice solving more problems without assistance and compare the complexity
+94. Understand logarithmic values
+95. Student logic is right, implementing the code needs to improve
+96. Soring time complexity : total pending
+97. Time and space complexity of datastrure above
+98. Time complexity of all sort algorithms why each one different from othe and
+use case
+99. Understanding logarithmic values and functions
+100. Omeg and theta notiaton
+101. Understanding logarithmic values
+102. time complexity of quick-sort in worst case
+103. Understand logarithmic functions and values
+104. understand time complexity of sorting,
+105. Space complexity of quick and merge
+106. omega and theta notation
+107. Time and space complexity calculation
+108. Read about time complexity analysis
+109. Analysing complexity of each operation in wors case scenario and avg case
+scenario
+110. write a function that time complexity is (O n log n)
+. Average vs worst-case time complexity	111
+112. Need to focus on logic.
+113. timecomplexity
+114. Understand Logarithmic Values and Functions
+115. Quanratic time complexity
+116. check more about complexity analysis
+117. Quadratic time complexity
+118. Linear Time complexity
+119. Complexity of removing the 2nd largest element
+120. Perform complexity analysis, understand Big O notation, and review
+logarithmic math concepts.
+MEMORY MANAGEMENT & ALLOCATION
+------------------------------
+1. Static vs dynamic memory allocation
+2. Memory Allocation in Data Structures
+3. What is Memory Leakage?
+4. how to prevent memory leak
+5. Memory Allocation
+6. Memory Leak
+7. Advantages of static,dynamic memory allocation
+8. What is a Memory Leak
+9. memory allocation and its types
+10. Memory Allocation – understanding how memory is managed and allocated.
+
+-- 4 of 57 --
+
+11. Memory allocation,
+12. Static memory allocation
+13. Dynamic memory allocation
+14. virtual memory
+15. memory leakage
+16. Garbage collection
+17. malloc
+18. Advantages of static memory allocation
+19. Memory allocation and types
+20. Advantages of static memmory allocation
+21. How to prevent memory leakage in JS
+22. Advantages of static memory
+23. Memory leakage,
+24. static memory allocation, its advantages
+25. security benefits of virtual memory *
+26. byte
+27. kilobyte vs kibibyte
+28. gigabytes
+29. Memory management
+30. Memory units
+31. Types of memory
+32. Memory leak
+33. Physical memory
+34. Memory padding
+35. advantages of static memory allocation
+36. virtual memory *
+37. What is a Memory Leak?
+38. LL memory allocation
+39. Memory pool
+40. => memory de allocation
+41. Visualize difference in memory allocation.
+42. Unity-Specific Memory Leak Awareness:
+43. Talk about OnDisable event unsubscription and avoiding DontDestroyOnLoad
+leaks.
+44. Static memory allocation vs Dynamic memory allocation
+45. drawbacks of dynamic memory allocation,
+46. memory allocation and deallocation
+47. static and dynamic allocation
+48. Memory leakage
+49. memory pool
+50. Memory management and Time complexity
+51. How to prevent memory leakage
+52. What is memory leak
+53. Stack memory
+54. Malloc
+55. memory allocation
+56. Garbage collector
+57. Basic blocs of memory
+58. What is memory leak?
+59. memory leak
+60. How to prevent memeory leakage
+
+-- 5 of 57 --
+
+. Static v/s dynamic memory allocation	61
+62. Static memory allocation vs dynamic memory allocation
+63. Virtual memory
+64. Static v/s dynamic memory allocation
+65. nibble vs byte
+66. Kilobytes v/s Kibi Bytes
+67. static / dynamic memory allocation
+68. Types of memory allocation
+69. virtual Memory
+70. static v/s dynamic memory allocation
+71. Memory Pool
+72. Revise concepts of virtual memory.
+73. Memory allocation and Types
+74. How to prevent memory leak
+75. static memory allocation v/s dynamic memory allocation'
+76. Virtual memory relation with Data Structure
+77. garbage collector
+78. static vs dynamic memory allocation
+79. advantages of static memory
+80. disadvantages of dynamic memory
+81. Memory allocation
+82. garbage collection & working
+83. types of memory allocation
+ARRAYS, MATRIX & SUBARRAYS
+--------------------------
+1. Dynamic array
+2. Sparse array
+3. let array = [
+4. [1,3,4],
+5. [6,7,8],
+6. [10,23,26]]
+7. Difference between List and Array
+8. Remove Duplicates from Array [1,5,2,2,7,5]
+9. Sum all the elements is nested array
+10. Move zero to beginning
+11. Third largest element
+12. Practical implementation of Array
+13. find the sum of numbers in an array (with different data types)-p
+14. revers an array
+15. Write a function that takes an array of integers as input, squares each
+element, and then returns the array in reversed order - P
+16. Arrays – types of arrays and core concepts.
+17. Array Workouts – problem-solving with arrays.
+18. Given an array of target times find if there’s a flight at that exact time.If
+not, return the next available flight time.
+19. Array : move zero elements to end of an array while maintaining the order of
+non zero elements
+. Second largest element from an array : bad coding	20
+21. Heterogenous vs Homogenous array
+22. Sum of prime numbers in an array
+
+-- 6 of 57 --
+
+23. Jagged array,
+24. Multidimensional array,
+25. find kth largest element in array
+26. Array and ll operation Complexity (incomplete)
+27. write a function to find the nth largest number from an array
+28. What are some applications of arrays?
+29. List functions,
+30. Find prime numbers in an array
+31. Multi dimensional array
+32. Third largest element in an array
+33. Hetrogenous vs Homogenous array
+34. Add an element to the middle of an array, practice 10 problems on an array and
+slice
+35. 3rd largest element from unsorted array
+36. array time complexity
+37. write a function which will return the position if the target is present in
+the given array.
+38. [1,2,3],
+39. [5,6,9],
+40. [10,23,34]
+41. ]
+42. Array operation Complexity
+43. JaggedArray
+44. squash array
+45. write a function to find if the target number is part of the given array
+46. [1,2,4],
+47. [5,7,8],
+48. [12,23,34]]
+49. what is a sub array
+50. reverse an array
+51. jagged array
+52. [6,7,9],
+53. [11,34,35]
+54. Find third largest element in an array without sorting
+55. Jagged array
+56. two dimensional array
+57. remove subarray containing largest number from a 2D array
+58. Find third largest element in an array
+59. Find minimum and maximum number from an array
+60. Types of arrays
+61. Array manipulation
+62. Array of arrays
+63. Efficient operations in arrays
+64. Operations in array without using builtin methods
+65. Jagged Array
+66. array time complexity to find item with index
+67. array memory allocation
+68. sparse array
+69. [10,23,24]
+70. // output = [1,2]
+71. Application of arrays in real-world problems?
+
+-- 7 of 57 --
+
+72. what is a subarray
+73. remove smallest number from array
+74. find sub array with max number of elements in increasing order - look at array
+problems-they are very commonly asked
+75. array amortization
+76. check if a target is in an 2-D array,return index
+77. => 2d array
+2	78. nd largest element in an array
+79. from an array find maximum count of numbers give sum as 2
+80. second largest element from the array
+81. Array reversal
+82. Convert array to a linkedlis
+83. Array
+84. Third largest element in an array without sorting
+85. Second largest element in an array
+86. sorted array which contain duplicate values
+87. 3rd largest number
+88. List the time complexities for common array operations like accessing,
+inserting, and deleting elements.
+89. What is an array in data structures?
+90. Find the common element between arrays
+91. create a function to find average of even numbers in an array
+92. Find min in a sorted rotated array
+93. Fix logic for finding the second largest element in an array to handle
+negative numbers.
+94. find kth largest in an arra
+95. merge two sorted list
+96. flatten a multidimensional arra
+97. sub array with max elements which are in continuously increasing orde
+98. How to delete a specific element from an array
+99. List functions
+100. inkedlist implementation
+101. Sunm of elements in an array using recursio
+102. Sum of elements in an array
+103. Find the largest element in an array
+104. Second largest
+. multi dimensional array	105
+. Jagged array	106
+107. [1,2,3,4,5,-1,-2,-,3,6,7]
+108. Find second highest and second least element from an array
+109. Jagged arrays
+110. Remove duplicates from an array
+111. multi dimensional array
+112. Heterogeneous Arrays
+113. Remove subarray that is having largest elem
+114. typed arrays in JS
+115. Multidimensional Array
+116. flatten nested list
+117. Homogenous v/s Heterogenous array
+118. multidimensional array
+119. Heterogenous vs homogenous array
+
+-- 8 of 57 --
+
+120. find the second largest element in an array
+121. Time complexities for common array operations like accessing, inserting, and
+deleting elements.
+122. find third largest in array
+123. find second largest element from array
+124. Homogeneous and heterogeneous array
+125. Find second largest in an array
+126. Understand homogeneous vs. heterogeneous arrays.
+127. find kth largest in an array
+128. Homogenous array v/s Heterogenous array
+129. Find second largest in array
+130. second smallest element from array
+131. Second largest in an array
+132. Homogenous v/s Heterogeneous array
+133. Find second largest element in an array
+134. circular linkelist
+135. Multidimensional array
+136. homogeneous array
+137. flatten a multidimensional array
+138. Homogenous v/s heterogenous array
+139. sub array with max elements which are in continuously increasing order
+140. sub array with max number of elements in increasing order
+141. concepts of array
+142. merge two sorted arrays in linear time
+143. limitations of using arrays
+144. append an element at the front of a list
+145. Merge two sorted arrays
+146. time complexity of getting item by index from array
+147. check if array is sorted or not
+148. Combine 2 sorted arrays into a single sorted array
+149. remove odd indexes from array
+150. check if array is sorted or not with linear complexity
+151. . sorting algo to use on an almost sorted array - explanation
+152. Combine 2 sorted arrays into a single sorted array in O(n) time
+153. check if array is sorted or not with linear time complexity
+154. Paractice leecode problem form 75 list
+155. write a code to find the first missing number in the array
+156. find the first missing number from an array of numbers
+157. move zeroes to end
+158. merge two sorted arrays
+159. Merging 2 sorted arrays into a single sorted array
+160. sorting algo to use on an almost sorted array - explanation
+161. reverse the array and the elements of the array
+162. remove duplicates from the array (On)j
+163. Merge 2 sorted array in O(n) time complexity
+164. Remove the duplicate from array in o(n)
+165. Find missing numbers from an unsorted array
+166. Convert nested array into flat array
+167. append a value at the front or in between two elements in an array without
+using inbuilt funciton
+168. Remove the duplicate from the nested array
+
+-- 9 of 57 --
+
+169. Remove duplicates from the array in o(n)
+170. two dimensional array syntax
+171. 'A': ['B', 'C'],
+172. 'B': ['A', 'D', 'E'],
+173. 'C': ['A', 'F'],
+174. 'D': ['B'],
+175. 'E': ['B', 'F'],
+176. 'F': ['C', 'E']
+177. [1,2,-3,5,0,4,-8,-5,7,-9,-7,3]
+178. kth largest from array
+179. Complexcity of removing second largest element
+STRINGS & CHARACTER ENCODING
+----------------------------
+1. Find the third largest world in sentence
+2. Find the second longest word in sentence
+3. Need clarity on practical implementation of string
+4. reverse the string in alphabetic order - p
+5. remove vowels from a string
+6. Replace Characters in String with n-th position - P
+7. Complexity ,String workout,Second largest odd number from array,logN
+. String : words that start with vowels	8
+9. String functions,
+10. Reverse each word in a string
+11. Array, Numbers, string
+. find all words that start with vowel in a string and return them as array	12
+13. write function to convert an obj to string as given below
+14. First non repeating character in a string
+15. Find first non repeating character
+16. Why string is immutable
+17. Reverse each word in a string without using built-in methods
+18. character encoding, UTF-8, ASCII
+19. function to Title Case a string
+20. How computers interpret strings
+21. String encoding
+22. Memory used by strings
+23. String manipulation (without builtin methods)
+24. Control characters
+25. String validation
+26. String sanitization
+27. character encoding
+28. ASCII, UTF-8
+29. palindrome
+30. anagrams
+31. remove extra whitespaces between words
+32. ASCII
+33. function to ensure string ends with .
+34. => character vs strings
+35. => character array
+36. String
+37. String problems
+
+-- 10 of 57 --
+
+38. reverse the letters of all words in a string without using inbuild functions '
+HELLO WORLD ' --> ' OLLEH DLROW
+39. .Find the first non repeating charecter of string
+40. Implement string permutations
+41. Write a function to check if two strings are anagrams of each other
+42. Palindrome code
+43. Reverse each word in an array
+44. Is string mutable or immutable in javascrip
+45. UTF-8 amd ASCII
+46. reverse the letters of all words in a string without using inbuild functions
+47. Reverse a string
+48. Check if Two Strings are Anagrams
+49. Reverse a String
+50. count words in a sentence without in-built fucntions.
+51. Find last non repeating character from a string
+52. find the longest consecutive repeating characters
+53. Palindrome using link list
+54. Find last non repeating character in string
+55. UTF-8
+56. extract digits from string (needs improvement)
+57. find shortest word in a string
+58. control characters *
+59. anagrams *
+60. Title Case words in a string
+61. strings are immutable in python
+62. longest word in string
+63. Please do more workout on strings
+64. reverse every word in a string
+65. String permutations
+66. Implement string permutations.
+67. Find the first non repeating charecter of string
+68. Without using set reverse a string
+69. Hello World to olleH dlroW convert string problem
+70. Reverse each word in a string without using any built in methods
+71. Reverse each word in a a string
+72. function to make sure sentence begins with uppercase and ends with period.
+73. extract numbers from strings
+74. Concepts of string
+75. find the third largest world in sentence (without using split)
+76. Check string is balanced or not
+77. Find Optimal solution for finding last non repeating char from a string
+78. remove duplicate from string using haltable
+79. Check if a string is balanced
+80. remove longest string from array
+81. swap the first and last characters in a string
+82. valid anagram (2nd half logic is not proper)its not taking care of corner
+cases
+83. control characters
+84. valid anagram- compare two dictionaries
+85. Find a common character from two strings
+86. Palindrome code - without using string methods
+
+-- 11 of 57 --
+
+87. Find first non repeating char from a string
+88. Find common characters from two strings
+89. why string is immutable
+90. find the longest consecutive repeating characters in string
+91. find the second longest word in sentence
+92. find the occurance of each characters in a string
+93. Convert the 1st character of the string to uppercase
+94. Convert string 1st character in upper case
+95. Find pelindromic sub-string
+96. ASCII vs UTF-8
+RECURSION & BACKTRACKING
+------------------------
+1. Tail recursion
+2. recursion
+3. using recursion
+4. sum of list of elements using recursion
+5. reverse a string using recursion
+6. advantage and disadvantage of recursion
+7. Reverse a string using recursion
+8. reverse an array using recursion
+9. remove char from string using recursion
+10. sum of array using recursion
+11. Need more clarity Recursion both theory and practical
+12. Recursion practical- P
+13. recursion vs. loop
+14. remove all instance of a char from a using recursion
+15. Recursion – concept, flow, and applications.
+16. Find all the file names from the given fileSystem using recursive approach
+17. Flatten the nested array using recursive approach
+18. What is recursion
+19. Find if a html tag exist in the given DOM structure using recursive approach
+20. Flatten the given array using recursive approach
+21. Recursion
+22. Sum of numbers in an array using recursion
+23. Disadvantages of using recursion,
+24. tail v/s head recursion
+25. direct v/s indirect recursion
+26. Binary recursion
+27. Applications of Recursion
+28. Limitations of recursion
+29. reverse a each word using recursion
+30. Recursion vs loop
+31. Recursion workouts
+32. Direct v/s Indirect recursion
+33. Tail v/s Head recursion
+34. Applications of recursion
+35. Print the first 10 elements of fibonacci series
+36. recursion workouts
+37. Advantages of recursion
+38. disadvantages of recursion
+
+-- 12 of 57 --
+
+39. reverse each word using recursion
+40. binary recursion
+41. remove char from string using recursion - understand working with string
+properties
+42. remove a char from recursion
+43. remove a char from string using recursion
+44. disadvantage of recursion
+45. mutual recursion *
+46. Print first 10 element of fibanoci using recursion
+47. Tail v/s Head Recursion
+48. Types of recursion
+49. Recursion and performance (memory and CPU)
+50. Backtracking
+51. Base case
+52. Applications and Limitations of recursion
+53. Recursion, workout find sum, largest etc
+54. direct and indirect recursion
+55. What is a Base Case in Recursion?
+56. Remove a character from a string using recursion
+57. Applications of recursion?
+58. What is tail recursion?
+59. recursively remove a char from string- recursion is important in upcoming
+topics
+60. recursive function to remove char from a string
+61. recursion (understand better)
+62. Recursion Practice:
+63. Fibonacci with and without recursion.
+64. recursive function to print Fibonacci series under a limit - not completed,
+65. find sum of even number using recursion
+66. Tail v/s head recursion
+67. recursion implementation
+68. Sum of elements in an array using recursion
+69. base case in recursion
+70. Explain the space complexity of recursion
+71. reverse string using recursion
+72. print first 10 element of fibanocci using recursion
+73. tail recursion
+74. Explore real-world applications of recursion.
+75. Hide "l" from hello using recursion
+76. complete recursion is covered along with practical that is remove duplicates
+77. space complexity of recursion]
+78. Factorial using recursion
+79. recursion that recurses only 5 times
+80. Recursive base conditons
+81. Recursively remove even number from array
+. direct v/s indirect recursion	82
+. binary recursion	83
+. reverse string using recursion	84
+. print first	85 	10 element of fibanocci using recursion
+86. pros and cons of recursion - need clarity.
+87. recursive fucntion to print fibonnaci series,
+
+-- 13 of 57 --
+
+88. Pros and cons for recursion
+89. Palindrome using recursion
+90. Direct recursion
+91. Cons of recursion
+92. fibbonnacci series using recursion
+93. Applications of recursion - refer more
+94. Tail v/s Head recursions
+95. Application of recursion
+96. Reverse each word in string using recursion
+97. recursive function to remove char from string
+98. Tail vs Head recursion
+99. Direct vs Indirect Recursion
+100. Apllications of recursion
+101. Recursively remove a char from string
+102. space complexity of recursion
+103. find sum of an array using recursion
+104. Print first 10 elements of Fibonacci series
+105. recursive function to find sum of an array
+106. Sum of an array using recursion
+107. find first n elements of Fibonacci series
+108. Practice binary recursion examples.
+109. Understand tail vs. head recursion.
+110. Differentiate direct vs. indirect recursion.
+111. Complete recursion is covered along with practical that is remove duplicates
+112. Print the first 10 elements of fibonacci using recursion
+113. advantages of recursion - more on it
+114. Tail and Head recursion
+115. Tail Recursion
+116. time complexity in recursion
+117. recursion advantages
+118. Tail recursion v/s Head recursion
+119. Fibonacci series - recursion
+120. Binary Recursion
+121. Fibonnacci series using recursion
+122. recursively remove a char from string
+123. recursively remove char from a string
+124. Practice recursive functions
+125. adv & dis adv of recursion
+126. recursion (string reverse)
+127. recursively print each word in a string in reverse order
+128. Space complexity of recursion Program
+129. Backtracking alogritham
+130. Backtracking algorithms
+131. Disadvantage of recursion
+132. benefits of tail recursion
+133. Find min using recursion
+134. Advantage of recursion
+135. advantages of recursion
+136. sum of elements in array using recursion
+SEARCHING & BINARY SEARCH
+
+-- 14 of 57 --
+
+-------------------------
+1. Complexity analysis - linear search
+2. Binary search using recursion code
+3. O(n) Binary search
+4. write a function to check if the given target value is present in a 2d sorted
+array
+5. time complexity of binary search
+6. find target element using binary search
+7. Binary search
+8. min from rotated sorted array
+9. minimum from rotated sorted array-binary search
+. Binary search	10
+. Linear search	11
+. Time complexity of binary search	12
+13. Binary search implementation
+14. Implement binary search and replace target by 0
+15. What are the limitations of Binary Search?
+16. implement binary search using recursion
+17. Binary search working concept
+18. min from rotated sorted array- BS
+19. binary search
+20. implement binary search
+21. binary search implementation
+22. Implement binary search
+. Search an element using binary search	23
+24. write a function to check if a target element is present in a 2d array
+25. Binary search using recursion
+26. What is the Time Complexity of Binary Search?
+27. time complexity binary search
+28. Binary search implementation using recursion
+29. Complexity of Binary Search
+30. Minimum from rotated sorted array (Binary Search)
+31. find min from rotated sorted array - binary search
+32. find min form rotated sorted array
+33. Define and give simple examples (e.g., sorting, searching).
+34. find two numbers that sum to a target value from a sorted array in a single
+iteration
+35. Binary search vs linear search
+36. Binary Search and linear search
+37. Binary search using Recursion
+38. Complexity of binary search
+39. Explain binary search algorithm
+40. Best Case time complexity of linear search
+41. Explain the difference between linear and binary search
+42. What is the worst-case time complexity of binary search
+43. Limitation of binary search
+44. Implement binary search and replace number with )
+45. binary search concept
+46. Binary and linear search implementation
+. binary search using recursion	47
+48. Time Complexity of binary search
+
+-- 15 of 57 --
+
+49. Binary search using recursion- refer more
+50. Binary search and replace with 0
+51. Binary search using array of string
+52. binary search using recursion
+53. Linear search vs Binary Search
+54. Reverse an array with O(n) complexity of linear search and binary search
+55. Min from rotated sorted array- bs
+56. Linear search v/s Binary search
+57. min from rotated sorted array - Binary search
+58. binary search recursion implementation
+59. Binary search (time , logic, debug)
+60. Binary search implementation using recursiom- refer more
+61. Complexity of Binary search
+62. Worst case time complexity of binary search
+63. binary search- completion
+64. Binary Search using Recursion
+65. Recursive binary Search
+66. Binary search -implementation
+67. linear search
+68. Binary search using recursion - optimize code
+69. Find the element that is closest to a target value
+LINKED LIST
+-----------
+1. Advantages of linked list.
+2. Applications of linked list.
+3. Reverse linked list code
+4. Insert after a node in linked list - code
+5. Function to traverse linked list using recursion
+6. Applications of linked list
+7. linked list time complexity
+8. delete method in DLL
+9. Remove duplicates from linked list
+10. Delete a node with a specified value from a linked list
+11. Delete a node in the singly linkedlist when a pointer is pointing to it
+1->2->3->4->5. wrote the code, but not fully correct. The code will go into a
+runtime error, so not all checks were present
+12. array vs linkedlist (reffer more)
+13. application of linked list
+14. remove the middle element from a double linkedlist - p (small mistake in
+code)-
+15. Create a singly linked list.
+16. Create a recursive method to print the the linked list in reverse.
+17. what is linked list?
+18. applications of doubly LL
+19. What is hierarchical linked list?
+20. given Linked list code with duplicate elements, write a function to remove
+duplicates from LL
+21. delete a node from a linkedlist
+22. inserts node at specific index SLL
+23. remove duplicate elements from given linked list
+
+-- 16 of 57 --
+
+24. Create a Singly linked list and find middle element
+25. create two linked lists using objects, find the sum of last values of both
+linked lists using a function, reverse the resultant sum and find the sum of that
+elements in the result, convert the resultant into a linked list with each digit
+as a node in linkedlist
+26. remove odd value linked list nodes
+27. Merge two LinkedList(partially done)
+28. create a doubly linked list and insert values and find the middle element
+29. Why linked list is better than array for insertion (partially answer)
+30. Find the kth largest element in linked list
+31. Find the middle element in linked list
+32. Remove duplicate from Linked list
+33. Reverse in singly Linkedlist
+34. delete function of dll
+35. delete middle element from linkedlist in o of n time
+36. learn two pointer ,fast slow approach
+37. Need clarity on usage of Array and linked list
+38. array vs linkedlist
+39. remove tHe middle element form a linkedlist - p
+40. reverse linked list
+41. remove the middle element from a double linkedlist-(p)
+42. Remove Duplicates from Sorted Linked List - p
+43. linked list exercises
+44. delete nth from linked list - two pointer
+45. inked List Fundamentals – types of linked lists, and how elements are
+arranged.
+46. Find if the linked list contains a circle or not.
+47. Doubly linkedlist
+48. Circular linkedlist
+49. Remove prev node in singly ll,Delete even number nodes from singly ll
+. Linked list : palindrome checking	50
+51. Reverse a doubly linked list-refer more
+52. Doubly to circular ll,
+53. Delete specific node from doubly ll,
+54. Reverse linked list
+55. memory allocation in linked list
+56. Advantages of linkedlist over array
+57. Linked list workouts
+58. implement linked list
+59. binary search, linked list, memory allocation, memory leak, complexity
+analysis
+60. Delete krh element from end of linkedlist
+61. What are some real-world applications of linked lists?
+62. Delete specific node from doubly linked list,
+63. Linkedlist:
+64. array vs linked list
+65. linked list definition
+66. check middle of linkedlist
+67. reverse a linked list
+68. all questions from blind75, fast and slow pointer concept
+69. Reverse logic - in doubly linked list
+
+-- 17 of 57 --
+
+70. reverse a double linked list
+71. time complexity of insert element to a linked list
+72. Reverse a doubly linked list
+73. Reverse a singly linked list - refer more
+74. delete function of doubly linked list
+75. learn fast and slow pointer- circle in LL
+76. Create doubly linkedlist
+77. Reverse linkdelist
+78. Linked list
+79. Circular linkedList
+80. reverse a node
+81. insert and delete the1st node of the linked list
+82. implement doubly linked list
+83. delete a node from singly linked list
+84. last 3 elements of the linkedlist
+85. delete function of DLL
+86. singly linked list implementation
+87. delete by value in doubly linked list
+88. delete nth node from last
+89. linked list :
+90. circular linked list
+91. Delete specific node from doubly linkedlist,
+92. Is linkedlist is linear?
+93. SLL: insert at index
+94. SLL: reverse
+95. is Linked listed linear /non-linear ds? why?
+96. Memory allocation in Linked list
+97. Remove the middle element from linked list
+98. Delete kth element from a LinkedList
+99. Why linked list is linear ds
+100. Advantages of linkedlist
+101. Applications of linkedlist
+102. Linked list memory allocation
+103. Why Linked list is linear
+104. time complexity of search if we know the index in both array and linked list
+105. extra: learn fast and slow pointer- circle in LL
+106. swap first and last nodes of SLL
+107. SLL implementation with proper encapsulation (using classes)
+108. What is a Circular Linked List?
+109. What is the Time Complexity to insert an element in a Linked List?
+110. learn recursion, singly linked list, doubly linked list, sub array
+111. remove nth node from last of linked list - two pointer
+112. circular LL
+113. Doubly to circular LL
+114. Delete node in doubly LL
+115. Find the middle of a linked list
+116. Singly linked list delete function
+117. Extra: Learn fast and slow pointer – circle in linked list
+118. Two pointers – Remove nth node from the end of linked list
+119. Delete by value in doubly linked list
+120. Application of linked lists?
+
+-- 18 of 57 --
+
+121. implement dll delete function
+122. practice linked list, subarray, array problems
+123. SLL: remove all nodes that hold a value
+124. find middle of linked list - fast and slow pointer
+125. => Circular linked list
+126. => application of linked list
+127. applications of linkedlist
+128. Array vs Linked List:
+129. Linked Lists:
+130. circular LinkedList
+131. create a LinkedList and delete second element from end of linked list
+. linked list practical ( singly, doubly )	132
+133. remove duplicate linked list nodes without using other data structures.
+134. middle of linked list in single iteration
+135. delete nth from last in a linked list (two pointer)
+136. Create a LinkedList and delete kth element from end of LinkedList-partial
+137. linked list implementation(All operations with example)
+138. remove duplicates from a linked list
+139. Circular linked list
+140. Delete an element from a specific position in the linked list
+141. Reverse a linked list
+142. Linked list Insertions/Deletions time complexity
+143. linked list operations
+144. reverse print a DLL
+145. remove the middle element from linked list
+146. time complexity of adding element to linkedlist
+147. Reverse a singly linked list
+148. .applications of doubly LL
+149. . Reverse a linked list
+150. Sort nodes in a linked list.
+151. add a node behind the position with particular data
+152. delete front and back node from where data==data
+153. traverse a double linked list
+154. Delete an element from a specific position in singly linked list
+155. linkedlist vs arrays
+156. Insert to a doubly linked list
+157. Merge Two Sorted LinkedList
+158. remove N'th node from the end of the List(fast,slow)
+159. Explore more applications of Doubly Linked List
+160. convert an array [1, 2, 3, 4, 5] to a linked list.
+161. function to print all elements of a linked list in order and reverse order.
+162. Singly to doubly
+163. multilinked list
+164. drawbacks of linked list and recursion - learn more,
+165. Application of linked list
+166. Advatantage and disadvantages of linked list
+167. Insert a node
+168. Head in linked list
+169. Delete specific node from doubly linked list
+170. Delete an element from a specific position in linked list
+171. Linked list practicals
+
+-- 19 of 57 --
+
+172. construct a singly linked list with elements [1, 2, 3].
+. Remove the middle element from Linked list	173
+174. Failed to complete the recursion and linked list practical
+175. drawbacks of linked list,
+176. function to remove duplicate linked list nodes,
+177. Create linked list into circular one and validate
+178. implement linked list with condition that only 1 duplicate is allowed
+179. time complexity for searching an element in linked list
+180. Reverse a double linked list - logic was correct
+181. Remove the middle element from Linked list
+182. construct a singly linked list with elements [1, 2, 3]
+183. Implement doubly linked lists
+184. Reverse singly linked list
+185. Reverse doubly linked list
+186. SLL: remove last instance of a value (needs improvement)
+187. Remove the middle element from a linked list
+188. binary search, linked list reverse and practice other problems
+189. finding middle of linkedlist in single iteration
+190. learn two pointer,fast slow, sliding windo approaches
+191. remove the middle element from the linked list
+192. Reverse a single linked list
+193. Linked list implementation
+194. Delete middle element from linked list
+195. time complexity to insert element in linked list
+196. SLL with tail (tail not utilized)
+197. remove last instance of a value from SLL
+198. Remove Middle element from Linked list
+199. Delete function of dll
+200. Middle of linked list
+201. implement doubly linked list delete function
+202. delete nth node from last in a singly linked list - two pointer
+203. find middle of linked list in 1 iteration - fast and slow pointer
+204. Memory allocation in array and linked list
+205. Reverse a doubly linked list- refer more
+206. reverse a doubly linked list
+207. Difference between singly linked lists and doubly linked lists
+208. What is the time complexity of deleting an element from the middle of a
+linked list
+209. Convert an array [1, 2, 3, 4, 5] to a linked list.
+210. Reverse nodes in a LL
+211. Reverse a linked list.
+212. linkedlist implementation
+213. Insert to a doubly linked list - incomplete
+214. linked list implementation
+215. Remove N'th node from the end of the List(fast,slow)
+216. Implementatipn of linked list
+217. Advantage to array over linked list,
+218. Remove duplicates from a linked list
+219. Circular Linked list
+220. Doubly linked list
+221. REVERSE LINKED LIST
+
+-- 20 of 57 --
+
+222. remove middle element from linked list
+223. Remove middle element from linked list
+224. Memory allocation in linked list
+225. Doubly linked list - refer more
+226. find the mid of the linked list
+227. singly linkedlist
+228. doubly linkedlist
+229. SLL implementation
+230. delete function for double linked list
+231. delete middle element from a single linked list without knowing the size
+232. Insert a node after a node code - check all conditions
+233. concepts of linked list
+234. singly linked list
+235. doubly linked list
+236. adv & dis adv of linkedlist
+237. Linkedlist (set, insert, delete, init, get)
+238. Linked list - Application
+239. Singly linked list
+240. circular doubly linked list
+241. Sorted single linked list
+242. get middle element in a linked list
+243. singly ll to doubly ll
+244. applications of linked list - learn more,
+245. multilinked list,
+246. remove odd element nodes from linked list - not completed,
+247. Circular Linkedlist
+248. Check Balanced parentheses (use Linked List as stack)
+249. Reverse a queue using linked list
+250. implement stack using SLL
+251. Implement Stack Using Linked List -P
+252. implement stack using linked list
+253. merge two linked list
+254. Queue implementation using a linked list:
+255. Understand the benefit of using a linked list over an array for queue
+implementation.
+256. Stack using a linked list
+257. Delete specific node in stack,
+258. learn fast and slow pointer, two pointer, sliding window, problems from array
+259. merge two sorted linked list- (already done this problem , still took more
+time and the solution was not right)
+260. stack using linkedlist
+261. delete specific node from stack
+262. Stack using SLL: improper
+263. Stack using linked list,
+264. Delete specific node from stack,
+265. Implement stack using linked list
+266. Delete a specific node from stack
+267. Stack using linked list
+268. Circular linked list with max length implementation with max length
+269. Why Merge Sort preferred for Linked Lists
+270. Head in linkedlist - concept
+
+-- 21 of 57 --
+
+271. deletion in node
+272. build logic in solving array and linkedlist questions.
+273. Implement double-ended queue using linked list
+274. Collision handling in hash table (Chaining with Linked List)
+275. Why linkedlist
+276. Stack - Linked List
+277. Why Merge Sort preferred for Linked Lists?
+278. How to handle collision in a linked list,
+279. Queue - Linked list
+280. Remove middle element from Linked list
+281. merge two sorted linked list
+282. Degree of a Node
+283. Degree of Node
+284. degree of node tre
+285. delete node from stack
+286. Degree of node
+287. Degree of nodes
+288. degree of a node
+289. degree of node
+290. clustering in node js
+291. binary search,delete middle element from a linkedlist
+292. Degree of a node
+293. degree of a node.
+STACK
+-----
+1. monotonic stack
+2. console.log(areBracesBalanced("{{}}{}{}")); // Output: true
+3. console.log(areBracesBalanced("{{{}}{}}{}}")); // Output: false
+4. Write a code to check if given parenthesis is balanced?
+5. Solve the valid parentheses problem
+6. what is Stack overflow
+7. Reverse the string to it's own place using stack
+8. Solve the valid parentheses problem.
+9. valid parentheses
+10. what is Stack overflow?
+11. Monotonic stack
+12. When does overflow occur in circular queue
+13. Reverse a string using stack approach
+14. remove nth element from a stack using recursion
+15. Stack practicals
+16. Stack underflow vs stack overflow
+17. Stack
+18. find next hottest day using stack
+19. Valid Parentheses (Using Stack) - P
+20. Implement Queue using stack.
+21. remove duplicate elements from stack using another stack
+22. Reverse each word in a string (stack approach)
+23. queue using stack
+24. stack using queue
+25. Purpose of stack pointer
+
+-- 22 of 57 --
+
+26. Applications of stack
+27. reverse a stack
+28. Complexity of search in stack
+29. Implement Undo - Redo operations in a text editor
+30. Implement Queue using Stack
+31. Valid parenthesis using stack
+32. Solve the balanced parentheses problem( memorised the code but doesn't know
+how it works)
+33. Usage of the stack for real-world use cases: implementing Undo and Redo
+operations for a text editor
+34. Stack and queue implementation with optimal complexity
+35. reverse a string using stack/queue
+36. Stack implementation
+37. minstack
+38. revese a stack
+39. Underflow
+40. Why are stacks not suitable for operations that require element search
+41. purpose of stack pointer
+42. valid paranthesis using que
+43. mistack
+44. Stack Underflow
+45. Apps of stack,double ended queue
+46. Sort a string using stack
+47. valid parenthesis
+48. What are the operations that can be done in Stack and Queue?
+49. Reverse a string using stack
+50. Stack workouts (80% done )
+51. Implement stack using LL
+52. Stack with a .reverse property. When .reverse is true, pop from the other end
+53. underflow in stack
+54. Applications of stack, double ended queue
+55. Application of stack
+56. reverse a string using stack
+57. implement stack using que
+58. complexity of push element into stack
+59. how stack used in undo -redo
+60. stack using que
+61. que using stack
+62. reverse stack
+63. stack under flow
+64. implement stack
+65. Stack underflow
+66. How stack used in undo-redo operations
+67. peek operation in stack / queue
+68. Study reverse a string using stack,
+69. Implementation of queue using stack
+70. delete a middle element of the stack
+71. Stack specify element delete
+72. Stack and queue conversion
+73. Stack list to stack linkd
+74. Queue list to stack queue
+
+-- 23 of 57 --
+
+75. Reverse a string using a stack
+76. Stack overflow vs Stack underflow
+77. Complexity of push element into stack,
+78. How stack used in undo and redo
+79. Check palindrom using stack
+80. Minstack and reverse stack
+81. Application of stack and queue
+82. Reverse a stack
+83. Monolithic stack
+84. Implement a stack using queue
+85. Reverse a stack using recursion
+86. Reverese a stack using recursion
+87. sort a stack using temporary stack
+88. stack that rejects duplicate values
+89. Reverse the string to their place using stack
+90. implement a stack with methods to push, pop and get the current highest number
+in o(1) complexity.
+91. Convert stack into Queue
+92. Program to check if a given string is a palindrome using a stack
+93. Call stack
+94. Stack overflow v/s underflow
+95. Stack using LL
+96. Stack into Queue-
+97. monotonic queue and monotonic stack
+98. How stack used in undo -redo
+99. Check palindrome using stack
+100. valid paranthases
+101. application of stack and queue
+102. reverse a stack - completion
+103. Stack application and its reson
+104. Stack workouts
+105. Palindrome or not using stack
+106. Stack applications and workouts
+107. Valid parentheses problem
+108. implement stack using query
+109. Check for valid parentheses
+110. Applications of stack/queue,
+111. Revise a string using a stack
+112. Reverse the stack using recursion
+113. Implement queue using stack
+114. stack
+115. Implement stack using que
+116. sort a stack
+117. Purspose of stack pointer
+118. Stack Undeflow
+119. parenthesis checking using stack
+120. How Is a Stack Used in Undo-Redo Operations
+121. Applications of queue,stack,hashtable
+122. stack vs array
+123. When to use stack instead of array
+124. create stack using queue
+
+-- 24 of 57 --
+
+125. reverse the string using stack
+126. how stack used in undo redo
+127. valid parentheses (LC 20 modified), get the count of invalid pairs
+128. palindrome using stack
+129. sort a stack.
+130. Applications of stack,
+131. valid parentheses (stack)
+132. Write the code to check that given input is Balance parenthesis by using
+stack
+133. how stack used in undo-redo operators
+134. How to create queue using stack?
+135. Program to check if a given string is a palindrome using a stack.
+136. reverse string using stack
+137. find balanced parenthesis using stack
+138. How stack used in Undo-redo opeations
+139. valid parantheses
+140. Applications of Stack
+141. reverse a string -stack
+142. stack pointer
+143. Reverse string using stack
+144. Stack pointer
+145. stack overflow
+146. Implement a Stack using two Queues.
+QUEUE, DEQUE & CIRCULAR QUEUE
+-----------------------------
+1. Workout more logical questions
+2. monotonic queue
+3. bounded queues
+4. Logical questions using recursion,
+5. Divide and conquer technique
+6. Practice medium level questions with Time constraints
+7. escape sequences
+8. Escape sequences
+9. leet code questions to check out
+10. Practice string questions without using built in methods
+11. Find the frequency of each number in an array
+12. Find the frequency of occurance of each number in an array
+13. common questions to learn
+14. git pull request,
+15. Monotonic queue
+16. What problem does circular queue solve
+17. Collision resolution techniques (learn each one of them)
+18. dequeue
+19. Queue practicals
+20. Queue
+21. How we can solve Collision (diff techniques)
+22. double ended que
+23. circular que
+24. need more clarity on sorting techniques and which one is the best and why
+25. learn how to implement double ended queue- learn how to add append value at
+
+-- 25 of 57 --
+
+the beginning of array with out inbuilt function
+26. Circular queue implementation
+27. Dequeue operation time complexity
+28. Feedback:Master code optimization techniques by first implementing the brute
+force approach, then refining it to find the optimal solution.
+29. divide and conquer strategy
+30. Applications of circular queue
+31. Double ended queue
+32. Double ended queue implementation
+33. double ended queue
+34. Applications of queue,
+35. Logical questions using hash table
+36. Applications of que
+37. consequence of many collisions in a hash table
+38. learn how to implement double ended queue- learn how to add append value at
+the bigenning of array with out inbuilt function
+39. queue workouts
+40. double ende que
+41. Circular Queue
+42. learn how to build double ended queue with out inbuilt method- insertion at
+the front of a list
+43. learn implementation of double ended queue without using inbuilt function
+44. Create a circular queue
+45. Apps of circular queue
+46. Apps of double-ended queue
+47. queue operations
+48. types of queues
+49. reverse que
+50. implement queue
+51. build url from base url and query params passed as dict
+52. divide and conquer startegy
+53. Double ended queue:
+54. Type of queue:
+55. Circular queue applications
+56. Reverse a queue
+57. Application of double ended queue
+58. Circular queue implemetations
+59. Application of circular queue
+60. Types of queue and applications
+61. Circular buffers
+62. enqueue, dequeue, display
+63. Circular queue implementation - refer more
+64. Find frequency of character in string using hash table
+65. Implement a hash table and use it to count the frequency of characters in the
+string "Mississippi"
+66. Divide and conquer alogoritham
+67. Double-ended queue
+68. find frequency of characters in a string using hash table
+69. reverse a string using queue
+70. Circular Queue with maximum length implementation
+71. Reverse a queue - write code
+
+-- 26 of 57 --
+
+72. reverse a queue completion
+73. Applications of Double Ended Queue
+74. Circular queue implementation with max length
+75. Applications of circular Queue
+76. Implementation of circular queue
+77. read questions and try to think the solutions first before going to
+implementation
+78. Applications of double-ended queue
+79. Circular queue printing - refer more
+80. Circular queue
+81. Apps of circular queue, double-ended queue
+82. queue
+83. Circular queue Application
+84. Application of queue
+85. Types of queue
+86. circular queue application
+87. Circular queue using Liked list
+88. DSA 2 Theory questions
+89. Divide and Conquer
+90. Circular Queue Implementation
+91. Queue implementation
+92. Circular queue clarity
+93. Double ended que
+. Divide and Conquer	94
+95. circular queue
+96. queue with ability to dequeue from both ends, controlled by a property
+97. preflightrequest
+98. find unique characters from given string
+HASHING & HASH TABLES
+---------------------
+1. find the first and last occurrences of an element using binary search
+2. Find the Last Occurrence of an Element in a Sorted Array
+3. Find the last occurrence of an element in array
+4. two sum Leet code
+5. Find the last occurrence of an element in a
+6. Find the First Non-Repeating Character in a String
+7. (hashif)
+8. Write a function to find the first non-repeating character in a string.
+9. remove all occurrences of a specific character from a string
+10. Load factor in hash table
+11. Rehashing
+12. hash table - not covered at all
+13. Need more clarity on hash collision
+14. Hashtable
+15. find top 2 least occurred number using hash table
+16. Two Sum Using Hash Table -P
+17. Rehashing.
+18. Linear probing implementation.
+19. Types of hash functions
+20. Load factor (needs clarity)
+
+-- 27 of 57 --
+
+21. Hash table (practical)
+22. How to handle collision (practical)
+23. Deep copy a deeply nested hashtable
+24. sort array of students in a deeply nested hashtable
+25. Chaining
+26. Double hashing
+27. Load factor
+28. Quatratic probing
+29. rehashing
+30. time complexity of hash table
+31. two sum
+32. hashtable implementation
+33. remove duplicate from string using hashtable
+34. Create a hashtable with hash function
+35. Hash function
+36. Application of hash table
+37. Linear probing implementation - refer more
+38. hash functions
+39. applications of hash table
+40. Linear probing vs Quadratic probing
+41. Hashtable and collision handling implementations
+42. Advantages of hash table
+43. Linear probing
+44. Quadratic probing
+45. Separate chaining
+46. Load factor - learn more
+47. Open addressing
+48. double hashing
+49. complexity of hashtable
+50. remove duplicate from a string using hash table
+51. Implementation of a basic Hash Table
+52. difference between hashing and encryption also learn which is more secure and
+why
+53. Hashing functions,
+54. Linear probing v/s quadratic probing
+55. Hash map
+56. Number of occurence of word in a string using hash table
+57. load factor
+58. separate chaining
+59. two sum in O (N) time
+60. valid anagram with dictionary
+61. Hash map v/s Hash set
+62. Number of occurrence word in a string using hash table
+63. valid anagram using hashtable
+64. two sum in O n time
+65. valid anagram using hash map
+66. explain hash table
+67. time complexity of search in hash table
+68. valid anagram using hash table
+69. Explain how hash functions work
+70. What is a collision in hashing?
+
+-- 28 of 57 --
+
+71. What is a load factor?
+72. Get the first non-repeating character from a string
+73. Apps of hash table
+74. Hash table implementation
+75. valid anagram with hashmap
+76. is it possible to avoid hash collision?
+77. popular hashing algorithms
+78. hashing vs encryption
+79. Hash table implementation with collision handling
+80. hashing functions
+81. resolve collisions
+82. hash table
+83. rehashing implementation
+84. hash table implementation
+85. remove duplicates from string using hash table
+86. finding the 1st non-repeating character in a string using hashtable
+87. linear probing
+88. quadratic probing
+89. open addressing
+90. avoiding/mitigating collisions (not resolution)
+91. popular hashing algorithm
+92. encryption vs hashing
+93. Hash table
+94. Applications of hash table
+95. how separate chaining affects time complexity
+96. ways to avoid hash collision
+97. uses cases of hashing
+98. hashing algorithms
+99. Difference between array and hashtable
+100. Probing,
+101. Remove duplicates using hash table
+102. Hash table collision handling implementation
+103. Find the occurrence of the character-using using hash table
+104. Hashmap
+105. Quntratic probing
+106. Application of hashtable
+107. Linear and qundartic probing
+108. Hashset
+109. Hash table implementations
+110. Time complexiciy of hash table
+111. Hash table collision handling
+112. Chaining and separate changing and open addressing
+113. Collision handling in hashmap implementation code
+114. Two sum
+115. Remove duplicate from string using hash table
+116. Find the uncommon elements from two different array using hash table
+117. Using a hash table, implement a function to find the first non-repeating
+character
+118. Hash table vs hash set
+119. Implementation of probing
+120. Explore more hash functions
+
+-- 29 of 57 --
+
+121. Application of hashing functions
+122. Open hashing and close hashing pros and cons and use case
+123. Remove duplicates from string using hashtable
+124. using hash table find least occurred numbe
+125. Hash table to check string contains duplicate
+126. Study and understand the applications of Hash Tables.
+127. ind the first non-repeating character from a string using inbuilt hash
+table(map)
+128. sing a hash table, implement a function to find the first non-repeating
+character in "swiss
+129. SHA1, MD5, CRC32, other popular hashing algorithms
+130. time complexity of operations in hashtable
+131. find the occurrence of each character in a string using inbuilt hash
+table(map
+132. Double Hashing
+133. Applications of hash Table
+134. linear v/s quadratic probing
+. hash set	135
+. hash map	136
+137. Merge sort, selection sort, hash table implementation
+138. time complexity of search in dictionary(hash table)
+139. Hash table with collission handling
+140. Hashing
+141. chaining
+142. Double- hashing
+143. Collision handling in hashmap - implementation and code
+144. remove duplicate from a string using hashtable
+145. Open Addressing
+146. Linear Probing vs Quadratic Probing
+147. find the uncommon elements from two defferent array using hash table
+148. Hashtable with collission handling implementation
+149. Hash table vs Hash set
+150. Applications of hashing functions
+151. Hash table workout
+152. Hash table with collision handling mechanism
+153. Load factor in hash tables
+154. Open hashing
+155. Closed hashing
+156. Collision handling implementation - refer more
+157. remove duplicates from as string using hashtable
+158. hash function working concept
+159. collision concept
+160. hash table practical implementation
+161. using hash table find least occurred number
+162. Collision Handling - implementation
+163. types of hash functions
+164. Chaining - hash table
+165. Hash table workout - quadratic probing
+166. Workout hash table
+167. hash table time complexity
+168. How to handle conflicts in hashtable
+
+-- 30 of 57 --
+
+169. hash table concept
+170. hash table and collision resolution
+171. Hash Collision
+172. Separate Chaining
+173. Different hashing methods
+174. Types of hashing
+175. methods to resolve hash collision
+176. Hashtable vs hashset
+177. Hash table implementation with collison handling
+178. Hashtable collision handling implementation
+179. different hashing methods
+180. hash table to find two numbers in an array that add up to a target
+sum.(passed some test cases).
+181. find the occurrence if tge charecter using hash table
+182. double hash implementation
+183. Linear Probing vs Quadratic probing
+184. Implement double hashing
+185. find the occurrence of each character in a string using inbuilt hash
+table(map)
+186. find the first non-repeating character from a string using inbuilt hash
+table(map)
+187. Using a hash table, implement a function to find the first non-repeating
+character in "swiss"
+188. quadratic probing practical
+189. Linear vs Quadratic probing
+190. Probing
+191. hash table complexity with reason
+192. Hashtable workouts
+193. Linear probing and Quadratic probing
+194. application of hashtable
+195. Hash Table -
+196. Load Factor
+197. Hashtable collision handling implementation - refer more
+198. Linear and quadratic probing
+199. Collision handling implementation- refer more
+200. collision handling methods
+201. hash table implimentation - needs improvement
+202. hashtable vs array
+203. hashtable not covered
+204. What is hashing
+205. why hashtable should be used when array can of similar time complexity
+206. implementation using hash table
+207. Applications of Hash Table
+SORTING ALGORITHMS
+------------------
+1. time complexity of quick sort best, average and worst case
+2. Bubble sort
+3. Merge sort vs quick sort
+4. time complexity of quick sort
+5. Quick sort implementation - small mistake
+
+-- 31 of 57 --
+
+6. Count number of comparisons made during merge sort
+7. merge sort and quick sort, time complexities across best/average/worst cases
+8. online sorting algorithms - can sort a stream of data, e.g., insertion sort
+9. stability in a sorting algorithm
+10. Nee more clarity on quick sort
+11. Practical implementation of Quick sort - Partially done
+12. Insertion Sort
+13. Selection sort
+14. Merge sort
+15. Quick sort
+16. Bubble Sort
+17. Time complexity quick sort in beat average and worst case
+18. Sort an array of students using merge sort
+19. Need more practice in quick sort
+20. Inplace sorting
+21. Merge sort - descending order
+22. complexity of merge sort
+23. Whats the best case time complexity bubble sort
+24. Sort array alphabetically using quick sort
+25. Complexity of quick sort
+26. Why merge sort has Space complexity
+27. Merge sort with ll
+28. Mergesort concept
+29. Worst case complexity of quick sort
+30. What would happen if you remove the “swapped” flag from Bubble Sort
+31. Implement quicksort in constant space complexity
+32. Stable sorting
+33. Inplace sorting (needs clarity)
+34. Implementation of insertion sort
+35. Complexity analysis of sorting algorithms
+36. Quick and merge sort working
+37. Revise a string using merge sort
+38. merge sort completion
+39. create an array and choose choose pivot that demonstrate worst case in
+quicksort
+40. mergeSort with array of objects
+41. in-place sorting
+42. What kind of input causes the worst-case performance for Bubble Sort
+43. sort a string using - merge sort
+44. Why is Merge Sort considered stable
+45. inplace sorting
+46. stable sorting
+47. sort a string using merge sort
+48. Best Sorting Algorithm
+49. Use of each sorting algorithm
+50. merge sort
+51. implement merge sort
+52. Explain the concept of Insertion Sort
+53. What is the best-case time complexity of Selection Sort?
+54. What is the time complexity of Merge Sort?
+55. Sort array alphabetically using QuickSort
+
+-- 32 of 57 --
+
+56. Merge sort concept not clear
+57. What is the main disadvantage of Selection Sort?
+58. sorting algorithm to choose when memory is abundant and speed is a requirement
+59. sort array of objects based on .amount property
+60. Quick sort without additional array
+61. quick sort
+62. merge sort implementation
+63. quick sort, complexity
+64. quick sort vs merge sort
+65. bubble sort implementation
+66. Merge sort implementation
+67. bubble sort
+68. Insertion sort
+69. best sorting algorithm when memory is limited
+70. Sorting algorithm
+71. Bubble ,insertion , selection sort, Quick sort
+72. Inplace sort
+73. Sort string using merge sort
+74. merge two sorted lists - use merge sort property
+75. Merge sort and complexicity
+76. Best sorting algorithma for parttiallu sorted small array
+77. Time complexity of quick sort at wrost case
+78. Sort array of students using merge sort
+79. Why Bubble Sort is a stable sorting algorithm
+80. Quick sort complexity and average case
+81. reason for On^2 on worst case on quick sort
+82. pivot selection on quick sort
+83. merge sort worst case time complexit
+84. Sort a string using merge sort
+85. Disadvantage of quicksort over merge sort
+86. Importance of pivot value
+87. Disadvantage of quick sort,
+88. What is the advantage of merge sort over quick sort
+89. Sort the string using merge sort
+90. Why Is Bubble Sort a Stable Sorting Algorithm
+91. Stable sorting algos
+. Disadvantages of Merge Sort	92
+93. quicksort time complexity
+94. why complexity of merge sort is O(n log n)?
+95. sort an array of objects based on .amount property
+96. Sort a string using Merge sort
+97. implement insertion sort
+98. Mergesort concept not clear
+99. Merge sort concept
+100. bubble sort bestcase time complexity
+101. insertion sort concept
+102. quick sort concept
+103. merge sort concept
+104. sort an array using quicksort(partially completed)
+105. Insertion Sort time complexity
+106. Selection Sort time complexity
+
+-- 33 of 57 --
+
+107. merge and sort two sorted arrays using merge sort concept
+108. Best sorting algorithm for partially sorted small arrays
+109. sort array of students using merge sort
+110. Complexity of MergeSort
+111. Quick sort without additional arrays
+112. Understand each sorting algorithm
+113. sort array of students based on age
+114. complexity of quick sort
+115. insertion sort
+116. selection sort,
+117. merge sort vs quick sort
+118. Time complexity of quick sort
+119. average case quick sort name
+120. merge sort worst case time complexity
+121. cons of merge sort
+122. time complexity of sorting algorithms
+123. Disadvantage of quicksort over merge sort,
+124. Space Complexity is more for merge sort?
+125. Quick sort vs merge sort
+126. What is the advantage of merge sort over quick sort?
+127. Imp of pivot in quick sort,
+128. time complexity of all sorting algorithms
+. Disadvantages of Merge Sort	129
+130. Selection of pivot element and complexity
+131. Why complexity of merge sort is O(n log n)?
+132. choosing appropriate sorting algorithm
+133. does pivot affect performance?
+134. Selection Sort
+135. Perform merge sort on array of strings
+136. quick sort implementation
+137. Merge sort - refer more
+138. working of all sorting algorithm
+139. Quick sort implementation
+140. merge sort - needs improvement
+141. Sort an array alphabetically using Insertion Sort.
+142. Sort a nearly sorted array
+143. Quick sort to sort the string
+144. Why quick sort is not stable
+145. Merge sort to sort the string
+146. how the position of pivot affects performance
+TWO POINTER, SLIDING WINDOW & COMMON PATTERNS
+---------------------------------------------
+1. buy and sell stock- sliding window
+2. sliding window- buy and sell stock
+3. two pointer- remove nth from last of LL
+4. Sliding window – Buy and Sell Stock
+5. buy and sell stocks - sliding window approach
+6. delete nth from last - two pointer
+7. sliding window algorithm
+. string palindrome checking	8
+
+-- 34 of 57 --
+
+9. buy and sell stock - sliding window
+10. extra: buy and sell stock- sliding window approch
+11. Sliding window pattern
+12. ifnd the subarray with the maximum sum(can use the kadane's algorithm)
+13. find the subarray with the maximum sum(can use the kadane's algorithm)
+14. Sliding Window
+TREES & BINARY TREES
+--------------------
+1. degenerate binary tree
+2. full binary tree
+3. perfect binary tree
+4. complete binary tree
+5. linked list insertion, deletion, search, traversal
+6. PascalCase to snake_case (good approach)
+7. PascalCase to snake_case *
+8. Factorial, sum of digits, tree traversal.
+9. How does a doubly linked list differ in traversal compared to a singly linked
+list
+10. B-tree
+11. Perfect hash function
+12. Mirroring a Binary tree
+13. Types of Tree Traversals
+14. Red-Black Tree
+15. Segment Tree
+16. Degree of a Tree
+17. What is full binary tree ?
+18. remove duplicates from tree
+19. Avl tree
+20. Segment tree
+21. AVL, Red-Black
+22. Red black tree
+23. Height of tree
+24. AVL Tree
+25. Red–Black Tree
+26. Applications of trees
+27. Level order traversal
+28. remove duplicate form bt -P
+29. Remove duplicates from BT
+30. What is an AVL Tree?
+31. Explain Tree Traversal (Inorder, Preorder, Postorder).
+32. Calculate the height of a Binary Tree.
+33. traversal patterns
+34. balanced tree
+35. LCA
+36. AVL tree
+37. remove duplicates from BT
+38. Internal nodes
+39. General Tree
+40. Applications of tree
+41. Self-balancing tree
+
+-- 35 of 57 --
+
+42. AVL and Red-Black tree
+43. level order traversal
+44. implement a binary tree
+45. kth smallest in binary tree
+46. Rotation of self balancing BT
+47. Balances and unbalanced tree
+48. Depth and Height
+49. compute the sum of left leaf nodes
+50. check whether a binary tree is full (every node has 0 or 2 children) and
+return the depth if it's full — otherwise return false.
+51. find the sum of all left leaf nodes in a binary tree
+52. degree of tree,
+53. BT code given just write method to find leaf nodes of BT
+54. internal nodes
+55. Maximum number of nodes in a binary tree of height h
+56. Whats AVL tree
+57. Types of traversal
+58. Binary indexed tree, Fenwick Tree
+59. Different tree structures
+60. Type of tree is formed when each node has no more than two children
+61. relationship between depth and height in a tree
+62. Splay tree
+63. Complete binary tree, Perfect binary tree and Full binary tree
+64. Program to find the depth of a binary tree
+65. Preorder
+66. Inorder
+67. Postorder
+68. Depth of a node
+69. PascalCase to snake_case
+. checking tree balanced or not	70
+71. binary tree complexity
+72. Perfect tree
+73. Binary tree
+74. types of tree
+75. Balanced tree
+. Program to check whether tree is balanced or nor	76
+77. What is the depth of a node?
+✅	78. Create a Binary Tree and calculate its height → 	Done
+79. Complete tree vs full tree
+80. Red-black tree
+81. Check identical , subtree
+82. level order traversal of binary tree
+83. function to check if tree is balanced or not
+84. Applications of trees,
+85. Complete tree vs perfect vs full tree,
+86. N-ary tree
+87. Height and Depth of a node in a Binary Tree
+88. red and black tree-need clarity
+89. AVL tree-need clarity
+90. degree of node vs degree of tree
+91. rotations in AVL trees
+
+-- 36 of 57 --
+
+92. btree
+93. B-Tree
+94. Tree Implementation
+95. Tree:
+96. N-arry tree
+97. Find the LCA
+98. Check if give tree is identical
+99. Perfect tree vs full tree
+100. degenerate tree
+101. ternary tree
+102. Sub tree
+103. internal node
+104. Complete tree and full tree
+105. implement a tree structure with multiple children per node.
+106. time complexity to search in binary tree
+107. isBalanced tree function
+108. Binary Tree Level Order Traversal
+109. Checking subtree
+110. Printing all leaf node in a tree
+111. Degenerate tree
+112. Terminologies in tree
+113. Degree of node vs degree of tree
+114. Depth of node
+115. Level order an post order traversal
+116. Check tree balanced
+117. tree
+118. Red and black tree(need clarity)
+119. Avl tree,
+120. Subtree
+121. Complete binary tree
+122. Level Order Traversal --
+123. Printing all leaf nodes in a tree
+124. learn time complexities properly- search in BT is not n log n
+125. Applications of Tree
+126. redblack tree
+127. Complete tree vs Full tree
+128. Balanced vs unbalanced tree
+129. Degenerate Tree
+130. isBalanced Tree
+131. implement balanced tree
+132. Balanced tree vs unbalanced tree
+133. What are the terminologies of tree
+134. degree of node vs degree of tree,
+135. Postorder Traversal
+136. Level-order Traversal
+137. Depth & Height
+138. Balance & Unbalanced tree
+139. AVL & red black tree
+140. Complete tree - refer more
+141. AVL trees
+142. time complexity of search in a balanced tree
+
+-- 37 of 57 --
+
+143. tree is balanced or not
+144. N-array Tree
+145. Check if given tree is identical ?
+146. implement a binary tree.
+147. Complete Binary Tree
+148. failed to complete traversal program
+149. Full binary tree
+150. depth of a node
+151. Ternary tree
+152. implement preorder traversal
+153. Complete binary tree example
+154. Implement a tree with multiple children and display its elements.
+155. Level order travel
+156. tree traversal
+157. tree,level order
+158. B-tree - refer more
+159. Write a function to check tree is balanced or not
+160. binary tree
+161. Complete binary tree - concept and example
+162. Height of tree- implementation
+163. height of a node vs depth of a node
+164. 3rd largest in binary tree.
+165. 2nd largest in binary tree.
+166. full binary tree.
+167. perfect tree.
+168. minimum spaning tree.
+169. red black tree avl tree.
+170. Implement a tree structure with multiple children per node.
+171. Complete tree, Full tree, Perfect Tree
+172. full binary tree vs complete biray tree
+BINARY SEARCH TREE (BST)
+------------------------
+1. complexity of binary search &bubble sort & BST insertion
+2. => extract a substring from a string
+3. Write a code to find the longest substring palindrome in the given string
+4. Longest Substring without repeating characters
+5. find largest substring without vowels from a string - not completed
+6. implement bst
+7. Searching an element in BST
+8. Draw the BST structure for given array
+9. Find the closest value to the target using BST
+10. Delete an element from a BST
+11. How to check whether a tree is BST or not
+12. find the nth largest element in BST -P
+13. BST : insert and inorder traversal
+14. Applications of BST
+15. What are self-balancing BSTs
+16. Find 3rd largest element in a BST
+17. time complexity of BST
+18. BST implementation - completion
+
+-- 38 of 57 --
+
+19. Find 3rd smallest element from BST
+20. Complete BST
+21. Convert BT into BST
+22. check whether the given BST is perfect or not,
+23. convert sorted array into balancing BST.
+24. Bst workouts
+25. count BST leaf nodes,
+26. check whether the given BST is perfect or not.
+27. Whats the difference between bt vs bst
+28. Find second largest in BST
+29. AVL tree v/s BST
+30. check two BST are identical
+31. second largest in BST
+32. Practicals using BST
+33. special case deletion in BST (needs improvement)
+34. Find kth largest element in BST
+35. Second largest element in BST
+36. Complexity analysis of Binary search tree operations
+37. Implement a BST with insertion, contains, and delete methods.
+38. Binary tree vs bst
+39. largest element from BST
+40. bst practical
+✅	41. Create a Binary Search Tree and perform traversal → done
+42. Bst applicational workouts
+43. Bst applications
+44. Second largest in BST
+45. implement a binary tree - how insert function works in binary tree(not BST)
+46. kth smallest from bst
+47. Application of BST
+48. BST deletion + special case
+49. Validate a tree is bst or not-not able to show -ve scenario
+50. Apps of BST
+51. BST implementation
+52. Find height of BST
+53. count BST single Child node
+54. Find element closest to a target element in BST
+55. BST Implementation
+56. BSt vs BT
+57. Implement binary tree not binary search tree
+58. bst level order traversal
+59. implement bst (not fully completed)
+60. Find 3rd Largest in BST
+61. Validate bst
+62. Find element that closet to the target element in bst
+63. Second largest in bst
+64. Complexity of bst insertion
+65. Bst and binary tree time complexity different in each opearton search ,insert
+so on
+66. Count single child nodes in a Bst
+67. Kth smallest element from bst(use inorder)
+68. Kth Smallest Element in a BST
+
+-- 39 of 57 --
+
+69. Allow duplicate element in bst
+70. Find the longest non-repeating substring in a string.
+71. Validate BST(issue in scenarios)
+72. Find the element closest to the target element in BST
+73. Binary search tree
+74. balanced BST
+75. Second largest - BST
+76. complexity of BST insertion,
+77. find 2nd largest in BST
+78. implement a balanced binary tree(not bst).
+79. Second largest using BST
+80. Third largest in BST
+81. Balanced BST
+82. find second largest in bst
+83. Second largest in BST - refer more
+84. Kth smallest from bst
+85. Binary search tree Applications
+86. binary tree and BST dont have the same time for search, learn what it is why
+87. implement a BT not BST
+88. count single child nodes in a BST - not done,
+89. Bt vs bst
+90. Check if two bst same
+91. Find closest element to a target element in BST
+92. K'th Smallest Element from BST(use Inorder)
+93. Bst implementation
+94. find second largest in BST
+95. Binary Search Tree (BST)
+96. bst
+97. Bst
+98. .check if bst is balanced
+99. .validate if a bst or not
+100. BST insertion - refer more
+101. allow duplicate elements in BST
+102. Find min in BST using recursion code
+103. bst applications.
+104. find the second largest in bst.
+105. Deletion in binary search tree
+106. Find the second largest from the BST
+107. Validate whether a given tree is BST or not.(binary tree creation completed)
+HEAP & PRIORITY QUEUE
+---------------------
+1. Heap and stack memory - memory allocation,GC working
+2. Stack memory, heap memory, virtual memory, Disk storage
+3. stackoverflow and heapoverflow
+4. Heap memory
+5. Stack and heap memory
+6. stack memory vs heap memory
+7. Stack vs heap memeory
+8. Stack vs Heap memory
+9. Stack v/s Heap memory
+
+-- 40 of 57 --
+
+10. stack and heap memory allocation
+11. Sort the tasks with a priority number using Heap.
+12. Priority queue
+13. priority que
+14. Implement queue based on priority
+15. Priority que
+16. Priority queue and applications
+17. Heap sort
+18. Applications of priority Queue
+19. Applications of priority queue
+20. heap sort
+21. priority queue
+22. Priority Queue
+23. Heap data structure
+24. constraints for a Binary tree to become a heap
+25. Using Heaps to sort an array
+26. Find the nth smallest element in array using MAx heap
+27. Max heap and Min heap
+28. Sort an array using heap sort
+29. time complexity of heap sort
+30. Heap sort time complexity
+31. Heap sort : sort an array in desc order
+32. Time Complexity of Heapify
+33. Create a MaxHeap and Display the Elements. -(Concept is mostly clear,
+implementation is incomplete and requires more practice)
+34. Find the n'th smallest element in an array using a max heap.
+35. Heap sort implementation- partially done
+36. Heap
+37. sort array using heap sort
+38. heap
+39. Heapify given array
+40. Sort array of students using heapsort
+41. Heap sort to sort the string
+42. Application of Heap
+43. Complexity of Heap
+44. Heapify
+45. complexity of heap sort,
+46. Min heap and max heap
+47. Priority queue with Heap advg
+48. Heap sorting
+49. find the k largest elements from an array using a min-heap
+50. Time complexity of inserting an element into a heap
+51. Sort an array using Heap sort
+52. Whats heapify
+53. Heap sort implementation
+54. Implementation of Max heap sort
+55. Usecase of Heap
+56. Max heap sort implementation - refer more
+57. Implement a min-heap with insert and remove operations.
+58. Implement a max-heap with build, insert, and remove functions.
+59. What is the time complexity of Heap Sort
+
+-- 41 of 57 --
+
+60. Heap concept
+61. heapify concept
+62. look into the heap concept
+63. remove min element from heap
+. heap sort practical	64
+. min heap and max heap	65
+66. minheap
+67. Max Heap Sort implementation
+68. time complexity of heap
+. Array to max/min heap	69
+✅	70. Create a Max Heap, insert elements, and display → 	Done
+71. Complexity of Heap sort
+72. Priority queue and Heap
+73. Application of heap
+74. Max heap sort implementation
+75. time complexity of insert operation to heap
+76. min heap- insertion
+77. Delete node from minheap,
+78. Is heap a complete binary tree?
+79. heap sort-issue in sorting
+80. BST vs heap
+81. Implementation of priority queue
+82. time to insert a value in heap
+83. implement a max heap(solved 90%)
+84. Heap sort implementation - refer more
+85. Understand Priority Queue
+86. Heap Implementation
+87. Priority queue and heap
+88. conversion min heap to max heap
+89. Applications of heap
+90. BST vs Max Heap
+91. Application of priority queue
+92. Kth largest in arry heap
+93. Heapify up and down
+94. Delete node from heap
+95. Top k frequent element using heap
+96. find the right child of a heap
+97. manage priority queues in heap
+98. application of priority queue
+99. Heapify,
+100. Delete node from heap,
+101. Priority Que and Heap
+102. heap-
+103. Kth largest in array- heap
+104. Max Heap
+105. Min Heap
+106. Max heap sort implementation using heapify
+107. Max heap sort implementation - refer more - unable to find the output
+108. min heap & max heap
+109. what is heap
+110. implementation of heap sort
+
+-- 42 of 57 --
+
+111. Max-Heap and Min-Heap Property
+112. Max heap sort- refer more
+113. Complexity of heap sort
+114. implement a min heap
+115. Top K Frequent Elements(use Heap)
+116. Build a heap completion
+117. heapify
+118. What is the purpose of heap sort
+119. Heap data structre - Topics
+120. heapify and heapsort concept
+121. Limitation of heap
+122. implement heap sort
+123. Heap sort - when it stops execution
+124. Heapify function
+125. Time complexity of heap sort
+126. Heapify complexity
+127. Heap application
+128. Heap deletion
+129. applications of heap
+130. heap applications.
+131. Whole heap concept
+132. heap and its concept
+133. min heap
+TRIE
+----
+1. Find prefix sum of an array in O(1) & O(n)
+2. implement trie
+3. Find pelindromic prefix
+4. Remove words startig with a specific character in sentence using Trie
+5. What is trie
+6. Trie : insertion and autocompletion
+7. Suffix trie vs prefix trie
+8. Trie : insert and auto complete
+9. What are the advantages of using a Trie over a HashMap or Binary Search Tree
+for storing strings
+10. Trie
+11. Applications of Trie
+12. tree vs trie
+13. Find the longest common prefix using trie
+14. Suffix trie v/s prefix trie
+15. Types of trie
+16. Trie with autocomplete
+17. Trie concept and workout
+18. Trie (insert, Search,prefix search)
+19. What's Trie
+20. Auto completion using trie
+21. find longest coomon prefix from the given array : [""flow"", ""flower"",
+""florine"", ""flurr""]
+22. In which scenarios is a Trie inefficient in terms of memory
+23. auto completion using trie
+
+-- 43 of 57 --
+
+24. Practicals using Trie
+25. Trie workout (needs improvement)
+26. Create an autocomplete feature using a Trie
+27. Autocomplete feature using a Trie
+. trie : inserting an element and autocomplete	28
+29. Auto suggestion using trie
+30. which algorithm is used in automation in trie
+31. Auto suggestion using Trie
+32. Auto completion using Trie
+33. Longest prefix in a trie,
+34. Complexity of initialization of trie,
+35. Deletion in Trie
+36. Types of tries
+37. what is a trie
+38. implement a trie(solved 90%)
+39. Auto completion using Trie- refer more
+40. radix tree
+41. Types of Trie
+42. Auto-complete using Trie
+43. Trie implementation
+44. Complexity in trie operations
+45. word suggestion using trie/auto completion using trie
+46. Suffix v/s Prefix trie
+47. Longest prefix in a trei
+48. Suffix trie
+49. Concept of trie
+50. Search word in trie
+51. Advantage of trie
+52. Prefix search in trie
+53. Compressed trie
+54. Application of trie
+55. Insert new word to trie
+56. Learn more about self balancing trie
+57. Trie concept is not clear
+58. trie
+59. word suggestion using trie
+60. Concept of trie is clear
+61. Trie - topics
+62. Search a word in the trie
+63. suffix trie v/s prefix trie
+64. implementation of trie
+65. What are the advantages of tries
+66. Trie (Prefix Tree)
+67. Trie Auto Complete
+68. Trie - Topics
+69. Auto suggestions- Trie
+70. implementation using trie
+71. Trie root node
+72. Suffix trie v/s Prefix trie
+73. .find longest prefix using trie
+74. Prefix search using Trie
+
+-- 44 of 57 --
+
+75. compressed trie.
+76. trie serialiosation and deserialization
+77. prefix suffix in trie.
+78. Trie prefix search implementation
+79. didnt cover heap, Trie.
+GRAPHS & GRAPH ALGORITHMS
+-------------------------
+1. linked list cycle
+2. weighted graph
+3. degree of a graph
+4. avoid using ai tools to learn and use blogs and videos to build dsa knowledge
+5. cycle in linked list
+6. : cycle in in linked list(fast and slow ),
+7. Detect Cycle in a List(fast,slow) - Floyd's
+8. Detect cycle / loop in singly linked list
+9. Why all graphs are not trees?
+10. Quick Sort- partially done- refer edge cases
+11. Merge Sort- partially done - refer edges.
+12. why cryptographic hash functions are not a good fit for hash tables
+13. Shortest path algorithms
+14. Hash table with linked list chaining (consider edge case)
+15. size of a char in UTF-8 (grapheme)
+16. Need to understand how Graph traversal works
+17. Finding cycles in a graph
+18. Weighted / Unweighted
+19. Construct the undirected adjacency list from the shared vertices and edges
+20. Graph : Theory and practical
+21. Bfs vs dfs in graph
+22. check cycle exsist or not inside a graph - p
+23. application of graph
+24. DFS implementation
+25. Minimum spanning tree
+26. Weighted graph
+27. Time complexity of DFS and BFS
+28. Graph practicals
+29. Isolated vertex
+30. Weighted and Unweighted Graph
+31. Difference between BFS and DFS.
+32. Given the following graph, write a function to perform BFS starting from node
+'A'
+33. graph = {
+34. (BFS implementation is mostly correct, but poor choice of data structure
+(sets) results in non-deterministic output. Needs better understanding of
+implementation details)
+35. Construct Undirected Graph of Adjacency List with given edges and vertices
+36. Graph-related topics
+37. graph ( need clarity)
+38. dfs and bfs for graph
+39. how to check a cycle exsist or not in a graph-P
+40. dfs
+
+-- 45 of 57 --
+
+41. bfs
+42. BFS for graph
+43. complexity of BFS and DFS of graph
+44. DFS VS BFS in graph
+45. dfs in graph
+46. Find cycle in directed graph using dfs
+47. BFS and DFS in graph
+48. Graph data structure - Topics
+49. Adjacency matrix and list
+50. Cycle in a graph
+51. clone graph
+52. graph problems
+53. use of spanning tree,
+54. graph algorithms,
+55. directional and undirctional graph
+56. DFS and BFS for graph
+57. Representation of graph (adjacency matix, adjecency list ,edge list)
+58. detect cycle in an undirected graph
+59. Graph Applications and types
+60. Path in Graph
+61. Adjacency
+62. Use cases of BFS, DFS
+63. Problems related BFS and DFS
+64. ( shortest path, contains a cycle)
+65. Which are the types of graph
+66. Whts degree of vertex
+67. Which are the types graph traversal
+68. In how many ways we can implement a graph
+69. path in Graph
+70. Applications of graph
+71. BFS&DFS in graph
+72. Applications of Graph data structre
+73. BFS implementation
+74. BFS using graph
+75. What is graph
+76. directed vs undirected graph
+77. shortest path in graph
+78. BFS in graph
+79. Weighted vs unweighted graph
+80. Minimum Spanning tree
+81. How to find cycles in a graph
+82. Graph vs Tree
+83. Tarjans algorithm
+84. Bipartite graph
+85. Understand the BFS and DFS implementation more deeply
+86. Implement BFS and DFS for a given graph
+87. Dijkstra’s algorithm
+88. complete graph
+89. BFS of graph
+90. Graphs and Graph Traversals (BFS, DFS)
+. what is graph data structure	91
+
+-- 46 of 57 --
+
+. graph practical : add vertex, add edges, DFS and BFS	92
+93. Complexity of BFS in graph
+94. time complexity of graph
+95. types of graph
+. Check whether a cycle is present or not in a graph	96
+97. queue with ability to dequeue from both ends (edge cases not handled)
+98. What is a graph?
+99. What is the difference between directed and undirected graphs?
+100. What is a weighted graph?
+101. What is the degree of a vertex in a graph?
+102. Which are the methods used to implement a graph?
+103. Which graph traversal uses a stack for its implementation?
+104. Write a function for Graph Traversal (e.g., DFS) →
+105. Graph used in map
+106. Graph travesal
+107. Tree vs Graph
+108. Implementation of graph
+109. types of graphs
+110. Graph,
+111. Complexity of initialization of graph,
+112. Data structure used for dfs and bfs traversal of graph,
+113. Degree of vertex
+114. How to detect cycles in a graph
+115. Shortest path in graph
+116. use of spanning tree
+117. how to count cycle's inside a graph
+118. BFS implementation in graph
+119. Time Complexity of BFS in Graph
+120. Applications of Graph and its Usage
+121. Shortest Path in Graph, BFS, DFS
+122. Minimum Spanning Tree
+123. Graph
+124. Graph: adjacency list
+125. Clone Graph
+126. Graph applications
+127. check cycles in a graph
+128. Complexity of bfs
+129. How graph connect in social media mutual friends
+130. Find shortest distance between two vertices
+131. How to count cycles in a graph
+132. Bfs and dfs(grpah traversal)
+133. Direct graph and undirected graph
+134. Disconnect graph
+135. Shortest distance between two vertices
+136. Tree vs graph
+137. Weight an un weighed graph
+138. Shortest path in unweighed graph
+139. Dikkstra shortest path algorithm for weighted gruaph
+140. Cycle in graph
+141. Backtracking in dfs
+142. Application of weighted graph
+
+-- 47 of 57 --
+
+143. Loop in graph
+144. prims algorithm, Kruskal algorithm.
+145. Graph:Adjacency matrix
+146. Number of Islands
+147. Graph Applications
+148. graph
+149. weighted and an unweighted graph
+150. DFS Complexity
+151. BFS Complexity
+152. graph indexing
+153. Spanning tree
+154. represent a graph in memory
+155. Workouts- tree, trie,graph, heap
+156. in social media how graph used to get mutal friends
+157. Clone graph
+158. spanning tree,
+159. how to find shortest distance between 2 vertices - need clarity,
+160. how to count cycles in a graph?.
+161. DFS
+162. BFS
+163. clone graph-practice graph problems
+164. Complexity of Heapsort, BFS in graph
+165. BFS in graph implementations
+166. Implementation of graph with traversal using DFS
+167. adjacency
+168. minimum spanning tree
+169. Direct Graph
+170. graph traversal
+171. Time complexity of graph operations
+172. complexity of BFS and DFs of graph
+173. What is Disconnected graph
+174. What is minimum spanning tree
+175. tree vs graph,
+176. find shortest distance between 2 vertices in a graph? - not done,
+177. Directed Graph vs Undirected Graph
+178. Weighted Graph vs Unweighted Graph
+179. Entire Graph Concept
+180. DFS in graph - implementation
+181. Classification of graph
+182. Shortest path in a graph
+183. Cycle detection in a graph
+184. Adjacency list vs adjancency matrix
+185. Complexity of DFS in graph
+186. Minimum Spanning trees
+187. Weighted graphs vs unweighted graph
+188. Shortest Path in a Unweighted Graph(BFS)
+189. Dijkstra' Shortest Path Algorithm for Weighted Graphs
+190. Cycle in a Graph
+191. Complete graph
+192. Complexity of bfs and dfs
+193. Graph implementation
+
+-- 48 of 57 --
+
+194. Wighted graph
+195. Directed vs undirected graph
+196. graph traversal.
+197. Graphic data structre - Topics
+198. Directed graph
+199. Connected graph
+200. Shortest path
+201. weighted edges
+202. Applications of weighted graphs
+203. Loop in graphs
+204. Backtracking - DFS
+205. DFS algorithm
+206. algorithms to find the shortest path in a graph
+207. Solve problems to find the shortest path in a graph.
+208. Directed ves undirected graph
+209. Degree of a vertex
+210. degree of vertex
+211. cycle in graph
+212. Complexity of BFS and DFS in graph
+213. BFS vs DFS
+214. Dijkstra algorithm
+215. graph traversal methods
+216. Degree of Vertex
+217. Ways to implement graph
+218. dfs and bfs in tree.
+219. weighted graph.
+220. graph vs tree.
+221. types of graph.
+222. applications of tree, graph, trie, heap.
+223. time complexity of tree, graph, trie, heap.
+224. Undirected graph
+225. Bfs and dfs
+226. Implement BFS, DFS, Trie, and Graph data structures.
+227. Implementation of DFS in graph
+228. Adjacency list and matrix
+LEETCODE / PRACTICE ROADMAP & RESOURCES
+---------------------------------------
+1. Reverse linked list 2 - leetcode
+2. practice problems from blind 75 Leetcode
+3. practice reading question on Leetcode
+4. Linked List Workouts – both basic and advanced practice problems.
+5. practice problems blind 75 leetcode, learn optimal solutions from youtube, try
+again to solve it without referring the video
+6. common leetcode problems
+7. practice problems from blind 75 leetcode, learn optimal solutions from youtube,
+8. practice problems from blind 75 leetcode, learn optimal solutions from youtube,
+try again to solve it without referring the video
+9. watch videos from freecodecamp channel
+10. get familiar with practicing problems in leetcode
+11. freecodecamp youtube channel has good video on recursion
+
+-- 49 of 57 --
+
+12. Get familiar with practicing problems in LeetCode
+13. Practice problems from Blind 75 (LeetCode), learn optimal solutions from
+YouTube
+14. FreeCodeCamp YouTube channel has a good video on recursion
+15. practice problems from blind 75, refer neetcode.io/practice for questions,
+practice them on leet code, learn brute force and optimal solutions for the
+problems(search in youtube for solutions)
+16. practice problems from blind 75 leetcode , watch videos to learn brute force
+approach and optimal solution, try again with out looking the video
+17. common problems from leetcode:
+18. practice problems from blind 75 leetcode, learn optimal solution from youtube
+, try agin without referencing the solutions
+19. practice problems from blind 75 leetcode, learn optimal solutions
+20. practice probelms form blind 75 leetcode, learn optimal solutions
+21. Practice problems from blind 75 leetcode, learn optimal solutions of this
+questions from youtube
+22. practice problems from blind 75 leetcode, learn optimal solution from youtube
+23. Solve more problems on platforms like LeetCode, HackerRank, and
+GeeksforGeeks(try applications level programs)
+24. Merge sorted arrays - leetcode
+25. Practice Leetcode Blind
+75:https://leetcode.com/discuss/post/460599/blind-75-leetcode-questions-by-krishna
+de-9xev/
+26. Two sum - leetcode
+27. search the problems in leetcode
+28. practice problems from leetcode blind 75 list, learn optimal solution
+29. practice problems from blind 75 leetocde, learn optimal solutions
+30. from youtube
+31. Write the code to check that given input is Balance parenthesis by using
+stack(leetcode 20)
+32. valid parenthesis (q:no - 20)
+33. merge two sorted list (q:no - 21)
+34. practice problems from blind 75 leetcode, learn optimal solutions from youtube
+35. practice problems from blind 75 leetcode,
+36. practice leetcode problems
+37. practice problems from blind 75, refer neetcode.io/practice for questions,
+practice them on leet code
+38. two sum with hashmap make to O(n) (q:no- 1)
+39. practice problem from blind 75 leetcode, learn optimal solutions
+40. learn brute force and optimal solutions for the problems(search in youtube for
+solutions)
+41. practice problems in leetcode
+42. practice problems from blind 75 refer neetcode.io/practice for questions,
+solve them in leetcode
+43. Range sum in bst - leetcode
+44. Range sum of bst - leetcode
+45. practice problems in leetcode itself
+46. practice problems blind 75leetcode, learn optimaleetcodeonss from youtube, try
+again to solve it without referring the video
+47. clone graph leetcode
+48. leetcode problems
+
+-- 50 of 57 --
+
+49. leetcode clone graph
+50. leetcode 102 ,133
+51. practice problems from blind 75 leetcode, learn optimal
+52. solution by watching solutions on youtube,
+53. musadheik - leetcode 215,133,102,230
+54. Leetcode 102
+55. Leetcode 133
+56. Leetcode 230
+57. Practice problems from blind
+58. 75 leetcode, learn optimal
+59. solutions from youtube
+60. Practice problem from blind 75 leetcode,learn optimal solution,watch solutions
+on youtube
+61. kth smallest from bst - leetcode
+62. number islands- graph - leetcode
+63. clone graph - leetcode
+64. leetcode question number 200
+65. leetcode question=kth smallest in bst
+OTHER PROGRAMMING / JAVASCRIPT OVERLAP
+--------------------------------------
+1. JS memory management techniques
+2. Array implementation in JS vs traditional arrays
+3. generator function to yield numbers from a 2d list
+4. http vs https,
+5. Is string mutable or immutable in javascript?,
+6. traditional arrays vs js arrays
+7. https://github.com/Ajaymanikandan0x/dsa_in_dart
+8. https://github.com/RahulR9809/Ds/tree/main/firstweek
+9. Why would a hash table be used in database indexing?
+10. Reduce method practicals
+11. Generator function practicals
+12. Factory function
+13. Options method
+14. app.locals
+15. Content negotiation
+16. fs.link
+17. Axios interceptors
+18. Axios canceltoken
+19. HTML sanitization
+20. React fiber
+21. Hashed index
+22. Partition tolerance
+23. Database profiler
+24. Execution context
+25. Create a promise and hande it
+26. Rest and spread operator
+27. Implementations using map , filter and reduce
+28. https://leetcode.com/problems/clone-graph/
+29. https://leetcode.com/problems/number-of-islands/description/
+30. https://leetcode.com/problems/binary-tree-level-order-traversal/description/
+
+-- 51 of 57 --
+
+31. https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+32. generator function,promise
+33. reactor pattern
+34. react fiber
+35. redux thunk(need clarity)
+FEEDBACK / STUDY NOTES
+----------------------
+1. target = 23
+2. DDL (work out more)
+3. Common Big-O Complexities
+4. How to find time and space complexities from a problem.
+5. need clarification in each concept
+6. Pendings:
+7. Practice workout
+8. fulldomain 2nd
+9. find loop
+10. what is dynamic typed language
+11. example :-
+12. let target = 9
+13. Asymptomatic analysis
+14. Awatages and applications of ll
+15. let target = 23
+16. Divisor problem(better approach required)
+17. Focus on the practical side more, don’t use chatgpt to understand the code use
+print statements and youtube videos
+18. Focus on the practical side more
+19. Try to improve explanations
+20. try again to solve it without referring the video
+. inserting element in beginning	21
+. reversing	22
+. smallest and largest element	23
+. Need improvement in practical	24
+25. weakset and weakmap
+26. let target = 3
+27. eg:-
+28. let obj = {
+29. name: "hisham",
+30. age: 20
+31. }
+32. output = "name=hisham&age=20"
+33. Practice explaining the solutions.
+34. append vs prepend
+35. circular reference
+36. Practice more workouts
+37. Remove the middle element from
+38. Ll concept
+39. implement BS
+40. What is a Dynamically Typed Language?
+41. implement LL
+42. // target = 8
+
+-- 52 of 57 --
+
+43. Pending Topics:
+44. Try again to solve it without referring to the video
+45. what is a subarry
+46. => Polynomial representation using LL
+47. find the sum of column and add as the last column
+48. Use pseudocode for illustration.
+49. full topic deep understanding
+50. Implement basic insertions.
+51. Need full understanding of code
+52. Show how to use Unity Profiler.
+53. Need to work on logic.
+54. Students need to cover all topics and practicals
+55. practice more linked list questions
+56. Linkin special pending topics:
+57. dynamic typed language
+58. Product except itself
+59. Without using set reverse a strin
+60. append & prepend
+61. find combination of two numbers given sum as 4?
+62. mutable and immutable
+63. Double Linked:
+64. Recurrsion
+65. Additional
+66. hierarchical ds
+67. Type of datastructure
+68. LL implementation
+69. Pendings & Updates:
+70. Theory*
+71. Practical*
+72. Eg. ' HELLO WORLD ' --> ' OLLEH DLROW'
+. practice more logical workouts	73
+74. Improve coding speed
+75. What is dynamic typed language
+76. find combination of numbers which give sums as 5
+77. Sum of Prime numbers
+78. Improve typing speed
+79. Reverse LL
+80. Pranav Sankar
+81. Rahul ranjan
+82. Likhin
+83. practice more logical workouts
+84. circular referencing
+85. Derived data types
+86. Dynamic typed language
+87. don’t overwrite builtin names
+88. Practice more logical workouts
+89. Debugging
+90. add a separate sales report page,
+91. restructure sales report,
+92. load balancing,
+93. DNS,
+
+-- 53 of 57 --
+
+94. SSL,
+95. TLS,
+96. ngnix architechture,
+97. git staging,
+98. git fetch vs pull,
+99. git checkout,
+100. git stashing,
+101. git conflicts,
+102. git cherypick,
+103. git revert,
+104. git rebase.
+105. Student have not studied hosting and git topics.
+106. Last week:
+107. git clone vs fork - need clarity,
+108. binarySearch implementation
+109. PENDINGS:
+110. learn time complexities properly
+111. Statically typed and Dynamically typed
+112. Focus on learning the concepts wisely
+113. Map
+114. and steps
+115. hierarchial ds
+116. Dynamic type
+117. Failed to complete the practical
+118. delete duplicate
+119. \t
+120. contegious and non contegious
+121. application of all structure
+122. Advantages and disadvantages of ll
+123. Applications of LL
+124. Pending Bucket © 2025 | Developed bySujith V S
+125. Most of the topics are not properly covered. Need more practice on the
+practical and theory side.
+126. Most topics are not properly covered. Proper full assessment required.
+Practical side needs more clarity.
+127. Deep copy an object (without using inbuild method)
+128. Try to understand the concept of base condition in recursive logics (practice
+more problems in recursion)
+129. prime algo
+130. mintack
+131. Use of different types of sorting
+132. Strengthen complexity analysis skills; be able to evaluate and optimise any
+solution’s time and space complexity.
+133. Focus on building a clear foundational understanding, and avoid relying on
+memorising code or definitions.
+134. How elements are stored
+135. Strengths, limitations, and alternatives
+136. Choosing the right structure based on use case
+137. Brush up on coding skills
+138. Pending:
+139. Hashtable advantages, Map object in JavaScript, practice problems on
+
+-- 54 of 57 --
+
+Hashtable (Don't memorise the code)
+140. Focus on building clear foundational understanding. avoid relying on
+memorising code or definitions.
+141. peek
+142. Purpose of sorting data
+143. from ds 1
+144. learn the time complexities properly
+145. Use of different types sorting
+146. Practice Applicational level workouts
+147. usage of interval timer, clearInterval()
+148. practice more problems from blind 75 leetcode, learn optimal solutions
+149. peek vs pop
+150. Theory 5, code 5
+151. Valid parathasess
+152. Remove middle element
+153. In place sorting
+154. 5 additional
+155. convert APPLE in to - A-pp-ppp-llll-eeeee
+156. Practice workouts
+157. understand the concept correctly and do more practicals
+158. Theory: 5"
+159. try to improve presentation
+160. understand problems and solutions rather than memorise it,
+161. learn optimal solutions from youtbue
+162. How to determine the complexities
+163. find the duplicate students
+164. pros ,cons and use-cases of
+165. (Jaseel QA)
+166. Practice more logical problems
+167. Applications of all ds
+168. valid parathesis
+169. push pop display
+170. set, delete, get, display
+171. Explain the concepts in detail,
+172. Rahul Ranjan pendings:
+173. work on code optimization
+174. Practice more application level problems
+175. Study - sorting
+176. loadfactor
+177. please do workout more on hastables
+178. Inpalce sorting
+179. reverse
+180. learn the syntaxes properly, learn to debug on the go
+181. nsertion sort
+182. open address
+183. Improve logic and Coding speed
+184. 'A': {'B', 'C'},
+185. 'B': {'A', 'D', 'E'},
+186. 'C': {'A', 'F'},
+187. 'D': {'B'},
+188. 'E': {'B', 'F'},
+
+-- 55 of 57 --
+
+189. 'F': {'C', 'E'}
+190. Topics to Improve
+191. Communication looks fine
+192. Note:Basics missing.Need to provide proper follow up
+193. what is ds(give a brief)
+194. practical
+195. Convert nested object into flat object
+196. Implementation of each DS
+197. look in to dp problems
+198. common
+199. Memoization
+200. Timer practicals
+201. flatMap
+202. T 4.5
+203. P 3
+204. Vishnu GR in Second full domain
+205. Siblings
+206. sort transaction objects based on .amount property
+207. {
+208. Find the average of age
+209. Add new key status , according to their mark
+210. Improve problem solving, logic and speed (Means You have to complete complex
+code problem within 5 minutes - Brototype Reviewers)
+211. improve practicals- learn to read errors and debug
+212. try again without looking at video
+213. Increase coding speed,
+214. find combination of numbers which will give sum as 2
+215. Note:Debug code
+216. Learn to debug and fix issues in code
+217. Adjecency
+218. Sibiling
+219. Definition of all datastructure
+220. Treie serializaton and deserializaton
+221. additonal
+222. Compelxiciy of all data structre
+223. Lowest common ancestor
+224. Practice more problems
+225. extra:
+226. event propagation
+227. event delegation
+228. call
+229. apply,bind
+230. object.freeze() vs object.seal(),currying
+231. polyfills,debouncing
+232. weak map,event driven architecture
+233. REPL
+234. read content from a file
+235. create middle ware
+236. child_process
+237. transform stream
+238. create a capped collection
+
+-- 56 of 57 --
+
+239. aggregation pipeline
+240. distinct
+241. group
+242. sort,limit,$lookup,$bulkwrite,create index
+243. communication between siblings
+244. children props
+245. forward ref
+246. replace useState with useReducer(need clarity)
+247. understand and practice well.
+248. Learn the concepts Wisely
+249. Degree of vertx
+250. .find closest value
+251. musadheik pending
+252. Balanced free.
+253. Back tracking
+254. adjecency.
+255. Practice more...
+
+-- 57 of 57 --
+

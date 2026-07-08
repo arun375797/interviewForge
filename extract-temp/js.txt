@@ -1,0 +1,2725 @@
+JavaScript Question Bank — Topic Wise
+Source: uploaded pasted text file.
+How this was arranged:
+- Removed only exact repeated entries after trimming bullets/extra spaces/case.
+- Kept every unique question/task/note from the source.
+- Grouped the items by topic so you can study one area at a time.
+- Some mixed items are placed under the most relevant topic; anything unclear is
+kept in Uncategorized / Needs Manual Review.
+Summary
+- Raw lines in file: 10759
+- Unique arranged items: 2472
+- Exact duplicate lines removed: 2445
+Topic Counts
+- 01. Basic JavaScript & Language Fundamentals: 36
+- 02. Variables, Scope, Hoisting & TDZ: 83
+- 03. Data Types, Type Conversion & Operators: 189
+- 04. Control Flow, Loops & Conditions: 40
+- 05. Arrays, Set, Map & Collection Problems: 240
+- 06. Strings, Numbers, Math & Regex: 58
+- 07. Objects, JSON, Destructuring, Copying & Immutability: 246
+- 08. Functions, This, Closure, Currying & HOF: 391
+- 09. Classes, OOP, Constructor, Prototype & Inheritance: 144
+- 10. Promises, Async/Await, Fetch & Callbacks: 184
+- 11. Event Loop, Timers, Runtime & Memory: 130
+- 12. DOM, BOM, Browser APIs & Events: 90
+- 13. Modules, ECMAScript & Modern JS Features: 52
+- 14. Error Handling: 31
+- 15. Code Output / Syntax & Small Snippets: 148
+- 16. Practical Coding / Algorithm Questions: 39
+- 17. Node.js, Express & Backend: 159
+- 18. MongoDB & Database: 107
+- 19. React, Redux, Frontend & CSS: 15
+- 20. DSA / Computer Science Fundamentals: 25
+- 21. Feedback, Notes & Study Improvements: 56
+- 22. Project / Miscellaneous Non-JS Tasks: 9
+- 23. Uncategorized / Needs Manual Review: 0
+---
+01. Basic JavaScript & Language Fundamentals
+1. what is js (give a brief)
+2. use strict
+3. High Level Language
+4. Is semi column mandatory?
+
+-- 1 of 52 --
+
+5. What is JavaScript
+6. Strict mode(ES5)
+7. use strict keyword
+8. strictmode
+9. What is JavaScript?
+10. Use of Strict
+11. JavaScript coding conventions
+12. Browser storage
+13. What is JS (brief)
+14. keywords
+15. identifiers
+16. Clean Code
+17. Use of Strict ('use strict')
+18. strict mode
+19. follow JS coding conventions
+20. Cross-browser compatibility
+21. Security best practices (e.g., XSS prevention CSRF protection)
+22. Testing JavaScript code (e.g., Jest Mocha)
+23. Microservices with JavaScript
+24. TypeScript basics for JavaScript developers
+25. blocks
+26. csrf, xss, interceptors
+27. strict mode in js
+28. keywords identifiers
+29. Identifier
+30. Basic JavaScript Questions
+31. scripting language
+32. What js and usage
+33. Keyword
+34. JS coding conventions
+35. Open Compiler
+36. Explore JavaScript in a structured and sequential way.
+02. Variables, Scope, Hoisting & TDZ
+1. scope chain
+2. illegal shadowing
+3. Tempural dead zone
+4. hoisting
+5. TDZ (clarity needed)
+6. Hoisting - Clear understanding how it works
+7. Scope
+8. lexical scope
+9. scope chaning
+10. Variable Shadowing
+11. TDZ
+12. Block and functional scope
+13. arrow function - hoisting
+14. What the difference between Lexical and Dynamic Scoping?
+15. The scope of a variable is determined by its position in the source code at
+the time of writing.
+
+-- 2 of 52 --
+
+16. JavaScript uses lexical scoping.
+17. The inner function looks up variables in the outer function where it was
+defined, not where it was called.
+18. Dynamic Scoping (Not in JS)
+19. Languages like older versions of Lisp or Bash use dynamic scoping.
+20. The function uses variables from the function that called it, even if it was
+defined else.
+21. Scop
+22. Lexical environment
+23. how to avoid hoisting: need clarity
+24. Scope & Closures
+25. temporal deadzone
+26. variables - scopes
+27. scope chaining
+28. Scope (Global, Local, Block, Function)
+29. Block Scope
+30. Hoisting (clarity)
+31. Issue with var
+32. Variables (var, let, const), Data Types, Operators
+33. hoisting (tdz)
+34. Block scope vs functional scope
+35. Function Scope, Block Scope and Lexical Scope
+36. Variables - why
+37. Temporal Dead Zone
+38. value of variables in TDZ
+39. Variables and Scoping:
+40. Type of Scope
+41. Shadowing
+42. Temporal Dead Zone (TDZ)
+43. What is hoisting in JavaScript, and how does it affect var, let, and const?
+44. Closures and Lexical Scoping
+45. block scope vs function scope
+46. Variable scope: var, let, const
+47. Hoisting (functions and variables)
+48. shadowing & illegal shadowing
+49. difference between variable types
+50. A function that remembers its lexical scope even when executed outside that
+scope.
+51. Arrow fun and hoisting
+52. Variable Declarations
+53. What is the scope? Function, Global, Block
+54. Lexical Environment or Lexical Scope
+55. Temporal death zone
+56. scope need clarity
+57. A closure is a function that has access to the parent scope, after the parent
+function has closed.
+58. Create private variables
+59. Scope (Global, Function, Block) Hoisting Closures
+60. Scope - Lexical scope
+61. Variable hoisting
+62. Closures vs. Lexical Scoping in JavaScript
+
+-- 3 of 52 --
+
+63. Variable scope
+64. scope of a variable
+65. Function and arrow func in hoisting,
+66. How to avoid hoisting in js code
+67. understand scoping better
+68. Variable
+69. Find Greater in 3 variable
+70. scope - practical
+71. Temporal dead zone - learn more Type coercion
+72. Difference b/w let, var, const
+73. Scope of variables
+74. variables
+75. Hoisting - need clarity
+76. function hoisting
+77. function scope
+78. What are the differences between var, let, and const?
+79. What is hoisting, and how does it work?
+80. hoisting - check deeper
+81. hoisting in JS
+82. redeclaration & reassignment in variable declarations
+83. Lexical scope vs lexical eniviorment
+03. Data Types, Type Conversion & Operators
+1. primitive vs non primitive datatypes
+2. rest operator
+3. null vs undefined
+4. nullish coalescing operator
+5. optional chaining
+6. == and ===
+7. Spread and rest operator
+8. Type casting
+9. typeof
+10. Null Coalescing
+11. Passed By Value vs Passed By Reference
+12. Infinity
+13. nullish operator
+14. optional chaning
+15. Short Circuiting
+16. Type Coercion
+17. isNaN()
+18. String() vs toString()
+19. unary functions
+20. Types of type coercion
+21. short circuting
+22. Typing casting
+23. Implicit type coercion
+24. False values
+25. nullish collision operator
+26. dynamic typing
+27. null coalsing
+
+-- 4 of 52 --
+
+28. undefined vs null
+29. Spread Operator vs Rest Operator
+30. Modern language features: optional chaining, nullish coalescing, pattern
+matching (proposal)
+31. type conversions
+32. Primitive & Non-primitive data types
+33. Null, undefined, and not defined
+34. Spread Operator
+35. Coercion - implicit, explicit String Boolean Coercion
+36. Explicit vs Implicit Type Coercion
+37. Concatenating arrays, use spread operator(task)
+38. Datatypes
+39. Combined ternary operator - P
+40. Type inference
+41. Spread vs Rest Operator
+42. Conditional Statements (if, else, switch, ternary operator)
+43. Spread and Rest Operators
+44. ternary operator
+45. Primitive vs non-primitive
+46. Pass by reference
+47. Pass by value
+48. {} == {} - P
+49. falsy values
+50. Primitive Types
+51. Value Types and Reference Types
+52. Implicit, Explicit, Nominal, Structuring and Duck Typing
+53. == vs === vs typeof
+54. Bitwise Operators, Type Arrays and Array Buffers
+55. datatypes - primitive & non primitive
+56. this.name === 'THANOS' ? 'disappeared' : 'came back'
+57. pass by value vs pass by reference,
+58. non primitive datatype
+59. Data types
+60. coercion
+61. flatMap(), Symbol()
+62. operator used for achieving shallow copy
+63. remove null, undefined from an array(task)
+64. nullish operators
+65. Unary function
+66. !! Double exclamation mark
+67. Type coercion, type inference
+68. Pass by value and Pass by reference
+69. implicit / explicit type casting
+70. primitive vs no primitive
+71. type coercion - P
+72. Unary operator
+73. ternary return
+74. !! Usage, why to use
+75. Preincrement vs PostIncrement
+76. ternary vs if..else
+77. Symbol()
+
+-- 5 of 52 --
+
+78. == vs ===, null vs undefined, NaN quirks
+79. coercion types
+80. NaN
+81. Destructuring, Rest operator
+82. Dynamic typing, type inference
+83. Truthy values vs falsey values
+84. Nullish coalescing, short circuit evaluation
+85. Primitive and non primitive data types
+86. Coercion (Types)
+87. convert function to single line (arrow function + ternary)
+88. primitive datatypes: need clarity
+89. purpose of double exclamation
+90. why to use, what is it
+91. unary function, ternary operator
+92. nullish operator with example
+93. optional chaining with example
+94. optional chaining clarity
+95. Modify an arrow function to find sum of n numbers(rest operator, HOFs)
+96. Assignment Operators
+97. Logical Operators
+98. call by reffrence
+99. call by value
+100. call by value vs call by reference
+101. Primitive data types and non primitive datatypes
+102. Passed by value and passed by reference
+103. immutable datatypes
+104. truthy, falsy values
+105. new datatypes in ES6
+106. undefined vs null ( Need Clarity )
+107. Boxing in Javascript
+108. simple data types
+109. convert function into single line (types of arrow functions, ternary return)
+110. Ternary operator syntax
+111. Symbol(), Array.with()
+112. Datatypes - primitive vs non-primitive
+113. is null an object?
+114. truthy falsy
+115. For in for of(practical)5. remove null, undefined from an array(task)
+116. Set, Map datatypes
+117. call by value call by reference
+118. pass by reference /pass by value
+119. boxing
+120. if..else vs ternary
+121. querying with logical operators
+122. Bitwise operators
+123. Primitive vs non primitive
+124. dynamically typed
+125. Non primitive datatypes
+126. Map datatype
+127. merge two arrays using spread operator
+128. pass by refernce and pass by value(pratical)
+
+-- 6 of 52 --
+
+129. Optional chai-ning
+130. passed by value vs passed by ref
+131. example of implicite type casing
+132. == vs ===
+133. boxing
+134. nullish assignment operator
+135. Post pre increment
+136. Operators
+137. Datatype
+138. primitive vs non-primitive storage
+139. implicite and explicit conversion - reversed definition
+140. Primitive & Non primitive Data types
+141. Pass by value & Pass by reference
+142. undefined vs not defined vs null
+143. Post and Pre increment
+144. Implicit coercion
+145. Explicit coercion
+146. Thruthy and Falsy values
+147. Primitive vs non-primitive datatypes
+148. logical operator
+149. optional chain
+150. Map (datatype) vs Object
+151. ternary operator (with return)
+152. Immutable data types
+153. explicit type casting
+154. ES6 new datatypes
+155. dynamic typing (vague)
+156. truthy and falsy value
+157. spread operator and rest operator
+158. coercion(type need to explained)
+159. Typecasting
+160. bitwise operator
+161. Explain null vs undefined in JavaScript.
+162. What are JavaScript data types?
+163. What is the difference between == and ===?
+164. rest operator vs spread operator
+165. Non-primitive datatype
+166. how the spread operator works
+167. Dynamic typing, type inference, type coercion
+168. Truthy vs falsey values
+169. falsy value
+170. Object operators
+171. Array operators
+172. Return type of == comparison
+173. Array copy (spread operator)
+174. Truthy vs Falsely values
+175. Short circuit evaluation, nullish coalescion, optional chaining
+176. coercion(need clarity)
+177. logical operators usage in if statement
+178. temnary operator
+179. truthy, falsy
+
+-- 7 of 52 --
+
+180. External Type conversion
+181. NAN property
+182. primitive vs non-primitive data types,
+183. BigInt,
+184. Js is dynamically typed
+185. Primitive and non primitive datatypes
+186. is null an object
+187. void
+188. is undefined an object?
+189. identify and use datatypes properly
+04. Control Flow, Loops & Conditions
+1. switch syntex
+2. Continue statement
+3. for in vs for of
+4. for...of vs for...in
+5. conditional statements
+6. Sum of Values in an Array using while & forEach & reduce
+7. What is the difference between for..of and for..in?
+8. countdown timer: 10 to 0
+9. Print 1-10 with a time delay of 1sec
+10. print from 1-10 in gap of 1s each
+11. switch is used alternative for what?
+12. countdown timer that ticks to 0 and stops
+13. while vs do while
+14. continue
+15. do while vs while
+16. print from 1-10 in gap of 1s
+17. For in
+18. For of
+19. countdown timer that counts down from 10 to 0 and stops
+20. for...of, for..in
+21. what happens on break statement
+22. for...of, for...in
+23. do while
+24. Do while syntax
+25. Break and continue
+26. for in -> practice
+27. print 1-100 in reverse order
+28. do while: print 1 to 10
+29. print 1-10 in gap of 1s
+30. For in/For of
+31. While and do while
+32. switch
+33. continue vs break
+34. print from 1-10 in gap of 1s without using genarator(p)
+35. what is the difference between for..of and for..in
+36. What is the difference between for.of and for..in?
+37. while vs dowhile
+38. if else
+
+-- 8 of 52 --
+
+39. switch case syntax
+40. print 1 to 50 using do while
+05. Arrays, Set, Map & Collection Problems
+1. Reverse an array
+2. forEach vs map
+3. find the 2nd largest number from an array - p
+4. remove duplicates from array
+5. isArray
+6. reduce syntax and workouts
+7. Map
+8. find the sum of prime number in an array
+9. fidn tha second largest value from an array
+10. Difference between map, forEach
+11. Practical implementation of filter
+12. array)
+13. Arrays
+14. Remove duplicate elements - P
+15. Set vs Map
+16. includes
+17. some and every
+18. Splice vs slice
+19. Map, filter, reduce
+20. Array vs Set
+21. flat
+22. slice vs splice
+23. reduce
+24. forEach
+25. map vs forEach
+26. Reverse an array in place
+27. Remove prime numbers from the array
+28. Remove duplication from an array
+29. Flip sign of numbers in an array using forEach(practical)
+30. Array
+31. Splice, slice
+32. Unshift, shift
+33. print the elements in an array in a specific pattern
+34. remove smallest string from array
+35. You are given an array of numbers.
+36. Set/Map
+37. Reverse an array inplace
+38. Map, Filter, Reduce, and Flat
+39. Splice and slice
+40. ForEach - Sum of array
+41. Map / filter / reduce
+42. Removing the nth element from an array
+43. Sets
+44. map v/s forEach
+45. Map & Set
+46. Remove duplicates from an array using reduce - P
+
+-- 9 of 52 --
+
+47. Set / Map
+48. remove multiples of 3 from array
+49. jagged array
+50. array empty
+51. capitalize every words in a sentence
+52. remove duplicate even numbers from array,
+53. in edit product image not populating
+54. minimum order amount-not populating in edit coupon
+55. sum of even numbers using forEach
+56. remove even numbers from an array
+57. find the count of 1 in the array
+58. reverse an array and multiply its first half by 2 and second half by 5 - P
+59. map, reduce, filter
+60. highest odd number from an array
+61. map vs set
+62. lice() and splice()
+63. find common elements from 2 arrays
+64. highest even number from an array using reduce
+65. sum of elements in given array
+66. Array.reduce: sum of positive numbers in a mixed array
+67. Slice
+68. Create array
+69. Add into another array without push
+70. Reverse array without inbuilt(swap)
+71. add two element from the array find pair which equals the target
+72. multiply all numbers with 2 and add into another array
+73. multiply add the number which is multiple of 2 and add into array
+74. Set
+75. sum of positive numbers in a mixed array
+76. Set(), Map()
+77. Shift vs Unshift
+78. remove even duplicates from an array
+79. Remove duplicate elements from an array, use set(task)
+80. reduce syntax and workout
+81. Array slice working
+82. Array splice working
+83. Map, weak-map
+84. Remove duplicates from an array
+85. WeekMap vs WeekMap
+86. Create custom filter
+87. Insert an element to 2nd index of an array
+88. flatMap
+89. frequency of an array - P
+90. Write the code for custom filter
+91. parent of Array
+92. Array.reduce: sum of negative numbers in mixed array
+93. reverse array
+94. largest odd element using reduce
+95. remove second last element from array
+96. find the 2nd largest number from an array
+97. Find third largest element in an array
+
+-- 10 of 52 --
+
+98. Reduce the age of all by 3
+99. inheriting Array
+100. Array.reduce(): sum of positive numbers
+101. map vs for Each
+102. Arr.shift
+103. Splice practicals
+104. largest element an a array
+105. 2nd largest array
+106. Array.some()
+107. Array.every()
+108. Top two frequent words
+109. some
+110. every
+111. map, forEach
+112. Sort
+113. array.reduce syntax
+114. How can you add an element to an array without using push or unshift
+115. How can you remove the last element of an array without using pop
+116. How can you sort an array of numbers manually without using sort?
+117. How can you find all occurrences of a target value in an array?
+118. array vs set - learn more,
+119. how to remove an array element from specific index?,
+120. map, reduce, filter practicals
+121. how to remove duplicates from an array
+122. how to remove an array element from specific index,
+123. Convert set into array -P
+124. flatMap(), Array.some() vs Array.every()
+125. largest odd number using reduce
+126. reduce syntax
+127. Reduce the age of allby 10
+128. find sum of array
+129. Map foreach etc
+130. reduce(find second smallest even number)
+131. Add number into a array using splice
+132. largest odd element from array using reduce
+133. remove nth index from array
+134. non-repeating elements in array
+135. Array.reduce: longest word in string
+136. Get the Orange and lemon from an array using slice(task)
+137. remove odd numbers from an array
+138. Array.reduce: sum of positive numbers in a mixed array (type checking)
+139. remove smallest number from array (array manipulation)
+140. splice
+141. Unshift vs shift
+142. map()
+143. filter()
+144. reduce()
+145. Mutating an array initialized with const
+146. Array.some, Array.every
+147. remove all zeros in a array
+148. accesing arrays
+
+-- 11 of 52 --
+
+149. sum of evennumbers from an array
+150. remove second last elem from an array
+151. largest odd using reduce
+152. filter
+153. Splice and splice,
+154. reduce() - find largest no from array
+155. find smallest odd number using reduce
+156. remove even numbrs from an array
+157. find average of even numbers in an array
+158. reduce() - P
+159. Find in array - P
+160. app.set()
+161. implementation flatmap()
+162. map(), forEach(), filter(), and reduce()
+163. Removing duplicates from array using filter
+164. extract strings from array
+165. array empty(find)
+166. Pop, Shift, Unshift
+167. set map
+168. Find sum of odd numbers using map, filter or reduce
+169. Filter even numbers from an array - P
+170. Remove duplicates from an array - P
+171. Set() vs Map
+172. array.filter()
+173. Set, Map
+174. forEach() vs map()
+175. Map, Set
+176. reverse array without .reverse()
+177. Unique
+178. Duplicate
+179. Sort - ascending, descending
+180. Find the largest element in an array using reduce - P
+181. remove 2nd last element from array
+182. What is the difference between map(), forEach(), filter(), and reduce()?
+183. remove multiples of 3 from the array
+184. find the second largest element from the array
+185. remove duplicate even numbers from an array
+186. array.splice()
+187. initial value of Array.reduce
+188. filter non-strings from array
+189. For each
+190. Map, filter & Reduce
+191. Find the second largest & second smallest element from an array.
+192. Delete consecutive odd numbers from an array.
+193. Delete the repeated elements from an array (without using Set).
+194. .map(): convert elements to uppercase.
+195. .reduce(): longest string in an array.
+196. move Zeros to the front
+197. remove duplicates number
+198. remove middle element from array
+199. map, filter, forEach
+
+-- 12 of 52 --
+
+200. find non repeating elements from array
+201. largest element using reduce(p)
+202. delete second largest from array(p)
+203. Array.map
+204. Array.filter
+205. filter out only numbers from an array
+206. array.reduce, Accumulator and Current value
+207. reduce(find second largest even number or odd number)
+208. some, every
+209. sum of elements of an array
+210. What is the difference between map(), filter(), and reduce()?
+211. map vs filter -- check deeper
+212. array.flat()
+213. Set, weak-set
+214. Remove duplicate from an array
+215. sum of even number with a condition that for every occurence of an even
+number do a substraction of 2 from the value
+216. Remove duplicateds from array (Set, filter)
+217. Array flattening
+218. Array.reduce: find largest string
+219. join(), filter()
+220. accessing arrays
+221. unshift
+222. generate array containing multiples of 7
+223. .reduce(): sum of positive number
+224. map vs filter vs reduce
+225. Sorting in descending order of array
+226. Biggest number in array
+227. array map vs foreach,
+228. array slice vs splice,
+229. Map reduce filter
+230. map(need clarity)
+231. reduce(find second smallest number)
+232. some - t
+233. every - t
+234. second smallest lement from array
+235. remove prime numbers from array
+236. Array.in
+237. Flatten the array
+238. reduce(): sum of positive numbers
+239. remove nth element from array
+240. Arr.shift, unshift
+06. Strings, Numbers, Math & Regex
+1. Factorial of a number
+2. Math.ceil
+3. Template literal
+4. Find the most frequent number
+5. Be able to access, update, traverse, and reason about data stored in these
+structures.
+
+-- 13 of 52 --
+
+6. How to convert a String to Number
+7. Escape sequence
+8. Capitalize the first and last letter of the string(practical)
+9. Math.round()
+10. Template literals
+11. Change 'hello world' to 'world hello'
+12. Template literals (Template strings)
+13. how to remove a character from string?,
+14. current time, without date
+15. Convert the first letter of each word to uppercase - P
+16. capitalize last letter of string
+17. Encoding a url, encodeURI, decodeURI
+18. Count the each character of the string using hashtable
+19. Write a code to find the pelindromic sub string from the given string
+20. Convert string 1st character into uppercase
+21. find prime numbers
+22. how to find current time in js
+23. encode a url - encodeUri, encodeUriComponent
+24. string mutability
+25. current date in D/M/YYYY format
+26. Update practicals
+27. Regex
+28. url encoded by js
+29. how to remove a character from a string?,
+30. encodeURI, ecodeUrlComponent
+31. capitalize first letter of string
+32. splitting first two elements from a string - practical
+33. Pendings & Updates:
+34. Template literals - Practical
+35. encodeURI
+36. date 15 days before today
+37. Convert the first letter of a string to uppercase - P
+38. Convert the first letter of each word in a given sentence to uppercase - P
+39. sum of digits in a number (without using string)
+40. date formatting
+41. date 25 days ago
+42. check if number has decimal points
+43. Sum of 2 numbers = target
+44. String(), toString()
+45. capitalize first and last letter of string
+46. Check a string is palindrome or not
+47. remove even numbers
+48. count the vowels in a string
+49. Find largest number?
+50. find second largest number
+51. split string in middle
+52. substr vs substring
+53. count the frequency of alphabets in a string
+54. reverse a string
+55. 2 -> 3
+56. find second min odd number - p
+
+-- 14 of 52 --
+
+57. find that last index of a particular number - p
+58. generate 5 prime numbers
+07. Objects, JSON, Destructuring, Copying & Immutability
+1. object creation
+2. object manipulation
+3. how to check if an object is empty or not?
+4. destructuring
+5. spread vs rest
+6. key with highest value
+7. Object empty
+8. deep copy of object - practice
+9. Object Destructuring
+10. WeakSet
+11. Need clarity on usage of object literals
+12. Objects , How to declare objects
+13. Create deep copy for an object
+14. delete a field from an object
+15. make object immutable
+16. proxy object
+17. Deep copy vs shallow copy
+18. Objects properties
+19. weakSet vs weakMap
+20. weakset, weakmap
+21. deep copy
+22. shallow copy
+23. Shallow Copy Implementation
+24. Weakset, weak map
+25. Destructuring in JavaScript
+26. Remove the key corresponding to the lowest value in an object(practical)
+27. Deep copy and shallow copy
+28. Object
+29. Object seal
+30. Disadvantages of Shallow
+31. Object.freeze
+32. Object.seal
+33. Object.keys
+34. Object.values
+35. weakmap
+36. weakest
+37. shallow copy vs deep copy
+38. de-structuring
+39. JSON.parse
+40. JSON.stringify
+41. Map vs Object
+42. convert array of strings to object where keys are the strings and values are
+their lengths
+43. remove odd valued key-value pairs from an object
+44. practice js problems of array, string, objects in leetcode
+45. spread and rest
+
+-- 15 of 52 --
+
+46. Deep copy & Shallow copy
+47. Object.freeze vs Object.seal
+48. Object shorthand
+49. Spread - Adding 2 arrays
+50. Object destructiring
+51. Objects v/s array
+52. Combine two objects - P
+53. Delete property from an object - P
+54. Object.seal() vs Object.freeze()
+55. object workouts
+56. Improve array and object problem solving
+57. how to check if an object is empty
+58. find key corresponds to highest value in an object
+59. how to make a nested object immutable?,
+60. add a new field to the obj with name 'John' in given array of object.- P
+61. hasOwnProperty
+62. Object.create and Object.assign
+63. object iteration
+64. JSON.stringify()
+65. object freeze vs seal,
+66. Object literals
+67. Use of Object.entries
+68. remove last property from object
+69. find sum of keys of an object
+70. find sum of values in an object
+71. check if object is empty
+72. Merge two objects - P
+73. Object.entries()
+74. object length, entries, values, keys
+75. array deep copy
+76. how to check whether the given object is empty or not?,
+77. how to make an object immutable?,
+78. how to freeze inner object
+79. mutable vs immutable
+80. Object.entries(obj);
+81. Deep copy, shallow copy
+82. Object vs map
+83. proxy objects
+84. Uses of object.assign
+85. Convert nested object into flat without using any inbuilt
+86. Transform an Parent object into a array of object containing the each key
+value pairs of the parent Object
+87. How to create deep copy
+88. mutable and immutable - P
+89. object.seal vs object.freeze
+90. how to unfreeze an object?,
+91. Shallow vs Deep copy
+92. find key corresponds to lowest value in an object
+93. JSON
+94. different ways of creating object
+95. object iterations
+
+-- 16 of 52 --
+
+96. Create deep copy
+97. JSON.parse()
+98. deep and shallow copy
+99. obj.freze vs seal ect
+100. object, values
+101. JSON.Stringify vs JSON.parse
+102. rest vs spread
+103. weakSet() and weakMap()
+104. Delete a property from an object - practical
+105. Object.entries
+106. remove object key corresponding to the smallest value
+107. 7 .object.seal
+108. array destructuring: practical
+109. what is spread operation
+110. weakmap vs weakest
+111. deepcopy
+112. immutable
+113. how to remove character from object,
+114. how to remove an object property,
+115. how to check object is empty,
+116. deep copying vs shallow copy
+117. object workout
+118. how to check if an object is empty?
+119. ● Js object
+120. ● Array destructuring & Object destructuring
+121. has own property
+122. week map
+123. weak set
+124. Shallow copy and deep copy
+125. Spread
+126. set vs weakSet
+127. how to make an object immutable - learn more.
+128. array like object
+129. sum of object
+130. find object key with highest value
+131. Obj.freeze
+132. Copy mechanism
+133. array destructuring
+134. spread operation
+135. adding a new key value to an existing object - practical
+136. Object freeze
+137. Object Immutability
+138. Object.fromEntries()
+139. Destructuring (Arrays & Objects)
+140. remove object key that holds the largest number (object manipulation)
+141. Object.freeze vs Object.seal()
+142. array destructuring - Practical
+143. Spread Operation - practical
+144. remove object keys corresponding to odd numbers
+145. object.seal() vs object.freeze
+146. object destructing
+
+-- 17 of 52 --
+
+147. Create a deep copy of an object
+148. Destructure an object
+149. object length
+150. Package json vs package lock json,
+151. set vs weakest
+152. Weak Map, Weak Set
+153. Spread & Rest
+154. Mutable and immutable
+155. Weakest, weak map
+156. Shallow copy- speard , rest
+157. Object, map, Json vs object
+158. Object length, key value pairs
+159. add/remove property in object
+160. accessing objects
+161. Array.reduce: total money after transactions that have income and expense
+objects
+162. weakset and weakmap
+163. find most aged user from an array of user objects
+164. array of arrays, object length
+165. how to access objects ?
+166. mplementation Proxy object
+167. WeakMap and WeakSet
+168. Object.freeze()vs Object.seal()
+169. objects sum
+170. how to remove a property from object?,
+171. object empty(find)
+172. deep clone
+173. How to create an object
+174. deepcopy vs shallow copy
+175. Object.freeze()
+176. object.assign, entries, keys, values - need practical workouts
+177. making object immutable
+178. add object key
+179. sum of values in object
+180. combine two arrays using spread
+181. shallow copy, deep copy
+182. object synta
+183. remove object key, object manipulation
+184. combine two values into string using template literals
+185. rest
+186. Deleting a property from an object
+187. how check if an object is empty or not?
+188. nested object destructuring
+189. weakest,weakmap
+190. What are the differences between shallow and deep copy in JavaScript?
+191. How do you deep clone an object in JavaScript?
+192. object destrcturing
+193. weakSet & weakMap
+194. how to find the length of an object
+195. remove key corresponding to the lowest value in object
+196. Bracket notation
+
+-- 18 of 52 --
+
+197. object. seal vs freeze
+198. Object.keys, Object.values
+199. Shallow copy & Deep copy
+200. Proxy
+201. How to check whether an object is empty or not.
+202. Destructure nested array and object.
+203. Object.keys()
+204. Object.values()
+205. insert a value in between 2 values
+206. array vs object
+207. object. Assign / object. Create
+208. concat strings in an object
+209. Desctructring (task) + theory
+210. deep copying vs shallow copying
+211. How to merge objects
+212. string is immutable or mutable
+213. What is the difference between shallow copy and deep copy in JavaScript?
+214. What is the difference between Object.freeze() and Object.seal()?
+215. make an obj immutable
+216. obj seal
+217. obj freaze
+218. is string mutable
+219. Immutable vs mutable
+220. Object empty (eg:Object.keys())
+221. add/remove object property
+222. object syntax
+223. object vs array
+224. is string mutable?
+225. fromEntries
+226. Destructuring an object
+227. Array, Object, String manipulations
+228. spread, rest
+229. Learn more about array desctructring
+230. object()
+231. object syntax, object manipulation
+232. What is a proxy in JavaScript?
+233. Objects
+234. Remove attribute from object
+235. how to check the given object is empty or not?,
+236. weakmap(need clarity)
+237. shallow copy vs deep copy (need clarity)
+238. proxy object - t
+239. deep copying
+240. add/remove key in object
+241. shallow copy v/s deep copy with example
+242. spread an object changing a property in it
+243. removing object key
+244. deep copy object
+245. destructuring arrays
+246. deep copy vs shalllow copy
+
+-- 19 of 52 --
+
+08. Functions, This, Closure, Currying & HOF
+1. Applications of generator function
+2. Generate first n prime numbers - generator function
+3. Function borrowing - concept and implementation
+4. closure & it's applications
+5. object methods
+6. deep copy methods
+7. Sum of odd numbers in an array using higher order functions.
+8. Is it possible to hoist an arrow function
+9. Arrow function -syntax
+10. arrow vs regular function
+11. closure
+12. pure function
+13. impure function
+14. bind() (practice the usage)
+15. generator function
+16. arrow function vs regular function
+17. Array methods and workouts
+18. currying
+19. IIFE
+20. Higher-Order Functions
+21. call, apply, bind
+22. Memoization
+23. higher order function
+24. closure - applications & drawbacks
+25. create a function to find average of even numbers in an array
+26. parameter, arguments & default parameters
+27. immediately invoked function
+28. closures
+29. How to make a function and return a value
+30. Why do we need an IIFEs at all?
+31. Function calculate sum of an array
+32. Write a function to concat to Array
+33. Write a function to return first letter of a string as uppercase
+34. how to declare and call a function (practical)
+35. Write a arrow function for square a number
+36. Number Methods
+37. Array.map , Array Methods
+38. Arrow function syntax
+39. closure - P
+40. borrow function to another function - P
+41. call, apply, and bind - need more understanding
+42. function borrowing-call ,apply ,bind
+43. Higher order functions
+44. Array methods
+45. String methods
+46. Arrow Function
+47. Factory function
+48. Higher-Order Function
+49. Pure Function vs Impure Function
+
+-- 20 of 52 --
+
+50. Anonymous function
+51. call() vs apply() vs bind()
+52. HOF
+53. IIFE Syntax
+54. Disadvantages of Closure
+55. Closure Disadvantages
+56. Write a js function that takes an order id as input and returns the products
+of that order as an array
+57. Arrow function to find sum of n number of arguments
+58. Generator function practical example
+59. Currying practical example
+60. Object manipulation and methods
+61. Closure - drawbacks
+62. This context
+63. Memoization in JavaScript
+64. Functions
+65. Types of functions
+66. Function borrowing
+67. sorting an array without .sort() method
+68. Array & Object Methods
+69. call, apply and bind
+70. write a function to reverse an array
+71. call vs apply
+72. arrow function vs regular functions
+73. generator functions
+74. func.call()
+75. bind()
+76. trimmer functions
+77. default parameter
+78. call, apply ,bind
+79. rest parameter
+80. arrow function vs normal function
+81. Debounce
+82. purpose of IIFE
+83. function to check if object is empty
+84. debouncing
+85. disadvantage of the closure
+86. explain the This in js
+87. closures drawbacks
+88. this in arrow function
+89. this substitution
+90. write a function to return the freq of elements in an array
+91. call, apply & bind usage
+92. Write a function to return the two numbers whose sum is closest to zero.
+93. this binding, call/apply/bind, and lexical vs dynamic context
+94. Functional patterns: currying, partial application, immutability
+95. Sum of 2 numbers using arrow function
+96. Example for closure
+97. Call, apply, and bind
+98. this keyword
+99. JSON & JSON Methods
+
+-- 21 of 52 --
+
+100. Function to return the sum of all arguments passed to it (rest)
+101. Generator function to return multiples of a given number
+102. Write a function to know if a given string is a Palindrome or not
+103. Math Function
+104. Pure Function and Side Effect
+105. Named Function
+106. Function vs method
+107. immediately invoked function(IIFE)
+108. Call apply bind
+109. Closure (clarity)
+110. Objects, Arrays, Functions
+111. Array Methods (map, filter, reduce, forEach, find, etc.)
+112. pure function clarity
+113. disadvantages of recursion
+114. call vs bind
+115. empty object (object methods)
+116. array methods (map, reduce, filter)
+117. regular vs arrow function - learn more,
+118. how to remove an array element without in-built methods,
+119. pros and cons of recursive function,
+120. recursive function to print Fibonacci series.
+121. merge 2 array using apply
+122. why we use return in function
+123. what is recursion?
+124. pure vs impure
+125. function composition
+126. deepClone nested object without in-built methods
+127. this, call, apply and bind
+128. High Order Functions
+129. Recursion
+130. Partial Applications, Currying, Compose and Pipe
+131. promse methods
+132. arrow functions vs regular function
+133. call, apply & bind
+134. Higher order function vs first order function
+135. snap: function () {
+136. return ${this.name} snapped the finger and half of the universe ${
+137. Array methods practicals
+138. Object methods practicals
+139. regular function vs arrow function
+140. arrow function vs regular function (this)
+141. applications & drawbacks of closure
+142. benefits of IIFE
+143. call
+144. apply
+145. bind
+146. Functions - why
+147. Insert in same array without inbuilt method
+148. Modify an arrow function to find the sum of n numbers
+149. Limitations of Closure
+150. Factory functions
+
+-- 22 of 52 --
+
+151. Method borrowing
+152. application of closure
+153. First order function
+154. Currying function
+155. Generator functions - practical
+156. Pure functions
+157. Recursive Functions
+158. Closure (Practical)
+159. examples for HOF
+160. JSON methods
+161. Advatages of Currying
+162. Reverse a string without reverse method
+163. Find the sum of n numbers using arrow function
+164. create a higher order function - P
+165. Write a function to flatten a nested object
+166. Explain debouncing in JavaScript.
+167. What is memoization?
+168. applications of closure
+169. this" in arrow function
+170. function curring
+171. path parameters
+172. Difference between normal function and arrow function
+173. Arguments vs Parameter
+174. Currying advantages
+175. What is the purpose of the this keyword, and how does it behave in arrow
+functions?
+176. What is a closure in JavaScript?
+177. Closure- example- incomplete
+178. methods to resolve hash collision
+179. Partials
+180. arrow fn vs regular fn(this)
+181. The this keyword
+182. Currying & Partial Application
+183. call(), apply(), and bind()
+184. this" substitution
+185. write a function to find the 2nd largest number from an array
+186. Closures – with real-world examples
+187. this context in arrow function
+188. return
+189. higher order function practical
+190. Reverse an array without using any built in methods
+191. Extracting yields from a generator function
+192. Write a function to find the length of an array without using length.
+193. Write a function to reverse an array without using built-in methods.
+194. Create a function to merge two arrays manually.
+195. Write a function to shift all elements of an array one position to the left.
+196. Write a function to rotate an array n times to the right.
+197. Write a function to find if a given element exists in an array without using
+includes.
+198. Write a function to find the first occurrence of a target value in an array.
+199. Write a function to find the maximum and minimum values in an array without
+
+-- 23 of 52 --
+
+using Math.max or Math.min.
+200. Write a function to sum all the elements in an array.
+201. Create a function to find the average of numbers in an array.
+202. array merging methods
+203. Generator fn - practical
+204. create a function to find sum of 2 numbers
+205. Modify an arrow function to find sum of n numbers
+206. Rate Limiting Techniques
+207. includes() Method Usage
+208. Array functions in depth
+209. regular vs arrow function -learn more,
+210. default parameters
+211. throtling
+212. arrow function - P
+213. Depends on how the function is called
+214. Higher order function with example
+215. object methods - more on it
+216. IIFE or Self-invoking function
+217. ● What is ‘method’?
+218. ● this keyword
+219. Math functions
+220. generetor function
+221. Array functions
+222. Arrow function to find sum of 2 numbers
+223. Reverse an array without using a second array or built-in methods
+224. this substitiution
+225. memorization
+226. Self Invoking Methods
+227. aplly
+228. function currying
+229. JavaScript Object freeze() Method
+230. generator function and example
+231. Array Methods Practical Problems
+232. concat method
+233. what is pipe with example?
+234. Closures has historically been used to:
+235. Preserve state between function calls
+236. Implement certain design patterns like currying and memoization
+237. Functions: bind, call, and apply
+238. check a string palindrome using recursion
+239. Arrays & Array Methods (map, filter, reduce, etc.)
+240. Objects & Object Methods
+241. check if number contains fraction (Math functions)
+242. arrow function vs regular function(this)
+243. higher order function(need clarity)
+244. regular function vs arrow function – key differences and use cases.
+245. Advantages of Recursion – why and when to use it
+246. Call, bind, apply
+247. function to count vowels in string
+248. call ,apply ,bind(need clarity)
+249. Modify an aroow function to find sum of n numbers
+
+-- 24 of 52 --
+
+250. Call, apply , bind - example
+251. Anonymous functions
+252. Function overloading
+253. Reduce function syntax
+254. find the largest number in a function using another function
+255. bind - P
+256. Types of Hash Functions
+257. advantages of recursionc-P
+258. closure application and drawbacks
+259. call,apply,bind
+260. generator function to print even number in reverse order
+261. Object.entries(), object methods
+262. Polifills, factory function
+263. Understanding JavaScript Closures: How They Work
+264. Different types of functions
+265. Memoizatio
+266. apply(need to practice on call,bind also)
+267. Functional programming in JavaScript
+268. arrow vs regular function (this)
+269. splice method
+270. Options method
+271. create a method to implement deep copy
+272. find sum of returns from three function with different execution timing
+273. Create a function that ensures a function runs only once, even if called
+multiple times.
+274. Yield keyword in generator functions
+275. function to split array in middle into two equal halves
+276. function borrwing pratical
+277. object methods (Object.keys, Object.values)
+278. closure pratical
+279. Eg for Array Methods
+280. generator
+281. Arrow function to find sum of 2 nums
+282. Immediately invoked functions
+283. call & apply
+284. call/apply/bind
+285. call vs apply vs bind - used for
+286. curying
+287. self invoking functions
+288. apply(), call(), and bind()
+289. Pure and impure functions
+290. Implementation of filter() method
+291. generator function(print off numbers in reverse order)
+292. memoization(need clarity)
+293. debouncing(need clarity)
+294. generator function example
+295. this vs globalThis
+296. Logical function
+297. closures/drawbacks
+298. IIFE & it's benefits
+299. Generator function syntax
+
+-- 25 of 52 --
+
+300. Function borrowing in JS
+301. Explain currying in JavaScript.
+302. Call apply bind methods
+303. Map reduce filter methods workouts
+304. arrow fn vs regular fn (this)
+305. function to check whether the given object is empty or not?,
+306. array methods-splice, slice , etc
+307. Generator function practicals
+308. regular vs arrow function
+309. currying - need clarity
+310. methods
+311. Closures - Advantage & drawbacks
+312. Purpose of function
+313. Arrow functions
+314. Normal vs Arrow function
+315. Named functions
+316. Benefits of higher-order function
+317. IIFE & Advantages
+318. Call , Apply & Bind
+319. Math methods
+320. Methods to create a shallow copy
+321. Currying & Benefits
+322. Denouncing
+323. Flat an array with nested arrays without using 'flat()' method.
+324. Generator function to yield multiples of a given number endlessly.
+325. write a function to find the sum of two number
+326. no idea of creating an function
+327. Filter method
+328. IIFE - P
+329. return keyword
+330. find even number using generator function
+331. arguments of Array.forEach
+332. Bind example
+333. HOF example
+334. Closure benefits
+335. closure - practical
+336. call vs apply vs bind
+337. Write a function to return first letter of a string
+338. Create generator function to print even numbers
+339. closures /drawbacks,adv
+340. function to number is fraction or not
+341. Explain the concept of closures in JavaScript with an example.
+342. What are arrow functions, and how do they differ from regular functions?
+343. What is the purpose of this in JavaScript, and how is it determined?
+344. Explain how the call(), apply(), and bind() methods work.
+345. What are higher-order functions in JavaScript? Provide an example.
+346. What is a generator function, and how is it different from a regular
+function?
+347. Explain the concept of functional programming in JavaScript.
+348. closures / drawbacks
+349. why js called dymamically called typed language
+
+-- 26 of 52 --
+
+350. Memoisation
+351. avg logic using HOFs
+352. Closure in JS
+353. call() vs bind()
+354. Pure fn
+355. Higher order fn
+356. currying in js
+357. function vs methord
+358. array.map return type
+359. Reverse an array without sorting or built in methods
+360. Arrow functions - practical
+361. Pure functions, higher order fns
+362. JavaScript Object freeze0 Method
+363. closure use cases
+364. What is the difference between call, apply, and bind?
+365. What is debouncing in JavaScript?
+366. What is currying in JavaScript?
+367. ClosClosure
+368. this
+369. arrow functions vs normal function
+370. Self invoking
+371. Array methods need clarity
+372. function to remove last property from an object,
+373. Calling anonymous function
+374. find sum of this array
+375. arrow function vs regular function (need calarity)
+376. closure(need clarity)
+377. this keyword in various contexts
+378. Object destructuring,call,apply
+379. currying - p
+380. memoization - t
+381. regular vs arrow functions - learn more,
+382. closure example
+383. Calling
+384. IIFE purpose
+385. globalThis
+386. use of IIFE, modern alternative
+387. call() vs apply()
+388. globalThis vs this
+389. IIFE benefits
+390. function to generate n prime numbers
+391. default parameter value
+09. Classes, OOP, Constructor, Prototype & Inheritance
+1. Prototype chain
+2. Sum of numbers till 100 using while loop
+3. static vs dynamic typed
+4. The purpose of the constructor
+5. What is the difference between while and do...while loops
+6. What are some alternatives to loops for iteration in JavaScript
+
+-- 27 of 52 --
+
+7. Sum of first 5 multiples of 3 using while loop
+8. generation function with reverse loop
+9. prototype chaining
+10. Class, Object, Constructor
+11. Abstraction
+12. Encapculation
+13. Lexical Scoping (Static Scoping)
+14. Abstraction, polymorphism, OOP principles
+15. First-class function
+16. Looping object, object manipulation, and its methods(practical)
+17. What is prototyping
+18. What is string prototyping
+19. Object Prototype
+20. class and object
+21. private properties
+22. get, set
+23. how to set instance properties
+24. Closures for stateful functions and encapsulation
+25. Prototypal inheritance, classes, and object composition
+26. static vs dynamic typed language
+27. Statically vs dynamically typed language
+28. Prototypes
+29. Prototypical inheritance
+30. Loops - difference between while and do-while
+31. Class and constructor
+32. Looping Statements (for, while, do...while, for...in, for…of)
+33. constructor
+34. string reverse (prototype)
+35. first class function
+36. what is oops
+37. first order function vs first class function
+38. encapsulation
+39. OOPS Concepts
+40. constructor function
+41. Factories and Classes
+42. new, Constructor, instanceof and Instances
+43. Prototype Inheritance and Prototype Chain
+44. Inheritance, Polymorphism and Code Reuse
+45. is it possible to use arrow function as a constructor?,
+46. does null have prototype?
+47. how to create a class
+48. print 20 to 2 even number only using while loop (with if and without if)
+49. does Array have prototype?
+50. understand prototype better
+51. first class functions
+52. class
+53. Factory functions vs constructor functions
+54. prototype,
+55. Prototypal inheritance
+56. entry controlled vs exit controlled loops
+57. Prototypal Inheritance (Practical)
+
+-- 28 of 52 --
+
+58. instanceof
+59. What is prototype chaining
+60. does undefined have prototype?
+61. getters, setters
+62. what is the purpose of constructor in js
+63. Types of loops
+64. prototype pollution
+65. statically typed vs dynamically typed
+66. Prototypes and Inheritance
+67. prototype inheritance
+68. prototype chaining (need clarity)
+69. Getter, Setter
+70. Class Constructor
+71. Inheritance in JS
+72. static keyword
+73. Entry & Exit Controlled loop
+74. Generator Function Implementation with Loops
+75. encapsulation in JS
+76. class, OOP
+77. loops concepts
+78. phases in an eventloop
+79. Instance
+80. Constructors
+81. loops
+82. object prototypes
+83. javascript oops concepts
+84. do arrays have prototype?
+85. Constructor Functions
+86. Array.prototype
+87. Prototype & Prototypal Inheritance
+88. Classes and Inheritance
+89. dynamic typed vs static typed
+90. Object.prototype
+91. Array prototype
+92. Prototype List
+93. loop an object
+94. New keyword
+95. Extends keyword
+96. globalThis in a class
+97. error instance properties
+98. instanceof vs type of
+99. prototype(need clarity)
+100. statically typed
+101. How to create an object with class
+102. do numbers have prototype?
+103. string reverse (for loop)
+104. purpose of constructor
+105. for loop syntax
+106. phases in eventloop
+107. prototype, which datatypes have prototype
+108. Class implementation
+
+-- 29 of 52 --
+
+109. first order function vs first class function
+110. inheritance
+111. OOP, classes
+112. loop an object, print keys and values
+113. static method vs instance method
+114. For in vs for of loop
+115. Array reverse - for loop while loop without using extra array...
+116. reverse string - for loop
+117. statically vs dynamically types language
+118. constructor vs factory function
+119. Entry controlled loops
+120. Exist controlled loops
+121. Should cover basic syantx of loops and methods
+122. while Loop
+123. separate even numbers using Loop
+124. Number prototype
+125. Constructor function & prototype
+126. class: constructor, methods
+127. What are prototypes in JavaScript? How do they work?
+128. Entry and Exit Controlled loop
+129. prototype, inheritance
+130. typeOf,instanceof
+131. prototype object(need clarity)
+132. Loops in js
+133. staticlay typed vs dynamically typed
+134. Oops vs Pops
+135. Oops concepts - abstraction, encapsulation
+136. prototype - need clarity.
+137. OOP concepts
+138. prototypal ineritance
+139. prototype traps
+140. Print even num using while loop from 20 to check a string palindrome or not
+141. learn class and OOP concepts
+142. prototype - t
+143. class: constructor syntax
+144. class: constructor, method, properties
+10. Promises, Async/Await, Fetch & Callbacks
+1. Handle exceptions in a promise
+2. callbacks
+3. callback hell
+4. create promise
+5. promise
+6. Callback
+7. Promise Concept
+8. Promise Methods
+9. Promise.any
+10. Call back hell
+11. Async wait
+12. Asynchronous JS
+
+-- 30 of 52 --
+
+13. Promise Chaining
+14. Promise.all
+15. deferred script
+16. understand how js handles async code
+17. callback function -(need clarity)
+18. promise stage
+19. promise.allsettelled
+20. promise.race
+21. async / await
+22. callback function
+23. async await
+24. Promise.race (combinators)
+25. Promise states
+26. async/ await
+27. Solve more js problems. Need to have clarity on callback based problem
+28. Promises and async/await error handling and composition
+29. Promise and Promise.all
+30. Promise.race vs Promise.any
+31. Async and Sync, await
+32. Usage of Promise, await, async
+33. Promises methods
+34. Why we use callback function
+35. synchronous and asynchronous
+36. Async/Await
+37. async-await
+38. Why we use Callback
+39. Fixing Callback Hell
+40. Error-first Callback
+41. promise - clarity
+42. what is promise
+43. handle a promise using async and await
+44. async and await
+45. HOF vs callback
+46. call back function
+47. Promises
+48. how to create a promise
+49. Promise, .then chaining, async
+50. why callbacks are used?
+51. promise implementation
+52. Asynchronus API
+53. Syntax of promise.all
+54. Promise.all example
+55. synchronus and asynchronous
+56. Callback Hell into promise
+57. Fetch
+58. Promise.all vs Promise.race
+59. Promise.race() vs Promise.any()
+60. Create callback hell and convert into promise and make more efficient using
+61. promise vs async/await,
+62. concurrency vs parallelism - need clarity,
+63. callbacks (vague)
+
+-- 31 of 52 --
+
+64. fetch JSON data at url and print to console
+65. arguments of fetch()
+66. promise example
+67. Explain promise chaining.
+68. how apps like instagram is fetching the profile data very easily.
+69. Promise syntax, Promise.all
+70. calling async function without await
+71. promise combinators,
+72. Promise.all - syntax
+73. states in promise
+74. Asynchronous JavaScript
+75. async
+76. await
+77. asynchronous working
+78. stages of promise
+79. Promises, Promise.any
+80. Callback example
+81. promise syntax
+82. promise.then syntax
+83. async await synatx
+84. concurrency vs parallelism,
+85. Callback Functions
+86. callback practicals
+87. purpose of callback
+88. synchronous vs asynchrous
+89. asynchronous programming,
+90. methods of promise
+91. defer vs async
+92. concurrency in node js
+93. Promises and handling Promise-based methods
+94. Fetch API (Getting Data using Fetch API)
+95. Fetch API (Getting
+96. Example for callback function
+97. Example for promise
+98. promise vs async/await - learn more,
+99. Handling promises in async/await
+100. ajax
+101. error firstcallback
+102. execution order when timers and callbacks are involved
+(https://pastebin.com/raw/Wh479eDr)
+103. asynchronous vs synchronous - need clarity
+104. Difference between Callback, promise, async/await
+105. Create Callback hell and convert into promise
+106. What is promise chaining
+107. Functions and Callbacks
+108. Promises and Async Handling
+109. Promise.finally()
+110. promise.allsetteled
+111. calling async functions without await
+112. error first callback,
+113. Javascript - synchronous/asynchronous
+
+-- 32 of 52 --
+
+114. Async task
+115. synchronous
+116. asynchronous
+117. callback - understand better
+118. promise - understand better
+119. How to make javascript asynchronous?,
+120. Call back func,
+121. Call back queue and micro stack queue,
+122. defered scripts
+123. asynchronous vs synchronous
+124. how callbacks are used
+125. Callback, Callbackhell
+126. Promise and its Syntax
+127. States of a Promise
+128. promise stages
+129. Syntax of callback function
+130. Syntax of promise
+131. Asynchronous coding, async and await
+132. concurrency
+133. default state of Promise, when does the state change
+134. implement a call back function
+135. promise(need clarity in implementation)
+136. Promise.race and any
+137. Promise architecture
+138. create a basic promise - practical
+139. promise and methods
+140. How does JavaScript handle asynchronous operations?
+141. What is the purpose of Promises in JavaScript?
+142. Explain async/await with an example.
+143. What is the difference between synchronous and asynchronous code?
+144. Promise chaining methods
+145. what is promise states in promise
+146. what is promise combinators?
+147. Synchronous &Asynchronous in JS
+148. Call back functions
+149. Async & Await
+150. call back queue
+151. async - await
+152. call vs promise
+153. promise.all promise.race etc..
+154. Callback - concept
+155. Implement promise and write time of rejection
+156. promise.all - understand better
+157. promise is object or constructure
+158. promise with async function
+159. What are JavaScript promises, and how do they work?
+160. Explain the difference between synchronous and asynchronous programming in
+JavaScript.
+161. What is the purpose of the async and await keywords?
+162. What is a JavaScript callback function, and how is it different from
+promises?
+
+-- 33 of 52 --
+
+163. use case of callback functions
+164. States of Promise
+165. state of promise
+166. async- await,
+167. Call back
+168. Callback fn
+169. Promise.any vs Promise.race
+170. concurrency
+171. promise methods - learn more
+172. Handling promises using .then
+173. difference between promise and async-await
+174. difference between promise and observables
+175. can we use async without await?
+176. Asynchronous Iteration
+177. promise.finally
+178. Callback, promise, async await - Theory and practial
+179. callback function(need clarity)
+180. asynchronous vs synchronous callback
+181. promise.methods
+182. Promise, states, combinator
+183. callback - p
+184. create a Promise - p
+11. Event Loop, Timers, Runtime & Memory
+1. setTimeOut vs setInterval
+2. phases in event loop
+3. timer function
+4. Event Loop
+5. SetImmediate
+6. The scope is determined by the call stack at runtime, not where the function is
+written.
+7. What is an event loop
+8. Event loop and code execution
+9. Benefits of jit (just-in-time compiler)
+10. Hoisting & Execution Context
+11. setTimeout time format
+12. microtask queue
+13. callback queue
+14. setTimeOut()
+15. setInterval()
+16. setImmediate()
+17. Memory leaks
+18. is JS fully interpreted
+19. interval timers, how to stop them
+20. web workers
+21. Event loop, microtasks vs macrotasks, and async patterns
+22. Module systems and bundling: ESM, tree-shaking, code splitting
+23. setTimeout, setInterval
+24. Microtask queue await
+25. Single Thread
+
+-- 34 of 52 --
+
+26. Blocking vs Non-Blocking
+27. Time format in setTimeout
+28. How to stop setInterval
+29. Call Stack
+30. Event loop, microtasks, macrotasks
+31. memory leak
+32. starvation
+33. Message Queue and Event Loop
+34. setTimeout, setInterval and requestAnimationFrame
+35. JavaScript Engines
+36. setTimeout, setEmmediate, process.nextTick,
+37. JIT
+38. Thread pool
+39. What is execution Context?
+40. What is event loop ?
+41. Create a count down using from 10-1 using setTimeout with 1 second delay
+42. phases of event loop
+43. process vs threads
+44. Execution context
+45. engine vs runtime
+46. static / dynamic memory allocation
+47. event loop & code execution
+48. process.nextTick
+49. service workers
+50. microtasks and macrotasks
+51. tail call optimization
+52. js working - check deeper
+53. setTimeout
+54. Event loop starvation
+55. Memory leaks in JavaScript
+56. Optimizing JavaScript performance
+57. Tree shaking
+58. Code splitting
+59. Lazy loading in JavaScript applications
+60. Understanding V8 engine
+61. JavaScript runtime environments
+62. Handling large datasets in JavaScript
+63. Event Loop, Call Stack, Web APIs, Task Queue, Microtasks
+64. single threaded vs synchronous
+65. memory allocation and code execution
+66. Excecution context
+67. working of JS (callstack, global execution context)
+68. proper usage of interval timer
+69. Message queue
+70. Event loop in detail
+71. compiled vs interpreted language
+72. Event Loop & Concurrency:
+73. Microtasks (Promise.then)
+74. Macrotasks (setTimeout, setInterval)
+75. Print 10-1 with a time delay in between
+76. Allocation & Deallocation
+
+-- 35 of 52 --
+
+77. microtaskquee
+78. garbage
+79. garbage collector
+80. setInterval (practice other async functions)
+81. Timer functions
+82. Difference between process.nextTick() and setImmidiate
+83. How Memory allocating?
+84. clearinterval
+85. cancel timeout
+86. Set immediate vs process nexttic,
+87. Blocking and non blocking code,
+88. process.nextTick vs setImmediate
+89. service worker
+90. single threaded
+91. multithreaded
+92. JavaScript Event Loop: An In-Depth Exploration
+93. The Call Stack and Event Loop in JavaScript
+94. JavaScript's Asynchronous Behavior: The Role of Event Loop
+95. Javascript single threaded?,
+96. single threaded vs multithreaded
+97. Event loop - learn more
+98. Call Stack in event loop
+99. JIT
+100. task vs thread - need clarity,
+101. setInterval
+102. setimmediate vs process.nexttick
+103. mark and sweep
+104. JIT
+105. stop an interval timer after n seconds
+106. using timer functions
+107. mark and sweep
+108. function memory allocation
+109. How does JavaScript’s event loop work?
+110. Timer practicals
+111. Cancel a setTimeout after 1 second
+112. Call stack queue
+113. SetTimeout, SetInterval & setImmediate
+114. single thread vs synchronous
+115. how garbage collector works
+116. js non-blocking architecture
+117. What is the event loop in JavaScript?
+118. JIT compilation
+119. Memory allocation
+120. Cancel setInterval
+121. cancelling setTimeout
+122. what is an event loop in js
+123. setTimeout syntax
+124. which type of task come under micro task queue?(understand event loop)
+125. Why JS is called a synchronous single-threaded language
+126. ECMA Script, JIT
+127. Internal working of JS in detail
+
+-- 36 of 52 --
+
+128. settimeout vs settinterval
+129. cancel a setlimeout after 2 seconds
+130. Pending Bucket © 2025 | Developed bySujith V S
+12. DOM, BOM, Browser APIs & Events
+1. Event Delegation
+2. event propagation
+3. DOM vs BOM
+4. DOM methods
+5. Event listeners
+6. Main Object used in BOM
+7. What are events
+8. event bubbling
+9. preventdefault
+10. event handler & listeners
+11. workout with event listener
+12. Class toggling
+13. Security: XSS/DOM sanitization, sandboxed eval alternatives, CSP awareness
+14. DOM
+15. Event Bubbling and Capturing
+16. Styling console log
+17. jQuery Side Effects
+18. innserhtml
+19. embedded documents
+20. DOM manipulation methods
+21. DOM manipulation (querySelector, appendChild, removeChild, event listeners)
+22. BOM - learn more,
+23. stop propogation
+24. fulldomain 2nd
+25. https://github.com/leonardomso/33-js-concepts
+26. DOM and Layout Trees
+27. Pure Functions, Side Effects, State Mutation and Event Propagation
+28. event capturing
+29. toggle checkbox by button click
+30. prevent right click of a button
+31. generate random number between 0 and 10
+32. browser web APIs
+33. BOM,
+34. (second domain week pendings from Rahul Ranjan)
+35. What is event delegation vs event propagation
+36. event capturing vs event bubbling
+37. Dom manipulation (Practical)
+38. Eg :- Create a button when clicking on that change the background colour
+39. Event propagation vs delegation
+40. event propagation-need clarity
+41. matches
+42. Vishnu GR in Second full domain
+43. Event Delegation & Bubbling
+44. Closures in event listeners
+45. event bubbling vs event propogation.
+
+-- 37 of 52 --
+
+46. In global, object, arrow, event handlers, etc.
+47. event propagation(need clarity)
+48. dom manipulation
+49. Web APIs
+50. IndexedDB
+51. web APIs in browser
+52. Event.preventDefault
+53. Event.stopPropogation
+54. Add Event Listener
+55. yield random elements from given array using generator function without
+producing duplicates
+56. generate random number between 0 and 100
+57. WEEK 20(full domain) :-
+58. AddEventListner
+59. Change h1 color when a button click - p
+60. Same origin policy
+61. Event propogation
+62. Practice DOM manipulation,
+63. event driven architecture
+64. toggle checkbox by button click - bugs,
+65. function to generate 6 digit random OTP
+66. event delegation(need clarity)
+67. event propagation(need more points)
+68. Math.random()
+69. DOM and BOM
+70. change background color of a button on click
+71. prevent right click of button
+72. how to prevent an event?
+73. Event listener
+74. appendChild
+75. removeChild
+76. togglecheckbox
+77. preventrightclick
+78. BOM methods
+79. stopPropegation
+80. What are event bubbling and event capturing in JavaScript?
+81. why js is event driven
+82. Event.stopPropagation,
+83. LocalStorage
+84. event propgation
+85. What is event delegation?
+86. Document vs window
+87. webapi
+88. first class function,preventdefault
+89. event delegation - t
+90. WebAPIs
+13. Modules, ECMAScript & Modern JS Features
+1. ECMA script
+2. ECMAScript
+
+-- 38 of 52 --
+
+3. default export vs named exports
+4. introduce the ES2024 module ,
+5. Structured clone
+6. JavaScript Iterables
+7. es6 features
+8. Module system (import/export)
+9. polifils
+10. structuredClone
+11. polyfills
+12. ES7 Features
+13. Pollyfills
+14. Gain a complete understanding of ES7 features
+15. Create a deep clone of an object (without using structuredClone)
+16. eval()
+17. labels
+18. Weak Ref
+19. ESModules
+20. s6 features
+21. weak reference
+22. JavaScript Modules (ES Modules)
+23. Array.with()
+24. JavaScript module systems (CommonJS ES Modules AMD)
+25. Bundlers (e.g., Webpack Rollup Vite)
+26. symbol
+27. Polyfills and transpilers
+28. es7 feature
+29. Iterators, Generators, and Decorators
+30. polyfill in js
+31. Interface
+32. Babel - read more
+33. Polyfill
+34. Es 6 new features,
+35. OS module
+36. defer
+37. use of Symbol
+38. Weak Ref
+39. structuredClone
+40. eval()
+41. latest ES version
+42. structuredClone
+43. node_modules
+44. Learn more about es6 features
+45. Sructuredclone
+46. What are JavaScript modules, and how do you use import and export?
+47. What are the key differences between ES5 and ES6?
+48. labels
+49. List some of the features of es6
+50. ES6, ECMAScript, latest
+51. bind,Polyfills,debouncing
+52. polyfils - t
+
+-- 39 of 52 --
+
+14. Error Handling
+1. How to throw a custom Err in try block
+2. throwing and handling errors
+3. Error handling strategies: centralized handlers, retries, backoff, cancellation
+4. exception handling
+5. throw
+6. Exception Handling: Learn and practice try, catch, finally, and throw what are
+things i need to study and how ....cover all the topics related to this
+7. finally
+8. null pointer exception
+9. Type error vs referance error
+10. error handling in javascript
+11. when does ReferenceError happen?
+12. throwing errors
+13. finally() block in error handling
+14. properties of Error()
+15. throw error if all values in object are the same datatype
+16. Types of errors
+17. throw error if all arguments have the same value
+18. try catch finally syntax
+19. throw error
+20. throw error if argument isn’t error
+21. How to do error handling in node js
+22. Exceptions
+23. custom errors
+24. Error() properties
+25. Error handling (try, catch, finally )
+26. Error objects - throw statement
+27. try, catch, finally
+28. throw error if argument passed isn’t string
+29. error handling (understand where/how error is thrown)
+30. Try catch block
+31. Try catch
+15. Code Output / Syntax & Small Snippets
+1. [1,2,3,4,5,6] => find average of even numbers
+2. find oldest user from [{},{}]
+3. [{},{}], forEach
+4. console.log(0 == "0");
+5. console.log(false&&true)
+6. || , && ,
+7. const with arrays
+8. const result = address ?? “Fault”;
+9. console.log(!!5);
+10. Array.from(), Array.with(), Array.every()
+11. Event delegation and propagation ========>
+12. Purpose of constructor =======>
+13. Currying example ======>
+14. console.log(1 ++’1’)
+
+-- 40 of 52 --
+
+15. console.log(1+’1’)
+16. Weak map ===========>
+17. Proxy object ==========>
+18. Optional Chaining in JavaScript =======>
+19. Higher-Order Functions in JavaScript =======>
+20. Map vs object =======>
+21. ?? operator (pratical)
+22. Promise.any and Promise.race differences =======>
+23. Object assign =====>
+24. Object methods ======>
+25. Object freeze ======>
+26. 1|2 vs 1|| 2 (pratical)
+27. (e)=>{e} vs (e)=>(e) (pratical)
+28. hoisting in let and conts
+29. eg: Input: [1, 60, -10, 70, -80, 85]
+30. Output: [-80, 85]
+31. IndexOf, typeof, instanceof
+32. ? vs ?. vs ??
+33. Optional chaining (?.)
+34. console.log({} === {})
+35. wallet need pagination
+36. const thanos = {
+37. name: 'THANOS',
+38. };
+39. },
+40. hoisting in let and const
+41. console.log({} == {}); find the answer
+42. A++
+43. ++A
+44. 1 | 2 vs 1 || 2
+45. Array.from(), Array.some()
+46. console.log(null == undefined);
+47. const cityName = address?.city;
+48. console.log(1 + +’1’), type casting
+49. console.log(1+ +'2')
+50. console.log('A'-1)
+51. console.log(null==undefined)
+52. let a = []; let b = [];
+53. console.log(a==b);
+54. Object.is() vs ==, JOSN.parse()
+55. Eg :- const obj = {name : “Don”, address : “Newyork”, age : 23}
+56. Transform to -> [ {name: “Don”} , {address:”NewYork”} , {age:23} ]
+57. parseInt(“Hello world”)
+58. console.log(undefined == null) -P
+59. [155,101,17711,100] => count 1 in each elements
+60. let a = [];
+61. let b = [];, console.log(a==b);
+62. lamda expression, =>
+63. Let vs Var
+64. Const vs Let
+65. let b = [];
+
+-- 41 of 52 --
+
+66. console.log(a===b);
+67. const obj = { name : "abcd" };
+68. [name : "abcd"]
+69. const city = address?.cityName;
+70. const address = "";
+71. Array.from(0
+72. Array.from()
+73. console.log(+0 === -0);
+74. Object.is
+75. console.log(Object.is(+0, -0));
+76. const words = [ "apple", "banana", "apple", "orange", "banana", "apple",
+"orange", "mango", "mango", "banana", "apple"];
+77. console.log(1+ +'1')
+78. var let const (understand better)
+79. outPut?console.log(1+"" +1)
+80. for(var i=0;i<5;i++){
+81. console.log(i)
+82. } what is the last value of i
+83. const obj = {name : "abcd"}
+84. Symbol(), Array.from()
+85. const res = name?.city;
+86. const res = address ?? "fault";
+87. Let and var scope
+88. var, let, and const (need clarity)
+89. input = [10,20,30,40,50]
+90. output = [30,10,20,40,50]
+91. Simulate block-scoping before let and const existed
+92. [155,101,17711,100] - count the frequency of '1' in each elements
+93. ?? vs ||,
+94. let name = myStr ?? 'no name';
+95. let result = myData?.name;
+96. {a:10, b:20} -> 30
+97. delay(5).then(data => console.log(data))
+98. const data = 0 ?? 10;
+99. Indexof, lastindexof
+100. flatMap(), Array.from(),
+101. console.log({}==={})
+102. const res = address?.name ?? 'hello’;
+103. let vs const (need some more clarity)
+104. test()
+105. exec()
+106. [{},{}],find is it empty array using filter
+107. {a:10, b:20, c:40, d:80} -> 150 see the sum
+108. 2 -> 3(how to make 2.2 =>3)
+109. const array mutation
+110. is [] falsy?
+111. || vs |
+112. [{},{}], array methods
+113. [{},{}]
+114. parseFloat()
+115. const { name = "Unknown", age = 0 } = data;
+
+-- 42 of 52 --
+
+116. var vs let vs const
+117. console.log({}=={})
+118. console.log(""=="")
+119. console.log(nul==null)
+120. console.log(1++"1")
+121. console.log("a"+1)
+122. how is i++ possible while numbers are immutable
+123. ?? operator
+124. || operator
+125. [1,2,3,4,5,6,7,7].map(()=>null) . What will be the
+126. let vs var // check in depth
+127. const name= result??'no result'
+128. toFixed()
+129. indexOf
+130. {a:10,b:20} -> 30
+131. console.log(1 + +"1")(predict the Out put)
+132. console.log(1+"1")
+133. [
+134. { age: 28, name: "John Doe" },
+135. { age: 34, name: "Jane Smith" },
+136. { age: 29, name: "Alice Johnson" },
+137. { age: 42, name: "Bob Brown" }
+138. ]
+139. const ab = [{af:34},{af:34},{af:34},{af:34}]
+140. const ba = {af:[3,23,423,2]}
+141. Const ba = [{af:[4,5,3],p:3}]
+142. Const ab = {f:6,g:3}
+143. let a=[1, [2, 3], [[4], 5], [6, [7, 8]]];
+144. Var, let , const
+145. var vs let
+146. lastindexof - t
+147. Array.from
+148. e => e vs e => {e}
+16. Practical Coding / Algorithm Questions
+1. Input: "How Are You
+2. Output: "woH erA uoY
+3. Type safety at scale: JSDoc patterns and TypeScript migration paths
+4. FInd DOB of a person whose birthday is in 10 days
+5. Design Patterns
+6. Second largest score
+7. Difference between highest and lowest score
+8. find total price of products
+9. Add fizz if multiple of 3 and buzz if multiple 5 and fizzbizz for both multiple
+10. Write a query to find the sum of total discount given by company
+11. Output of
+12. find second largest age
+13. Pattern creating
+14. reverse integer
+15. Names that ends with 'n'
+
+-- 43 of 52 --
+
+16. find biggest no from 3 nos
+17. find a no is even or odd
+18. input = ""How Are You
+19. output =""woH erA uoY
+20. input = "How Are You
+21. output = "woH erA ouY
+22. count hours since new year
+23. find second largest price -P
+24. find the average price of a particular genre -P
+25. print multiples of 5 between 1-100 in reverse order
+26. Prime
+27. output = "woH erA uoY
+28. Print the below pattern
+29. 100 1 = 100
+30. 50 2 = 100
+31. 25 4 = 100
+32. 5 8 = 100
+33. Convert "Hello world" to "word Hello".
+34. delete a file using fs
+35. in reverse order with 1 sec delay
+36. Average of age
+37. Input: How are you
+38. Output: owH era uoy
+39. find sum of age less than 30
+17. Node.js, Express & Backend
+1. block all incoming request to server using middle ware
+2. lamda expressions
+3. Replace odd number with its square
+4. Authorization in JavaScript
+5. Design patterns: Module, Factory, Observer, Singleton, Command, Adapter, Facade
+6. Reactive and event-driven architectures (streams, observers)
+7. IIFE (Immediately Invoked Function Expression)
+8. path params vs query params
+9. clusters
+10. app.all
+11. child process
+12. dynamic routing - practice
+13. res.send vs res.write
+14. http Options
+15. morgan
+16. error handling middleware
+17. localStorage vs sessionStorage
+18. Browser APIs (localStorage, sessionStorage, fetch, XMLHttpRequest)
+19. Regular expressions
+20. move status code to Enum
+21. Expression vs Statement
+22. Create piping using stream
+23. Create Worker thread
+24. Create JWT token and verify token
+
+-- 44 of 52 --
+
+25. Worker thread vs cluster
+26. What is thunk middleware
+27. type of streams
+28. process module - understand better,
+29. middleware to block all POST requests,
+30. HTTP request structure,
+31. HTTP header,
+32. idempotency,
+33. content negotiation,
+34. REST principles,
+35. package-lock.json
+36. router chaining
+37. query params vs path params - usecases
+38. req.query
+39. app.locals
+40. application level middleware
+41. dynamic routing
+42. encryption vs hashing
+43. cron-job
+44. write head
+45. set header
+46. clustering
+47. authorization
+48. views
+49. Threadpool
+50. Libuv
+51. Types of streams
+52. Buffer class
+53. express.json
+54. fs.unlink
+55. Common JavaScript design patterns (e.g., Module Singleton Observer)
+56. Handling CORS in JavaScript
+57. EventEmitter in Node.js
+58. Debugging JavaScript (browser dev tools Node.js debugging)
+59. What is Node.js?
+60. Fn statement vs fn expression
+61. process module,
+62. spawn vs fork,
+63. idempotency - need clarity,
+64. REST API,
+65. lamda expression
+66. write content in to a file
+67. clsutering in nodejs
+68. libuv (need clarity)
+69. preflight request
+70. reactor pattern
+71. event emitter
+72. Function expression
+73. Local storage & session storage
+74. write a promise to sum the array and resolve it ,then read that file using fs
+module within 2 seconds.
+
+-- 45 of 52 --
+
+75. functional expression and functional statement
+76. cors
+77. create a worker thread
+78. what is eventEmitter with example?
+79. What is difference between worker thread and cluster modules?
+80. fork vs spawn
+81. String.replaceAll() – syntax and use cases
+82. Transform stream,
+83. Pre flight request,
+84. Authentication vs authorisation,
+85. Node js architecture,
+86. How to access a value in env file,
+87. Status code types,
+88. Types of middlewares,
+89. 4 parameters in which middleware,
+90. dynamic routing, req.params
+91. req.body
+92. express.static
+93. http Options, preflight request
+94. router.route, route chaining
+95. pagination (skip, limit)
+96. .env file
+97. what is node.js
+98. setHeader, writeHead
+99. Hidden files, .env, .gitignore
+100. Preflight req, cors
+101. __dirname, relative, absolute path
+102. http 100 status code
+103. Put, patch, options
+104. devDependencies, dependencies
+105. read data from REST API and print it as JS object
+106. application level middleware to block GET Request and record other incoming
+request to a file (PUT - current time) -P
+107. Content Negotiation - read more
+108. Child_process -P
+109. 403 and 404
+110. sum of odd numbers and replace even numbers with 0 using recursion -P
+111. cache
+112. local storage vs session storage
+113. node-express
+114. query params vs path params
+115. httpOnly cookie
+116. nvm
+117. how to setup a router level middleware
+118. httpOnly cookies
+119. working flow of sessions & cookies
+120. Child process - learn more
+121. Write to a file using fs - P
+122. Dev dependency installation - P
+123. app.all()
+124. types of middleware
+
+-- 46 of 52 --
+
+125. streams in node.js
+126. session vs cookies
+127. string.replaceAll(),
+128. process module - learn more,
+129. app.use vs app.set - learn more,
+130. Authentication vs Authorization
+131. Http methods
+132. put vs post
+133. create http server using express
+134. app.use
+135. middle ware
+136. merge two objects but don’t replace existing keys
+137. view engine, MVC
+138. express middlewares
+139. express.urlEncoded()
+140. express.nocache()
+141. express.static()
+142. buffer class- binary data
+143. hashing, encryption
+144. Function declaration, expression
+145. core modules in node.js
+146. REPL
+147. http in detail
+148. path params
+149. middleware
+150. transform streams
+151. and resolve to a file using fs module
+152. Fn as statement vs fn as expression
+153. Function expression vs fn declaration
+154. Cookie
+155. package.json vs package-lock.json - use cases,
+156. content-type vs accept header,
+157. learn more http status codes,
+158. CORS - learn more,
+159. web api vs rest api
+18. MongoDB & Database
+1. Garbage collections
+2. promise.allSettled
+3. garbage collection
+4. Promisea.allsettled
+5. throttling implementation
+6. Performance: debounce/throttle, minimize DOM work, async script loading,
+profiling
+7. Memory management: garbage collection basics, avoiding leaks, weak references
+8. $expr
+9. $lookup - practice
+10. single purpose aggr.
+11. max size of mongo doc
+12. gridFS
+
+-- 47 of 52 --
+
+13. addToSet
+14. elemMatch
+15. TTL index
+16. hashed index
+17. IIFE, Modules and Namespaces
+18. Collections and Generators
+19. throttling vs debouncing
+20. find the 2nd hightest salary
+21. Write a query to find the count of the employee who have same salary
+22. Write a query to increase the salary of employee by 10% who is working in hr
+depart
+23. Write a query to find the employee name which is start with “A
+24. compound index
+25. avg age of each qualification
+26. distinct
+27. query - find persons with more than 2 skills,
+28. query - find most common skill,
+29. drawbacks of indexing,
+30. clustered collection - learn more,
+31. $pop vs $pull.
+32. CAP theorem
+33. clustered collection
+34. covered query
+35. how to modify a collection name?
+36. aggregate workouts
+37. indexing
+38. sharding
+39. type of data modeling
+40. embedded data vs references
+41. type of relations
+42. one-to-one
+43. one-to-many
+44. many-to-many
+45. bulk write
+46. ttl
+47. need to practice db practicals
+48. Difference between min and max salary
+49. $setUnion
+50. Replica set
+51. Create index syntax
+52. Partition tolerance
+53. Database profiler
+54. Memory Management & Garbage Collection
+55. throttling, debouncing
+56. Throttling
+57. shading vs replication - need clarity,
+58. journaling,
+59. multikey index vs compound index,
+60. query - avg price where 2000>year2020.
+61. Mongodb -
+62. Covered queries
+
+-- 48 of 52 --
+
+63. create a capped collection
+64. $addtoset
+65. aggregation pipeline
+66. group
+67. indexing and its type
+68. create index
+69. Set Collection
+70. lookup(practice)
+71. disadvantages of index
+72. AggregateError
+73. throttling and debouncing
+74. Mongo:-
+75. Mongo utilities
+76. Backup of mongodb
+77. Geo spatial indexing
+78. Journaling, $lookup - query elements
+79. $facet, TTL, $fill
+80. bulkWrite, distinct
+81. CAP, ACID
+82. to find the sum of total salary in a object
+83. Denormalization - read more
+84. upsert vs save
+85. $elemMatch
+86. 10% salary increment to every employees
+87. deboucning, throttling
+88. mongo
+89. $exists
+90. Geospatial index
+91. Promise.allSettled()
+92. Shard key
+93. Namespace
+94. Data modeling and anti-patterns
+95. implementation using throttling
+96. debouncing vs throttling(need clarity)
+97. debounce vs throttling
+98. Map vs Set Collection
+99. What is debouncing and throttling, and when would you use them?
+100. promise.all vs promise.allsettled
+101. Set, Map collection
+102. $all vs $in
+103. types of indexing
+104. debounce vs throttle
+105. BSON
+106. How does JavaScript handle memory management and garbage collection?
+107. garrabage collection
+19. React, Redux, Frontend & CSS
+1. Bootstrap components
+2. flex vs grid
+3. CSS media types
+
+-- 49 of 52 --
+
+4. error handling in react
+5. react profiler
+6. render props
+7. redux store methods
+8. useSelector vs useDispatch
+9. UseReducer vs useState
+10. create auto inc/dec counter using redux
+11. Grid sytem designing
+12. mixins
+13. Functional reactive programming (e.g., RxJS)
+14. useImperativehandle
+15. Change the colour of an html element on parent when click on a button in child
+component and it should be done using context
+20. DSA / Computer Science Fundamentals
+1. minimum spanning tree
+2. graph vs tree
+3. Data Structures
+4. Expensive Operation and Big O Notation
+5. Algorithms
+6. Balance parenthesis using stack
+7. Learn BFS using graph
+8. Learn to if check the given tree is identical ?
+9. Reverse the stings using stack (input-hello world )- (output- olleh dlrow)
+10. Asymptotic notations
+11. Big-O
+12. underflow in stack
+13. load factor
+14. Event queue
+15. Stack Overflow & Stack Underflow
+16. Binary search need more understanding
+17. Time & Space Complexity – improve understanding
+18. Stack Underflow – what it is, when it happens
+19. Micro task queue,
+20. Scalability - vertical, horizontal
+21. autocomplete program using trie - P
+22. micro and macro task queue
+23. macro task & micro task queue
+24. Micro stack queue
+25. micro task queue and macro task queue
+21. Feedback, Notes & Study Improvements
+1. TDZ - lacks clarity
+2. Theoretical answers felt memorized, needs more work in practical side.
+3. Feedback:
+4. Need improvement in practical implementation
+5. Student appears to get nervous when unable to answer a question, encourage
+building confidence through regular practice and concept clarity.
+6. Feedback: Communication needs improvement.
+
+-- 50 of 52 --
+
+7. Practice by solving problems level by level
+8. don't complicate things
+9. Need to improve problem-solving skills
+10. Focus on fundamental data structures (e.g., arrays, objects, strings).
+11. isNaN() needs clarity
+12. Find the count of students in each class from an array of students
+13. Find students with the highest scores from an array of student objects
+14. map vs filter: need more clarity
+15. Practice more callback based problems.
+16. event loop needs clarity
+17. spread (refer more)
+18. task need improvement (.env file, combine user and admin side, form
+validation)
+19. proper naming convention
+20. needs better understanding of syntax
+21. CAP - need more clarity
+22. Need to work on coding and querying.
+23. Dom manipulation to change button text (not completed)
+24. Logical Operators need more clarity
+25. Add new key to array of objects to determine whether the student is passed or
+not
+26. Student need to practice in js, filter, map , reduce function.
+27. currying(lacks clarity)
+28. should learn use cases
+29. Arrow function - this context- refer more
+30. Promise.all syntax - refer more
+31. remove adjacent odd numbers from array - not completed,
+32. toggle checkbox by button click - not done,
+33. remove duplicate even numbers from an array - not completed,
+34. api end point to add 2 numbers - not known,
+35. middleware to log all parameter names - not known,
+36. call stack - refer in detail
+37. Call, apply, bind need more clarity
+38. Closure example - needs clarity
+39. call, apply, bind -needs clarity
+40. promise - needs clarity
+41. prevent right click of a button - not known,
+42. find the class in which most numbers of students are present from an array of
+student objects
+43. splice vs slice - need more clarity
+44. closure - lacks clarity
+45. Work out more
+46. practice more aggregate workouts involving multiple stages
+47. prevent right click of a button - not done,
+48. Pure functions - need more clarity
+49. task - find sum of two nos using regular function and arrow function - not
+done
+50. Find the Maximum mark earned by the student from an array of objects ( obj
+eg:{ name:''john'', mark:75} ).
+51. Do more workouts on arrays methods such as map, reduce and filter
+52. hoisting - need more clarity
+
+-- 51 of 52 --
+
+53. generator function to endlessly yield multiples of a given number (needs
+improvement)
+54. Do more workouts
+55. promise.allsettled - lacks clarity
+56. arrow function(practice more)
+22. Project / Miscellaneous Non-JS Tasks
+1. project hosting week-anbin anil
+2. offer management-fixed amount
+3. order listing need retry option
+4. failed payment-able cancel and get refund
+5. show all required status in order processing
+6. mention delivery charge in invoice
+7. common message in constant
+8. badge
+9. Bread crumbs
+23. Uncategorized / Needs Manual Review
+_No items._
+
+-- 52 of 52 --
+

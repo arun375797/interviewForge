@@ -1,0 +1,1499 @@
+Node.js Question Bank — Topic Wise
+Source: uploaded pasted text file.
+How this was arranged:
+- Removed only exact repeated entries after trimming bullets/extra spaces/case.
+- Kept every unique question/task/note from the source.
+- Grouped the items by topic so you can study one Node.js / Express area at a
+time.
+Summary
+- Raw lines in file: 8753
+- Cleaned non-empty content lines: 3991
+- Unique arranged items: 1304
+- Exact duplicate lines removed: 2687
+Topic Counts
+- 01. Node.js Basics, Runtime & Architecture: 49
+- 02. Modules, NPM, Packages & Environment Variables: 76
+- 03. Core Modules: FS, Path, OS, URL, Crypto, Util, Zlib & Timers: 48
+- 04. HTTP, HTTPS, TCP/IP, URL & Networking: 83
+- 05. REST APIs, API Design & Web Concepts: 50
+- 06. Express.js Basics, App Methods & Routing: 97
+- 07. Middleware, Validation & Request Handling: 53
+- 08. Request/Response, Params, Headers, Status Codes & Content Negotiation: 117
+- 09. CORS, Same-Origin Policy, Preflight & Browser Security: 45
+- 10. Authentication, Authorization, JWT, Sessions & Cookies: 79
+- 11. Event Loop, Async Flow, Timers, Libuv & Concurrency: 96
+- 12. Worker Threads, Cluster, Child Process & Scaling: 88
+- 13. Streams, Buffers, Pipe & File Processing: 38
+- 14. Events, EventEmitter, Event-Driven Architecture & Reactor Pattern: 17
+- 15. View Engines, EJS, SSR & Template Rendering: 41
+- 16. Security, Encryption, Hashing, CSRF, XSS, SSL & TLS: 39
+- 17. Performance, Deployment, Rate Limiting & Infrastructure: 18
+- 18. WebSockets, Socket, Webhooks & Real-Time Communication: 6
+- 19. Database, ODM, MongoDB & Query Topics: 25
+- 20. Practical Node.js / Express Coding Tasks: 81
+- 21. JavaScript Overlap / General JS Concepts Found in File: 50
+- 22. React / Frontend / Browser Storage / Other Web Topics: 18
+- 23. Feedback, Scores, Notes & Study Improvements: 68
+- 24. Error Handling, Debugging & Exception Handling: 22
+- 25. General Terms, Notes & Small Fragments: 0
+----------------------------------------------------------------------
+01. Node.js Basics, Runtime & Architecture
+------------------------------------------
+1. Node is not multi theard
+2. Runtime environment
+3. What causes memory leaks in Node.js?
+4. Can we post a data to server using GET method
+
+-- 1 of 29 --
+
+5. working of node js
+6. what is node js (give a brief)
+7. Opensource
+8. MVC
+9. Library vs framework
+10. Why use it?
+11. REPL
+12. MVC Architecture
+13. framework vs library
+14. Your main server keeps running smoothly
+15. What is process in Node.js?
+16. Alternatives of Node.js
+17. Node concept
+18. Propertys
+19. **1. Introduction to Node.js**
+20. What is Node.js?
+21. Features of Node.js
+22. Applications of Node.js
+23. Node.js Architecture
+24. REPL (Read-Eval-Print Loop)
+25. MVC Architecture in Node.js
+26. Deploying Node.js Applications
+27. Why V8 Engine?
+28. Advantages & Disadvantages of Node.js
+29. How Node.js Works?
+30. REPL & CLI
+31. understand the working of node.js
+32. What are some key features of Node.js?
+33. Node js architecture,
+34. Concurrent in node js
+35. Node js propertys
+36. server
+37. MVC arch
+38. models, view, controllers
+39. node features
+40. Working of node.js
+41. V8 engine
+42. Working of node,
+43. Node js architecture
+44. what is a framework
+45. repel
+46. WebServer
+47. Framework
+48. Run Time Environment
+49. How node js is highly scalabale
+02. Modules, NPM, Packages & Environment Variables
+--------------------------------------------------
+1. package.json vs package-lock.json
+2. Dev Dependency
+3. Core
+
+-- 2 of 29 --
+
+4. .env
+5. Package.json vs package.lock.json
+6. package-lock.json
+7. .env, .gitignore
+8. use .env
+9. NVM
+10. Environment variables
+11. package.lock
+12. Environmental Variables
+13. NVM vs NPX
+14. Why Package.lock.json is needed?
+15. Why Package.lock.json is used
+16. Core modules
+17. Env variables
+18. Componets of package.json file
+19. NPX
+20. setting environment variables without dotenv
+21. CommonJS
+22. node_modules
+23. package.json, package-lock.json
+24. dotenv config()
+25. Modules & its types
+26. What is npm?
+27. module
+28. NPM
+29. Why we need env file
+30. core modules in node.js
+31. **2. Node.js Modules & Package Management**
+32. CommonJS vs ES Modules
+33. `package.json` vs `package-lock.json`
+34. npm vs npx
+35. Global & Local Dependencies
+36. devDependencies vs Production Dependencies
+37. Scaffolding in Node.js
+38. Managing Dependencies (`npm install`, `npm update`)
+39. Environment Variables (`.env`)
+40. Node Module System
+41. Modules
+42. Local Modules
+43. Third-party Modules
+44. `require`
+45. Local & Global Packages
+46. `npm init`
+47. `npm install` or `npm i`
+48. Nodemon
+49. `npm run dev`
+50. `package.json` & `package-lock.json`
+51. Package.json
+52. What is npm in Node.js?
+53. What is the role of package.json in a Node.js project?
+54. Env file,
+
+-- 3 of 29 --
+
+55. CommonJS vs ESM modules
+56. package-lock
+57. CommonJS vs ESM
+58. Pkg.lock.json
+59. env
+60. How value is stored in env and how to access it
+61. .npmrc
+62. Nvm v/s npm
+63. Clusture Modules
+64. dev dependencies
+65. package json vs package-lock json
+66. scope of npm package
+67. purpose of package.lock.json
+68. core module eg,
+69. dependencies, dev dependencies,
+70. Scaffolding
+71. Common js vs ES modules
+72. Core modules,
+73. package.json vs package.lock-json
+74. Learn Networking and Web Modules
+75. Package.json vs package. Lockjson
+76. Core modules in node js
+03. Core Modules: FS, Path, OS, URL, Crypto, Util, Zlib & Timers
+----------------------------------------------------------------
+1. fs.writeFile()
+2. fs module implementation
+3. follow proper file structure
+4. fs methods
+5. File upload
+6. os.arch()
+7. fs module
+8. fs.stat
+9. how to check existence of a file
+10. promisify, why using.
+11. fs.existsSync()
+12. fs.unlink()
+13. reading file size
+14. Util
+15. os module
+16. fs.stat, fs operations
+17. file writing
+18. Command-line arguments
+19. File processing
+20. Exit codes
+21. **3. File System (FS) Module**
+22. Reading & Writing Files (`fs.readFile`, `fs.writeFile`)
+23. File System Operations (`fs.stat`, `fs.rename`)
+24. Process Management (`process.exit`, `process.env`)
+25. Global Variables (`__dirname`, `__filename`, `module`, `process`)
+26. process module
+
+-- 4 of 29 --
+
+27. promisify
+28. Global objects in node js,
+29. fs module practicals
+30. zlib
+31. Global object in node.js
+32. Global Objects in Node.js
+33. File System (fs module)
+34. process module,
+35. fs module workout
+36. global object,
+37. Purpose of process object
+38. Exit codes in node js
+39. files that manage dependencies
+40. fs operations
+41. path module:
+42. Key concepts: path.join(), path.resolve(), path.basename(), etc.
+43. os module:
+44. Key concepts: os.platform(), os.cpus(), os.freemem(), os.totalmem(),
+os.hostname(), etc.
+45. FileSystem
+46. fs modules - do more workout
+47. fs.link
+48. fs.unlink
+04. HTTP, HTTPS, TCP/IP, URL & Networking
+-----------------------------------------
+1. HTTP
+2. TCP
+3. UDP
+4. 3 way handshake
+5. PORT
+6. Localhost
+7. Import vs require
+8. Components of a url
+9. Http methods
+10. require , import
+11. Options in http methods
+12. URI vs URL vs URN
+13. what is the different between http and https
+14. http vs https
+15. http in detail
+16. Port Number of HTTP & HTTPS
+17. HTTPS port
+18. scripts in package.json -- need more clarity
+19. OPTION in http methods
+20. Http methods(PATCH,OPTION)
+21. DNS
+22. default port used by HTTPS
+23. HTTP PATCH
+24. configuring static files
+25. configuring static files (incomplete)
+
+-- 5 of 29 --
+
+26. HTTP HEAD
+27. Journaling
+28. Http 1 vs http2
+29. What is the difference between require and import?
+30. Difference between require & import
+31. https vs http
+32. Scripts
+33. `require` vs `import`
+34. **4. HTTP & Networking in Node.js**
+35. HTTP Module (`http.createServer`)
+36. HTTP Methods (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`)
+37. Database Connections & Queries
+38. `module.exports`
+39. ESM (`import` and `export`)
+40. Scripts (`start`, `dev`)
+41. HTTPS & How it Works
+42. HTTP Methods (`GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `CONNECT`, `OPTIONS`,
+`TRACE`)
+43. HTTP/2
+44. TCP & IP
+45. Fragment Identifiers
+46. API vs HTTP
+47. URIs vs URLs vs URNs
+48. Important Built-in Modules
+49. HTTP (abbreviation)
+50. Urlencoded
+51. TCP/IP
+52. cross site scripting
+53. http.createServer
+54. Pkg.json/ Script
+55. path module vs url module,
+56. Options, trace method
+57. statelessness of HTTP
+58. Http methods in detail
+59. web server
+60. server, client
+61. URL & components
+62. HTTP vs HTTPs port numbers
+63. fs module,require,import,
+64. what is a PORT?
+65. what is scripts in Package.json
+66. PORT Number
+67. Learn how to handle and manipulate file paths, directories, and file system
+operations across platforms.
+68. Practical examples: Manipulating file paths in Node.js projects, combining
+paths, resolving relative paths to absolute.
+69. http module:
+70. Learn how to create HTTP servers and clients.
+71. https module:
+72. Practical examples: Set up an HTTPS server for secure communication.
+73. url module:
+
+-- 6 of 29 --
+
+74. Learn how to parse, resolve, and manipulate URLs.
+75. Key concepts: url.parse(), url.format(), url.resolve().
+76. Security
+77. Http and Https
+78. HEAD, OPTIONS
+79. Parts of a URL
+80. how dns work
+81. HTTPS
+82. scripts in package.json
+83. Localhost • Socket • ODM (Object-Document Mapper)
+05. REST APIs, API Design & Web Concepts
+----------------------------------------
+1. API
+2. REST API
+3. JSON
+4. Endpoint
+5. Output of
+6. REST apis
+7. put vs patch
+8. REST API,
+9. GET,POST and PUT
+10. put vs post(idempotency)
+11. Difference between PUT & PATCH
+12. REST principles,
+13. idempotency,
+14. PATCH
+15. Restful api
+16. API vs REST API
+17. api verioninsg
+18. rest principles
+19. REST API Development
+20. Idempotent Methods
+21. **14. REST APIs & Web Technologies**
+22. RESTful APIs
+23. `GET` vs `POST`
+24. `PUT` vs `PATCH`
+25. is GET idempotent?
+26. Differentiate between PUT and PATCH.
+27. api vesioning
+28. ratelimiting of apis
+29. REST Principle
+30. REST
+31. Principles of REST
+32. web api vs REST api,
+33. Patch method
+34. api versioining
+35. rate limiting of apis
+36. api versioning
+37. Safe and Unsafe Methods
+38. idempotency
+
+-- 7 of 29 --
+
+39. PUT v/s PATCH
+40. Put vs patch methods
+41. post, put, patch,
+42. Put vs post
+43. idempotence
+44. Put vs Post vs PATCH
+45. Once you're comfortable with system-level modules, move on to networking and
+web-related modules. These are key when building server-side applications and
+APIs.
+46. Practical examples: Create a basic web server, build a REST API.
+47. JSON.parse, JSON.stringify
+48. api to add 2 numbers
+49. How to optimise performance of API
+50. web service worker
+06. Express.js Basics, App Methods & Routing
+--------------------------------------------
+1. app.set()
+2. Router chaining
+3. express.urlencoded(), express.static()
+4. App.all
+5. app.use() vs app.set()
+6. app.locals
+7. app.use
+8. dynamic routing
+9. get() vs set()
+10. use()
+11. body-parser
+12. Bodyparser
+13. express.urlencoded
+14. express.json
+15. app.set() vs app.use()
+16. router level
+17. http server vs express
+18. Express
+19. app.use()
+20. bodyParser()
+21. app.all() & router.all()
+22. setting and getting express app settings
+23. express.json()
+24. router chain
+25. express.static, express.json(),
+26. express.urlEncoded()
+27. express.nocache()
+28. express.get vs express.all
+29. express.set
+30. Difference between app.use and app.set
+31. advantages of router chaining,
+32. app.use vs app.set
+33. what happens on client side if next() isn’t called
+34. app settings
+
+-- 8 of 29 --
+
+35. express.urlencoded, express.json: how they work, the difference
+36. Nested route
+37. Express.static(), public folder
+38. Difference b/w app.use() & app.set()
+39. morgan
+40. explore route chaining, router.route()
+41. express.static
+42. Express.json vs express.urlencoded
+43. Express js
+44. Advantages of Express js
+45. Router
+46. render vs redirect
+47. Express.js Basics (`app.use`, `express.static`, `express.json`)
+48. Static Files
+49. **12. Express.js**
+50. Installing Express (`npm install express --save`)
+51. Express App (`express()`)
+52. `app.get()`, `app.post()`, `app.put()`, `app.delete()`
+53. `app.listen()`
+54. Static Files (`express.static()`)
+55. Route Parameters & Query Strings
+56. `req`, `res`, `next()`
+57. Third-party (`morgan`, `multer`)
+58. Router-level
+59. Routing & Express Router (`express.Router()`)
+60. multer
+61. installing express.js
+62. express.all
+63. app.set
+64. express.urlencoded vs express.json
+65. app.use, get, locals
+66. Get method creation
+67. express json vs url encoded
+68. route chaining
+69. app.all vs app.get
+70. Express vs httpServer
+71. Viewengine
+72. Dynamic route
+73. Module in Express
+74. Route
+75. dynamic routing,
+76. router chaining,
+77. View
+78. Explain express.json
+79. Explain express.urlencoded
+80. Explain express.static
+81. Why we need express
+82. app.setO
+83. app.post or app.get when clicking on a button to get a page loaded
+84. express.static, app.use()
+85. Routing
+
+-- 9 of 29 --
+
+86. res.locals
+87. express.json() ,
+88. bodyparser,
+89. Post method data flow
+90. path params, dynamic routing
+91. Practical examples: URL parsing for routing in an API, constructing URLs
+programmatically.
+92. express.json vs urlencoded
+93. How to get data set using app.set
+94. sessionStorage vs express-session
+95. app.use - needs more clarity
+96. app.all, app.get, app.post
+97. app.set, app.locals
+07. Middleware, Validation & Request Handling
+---------------------------------------------
+1. Middlewares
+2. Types of middlewares
+3. App-Level Middleware
+4. application level middleware
+5. route level middleware
+6. types of middlewears
+7. Custom middleware practicals
+8. Middleware chaining
+9. middlewares - explore the types & usecases
+10. Middleware
+11. type of middleware
+12. application
+13. custom middleware
+14. router level middleware
+15. Types & examples -
+16. types of middleware
+17. router level and global level middleware use
+18. middleware usecase
+19. Express middlewares
+20. application vs router middleware
+21. Middlewares & its types
+22. undestand the types of middlewares & it's usecases
+23. third party middlewares
+24. Problem of using too many middleware
+25. Middleware positioning -
+26. Auth middleware(application level) -
+27. What is middlewares & types of middlewares
+28. Routing & Middleware
+29. Middleware Types (Built-in, Third-party, Custom, Error-handling)
+30. What is Middleware?
+31. Application-level
+32. Built-in Middleware
+33. Error-handling Middleware (`err.statusCode`, `err.message`)
+34. Core Middleware, Routing, API Development
+35. types
+
+-- 10 of 29 --
+
+36. application level middleware to block GET Request and -record other incoming
+request to a file (PUT - current time)
+37. Middleware and types
+38. middle ware to validate a particular header
+39. Middleware in Express
+40. Use of middleware
+41. Third-party middleware - morgan, multer
+42. Middleware creation
+43. middle ware type,
+44. basic parameters in a middleware
+45. next
+46. Middleware concept in express
+47. Middlewares different types,
+48. middleware and its type
+49. What is middleware and types
+50. Type of Middlewares
+51. body parsing middleware
+52. understand the middleware concept
+53. third party middleware
+08. Request/Response, Params, Headers, Status Codes & Content Negotiation
+-------------------------------------------------------------------------
+1. Query Parameters
+2. Content Negotiation
+3. Learn about http status codes
+4. Pre flight request
+5. Http header
+6. Query Params – Find Sum of Two Numbers
+7. query params
+8. path params
+9. write() vs writwHead()
+10. url parameters vs query parameters
+11. query params vs path params - usecase
+12. path params vs query params
+13. Components of HTTP request and response
+14. Response status codes
+15. query vs params - how to access query params
+16. 201,400,401,500 Status Code
+17. HTTP 400, 201, 401, common HTTP status codes
+18. HTTP request structure,
+19. use of HTTP header,
+20. query string
+21. res.write vs res.send
+22. res.send() vs res.json()
+23. path parameters
+24. set header
+25. checking HTTP headers
+26. modifying headers
+27. user-agent
+28. HTTP 401, 400, common HTTP status codes
+29. req.query vs req.params
+
+-- 11 of 29 --
+
+30. HTTP Headers
+31. structure of HTTP request and response
+32. browser cache, cache headers
+33. changing status code of a response
+34. checking if a header is present
+35. HTTP 401, 201
+36. passing and reading of query and path params
+37. res.send vs res.end
+38. content negotiation,
+39. user agent
+40. query params & path params
+41. HTTP 400, 403
+42. HTTP headers, parts of HTTP request and response
+43. don’t pass error messages as query param
+44. Url param implementation
+45. What are status codes in Node.js
+46. Commonly used response status codes
+47. query params vs path params
+48. setHeader, writeHead
+49. path params needs some clarity
+50. req.query
+51. req.params
+52. HTTP status code
+53. query params and path params
+54. Parts of HTTP request and response
+55. Path Parameters vs Query Parameters
+56. Status Codes (Commonly Used)
+57. Setting Headers (`setHeader`, `writeHead`)
+58. HTTP Request Components
+59. HTTP Headers (403, 404, 500, etc.)
+60. Request-Response Cycle
+61. HTTP Request Structure
+62. Headers (`writeHead` vs `setHead`)
+63. Status Codes (1xx, 2xx, 3xx, 4xx, 5xx)
+64. MIME Types
+65. API & JSON Responses
+66. setting HTTP status code
+67. http status code 400
+68. HTTP status codes, and give some examples.
+69. Writehead vs setheader
+70. status code -403
+71. Query and params
+72. query vs params
+73. Status code 403/401
+74. Status code -500,400
+75. UserAgent
+76. Http status codes
+77. cross site request forgery
+78. Http get request creation
+79. Res.send vs res.json
+80. Components of an HTTP request
+
+-- 12 of 29 --
+
+81. Commonly used response status codes and their meaning
+82. Body, params, query
+83. writeHead vs setHead
+84. 200 vs 201 vs 204
+85. 400 vs 404 vs 403
+86. covered query,
+87. 400
+88. httpstatus codes
+89. Parameters in middileware
+90. use of http header
+91. where is content-type present?
+92. HTTP 403
+93. fs.readFile parameters
+94. Status codes
+95. res.write()
+96. reading of path params and query params
+97. Components of request & response
+98. status code types,
+99. parts of HTTP request
+100. identifying request method
+101. Types of request
+102. req.params vs req.query
+103. status code
+104. query param structure
+105. reading query params
+106. HTTP 200
+107. Key concepts: http.createServer(), req, res, handling requests, sending
+responses, working with HTTP methods (GET, POST, etc.).
+108. URL - query
+109. reading query params and path params
+110. Parts of HTTP request and
+111. response, CSRF, and how to
+112. Query params, using them in
+113. Dynamic route, URL params,
+114. Common HTTP status codes
+115. Cache headers
+116. res.send() , res.write()
+117. Query params vs path params • Using query params in
+09. CORS, Same-Origin Policy, Preflight & Browser Security
+----------------------------------------------------------
+1. CORS
+2. same-origin policy
+3. Method of Preflight request
+4. Preflight req http method
+5. How to resolve cors issue
+6. CORS policy -
+7. preflight request
+8. http OPTIONS, PUT, PATCH,
+9. need to know how to set CORS in the backend
+10. what preflight request
+
+-- 13 of 29 --
+
+11. options method
+12. Http options
+13. option method
+14. Method used by Preflight
+15. Options
+16. http options, buffer class
+17. Preflight
+18. HTTP OPTIONS, preflight request, CORS
+19. How to configure CORS in nodejs
+20. OPTION
+21. What is CORS in Node.js?
+22. http OPTION
+23. CORS (Cross-Origin Resource Sharing)
+24. Preflight Requests
+25. Headers (`Access-Control-Allow-Origin`, `Access-Control-Allow-Methods`)
+26. same origin policy
+27. What is CORS?
+28. Preflight request(CORS)
+29. Cors,
+30. Same origin policy & CORS
+31. PUT
+32. CSRF, CORS
+33. Cross origin resource sharing
+34. Options request
+35. htttp otions
+36. same origin policy,
+37. CORS - learn more,
+38. CORS policy,
+39. How to handle CORS
+40. CORS policy
+41. Option request
+42. Preflight request http method
+43. does redirect require CORS?
+44. HTTP OPTIONS, HTTP HEAD
+45. Same-origin policy, CORS,
+10. Authentication, Authorization, JWT, Sessions & Cookies
+----------------------------------------------------------
+1. Cookie Max Size
+2. Local storage vs session
+3. Authorization and authentication
+4. Does the cookie expire?
+5. Authentication vs Authorisation
+6. CSRF, tokens, jwt
+7. Cookie, Session
+8. Jwt
+9. how we can see the cookies in the browsers
+10. what is samesite and lax cookies
+11. authentication vs authorization
+12. sessions vs cookies
+13. maxAge vs expires in cookies
+
+-- 14 of 29 --
+
+14. cancel token
+15. understand the code written for the user login application
+16. Authentication
+17. session
+18. Session management
+19. sticky session
+20. Cookies and Sessions
+21. Authorization vs Authentication
+22. how to insert a value to session
+23. parts of JWT
+24. how JWT signature helps in verification
+25. purpose of refresh token
+26. protected routes
+27. Session handling - issue when moving to homepage
+28. disadvantage of cookies
+29. token introspection
+30. httpOnly cookies
+31. Cookie
+32. working of cookies not properly understood
+33. role of JWT signature
+34. JWT claims
+35. httponly cookie
+36. type of cookies
+37. session not handled
+38. How session and cookies are working
+39. JWT tokens
+40. Role based Access control
+41. cookie - sameSite
+42. is there expiry for cookie?
+43. Session & cookies
+44. local storage vs session storage
+45. How server handling the user identification using sessions & cookies
+46. **7. Authentication & Security**
+47. JWT (JSON Web Tokens)
+48. Session vs Cookies
+49. HTTP-Only Cookies
+50. Stateless Protocol (Local Storage, Sessions, Cookies)
+51. Express Session (`express-session`)
+52. Cookies (`cookie-parser`)
+53. statelessness of HTTP (and how cookies and session help mitigate this)
+54. cookie- sameSite, httpOnly, domains
+55. HTTP - only cookies
+56. Authorization
+57. JWT token
+58. Cookies and cache
+59. Expiry of Cookie
+60. Cookies
+61. http cookie
+62. disadvantages of cookies
+63. package used for session
+64. session initialization
+
+-- 15 of 29 --
+
+65. max size of cookie
+66. max size of a cookie
+67. authentication vs authorisation,
+68. how to initialise session
+69. Jwt,
+70. how to make a cookie expired
+71. Session Handling
+72. how does browser receive cookies
+73. session vs cookies vs local storage
+74. express-session
+75. maxAge vs Expires
+76. All Flags in Cookie
+77. authentication vs autherisation
+78. Cookie headers
+79. cookie and session
+11. Event Loop, Async Flow, Timers, Libuv & Concurrency
+-------------------------------------------------------
+1. event loop phases
+2. event loop starvation
+3. phases in event loop
+4. timer function
+5. setTimeout(() => console.log("timeout"), 0);
+6. setImmediate(() => console.log("immediate"));
+7. process.nextTick(() => console.log("nextTick"));
+8. Phases of event loop in nodejs
+9. How to handle concurrency
+10. memory heap
+11. process.nextTick
+12. setImmediate
+13. libuv
+14. Asynchronous working of nodejs
+15. libuv library
+16. Event loop
+17. Node concurrency
+18. Poll Phase in event loop
+19. Process.nextTick vs. setImmediate
+20. process.nexttick vs setimmediate
+21. features of libuv
+22. Concurrency in node.js
+23. concurrency and parallelism
+24. What is process.nextTick()
+25. what is setInterval and clearInterval
+26. phase in event loop
+27. microtaskQ vs macroTaskQ
+28. timers module
+29. concurrency
+30. settimmediate
+31. setinterval
+32. Event loop in nodejs
+33. Libuv and its benefits
+
+-- 16 of 29 --
+
+34. Process. NextTick()
+35. phases of event loop
+36. cuncurrency vs paralelism
+37. Macro Task Queue vs Micro Task Queue
+38. Polling
+39. Blocking vs NoN Blocking Request
+40. What is the Event Loop?
+41. Asynchronous API
+42. microtasks and macrotasks
+43. SetTImeout priority
+44. event loop (node vs Js)
+45. Macrotask vs microtasks
+46. **5. Event Loop & Concurrency**
+47. Microtasks vs Macrotasks
+48. `process.nextTick()` vs `setImmediate()`
+49. Thread Pool & libuv
+50. How Node.js Handles Concurrency
+51. Event Loop & Event Queue
+52. setTimeout 0ms vs setImmediate *
+53. Timer methods
+54. concurrency vs parallelism
+55. how does not handle cpu bound operations
+56. process.nextTick()
+57. event loop in Node.js?
+58. Concurrency vs Parallielsm
+59. phases in eventloop
+60. How to Stop a setInterval,
+61. Starvation,
+62. Microtask queue
+63. How to achieve concurrency
+64. How node js handles concurrency(need clarity)
+65. setInterval vs setTimeout
+66. asyc/await
+67. Event loop working
+68. Async vs Sync - Task
+69. process.nextTick() vs setImmediate()
+70. parallelism
+71. Event queue
+72. Eventloop
+73. Starvation
+74. i/o bound vs cpu bound
+75. process.nextick vs setImmidiate
+76. concuurency
+77. parralism
+78. how nodejs achieves concurrency?,
+79. Blocking and Non-Blocking Operation
+80. concurrency vs parallelism,
+81. setImmediate()
+82. Macro task queue and micro task queue
+83. microtask vs macrotask queue
+84. concurrency in node - clarity
+
+-- 17 of 29 --
+
+85. Synchronous & Asynchronous
+86. how node js handles concurrency
+87. nexttick, setimmediate,
+88. concurrency doesn’t need multiple workers
+89. How node js handle concurrency
+90. how handle concurrency in node js
+91. process.nexttick vs settimmedaite
+92. process.nextTick() differ from setImmediate()
+93. concurrency (understand how nodejs handles it)
+94. microtask
+95. concurrency vs parallel
+96. how event loop knows a process is completed
+12. Worker Threads, Cluster, Child Process & Scaling
+----------------------------------------------------
+1. Single threaded
+2. Thread
+3. Thread pool
+4. worker thread
+5. When does worker thread execute
+6. Cluster
+7. Difference between spawn, fork, and exec?
+8. child_process
+9. fork vs spawn
+10. fork
+11. spawn
+12. clusters
+13. process vs threads
+14. clustering
+15. process vs thread
+16. proces vs threads
+17. child process
+18. Worker threads
+19. execFile
+20. number of threads needed for concurrency
+21. spawn & fork
+22. creating a child process
+23. Cluster moduel
+24. what is child_process
+25. what is worker_thread
+26. Fork, spawn, exec
+27. Child processs
+28. Cluster module
+29. clustering for performance improvement
+30. Childprocess
+31. clustering in node js
+32. worker thread - clarity
+33. implementation of child_process using fork ,spawn
+34. child process,
+35. fork()
+36. spawn()
+
+-- 18 of 29 --
+
+37. Thread vs process
+38. exec.file
+39. worker threads:
+40. By default, Node.js runs your JavaScript code in a single thread — meaning it
+can only do one thing at a time (mainly designed for asynchronous I/O).
+41. But sometimes you need to do CPU-heavy tasks like:
+42. Large calculations
+43. Image compression
+44. Those tasks block the single thread and can slow down your entire server.
+🔧	45. 	That’s where Worker Threads come in.
+46. They allow you to:
+47. Run JavaScript in separate threads (like parallel workers).
+48. Avoid blocking the main thread.
+49. Example Use Case:
+50. Say you’re building an Express server and you want to process a huge JSON
+file. Without worker threads, it would block all other requests.
+51. With a worker thread:
+52. You offload that task to a new thread
+53. spawn vs fork
+54. Explain cluster module in Node.js
+55. Childprocess methods
+56. Cluster archetecture
+57. threads
+58. spawn and fork
+59. Single-Threaded vs Multi-Threaded
+60. Synchronous vs Asynchronous Execution
+61. Clustering in Node.js
+62. **6. Child Processes & OS Module**
+63. `child_process` Module
+64. Fork vs Spawn vs Exec
+65. Process & Threads
+66. Using Clusters for Scalability
+67. Clustering & Multithreading (`worker_threads`)
+68. Exec
+69. cluster modeule
+70. Clustered collection
+71. spawn, fork
+72. exec, execFile
+73. thread pool - read more
+74. If Node.js is single-threaded, then how does it handle concurrency?
+75. How node js improves performance by clustering(need clarity)
+76. How to do multithreading in Node.JS
+77. Threadpool
+78. Process and threads
+79. Cluster modules
+80. Single threaded vs multi-threaded
+81. child processes
+82. fork vs spwan
+83. spawn, exec, and fork
+84. Child process &types
+85. workers threads
+
+-- 19 of 29 --
+
+86. spawn() vs fork()
+87. cluster module: thread or process
+88. child_process.fork() vs cluster.fork()
+13. Streams, Buffers, Pipe & File Processing
+--------------------------------------------
+1. Streams
+2. Buffer
+3. streams - readable, writable
+4. reateReadStream
+5. Types of streams
+6. buffers
+7. Streams and types
+8. transform stream
+9. duplex stream
+10. streams, buffer, res.pipe()
+11. type of streams
+12. what is stream?
+13. what is pipe?
+14. streams and buffer
+15. streams and type of streams
+16. Buffer and stream
+17. Buffer class
+18. Share memory using SharedArrayBuffer.
+19. What are streams in Node.js?
+20. express.json(), buffer class
+21. Streams vs Buffers
+22. Transform Streams
+23. Streams & Types of Streams
+24. Readable, Writable, Duplex, Transform
+25. Streams & Buffers
+26. piping
+27. Stream
+28. different types of stream
+29. streams in node.js
+30. Buffer in context on stream
+31. Buffer vs Stream
+32. steams,
+33. Streams,
+34. Types of streams,
+35. Duplex vs transform stream,
+36. Purpose of buffer class
+37. Streams and its type
+38. type of stream
+14. Events, EventEmitter, Event-Driven Architecture & Reactor Pattern
+---------------------------------------------------------------------
+1. emitters
+2. Eventemitter
+3. Event driven architecture
+4. event emitter
+
+-- 20 of 29 --
+
+5. events in nodejs, event.on()
+6. concept of event-driven programming
+7. Reactor Pattern
+8. What is EventEmitter?
+9. Event-Driven Programming
+10. Event-Driven File Handling
+11. Event Emitters & Custom Events
+12. Events & Event Emitters
+13. event-driven architecture?
+14. Event driven programming
+15. Events in node.js
+16. event driven
+17. event emitter on vs once
+15. View Engines, EJS, SSR & Template Rendering
+-----------------------------------------------
+1. View Engine
+2. EJS
+3. server side rendering vs client side rendering
+4. send() vs render()
+5. template engline
+6. Partials
+7. Advantages of Nodejs
+8. View engines
+9. Interceptors, view engine
+10. browser js vs nodejs
+11. What are the HTTP Methods used in nodejs and its differences
+12. V8 engine in nodejs
+13. Use of body parser in nodejs
+14. How to fetch an api from nodejs
+15. template partials, inheritance
+16. Event in nodejs
+17. Views & Server-side Rendering
+18. **13. EJS (Embedded JavaScript)**
+19. Installing EJS (`npm install ejs`)
+20. Server-Side Rendering
+21. Using EJS as View Engine
+22. `res.render()`
+23. EJS Syntax (`<% %>`, `<%- %>`, `<%= %>`)
+24. Partials & Layouts
+25. API vs SSR
+26. Nodejs architecture
+27. Render
+28. View engine concepts
+29. Render plain html
+30. latest nodejs features
+31. how to remove a file in nodejs,
+32. template partials
+33. What is nodejs
+34. eventloop nodejs,
+35. applications of nodejs
+
+-- 21 of 29 --
+
+36. template partials, template inheritance
+37. view engine vs html
+38. res.render
+39. passing data to template
+40. Changing HTTP status code when rendering template
+41. Explore NodeJS in a structured and sequential way.
+16. Security, Encryption, Hashing, CSRF, XSS, SSL & TLS
+-------------------------------------------------------
+1. Crypto
+2. Hashing vs Encryption
+3. Why do we need validation on both sides
+4. XSS attack, ssl pinning
+5. encryption vs hashing
+6. SSL
+7. TLS
+8. XSS
+9. CSRF
+10. include client side validation
+11. Sanitization
+12. HTTP vs HTTPS - SSL certificate
+13. bcrypt
+14. helmet
+15. CSRF, XSS attacks
+16. Buffer, hashing, encryption
+17. CSRF, csrf token,
+18. crypto module
+19. Hashing/Encryption
+20. store secrets in ENV
+21. Handling sensitive Information
+22. CSP
+23. Hashing, Encryption
+24. encryption
+25. hashing
+26. CSRF Protection
+27. SSL vs TLS
+28. passport authentication
+29. SQL injection
+30. content security policy
+31. Sanitization of input
+32. SSL certificate
+33. ssl/tls
+34. encrypt
+35. hashing , encryption
+36. SSL cert
+37. Understand how to make secure HTTP requests and set up an HTTPS server with
+SSL/TLS.
+38. Key concepts: https.createServer(), handling secure connections, SSL/TLS
+configuration.
+39. CSRF (Cross-Site Request Forgery)
+
+-- 22 of 29 --
+
+17. Performance, Deployment, Rate Limiting & Infrastructure
+-----------------------------------------------------------
+1. cron job
+2. Rate limiting
+3. reverse proxying
+4. SSH
+5. rate-limiting
+6. debouncing
+7. cron
+8. cron-job
+9. Design patterns
+10. reverse proxy
+11. pm2
+12. load balancing
+13. throttling, debouncing
+14. Vertical scaling
+15. throttling
+16. Logging & Monitoring
+17. Load Balancing & Reverse Proxy (Using Nginx)
+18. Cron Jobs (`* * * *`)
+18. WebSockets, Socket, Webhooks & Real-Time Communication
+----------------------------------------------------------
+1. Socket
+2. Real-time communication
+3. websocket
+4. websockets
+5. WebSockets & Real-time Communication
+6. Webhooks
+19. Database, ODM, MongoDB & Query Topics
+-----------------------------------------
+1. Render dynamic elements
+2. ODM
+3. Find non repeating elements in an array
+4. Avg salary of each dept- syntax issue
+5. Cross Platform
+6. `os` Module (Platform, Memory, CPU Info)
+7. **8. Database & ORM Integration**
+8. Working with Databases in Node.js
+9. SQL vs NoSQL Databases
+10. Using ORMs (Sequelize, Mongoose)
+11. Database Integration
+12. How to modify collection name
+13. $expr
+14. $elemMatch
+15. $facet
+16. how indexing works?,
+17. drawbacks of indexing,
+18. multikey index vs compound index,
+19. concepts of html form
+
+-- 23 of 29 --
+
+20. form submit
+21. for two buttons there is no need of two forms
+22. BSON datatypes
+23. Understand how to gather information about the operating system and current
+system environment.
+24. Practical examples: Gathering system resource information, memory usage, CPU
+info.
+25. form data, content types
+20. Practical Node.js / Express Coding Tasks
+--------------------------------------------
+1. Create a route with a path parameter userName and check whether it exists in a
+predefined array.
+2. Practical: write an http endpoint and add a middleware in router level
+3. Create Server in Express
+4. block all incoming request to server using middle ware
+5. Create a basic server using nodejs - P
+6. Create a router level middleware
+7. Create child process
+8. workout: display current user's email id in the home page
+9. How to start a nodejs application in port 3000 (practical)
+10. Add protected routes
+11. OPTION - preflight request
+12. api end point to divide 2 numbers,
+13. middleware to block all POST requests,
+14. static file serving in nodejs - Practical
+15. write head
+16. implement readStream
+17. nodejs server - p
+18. write a text to file - p
+19. OPTIONS - preflight
+20. create http server using express
+21. using environment variables without using .env
+22. how to create child_process
+23. write hashed data to a file using fs mofule
+24. How to pass data in GET method
+25. handle sessions properly
+26. implement form validation
+27. how to send data in http.get()
+28. Middleware to Cache incoming request url
+29. Create stream and read file
+30. Update based on condition
+31. Parse a URL using URL module
+32. How to create a file using fs
+33. How to create a child process
+34. Application level middleware - P
+35. Error handling middleware - P
+36. how to setup router level middleware
+37. how to access .env variable
+38. how to access userinput values in post method
+39. how to setup a router level middleware
+
+-- 24 of 29 --
+
+40. Create a callback hell and convert the code into promise
+41. create a worker thread
+42. transfer data from one file to another using pipe
+43. Session handling - pending
+44. Create a server using Node js
+45. Write current date and time to a file using fs module
+46. Http get end point creation
+47. middleware to block all DELETE methods
+48. create middleware to block request
+49. write into a file
+50. Create a server using http
+51. create custom module
+52. Encrypt a string in node js
+53. write content to a file using fs module
+54. How to use router level middleware
+55. Create a server using HTTP - P
+56. delete a file using fs
+57. add proper validations
+58. middleware to log names of every incoming parameters,
+59. API endpoint to create a file if not exists else read it
+60. Pass a value as url parameter in api
+61. Add middleware for an api
+62. How to set up cors policy
+63. api end point add 2 numbers(path&query)
+64. middleware to block all POST method requests
+65. display username in homepage
+66. Create a server using express
+67. how to use hashed data
+68. how to set an environment value
+69. Types of middleware, custom, and error handling middleware - practical
+70. renaming file
+71. Read more about status code
+72. Parse url using url module
+73. Write current date into a file using fs module
+74. Block browser back
+75. How to set expiry for a cookies
+76. how to pass multiple queries in url
+77. how to create an env variable
+78. how to setup view engine
+79. Implement event emitter
+80. create http get endpoint to read content from a file
+81. how to setup an error handling middleware
+21. JavaScript Overlap / General JS Concepts Found in File
+----------------------------------------------------------
+1. includes
+2. some and every
+3. promise
+4. function borrowing-call ,apply ,bind
+5. generation function with reverse loop
+6. event delegation
+
+-- 25 of 29 --
+
+7. event propagation
+8. object destructuring
+9. make object immutable
+10. proxy object
+11. prototype chaining
+12. Promise.resolve().then(() => console.log("promise"));
+13. escape sequence
+14. what is promise
+15. methods of promise
+16. Handle multi user login with an array of username & password
+17. promise methods
+18. Print the prime numbers in an array
+19. Illegal shadowing
+20. Reduce the id by 1 - syntax issue
+21. Name that starts with 'a'
+22. Event Emitter class
+23. Weakset, weak map
+24. flatMap()
+25. Structured clone
+26. Object.entries(res);
+27. Symbol(), Array.from()
+28. const name = address?.cityName ?? "empty";
+29. Callback hell
+30. What are the advantages of using promises instead of callbacks?
+31. promises
+32. callbacks
+33. loops (for, while, do-while)
+34. map/filter/reduce
+35. switch
+36. Constructor
+37. promise.all and promise.race
+38. Callback
+39. promise vs async/await,
+40. proxy object,
+41. promise and methods
+42. arrow function vs regular function
+43. generator functions
+44. weakest
+45. weakmap
+46. Types of promises
+47. Types of promise,
+48. Reduce
+49. != vs !==
+50. Promise.All
+22. React / Frontend / Browser Storage / Other Web Topics
+---------------------------------------------------------
+1. localStorage vs sessionStorage
+2. browser storages
+3. Browser Storages in detail
+4. types of browser storages and their uses
+
+-- 26 of 29 --
+
+5. session vs cookies vs localstorage
+6. process
+7. cloudinary
+8. browser cache
+9. sessionstorage vs cookies vs localstorage
+10. local storage
+11. BOM,
+12. a href
+13. localstorage, setItem,getItem
+14. localstorage
+15. Cookie vs. sessionStorage vs. localStorage
+16. Types of browser storage
+17. localstorage v/s sessionstorage
+18. Browser cache, types of browser storage
+23. Feedback, Scores, Notes & Study Improvements
+------------------------------------------------
+1. NPM vs NPX needs clarity
+2. Modify login functionality in the project (failed)
+3. Need to have more clarity in the dynamic rendering concepts. Try multiple user
+logins with an array of users in the backend.
+4. sessions & cookies workflow - explore more
+5. event loop and lubuv (need clarity)
+6. packsge.lock.json
+7. dependecy vs dev-dependecy
+8. cors(need clarity)
+9. CORS needs clarity
+10. work flow of node
+11. Haven't covered the practical side
+12. http (need clarity)
+13. Worker Threads -- need clarity
+14. Score: 2.5
+15. Vishnu GR in Second full domain
+16. cors(understand better)
+17. preflight request-need clarity
+18. clustering-need clarity
+19. Do more workouts on nodejs
+20. explore more about package.json
+21. Interface
+22. Fetch
+23. Us
+24. Event Emitter(Need clarity)
+25. Passport Authentication(need clarity)
+26. Transform Stream(need clarity)
+27. fork() vs Spawn()(need clarity)
+28. Middleware (need clarity)
+29. Env variables need clarity
+30. Learn more about HTTP methods
+31. Strict mode
+32. Explore res methods & have a proper understanding of its purposes
+33. **10. Advanced Topics**
+
+-- 27 of 29 --
+
+34. **11. Theory Concepts**
+35. HTTP headers (vague)
+36. Authentication vs Authorization(need clarity)
+37. event driven architecture(need clarity)
+38. buffer class(need clarity)
+39. child_process (need clarity)
+40. explore res methods
+41. Need clarity in middleware types and it’s usages
+42. String operation(need to be familiar)
+43. promise(need clarity)
+44. Buffer(need clarity)
+45. process.nexttick vs settimeout vs setimmediate(need clarity)
+46. microtaskqueue vs macrotaskqueue(need clarity)
+47. Brief conceptual code
+48. promise need clarity
+49. PUT vs PATCH need clarity
+50. example of event delegation - not done,
+51. toggle checkbox by button click - not completed,
+52. api end point to count occurrence of a specific character in a string - not
+completed,
+53. CORS (vague)
+54. Middlewares - refer more
+55. Session vs Cookies - refer more
+56. Good with javascript concepts and coding. Getting tensed while coding.
+57. Require little more time to get the logic.
+58. Cover nodejs partical side
+59. (MIDHUNZELLY)
+60. os module (vague)
+61. event loop - lacks clarity
+62. practical task was not able to finish
+63. CORS: lacks clarity
+64. prevent it
+65. process us thread: need clarity
+66. middle ware and its type(need clarity)
+67. REPL(need clarity)
+68. Pending Bucket © 2025 | Developed bySujith V S
+24. Error Handling, Debugging & Exception Handling
+--------------------------------------------------
+1. Error handling middleware
+2. How to do exception handling in nodejs
+3. error 1st call back
+4. error
+5. how to handle unhandled errors in nodejs
+6. error handling using custom event emitter
+7. error first callback
+8. how error handling middleware is invoked
+9. **9. Performance Optimization & Debugging**
+10. Profiling & Debugging in Node.js
+11. Error Handling Best Practices
+12. Exception Handling (`try/catch`, Promises)
+
+-- 28 of 29 --
+
+13. error handling middleware args (order matters)
+14. Explain how error handling works in Node.js.
+15. Error handling middleware position
+16. Error objects - Instance
+17. stub
+18. exception handling
+19. error firstcallback
+20. Debugging
+21. Invoking an error handling
+22. Error handling middleware args
+25. General Terms, Notes & Small Fragments
+------------------------------------------
+No items.
+
+-- 29 of 29 --
+
