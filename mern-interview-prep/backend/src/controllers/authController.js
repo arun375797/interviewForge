@@ -65,7 +65,14 @@ exports.protect = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET());
-    const user = await User.findById(decoded.id);
+    // Prefer claims from a valid JWT — skip an extra User.findById on every request.
+    // /auth/me still loads the live user document when needed.
+    if (decoded.id && decoded.email) {
+      req.user = { id: decoded.id, email: decoded.email };
+      return next();
+    }
+
+    const user = await User.findById(decoded.id).select('_id email').lean();
     if (!user) {
       return res.status(401).json({ message: 'User no longer exists' });
     }
@@ -78,30 +85,47 @@ exports.protect = async (req, res, next) => {
 };
 
 /** Create/update the single admin account from env (or defaults). */
+let adminEnsurePromise = null;
 exports.ensureAdminUser = async () => {
-  const email = (process.env.ADMIN_EMAIL || 'arun375797').trim().toLowerCase();
-  const password = process.env.ADMIN_PASSWORD || 'Job@2026';
-  const name = process.env.ADMIN_NAME || 'Arun';
+  // Deduplicate concurrent cold-start calls
+  if (adminEnsurePromise) return adminEnsurePromise;
 
-  let user = await User.findOne({ email }).select('+password');
-  if (!user) {
-    user = await User.create({ email, password, name });
-    console.log(`Admin user created: ${email}`);
+  adminEnsurePromise = (async () => {
+    const email = (process.env.ADMIN_EMAIL || 'arun375797').trim().toLowerCase();
+    const password = process.env.ADMIN_PASSWORD || 'Job@2026';
+    const name = process.env.ADMIN_NAME || 'Arun';
+    const syncPassword = process.env.SYNC_ADMIN_PASSWORD === 'true';
+
+    let user = await User.findOne({ email }).select(syncPassword ? '+password' : 'email name');
+    if (!user) {
+      user = await User.create({ email, password, name });
+      console.log(`Admin user created: ${email}`);
+      return user;
+    }
+
+    // Only bcrypt-compare when SYNC_ADMIN_PASSWORD=true (avoids ~100–300ms on every cold start)
+    if (syncPassword) {
+      const matches = await user.comparePassword(password);
+      if (!matches) {
+        user.password = password;
+        user.name = name;
+        await user.save();
+        console.log(`Admin password updated for: ${email}`);
+        return user;
+      }
+    }
+
+    if (user.name !== name) {
+      user.name = name;
+      await user.save();
+    } else {
+      console.log(`Admin user ready: ${email}`);
+    }
     return user;
-  }
+  })().catch((err) => {
+    adminEnsurePromise = null;
+    throw err;
+  });
 
-  // Keep password in sync with env on boot (useful after credential change)
-  const matches = await user.comparePassword(password);
-  if (!matches) {
-    user.password = password;
-    user.name = name;
-    await user.save();
-    console.log(`Admin password updated for: ${email}`);
-  } else if (user.name !== name) {
-    user.name = name;
-    await user.save();
-  } else {
-    console.log(`Admin user ready: ${email}`);
-  }
-  return user;
+  return adminEnsurePromise;
 };

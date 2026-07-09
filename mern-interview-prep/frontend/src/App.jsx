@@ -3,10 +3,12 @@ import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import Home from './components/Home';
+import Login from './components/Login';
 import { api } from './api';
 import RouteSeo from './seo';
 
-const Home = lazy(() => import('./components/Home'));
+// Heavy / secondary routes stay lazy; Home + Login are eager for first paint.
 const SubjectPage = lazy(() => import('./components/SubjectPage'));
 const Practice = lazy(() => import('./components/Practice'));
 const Mock = lazy(() => import('./components/Mock'));
@@ -20,7 +22,6 @@ const CodeSubject = lazy(() => import('./components/CodeSubject'));
 const CodeWorkspace = lazy(() => import('./components/CodeWorkspace'));
 const PlanStudy = lazy(() => import('./components/PlanStudy'));
 const NotFound = lazy(() => import('./components/NotFound'));
-const Login = lazy(() => import('./components/Login'));
 
 function PageFallback() {
   return (
@@ -28,6 +29,18 @@ function PageFallback() {
       <div className="skeleton h-24 rounded-3xl" />
       <div className="skeleton h-48 rounded-3xl" />
     </div>
+  );
+}
+
+function statsFromSubjects(subjects) {
+  return subjects.reduce(
+    (acc, s) => {
+      acc.total += s.questionCount || 0;
+      acc.bookmarked += s.bookmarked || 0;
+      acc.mastered += s.mastered || 0;
+      return acc;
+    },
+    { total: 0, bookmarked: 0, mastered: 0 }
   );
 }
 
@@ -46,11 +59,13 @@ function AppRoutes() {
 
     let alive = true;
     setLoading(true);
-    Promise.all([api.getSubjects(), api.getStats()])
-      .then(([subs, st]) => {
+    // One request instead of subjects + stats — halves cold-start API wait.
+    api
+      .getSubjects()
+      .then((subs) => {
         if (!alive) return;
         setSubjects(subs);
-        setStats(st);
+        setStats(statsFromSubjects(subs));
         setError('');
       })
       .catch((err) => {
@@ -71,14 +86,7 @@ function AppRoutes() {
     <>
       <RouteSeo />
       <Routes>
-        <Route
-          path="/login"
-          element={
-            <Suspense fallback={<PageFallback />}>
-              <Login />
-            </Suspense>
-          }
-        />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/*"
           element={

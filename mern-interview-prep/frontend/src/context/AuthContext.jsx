@@ -6,7 +6,12 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => getStoredUser());
   const [token, setToken] = useState(() => getStoredToken());
-  const [booting, setBooting] = useState(true);
+  // Only block the UI when we have a token but no cached user to trust yet.
+  const [booting, setBooting] = useState(() => {
+    const existingToken = getStoredToken();
+    const existingUser = getStoredUser();
+    return Boolean(existingToken && !existingUser);
+  });
 
   useEffect(() => {
     let alive = true;
@@ -14,6 +19,12 @@ export function AuthProvider({ children }) {
     if (!existing) {
       setBooting(false);
       return undefined;
+    }
+
+    // Returning visitors already have token + user in localStorage — paint immediately
+    // and revalidate in the background instead of blocking on a cold API.
+    if (getStoredUser()) {
+      setBooting(false);
     }
 
     api

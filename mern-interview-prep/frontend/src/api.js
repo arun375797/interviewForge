@@ -12,9 +12,20 @@ function resolveApiBase() {
 }
 
 const API_BASE = resolveApiBase();
-const GET_CACHE_TTL_MS = 30 * 1000;
+const GET_CACHE_TTL_MS = 2 * 60 * 1000;
 const responseCache = new Map();
 const pendingRequests = new Map();
+
+/** Kick the API awake as early as possible (helps Vercel/Render cold starts). */
+export function warmApi() {
+  const healthUrl = `${API_BASE.replace(/\/api$/, '')}/api/health`;
+  return fetch(healthUrl, { method: 'GET', cache: 'no-store' }).catch(() => null);
+}
+
+// Start warming immediately when this module loads
+if (typeof window !== 'undefined') {
+  warmApi();
+}
 
 function cacheKeyFor(url, token) {
   return `${token || 'anonymous'}:${url}`;

@@ -7,8 +7,12 @@ export default function ProtectedRoute({ children }) {
 
   if (booting) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="glass-panel rounded-2xl px-6 py-4 text-sm text-muted">Loading…</div>
+      <div className="flex min-h-screen items-center justify-center px-4">
+        <div className="w-full max-w-md space-y-3">
+          <div className="skeleton h-10 rounded-xl" />
+          <div className="skeleton h-40 rounded-2xl" />
+          <p className="text-center text-sm text-muted">Loading…</p>
+        </div>
       </div>
     );
   }

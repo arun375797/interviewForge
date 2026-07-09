@@ -54,27 +54,38 @@ function createApp() {
     app.use(morgan(isProd ? 'combined' : 'dev'));
   }
 
-  // Skip heavy boot for CORS preflight
+  // Skip heavy boot for CORS preflight and health checks (keeps cold starts snappy)
   let bootPromise = null;
+  function ensureBooted() {
+    if (!bootPromise) {
+      bootPromise = (async () => {
+        await connectDB();
+        // Fast path: ensure admin exists without bcrypt on every wake.
+        // Set SYNC_ADMIN_PASSWORD=true only when rotating the admin password.
+        await ensureAdminUser();
+        const skipSeed =
+          process.env.SKIP_AUTO_SEED === 'true' ||
+          (onVercel && process.env.FORCE_SEED !== 'true');
+        if (!skipSeed) {
+          await ensureSeeded();
+        }
+      })().catch((err) => {
+        bootPromise = null;
+        throw err;
+      });
+    }
+    return bootPromise;
+  }
+
   app.use(async (req, res, next) => {
     if (req.method === 'OPTIONS') return next();
+    if (req.path === '/api/health' || req.path === '/health') {
+      // Wake DB in the background without delaying the health response
+      ensureBooted().catch(() => {});
+      return next();
+    }
     try {
-      if (!bootPromise) {
-        bootPromise = (async () => {
-          await connectDB();
-          await ensureAdminUser();
-          const skipSeed =
-            process.env.SKIP_AUTO_SEED === 'true' ||
-            (onVercel && process.env.FORCE_SEED !== 'true');
-          if (!skipSeed) {
-            await ensureSeeded();
-          }
-        })().catch((err) => {
-          bootPromise = null;
-          throw err;
-        });
-      }
-      await bootPromise;
+      await ensureBooted();
       next();
     } catch (err) {
       next(err);
