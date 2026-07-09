@@ -33,7 +33,7 @@ export default function Practice() {
   useEffect(() => {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [subject, difficulty]);
 
   return (
     <div className="mx-auto max-w-3xl animate-rise space-y-6">

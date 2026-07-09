@@ -9,6 +9,9 @@ import Bookmarks from './components/Bookmarks';
 import AddQuestion from './components/AddQuestion';
 import Learn from './components/Learn';
 import LearnSubject from './components/LearnSubject';
+import Code from './components/Code';
+import CodeSubject from './components/CodeSubject';
+import CodeWorkspace from './components/CodeWorkspace';
 import NotFound from './components/NotFound';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -71,6 +74,9 @@ function AppRoutes() {
                 <Route path="/subject/:subject" element={<SubjectPage />} />
                 <Route path="/learn" element={<Learn />} />
                 <Route path="/learn/:subject" element={<LearnSubject />} />
+                <Route path="/code" element={<Code />} />
+                <Route path="/code/:subject" element={<CodeSubject />} />
+                <Route path="/code/:subject/:id" element={<CodeWorkspace />} />
                 <Route path="/practice" element={<Practice />} />
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/add" element={<AddQuestion />} />

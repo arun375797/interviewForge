@@ -45,7 +45,7 @@ async function request(path, options = {}) {
   };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(url, { ...options, headers });
+  const res = await fetch(url, { cache: 'no-store', ...options, headers });
   const data = await res.json().catch(() => ({}));
 
   if (res.status === 401 && !path.includes('/auth/login')) {
@@ -70,7 +70,9 @@ export const api = {
   getTopics: (subject) => request(`/questions/subjects/${subject}/topics`),
   getStats: () => request('/questions/stats'),
   getRandom: (params = {}) => {
-    const q = new URLSearchParams(params).toString();
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
     return request(`/questions/random${q ? `?${q}` : ''}`);
   },
   getQuestions: (params = {}) => {
@@ -94,6 +96,29 @@ export const api = {
     ).toString();
     return request(`/questions/learn/progress${q ? `?${q}` : ''}`);
   },
+  getCodeProgress: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/code/progress${q ? `?${q}` : ''}`);
+  },
+  getCodeTopics: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/code/topics${q ? `?${q}` : ''}`);
+  },
+  getCodeQuestions: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/code${q ? `?${q}` : ''}`);
+  },
+  getCodeQuestion: (id) => request(`/questions/code/${id}`),
+  toggleCodeCompleted: (id) => request(`/questions/code/${id}/completed`, { method: 'PATCH' }),
+  saveCode: (id, code) =>
+    request(`/questions/code/${id}/save`, { method: 'PUT', body: JSON.stringify({ code }) }),
+  getSavedCode: (id) => request(`/questions/code/${id}/saved-code`),
 };
 
 export const SUBJECT_META = {

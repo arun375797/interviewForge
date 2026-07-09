@@ -10,7 +10,8 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "seed": "node src/utils/seed.js",
-    "refresh-answers": "node src/utils/refreshAnswers.js"
+    "refresh-answers": "node src/utils/refreshAnswers.js",
+    "upsert-code-practice": "node src/utils/upsertCodePracticeQuestions.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

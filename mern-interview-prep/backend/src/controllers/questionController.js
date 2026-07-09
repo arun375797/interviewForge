@@ -5,17 +5,25 @@ const {
   generateKeyPoints,
   difficultyFromQuestion,
 } = require('../utils/answerGenerator');
+const {
+  CODE_SUBJECTS,
+  CODE_KEYWORD_RE,
+  isCodePracticeQuestion,
+  toCodeQuestion,
+} = require('../utils/codePracticeGenerator');
+
+const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 
 exports.getSubjects = async (_req, res) => {
   try {
     const subjects = await Subject.find().sort({ label: 1 });
     const withLiveCounts = await Promise.all(
       subjects.map(async (s) => {
-        const questionCount = await Question.countDocuments({ subject: s.key });
-        const topics = await Question.distinct('topic', { subject: s.key });
-        const bookmarked = await Question.countDocuments({ subject: s.key, bookmarked: true });
-        const mastered = await Question.countDocuments({ subject: s.key, mastered: true });
-        const learned = await Question.countDocuments({ subject: s.key, learned: true });
+        const questionCount = await Question.countDocuments({ subject: s.key, ...PUBLIC_QUESTION_FILTER });
+        const topics = await Question.distinct('topic', { subject: s.key, ...PUBLIC_QUESTION_FILTER });
+        const bookmarked = await Question.countDocuments({ subject: s.key, bookmarked: true, ...PUBLIC_QUESTION_FILTER });
+        const mastered = await Question.countDocuments({ subject: s.key, mastered: true, ...PUBLIC_QUESTION_FILTER });
+        const learned = await Question.countDocuments({ subject: s.key, learned: true, ...PUBLIC_QUESTION_FILTER });
         return {
           ...s.toObject(),
           questionCount,
@@ -36,7 +44,7 @@ exports.getTopics = async (req, res) => {
   try {
     const { subject } = req.params;
     const topics = await Question.aggregate([
-      { $match: { subject } },
+      { $match: { subject, ...PUBLIC_QUESTION_FILTER } },
       {
         $group: {
           _id: '$topic',
@@ -81,7 +89,7 @@ exports.getQuestions = async (req, res) => {
       sort = 'order',
     } = req.query;
 
-    const filter = {};
+    const filter = { ...PUBLIC_QUESTION_FILTER };
     if (subject) filter.subject = subject;
     if (topic) filter.topic = topic;
     if (difficulty) filter.difficulty = difficulty;
@@ -183,6 +191,7 @@ exports.updateQuestion = async (req, res) => {
       'bookmarked',
       'mastered',
       'learned',
+      'codeCompleted',
       'order',
       'topicOrder',
     ];
@@ -252,7 +261,7 @@ exports.toggleLearned = async (req, res) => {
 exports.getLearnProgress = async (req, res) => {
   try {
     const { subject } = req.query;
-    const match = subject ? { subject } : {};
+    const match = subject ? { subject, ...PUBLIC_QUESTION_FILTER } : { ...PUBLIC_QUESTION_FILTER };
 
     const [totals, bySubject, byTopic] = await Promise.all([
       Question.aggregate([
@@ -314,15 +323,213 @@ exports.getLearnProgress = async (req, res) => {
   }
 };
 
+function isValidCodeSubject(subject) {
+  return !subject || CODE_SUBJECTS.includes(subject);
+}
+
+async function loadCodeQuestions({ subject, topic, completed, search } = {}) {
+  const filter = {
+    subject: subject || { $in: CODE_SUBJECTS },
+    $or: [{ question: CODE_KEYWORD_RE }, { codeOnly: true }],
+  };
+  if (completed === 'true') filter.codeCompleted = true;
+  if (completed === 'false') filter.codeCompleted = false;
+
+  const docs = await Question.find(filter)
+    .sort({ topicOrder: 1, order: 1 })
+    .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+    .lean();
+
+  const query = search?.trim().toLowerCase();
+  return docs
+    .filter((doc) => isCodePracticeQuestion(doc))
+    .map((doc) => toCodeQuestion(doc))
+    .filter((doc) => {
+      if (!topic) return true;
+      return doc.codePrompt.topic === topic;
+    })
+    .filter((doc) => {
+      if (!query) return true;
+      return `${doc.question} ${doc.topic} ${doc.codePrompt.topic}`.toLowerCase().includes(query);
+    })
+    .sort(
+      (a, b) =>
+        (a.codePrompt.topicOrder || 99) - (b.codePrompt.topicOrder || 99) ||
+        (a.order || 0) - (b.order || 0)
+    );
+}
+
+exports.getCodeProgress = async (req, res) => {
+  try {
+    const { subject } = req.query;
+    if (!isValidCodeSubject(subject)) {
+      return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
+    }
+
+    const items = await loadCodeQuestions({ subject });
+    const completed = items.filter((q) => q.codeCompleted).length;
+    res.json({
+      total: items.length,
+      completed,
+      remaining: Math.max(0, items.length - completed),
+      percent: items.length ? Math.round((completed / items.length) * 100) : 0,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getCodeTopics = async (req, res) => {
+  try {
+    const { subject } = req.query;
+    if (!isValidCodeSubject(subject)) {
+      return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
+    }
+
+    const items = await loadCodeQuestions({ subject });
+    const topics = new Map();
+    for (const item of items) {
+      const codeTopic = item.codePrompt.topic;
+      if (!topics.has(codeTopic)) {
+        topics.set(codeTopic, {
+          name: codeTopic,
+          subject: item.subject,
+          topicOrder: item.codePrompt.topicOrder,
+          count: 0,
+          completed: 0,
+        });
+      }
+      const entry = topics.get(codeTopic);
+      entry.count += 1;
+      if (item.codeCompleted) entry.completed += 1;
+    }
+
+    res.json(
+      [...topics.values()].sort(
+        (a, b) => (a.topicOrder || 0) - (b.topicOrder || 0) || a.name.localeCompare(b.name)
+      )
+    );
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getCodeQuestions = async (req, res) => {
+  try {
+    const {
+      subject,
+      topic,
+      search,
+      completed,
+      page = 1,
+      limit = 40,
+    } = req.query;
+
+    if (!isValidCodeSubject(subject)) {
+      return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
+    }
+
+    const allItems = await loadCodeQuestions({ subject, topic, completed, search });
+    const pageNum = Math.max(1, parseInt(page, 10) || 1);
+    const lim = Math.min(100, Math.max(1, parseInt(limit, 10) || 40));
+    const skip = (pageNum - 1) * lim;
+
+    res.json({
+      items: allItems.slice(skip, skip + lim),
+      total: allItems.length,
+      page: pageNum,
+      pages: Math.ceil(allItems.length / lim) || 1,
+      limit: lim,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getCodeQuestionById = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id)
+      .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+      .lean();
+    if (!item || !isCodePracticeQuestion(item)) {
+      return res.status(404).json({ message: 'Code question not found' });
+    }
+    res.json(toCodeQuestion(item));
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.toggleCodeCompleted = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id);
+    if (!item || !isCodePracticeQuestion(item)) {
+      return res.status(404).json({ message: 'Code question not found' });
+    }
+    item.codeCompleted = !item.codeCompleted;
+    await item.save();
+    const safeItem = await Question.findById(item._id)
+      .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+      .lean();
+    res.json(toCodeQuestion(safeItem));
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.saveCode = async (req, res) => {
+  try {
+    const code = typeof req.body.code === 'string' ? req.body.code : '';
+    if (code.length > 100000) {
+      return res.status(400).json({ message: 'Saved code is too large' });
+    }
+
+    const item = await Question.findById(req.params.id);
+    if (!item || !isCodePracticeQuestion(item)) {
+      return res.status(404).json({ message: 'Code question not found' });
+    }
+
+    item.savedCode = code;
+    item.savedCodeUpdatedAt = new Date();
+    await item.save();
+    res.json({
+      id: item._id,
+      hasSavedCode: Boolean(code),
+      savedCodeUpdatedAt: item.savedCodeUpdatedAt,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getSavedCode = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id)
+      .select('+savedCode subject topic question savedCodeUpdatedAt')
+      .lean();
+    if (!item || !isCodePracticeQuestion(item)) {
+      return res.status(404).json({ message: 'Code question not found' });
+    }
+    res.json({
+      id: item._id,
+      code: item.savedCode || '',
+      savedCodeUpdatedAt: item.savedCodeUpdatedAt,
+      hasSavedCode: Boolean(item.savedCode),
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 exports.getStats = async (_req, res) => {
   try {
     const [total, bookmarked, mastered, learned, bySubject, byDifficulty] = await Promise.all([
-      Question.countDocuments(),
-      Question.countDocuments({ bookmarked: true }),
-      Question.countDocuments({ mastered: true }),
-      Question.countDocuments({ learned: true }),
-      Question.aggregate([{ $group: { _id: '$subject', count: { $sum: 1 } } }]),
-      Question.aggregate([{ $group: { _id: '$difficulty', count: { $sum: 1 } } }]),
+      Question.countDocuments(PUBLIC_QUESTION_FILTER),
+      Question.countDocuments({ bookmarked: true, ...PUBLIC_QUESTION_FILTER }),
+      Question.countDocuments({ mastered: true, ...PUBLIC_QUESTION_FILTER }),
+      Question.countDocuments({ learned: true, ...PUBLIC_QUESTION_FILTER }),
+      Question.aggregate([{ $match: PUBLIC_QUESTION_FILTER }, { $group: { _id: '$subject', count: { $sum: 1 } } }]),
+      Question.aggregate([{ $match: PUBLIC_QUESTION_FILTER }, { $group: { _id: '$difficulty', count: { $sum: 1 } } }]),
     ]);
     res.json({ total, bookmarked, mastered, learned, bySubject, byDifficulty });
   } catch (err) {
@@ -333,6 +540,7 @@ exports.getStats = async (_req, res) => {
 exports.getRandomQuestion = async (req, res) => {
   try {
     const filter = {};
+    Object.assign(filter, PUBLIC_QUESTION_FILTER);
     if (req.query.subject) filter.subject = req.query.subject;
     if (req.query.topic) filter.topic = req.query.topic;
     if (req.query.difficulty) filter.difficulty = req.query.difficulty;

@@ -1,10 +1,11 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { BookOpen, Bookmark, Brain, Shuffle, Plus, LogOut, GraduationCap } from 'lucide-react';
+import { BookOpen, Bookmark, Brain, Shuffle, Plus, LogOut, GraduationCap, Code2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const links = [
   { to: '/', label: 'Subjects', icon: BookOpen, end: true },
   { to: '/learn', label: 'Learn', icon: GraduationCap },
+  { to: '/code', label: 'Code', icon: Code2 },
   { to: '/practice', label: 'Practice', icon: Shuffle },
   { to: '/bookmarks', label: 'Bookmarks', icon: Bookmark },
   { to: '/add', label: 'Add', icon: Plus },

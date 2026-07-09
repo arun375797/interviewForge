@@ -1,5 +1,5 @@
 /**
- * Generates direct spoken interview answers — no meta framing.
+ * Generates direct answers with no meta framing.
  * Speaks as the candidate answering, not describing how to answer.
  */
 
@@ -44,7 +44,7 @@ const CONCEPTS = {
   module: `ES Modules use import and export, support static analysis, and have live bindings. CommonJS uses require and module.exports and loads synchronously. In Node I choose based on the project setup — package.json "type": "module" or .mjs for ESM, otherwise CommonJS is still common.`,
 
   // React
-  react: `React is a JavaScript library for building user interfaces with components. I describe the UI as a function of state, and React updates the DOM when that state changes. It follows a declarative, one-way data flow model, which keeps complex UIs more predictable.`,
+  react: `React is a JavaScript library for building user interfaces with components. The UI is described as a function of state, and React updates the DOM when that state changes. It follows a declarative, one-way data flow model, which keeps complex UIs more predictable.`,
 
   jsx: `JSX lets me write UI markup that looks like HTML inside JavaScript. Tools like Babel or SWC compile it into React element calls. In JSX I use className instead of class, camelCase for events, and curly braces for JavaScript expressions. JSX isn't mandatory, but it's the standard way to write React.`,
 
@@ -102,7 +102,7 @@ const CONCEPTS = {
 
   algorithm: `An algorithm is a clear step-by-step method to solve a problem. Beyond correctness, I care about time and space complexity — usually expressed with Big-O — so I know how the solution scales as input size grows.`,
 
-  'big o': `Big-O describes the upper bound of growth for time or space as n increases. Common ones are O(1), O(log n), O(n), O(n log n), and O(n²). Big-Ω is a lower bound, and Big-Θ is a tight bound when both sides match. In interviews I usually quote worst-case Big-O unless asked otherwise.`,
+  'big o': `Big-O describes the upper bound of growth for time or space as n increases. Common ones are O(1), O(log n), O(n), O(n log n), and O(n²). Big-Ω is a lower bound, and Big-Θ is a tight bound when both sides match. Worst-case Big-O is the default unless the question asks for best, average, or amortized complexity.`,
 
   array: `An array stores elements in contiguous memory, so index access is O(1). Inserting or deleting in the middle is O(n) because elements shift. Dynamic arrays resize occasionally with amortized cost. Arrays are great for random access, weaker when I need frequent inserts in the middle.`,
 
@@ -133,10 +133,151 @@ const CONCEPTS = {
   'two pointer': `The two-pointer technique uses two indices moving through a structure. On sorted arrays it's great for pair sums and in-place rearrangements. Sliding window is a related pattern for subarray or substring problems where I expand and shrink a range while tracking a condition.`,
 };
 
+Object.assign(CONCEPTS, {
+  encapsulation: `Encapsulation means keeping data and the methods that work on that data together, while hiding the internal details from outside code. In JavaScript I can achieve it with classes, closures, private fields using #, or module scope. The main benefit is control: outside code uses a clean public API instead of directly changing internal state.`,
+  abstraction: `Abstraction means exposing only the necessary behavior and hiding implementation details. For example, a class can expose a save() method without forcing the caller to know how validation, API calls, or database writes happen internally. It reduces complexity and makes code easier to change.`,
+  inheritance: `Inheritance lets one class or object reuse behavior from another. In JavaScript, this works through the prototype chain, and class extends is syntax over that mechanism. I use inheritance carefully because composition is often simpler, but inheritance is useful when there is a real is-a relationship.`,
+  polymorphism: `Polymorphism means different objects can respond to the same method name in their own way. For example, different payment classes can all have a pay() method, but each implements the logic differently. It helps write flexible code that depends on behavior instead of concrete types.`,
+  class: `A class in JavaScript is a template for creating objects. It groups constructor logic and methods together. Under the hood, class methods live on the prototype, so classes are mostly cleaner syntax over JavaScript's prototype-based object model.`,
+  constructor: `A constructor is the function that runs when a new object is created. In a class, constructor() initializes properties. In older JavaScript, constructor functions were called with new. The purpose is to set up the object's initial state.`,
+  object: `An object is a collection of key-value pairs. Values can be primitives, arrays, other objects, or functions. Objects are reference types, so assigning an object to another variable copies the reference, not the whole object.`,
+  'static dynamic typing': `A statically typed language checks variable types at compile time, while a dynamically typed language checks them at runtime. JavaScript is dynamically typed, so a variable can hold a string now and a number later. TypeScript adds static type checking on top of JavaScript.`,
+  'type coercion': `Type coercion is JavaScript automatically converting one type to another. For example, '5' + 1 becomes '51' because + with a string performs string concatenation, while '5' - 1 becomes 4 because - forces numeric conversion. I avoid relying on implicit coercion and use explicit conversion when clarity matters.`,
+  'truthy falsy': `Falsy values in JavaScript are false, 0, -0, 0n, '', null, undefined, and NaN. Everything else is truthy, including empty arrays and empty objects. This matters in conditions because if ([]) runs, but if ('') does not.`,
+  'spread rest': `Spread expands values, while rest collects values. In arrays and objects, spread copies or combines values, like [...arr] or {...obj}. In function parameters, rest collects remaining arguments into an array, like function sum(...nums).`,
+  'optional chaining': `Optional chaining, written as ?., safely accesses nested properties. If the value before ?. is null or undefined, the expression returns undefined instead of throwing. It is useful for optional API data like user?.profile?.name.`,
+  'nullish coalescing': `Nullish coalescing, written as ??, gives a fallback only when the left side is null or undefined. It is safer than || when valid falsy values like 0 or '' should be kept. For example, count ?? 0 keeps count if it is 0.`,
+  'map filter reduce': `map transforms each array item and returns a new array. filter keeps only items that match a condition. reduce combines the array into a single result such as a sum, object, or grouped structure. All three avoid manual loop bookkeeping and make intent clearer.`,
+  'slice splice': `slice returns a shallow copy of part of an array without changing the original. splice changes the original array by adding, removing, or replacing elements. The key difference is immutability: slice is non-mutating, splice mutates.`,
+  'set map': `Set stores unique values. Map stores key-value pairs and allows any type as a key. I use Set for uniqueness checks and Map when I need fast lookup with keys that are not limited to strings.`,
+  json: `JSON is a text format for representing data, commonly used between frontend and backend. JSON.stringify converts a JavaScript value to a JSON string, and JSON.parse converts a JSON string back to a JavaScript value. JSON supports data, not functions or undefined values.`,
+  destructuring: `Destructuring extracts values from arrays or objects into variables. For example, const { name } = user gets user.name, and const [first] = arr gets the first array item. It makes code shorter and clearer when reading structured data.`,
+  immutability: `Immutability means not changing existing data directly. Instead, I create a new copy with the updated value. In React this is important because state changes must produce a new reference so React can detect the update and re-render correctly.`,
+  iife: `An IIFE is an Immediately Invoked Function Expression. It runs as soon as it is defined. Before block scope and modules were common, IIFEs were used to create private scope and avoid polluting the global namespace.`,
+  memoization: `Memoization caches the result of an expensive function for the same inputs. If the function is called again with the same arguments, it returns the cached result instead of recalculating. It is useful for recursive problems and expensive pure calculations.`,
+  callback: `A callback is a function passed into another function to run later. It is common in asynchronous code and event handling. The downside is that nested callbacks can become hard to read, which is why promises and async/await are often preferred.`,
+  'promise all': `Promise.all runs multiple promises in parallel and resolves when all of them succeed. If any promise rejects, the whole Promise.all rejects. Promise.allSettled waits for every promise and returns each result as fulfilled or rejected, which is useful when partial success is acceptable.`,
+  'fetch axios': `fetch is the browser's built-in API for HTTP requests. Axios is a library with conveniences like automatic JSON handling, request/response interceptors, and easier error handling. I use fetch for simple cases and Axios when the project benefits from interceptors or shared configuration.`,
+  dom: `The DOM is the browser's object representation of an HTML document. JavaScript can read and update DOM nodes to change content, styles, attributes, and event behavior. Direct DOM manipulation is normal in vanilla JavaScript, but in React I usually let React manage DOM updates.`,
+  'event propagation': `Event propagation is how an event moves through the DOM. It has capturing, target, and bubbling phases. In bubbling, the event moves from the target element up to ancestors. stopPropagation stops it from continuing upward.`,
+  'event delegation': `Event delegation attaches one event listener to a parent instead of many listeners on child elements. Because events bubble up, the parent can inspect event.target and handle child interactions. It is efficient for dynamic lists because newly added children work automatically.`,
+  storage: `localStorage and sessionStorage store key-value strings in the browser. localStorage persists until cleared, while sessionStorage lasts for the browser tab session. They are useful for non-sensitive preferences, but not ideal for secrets because JavaScript can read them if XSS happens.`,
+  xss: `XSS, or Cross-Site Scripting, happens when attacker-controlled script runs in a user's browser. Prevention includes escaping output, sanitizing HTML, avoiding unsafe innerHTML, using Content Security Policy, and never trusting user input.`,
+  csrf: `CSRF tricks a logged-in browser into sending an unwanted request to another site. Common protection includes SameSite cookies, CSRF tokens, checking origin/referer headers, and avoiding state-changing GET requests.`,
+  rest: `REST is an API style where resources are represented by URLs and actions are expressed with HTTP methods. GET reads, POST creates, PUT or PATCH updates, and DELETE removes. Good REST APIs use clear resource names, proper status codes, and predictable request/response shapes.`,
+  'http methods': `GET retrieves data and should not change server state. POST creates or triggers an action. PUT usually replaces a resource, PATCH partially updates it, and DELETE removes it. OPTIONS is used by browsers for CORS preflight checks.`,
+  'status codes': `HTTP status codes describe the result of a request. 200 means success, 201 means created, 400 means bad request, 401 means unauthenticated, 403 means forbidden, 404 means not found, and 500 means server error.`,
+  'query params': `Query parameters are used for optional filters, sorting, searching, and pagination, like ?page=2&search=react. Path parameters identify a specific resource, like /users/123. I use path params for identity and query params for options.`,
+  mongoose: `Mongoose is an ODM for MongoDB. It lets me define schemas, models, validation, middleware, and query helpers. It gives structure to MongoDB documents while still storing data in collections as BSON documents.`,
+  mongodb: `MongoDB is a NoSQL document database. Data is stored as flexible JSON-like documents inside collections. It works well when data is naturally document-shaped and when I need flexible schemas, indexing, aggregation, and horizontal scaling.`,
+  aggregation: `MongoDB aggregation processes documents through pipeline stages. Common stages are $match for filtering, $group for grouping, $project for shaping fields, $sort for ordering, and $lookup for joining collections. It is useful for reports and computed summaries.`,
+  index: `An index is a data structure that speeds up reads by letting the database find documents without scanning the whole collection. The trade-off is extra storage and slower writes because indexes must be updated whenever data changes.`,
+  authentication: `Authentication verifies who the user is, usually with credentials like email and password. Authorization checks what that authenticated user is allowed to do. Login proves identity; permissions decide access.`,
+  authorization: `Authorization decides whether an authenticated user can access a resource or perform an action. For example, an admin can delete a record, while a normal user might only read it. It should be enforced on the backend, not only in the UI.`,
+  cookie: `A cookie is a small value stored by the browser and sent automatically with matching requests. HttpOnly cookies are safer for tokens because JavaScript cannot read them. SameSite and Secure attributes help reduce CSRF and transport risks.`,
+  session: `A session stores login state on the server and gives the browser a session ID, usually in a cookie. The server looks up the session on each request. This is different from JWT-based stateless authentication, where the token itself carries signed claims.`,
+  hashing: `Hashing is one-way transformation. Passwords should be hashed with slow algorithms like bcrypt, scrypt, or Argon2, plus a salt. Unlike encryption, hashing is not meant to be reversed.`,
+  encryption: `Encryption transforms data so it can be decrypted later with a key. It protects confidentiality for data in transit or at rest. Hashing is different because hashes are one-way and used for verification, especially passwords.`,
+  'rate limiting': `Rate limiting restricts how many requests a client can make in a period of time. It protects APIs from brute force attacks, scraping, and accidental overload. Common strategies use IP, user ID, route, and time window.`,
+  websocket: `WebSocket creates a persistent two-way connection between client and server. Unlike normal HTTP request-response, either side can send messages at any time. It is useful for chat, live notifications, dashboards, and multiplayer features.`,
+  'react router': `React Router handles client-side navigation in React. It maps URLs to components without a full page reload. Dynamic params read values from the path, nested routes render inside an Outlet, and navigation can happen through Link or programmatic navigate.`,
+  'props state': `Props are inputs passed from a parent component to a child. State is data owned by a component that can change over time. Props should be treated as read-only, while state is updated through its setter or state management logic.`,
+  'props drilling': `Props drilling means passing data through multiple layers of components that don't use it directly, just to reach a deeper child. For small cases it is fine, but for widely shared data I use Context or a state management library.`,
+  'controlled component': `A controlled component gets its value from React state and updates through onChange. This gives React full control over the form input, which makes validation, formatting, and conditional UI easier.`,
+  'pure component': `A pure component renders the same output for the same props and state. In React, memoization tools like React.memo can skip re-rendering pure function components when props have not changed.`,
+  'lazy loading': `Lazy loading delays loading code or resources until they are needed. In React, React.lazy with Suspense can split components into separate chunks, improving the initial load time.`,
+  ssr: `Server-Side Rendering generates HTML on the server before sending it to the browser. It can improve SEO and first contentful paint, but it adds server complexity and needs hydration on the client.`,
+  hydration: `Hydration is when React attaches event handlers and state to HTML that was already rendered on the server. The server markup and client render must match, otherwise hydration warnings or UI inconsistencies can happen.`,
+  'memory leak': `A memory leak happens when memory that is no longer needed is still referenced, so the garbage collector cannot free it. In JavaScript and Node, common causes include forgotten timers, event listeners, global caches, and closures holding large objects.`,
+  'garbage collection': `Garbage collection automatically frees memory for objects that are no longer reachable. JavaScript mainly uses reachability: if nothing can access an object from the roots, it can be collected. It reduces manual memory management but does not prevent leaks caused by lingering references.`,
+  'static dynamic memory': `Static memory is allocated with a known size and lifetime, while dynamic memory is allocated during runtime as needed. Dynamic allocation is flexible but must be managed carefully in languages with manual memory control; in JavaScript the garbage collector handles most cleanup.`,
+  'linear non linear': `Linear data structures store elements in sequence, such as arrays, linked lists, stacks, and queues. Non-linear structures store relationships in hierarchy or networks, such as trees and graphs. The choice depends on access patterns and relationships in the data.`,
+  matrix: `A matrix is a two-dimensional array arranged in rows and columns. It is used for grids, images, graphs, and dynamic programming tables. Access by row and column is O(1), but traversal usually visits every cell, so it is O(rows * columns).`,
+  string: `A string is a sequence of characters. Common operations include traversal, reversal, frequency counting, substring search, anagram checks, and palindrome checks. Many string problems become easier with two pointers, hash maps, or sliding windows.`,
+  palindrome: `A palindrome reads the same forward and backward. I usually check it with two pointers: one from the start and one from the end, moving inward while characters match. That gives O(n) time and O(1) extra space.`,
+  anagram: `Two strings are anagrams if they contain the same characters with the same frequencies. A frequency map solves it in O(n) time. For fixed lowercase English letters, an array of size 26 is enough.`,
+  'load factor': `Load factor in a hash table is the ratio of stored elements to bucket capacity. When it gets too high, collisions increase and performance drops. Hash tables resize and rehash to keep operations close to O(1).`,
+  'collision': `A hash collision happens when different keys map to the same bucket. Chaining stores multiple values in a bucket, often as a list. Open addressing searches for another empty slot using probing strategies like linear or quadratic probing.`,
+  'bfs dfs': `BFS explores a graph level by level using a queue. It finds the shortest path in an unweighted graph. DFS explores as deep as possible using recursion or a stack, and is useful for cycle detection, connected components, and topological-style traversals.`,
+  'dijkstra': `Dijkstra's algorithm finds the shortest path from a source to all reachable nodes in a graph with non-negative edge weights. It uses a priority queue to always expand the current cheapest node. With an adjacency list and heap, the complexity is usually O((V + E) log V).`,
+  'avl tree': `An AVL tree is a self-balancing Binary Search Tree. After insertions or deletions, it uses rotations to keep the height difference between left and right subtrees at most one. That keeps search, insert, and delete at O(log n).`,
+  'red black tree': `A Red-Black Tree is a self-balancing BST that uses color rules to keep height controlled. It is less strictly balanced than AVL, so inserts and deletes can be faster in practice, while still keeping O(log n) operations.`,
+  'priority queue': `A priority queue removes elements by priority instead of insertion order. It is commonly implemented with a heap. It is used in Dijkstra's algorithm, task scheduling, and finding top-k elements.`,
+});
+
 const ALIASES = [
   { re: /\bnode\.?js\b|\bwhat\s+is\s+node\b/i, key: 'nodejs' },
   { re: /\breact\.?js\b|\bwhat\s+is\s+react\b|\breact\b/i, key: 'react' },
   { re: /\bjavascript\b|\bwhat\s+is\s+js\b|(?<![.\w])js(?![.\w])/i, key: 'javascript' },
+  { re: /\bencapsulation\b/i, key: 'encapsulation' },
+  { re: /\babstraction\b/i, key: 'abstraction' },
+  { re: /\binheritance\b/i, key: 'inheritance' },
+  { re: /\bpolymorphism\b/i, key: 'polymorphism' },
+  { re: /\bclass(es)?\b|\bclass\s+object\b/i, key: 'class' },
+  { re: /\bconstructor\b/i, key: 'constructor' },
+  { re: /\bobject\b|\bobjects\b/i, key: 'object' },
+  { re: /\bstatically\b|\bdynamically\s+typed|\bstatic\s+typing|\bdynamic\s+typing/i, key: 'static dynamic typing' },
+  { re: /\btype\s*coercion\b|\bimplicit\s*coercion\b|\btype\s*casting\b/i, key: 'type coercion' },
+  { re: /\btruthy\b|\bfalsy\b|\bfalse\s*values?\b/i, key: 'truthy falsy' },
+  { re: /\bspread\b|\brest\s*operator\b|\.\.\./i, key: 'spread rest' },
+  { re: /\boptional\s*chaining\b|\?\./i, key: 'optional chaining' },
+  { re: /\bnullish\b|\?\?/i, key: 'nullish coalescing' },
+  { re: /\bmap\b.*\bfilter\b|\bfilter\b.*\breduce\b|\breduce\b|\barray\s*methods?\b/i, key: 'map filter reduce' },
+  { re: /\bslice\b|\bsplice\b/i, key: 'slice splice' },
+  { re: /\bset\b.*\bmap\b|\bmap\b.*\bset\b|\bweakmap\b|\bweakset\b/i, key: 'set map' },
+  { re: /\bjson\b|\bstringify\b|\bparse\b/i, key: 'json' },
+  { re: /\bdestructur/i, key: 'destructuring' },
+  { re: /\bimmutab|\bfreeze\b|\bseal\b/i, key: 'immutability' },
+  { re: /\biife\b|immediately\s*invoked/i, key: 'iife' },
+  { re: /\bmemoization\b|\bmemoisation\b/i, key: 'memoization' },
+  { re: /\bcallback\b|\bcallback\s*hell\b/i, key: 'callback' },
+  { re: /\bpromise\.all\b|\ballsettled\b|\bpromise\.race\b|\bpromise\.any\b/i, key: 'promise all' },
+  { re: /\bfetch\b|\baxios\b|\binterceptor/i, key: 'fetch axios' },
+  { re: /\bdom\b|\bdocument\b|\bwindow\b|\bbom\b/i, key: 'dom' },
+  { re: /\bevent\s*propagation\b|\bbubbling\b|\bcapturing\b|\bstoppropagation\b/i, key: 'event propagation' },
+  { re: /\bevent\s*delegation\b/i, key: 'event delegation' },
+  { re: /\blocalstorage\b|\bsessionstorage\b|\bbrowser\s*storage\b/i, key: 'storage' },
+  { re: /\bxss\b|cross.?site\s*scripting/i, key: 'xss' },
+  { re: /\bcsrf\b/i, key: 'csrf' },
+  { re: /\brest\s*api\b|\brest\b|\bapi\s*design\b/i, key: 'rest' },
+  { re: /\bhttp\s*methods?\b|\bget\b.*\bpost\b|\bput\b.*\bpatch\b|\boptions\b/i, key: 'http methods' },
+  { re: /\bstatus\s*codes?\b|\b401\b|\b403\b|\b404\b|\b500\b/i, key: 'status codes' },
+  { re: /\bquery\s*params?\b|\bpath\s*params?\b|\bparams\b/i, key: 'query params' },
+  { re: /\bmongoose\b|\bodm\b/i, key: 'mongoose' },
+  { re: /\bmongodb\b|\bmongo\b|\bcollection\b|\bdocument\b/i, key: 'mongodb' },
+  { re: /\baggregation\b|\bpipeline\b|\blookup\b|\bgroup\b/i, key: 'aggregation' },
+  { re: /\bindex(es)?\b|\bindexing\b/i, key: 'index' },
+  { re: /\bauthentication\b|\blogin\b|\btoken\b/i, key: 'authentication' },
+  { re: /\bauthorization\b|\bpermission\b|\baccess\s*control\b/i, key: 'authorization' },
+  { re: /\bcookie\b|\bhttponly\b|\bsamesite\b/i, key: 'cookie' },
+  { re: /\bsession\b|\bsessions\b/i, key: 'session' },
+  { re: /\bhashing\b|\bcrypt\b|\bbcrypt\b|\bsalt\b/i, key: 'hashing' },
+  { re: /\bencryption\b|\bdecrypt\b|\bssl\b|\btls\b|\bhttps\b/i, key: 'encryption' },
+  { re: /\brate\s*limit/i, key: 'rate limiting' },
+  { re: /\bwebsocket\b|\bsocket\b|\breal.?time\b/i, key: 'websocket' },
+  { re: /\breact\s*router\b|\boutlet\b|\bnavigate\b|\brouting\b/i, key: 'react router' },
+  { re: /\bprops\b.*\bstate\b|\bstate\b.*\bprops\b|\bprops\b|\bstate\b/i, key: 'props state' },
+  { re: /\bprops\s*drilling\b/i, key: 'props drilling' },
+  { re: /\bcontrolled\s*component\b/i, key: 'controlled component' },
+  { re: /\bpure\s*component\b|\breact\.memo\b/i, key: 'pure component' },
+  { re: /\blazy\s*loading\b|\bcode\s*splitting\b/i, key: 'lazy loading' },
+  { re: /\bssr\b|\bserver.?side\s*rendering\b/i, key: 'ssr' },
+  { re: /\bhydration\b/i, key: 'hydration' },
+  { re: /\bmemory\s*leak\b/i, key: 'memory leak' },
+  { re: /\bgarbage\s*collection\b|\bgarbage\s*collector\b/i, key: 'garbage collection' },
+  { re: /\bstatic\s*memory\b|\bdynamic\s*memory\b|\bmemory\s*allocation\b/i, key: 'static dynamic memory' },
+  { re: /\blinear\b.*\bnon.?linear\b|\bnon.?linear\b.*\blinear\b/i, key: 'linear non linear' },
+  { re: /\bmatrix\b|\b2d\s*array\b/i, key: 'matrix' },
+  { re: /\bstring\b|\bchar(acter)?\b|\butf-?8\b|\bascii\b/i, key: 'string' },
+  { re: /\bpalindrome\b/i, key: 'palindrome' },
+  { re: /\banagram\b/i, key: 'anagram' },
+  { re: /\bload\s*factor\b/i, key: 'load factor' },
+  { re: /\bcollision\b|\bquadratic\s*probing\b|\blinear\s*probing\b/i, key: 'collision' },
+  { re: /\bbfs\b|\bdfs\b|\bbreadth\b|\bdepth\s*first\b/i, key: 'bfs dfs' },
+  { re: /\bdijkstra\b/i, key: 'dijkstra' },
+  { re: /\bavl\b/i, key: 'avl tree' },
+  { re: /\bred.?black\b/i, key: 'red black tree' },
+  { re: /\bpriority\s*queue\b/i, key: 'priority queue' },
   { re: /\buse\s*strict\b|\bstrict\s*mode\b/i, key: 'use strict' },
   { re: /\btdz\b|temporal\s*dead\s*zone/i, key: 'tdz' },
   { re: /\bhoist(ing)?\b/i, key: 'hoisting' },
@@ -250,49 +391,51 @@ function difficultyFromQuestion(q, topic) {
 function topicFallback(subject, topic, question) {
   const t = topic.toLowerCase();
   const q = question.toLowerCase();
-  const label = {
-    javascript: 'JavaScript',
-    react: 'React',
-    nodejs: 'Node.js',
-    dsa: 'DSA',
-  }[subject] || subject;
+  const cleanedQuestion = question
+    .replace(/\?$/, '')
+    .replace(/\s*[-–—]\s*(need clarity|clarity needed|learn more|check deeper|practical)$/i, '')
+    .trim();
 
   if (/difference|vs\.?|versus|v\/s/.test(q)) {
-    return `${question.replace(/\?$/, '')} comes down to behavior and use-case. Under ${topic}, I define each side clearly, then contrast syntax or semantics, performance, and when I pick one over the other. I also call out one common pitfall so the distinction stays practical.`;
+    return `${cleanedQuestion} is a comparison of two related ideas. The correct way to understand it is by separating meaning, behavior, and use-case: one side solves a specific problem or behaves in one way, while the other has different rules, trade-offs, or runtime behavior. In ${topic}, the practical difference matters because choosing the wrong option can affect correctness, readability, performance, or maintainability.`;
   }
 
   if (/what is|define|explain|brief/.test(q)) {
-    return `${question.replace(/\?$/, '')} is a core idea in ${topic}. In short, I define it in one clear line, explain how it works in ${label}, and connect it to a real situation where I'd actually use it. That keeps the answer concrete instead of just a textbook definition.`;
+    return `${cleanedQuestion} refers to a core concept in ${topic}. It describes a specific behavior, structure, or pattern used to solve a problem in that area. The important points are what it does, how it behaves at runtime, where it is used, and what limitation or trade-off it has. A clear answer should connect the definition with a small real use-case instead of only naming the term.`;
   }
 
   if (/how (do|does|to)|working|work/.test(q)) {
-    return `For ${question.replace(/\?$/, '')}, I walk through the flow step by step: what triggers it, what happens internally, and what comes out. In ${topic}, the important part is the mechanism — once that is clear, the details are easier to remember and apply.`;
+    return `${cleanedQuestion} works as a sequence of steps. First there is an input or trigger, then the underlying mechanism processes it, and finally it produces an output, state change, or side effect. In ${topic}, the important part is understanding the order of operations and the conditions that change the result.`;
   }
 
   if (/time complexity|space complexity|big ?o|complexity/.test(q) || /complexity|asymptotic/.test(t)) {
-    return `I describe the complexity with Big-O, and I separate best, average, and worst case when they differ. Then I explain why that bound exists — loops, recursion depth, tree height, or hashing — and mention space if it matters. I also say which inputs cause the worst case.`;
+    return `The complexity depends on how the input size grows and how many operations are performed. Constant operations are O(1), single scans are O(n), nested scans are often O(n²), divide-and-conquer patterns are often O(log n) or O(n log n), and recursion also depends on depth and branching. Space complexity counts extra memory such as arrays, maps, recursion stack, or auxiliary structures.`;
   }
 
   if (/implement|write|program|code|practical|leetcode|workout/.test(q)) {
-    return `For this problem in ${topic}, I first clarify constraints and edge cases. Then I outline a brute-force approach, improve it to a better one, state the time and space complexity, and finally implement it cleanly while handling empty input, duplicates, and boundary conditions.`;
+    return `The solution starts by identifying the input, output, constraints, and edge cases. A simple brute-force version checks correctness first; then it can be improved using the pattern that fits the problem, such as two pointers, hashing, recursion, sorting, BFS/DFS, or dynamic programming. The final solution should handle empty input, duplicates, boundary indexes, and should state time and space complexity.`;
   }
 
   if (/advantage|disadvantage|pros|cons|why use|why do we/.test(q)) {
-    return `I start with what ${question.replace(/\?$/, '')} solves well, then the limitations — performance, complexity, or runtime constraints — and finish with when I'd choose an alternative. That balance shows I understand trade-offs, not just the happy path. Context here is ${topic}.`;
+    return `${cleanedQuestion} is useful when it solves the problem more clearly, safely, or efficiently than the alternative. The advantage is usually better structure, performance, maintainability, or developer experience. The disadvantage is the extra complexity, runtime cost, memory use, or the chance of using it where a simpler approach is enough.`;
   }
 
   if (/type|types of|classification|kinds of/.test(q)) {
-    return `I group the main types under ${topic}, give each one a one-line meaning, and add a quick example of when I'd pick it. A clear taxonomy is usually what matters most for this kind of question.`;
+    return `The main types in ${topic} are classified by how they store data, how they behave, or what problem they solve. Each type has different operations, strengths, and limitations. The best way to choose between them is to compare access time, insertion/deletion cost, memory usage, ordering, and whether relationships between items matter.`;
   }
 
-  const subjectHint = {
-    javascript: 'In JavaScript I connect it to scope, types, the async model, or the runtime.',
-    react: 'In React I connect it to rendering, state, component design, or one-way data flow.',
-    nodejs: 'In Node.js I connect it to the event loop, non-blocking I/O, modules, or middleware.',
-    dsa: 'In DSA I connect it to the operations I need, the complexity, and which structure or algorithm fits.',
-  }[subject] || 'I keep the explanation clear and tied to a real use-case.';
+  const topicAnswer = {
+    javascript:
+      'In JavaScript this is connected to runtime behavior, data types, scope, objects, functions, asynchronous execution, or browser APIs. The key is to understand what the engine does, what value is produced, and which edge cases can create unexpected output.',
+    react:
+      'In React this is connected to component rendering, props, state, hooks, routing, global state, or performance. The key is to understand how data flows through components and how React decides when to render and update the UI.',
+    nodejs:
+      'In Node.js this is connected to the runtime, event loop, non-blocking I/O, modules, Express middleware, HTTP handling, security, or database communication. The key is to understand request flow and how asynchronous work is handled without blocking the main thread.',
+    dsa:
+      'In DSA this is connected to choosing the right structure or algorithm for the required operations. The key is to compare time complexity, space complexity, edge cases, and whether the data is ordered, hierarchical, graph-like, or needs fast lookup.',
+  }[subject];
 
-  return `${question.replace(/\?$/, '')} sits under ${topic}. I give a concise definition, explain the important mechanics, and show where I'd use it. ${subjectHint}`;
+  return `${cleanedQuestion} is part of ${topic}. ${topicAnswer}`;
 }
 
 function generateAnswer(question, subject, topic) {
@@ -300,10 +443,10 @@ function generateAnswer(question, subject, topic) {
   if (hit) {
     let core = hit.answer;
     if (/difference|vs\.?|versus/.test(question.toLowerCase())) {
-      core += ` When the question is comparative, I also state when I choose one option over the other.`;
+      core += ` The practical choice depends on correctness, readability, and the specific use-case.`;
     }
     if (/implement|write a|code/.test(question.toLowerCase())) {
-      core += ` If I need to code it, I explain the approach first, then implement with edge cases and state the complexity.`;
+      core += ` The implementation should handle edge cases and include time and space complexity.`;
     }
     return core;
   }

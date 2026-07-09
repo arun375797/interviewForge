@@ -20,9 +20,13 @@ const questionSchema = new mongoose.Schema(
       index: true,
     },
     tags: [{ type: String }],
+    codeOnly: { type: Boolean, default: false, index: true },
     bookmarked: { type: Boolean, default: false, index: true },
     mastered: { type: Boolean, default: false, index: true },
     learned: { type: Boolean, default: false, index: true },
+    codeCompleted: { type: Boolean, default: false, index: true },
+    savedCode: { type: String, default: '', select: false },
+    savedCodeUpdatedAt: { type: Date },
     notes: { type: String, default: '' },
     order: { type: Number, default: 0 },
   },
@@ -31,5 +35,6 @@ const questionSchema = new mongoose.Schema(
 
 questionSchema.index({ question: 'text', answer: 'text', topic: 'text', tags: 'text' });
 questionSchema.index({ subject: 1, topic: 1, order: 1 });
+questionSchema.index({ subject: 1, codeCompleted: 1, topicOrder: 1, order: 1 });
 
 module.exports = mongoose.model('Question', questionSchema);

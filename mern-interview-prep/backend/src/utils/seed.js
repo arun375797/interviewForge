@@ -56,6 +56,8 @@ async function buildAndInsert() {
           bookmarked: false,
           mastered: false,
           learned: false,
+          codeCompleted: false,
+          savedCode: '',
           notes: '',
           order: idx + 1,
         });
