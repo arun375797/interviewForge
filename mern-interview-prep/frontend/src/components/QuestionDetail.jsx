@@ -180,7 +180,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
 
               <div className="rounded-2xl border border-line bg-paper/70 p-4 sm:p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                  How I&apos;d answer in an interview
+                  Answer
                 </p>
                 <div className="mt-3 whitespace-pre-wrap text-[15px] leading-relaxed text-ink-soft">
                   {question.answer}

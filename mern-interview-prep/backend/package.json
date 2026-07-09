@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "seed": "node src/utils/seed.js"
+    "seed": "node src/utils/seed.js",
+    "refresh-answers": "node src/utils/refreshAnswers.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

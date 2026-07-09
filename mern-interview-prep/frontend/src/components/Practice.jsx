@@ -124,7 +124,7 @@ export default function Practice() {
           {reveal && (
             <div className="animate-fade mt-6 rounded-2xl border border-line bg-paper/80 p-5">
               <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                Interview-style answer
+                Answer
               </p>
               <div className="mt-3 whitespace-pre-wrap text-[15px] leading-relaxed">
                 {question.answer}
