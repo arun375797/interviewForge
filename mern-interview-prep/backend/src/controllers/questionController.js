@@ -1,5 +1,6 @@
 const Question = require('../models/Question');
 const Subject = require('../models/Subject');
+const mongoose = require('mongoose');
 const {
   generateAnswer,
   generateKeyPoints,
@@ -547,6 +548,40 @@ exports.getRandomQuestion = async (req, res) => {
     const [item] = await Question.aggregate([{ $match: filter }, { $sample: { size: 1 } }]);
     if (!item) return res.status(404).json({ message: 'No questions found' });
     res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getRandomBatch = async (req, res) => {
+  try {
+    const filter = {};
+    Object.assign(filter, PUBLIC_QUESTION_FILTER);
+    if (req.query.subject) filter.subject = req.query.subject;
+    if (req.query.topic) filter.topic = req.query.topic;
+    if (req.query.difficulty) filter.difficulty = req.query.difficulty;
+
+    let count = parseInt(req.query.count, 10);
+    if (Number.isNaN(count) || count < 1) count = 10;
+    count = Math.min(count, 200);
+
+    const excludeRaw = req.query.exclude;
+    if (excludeRaw) {
+      const ids = String(excludeRaw)
+        .split(',')
+        .map((id) => id.trim())
+        .filter(Boolean);
+      if (ids.length) {
+        const objectIds = ids
+          .filter((id) => mongoose.Types.ObjectId.isValid(id))
+          .map((id) => new mongoose.Types.ObjectId(id));
+        if (objectIds.length) filter._id = { $nin: objectIds };
+      }
+    }
+
+    const items = await Question.aggregate([{ $match: filter }, { $sample: { size: count } }]);
+    if (!items.length) return res.status(404).json({ message: 'No questions found' });
+    res.json({ items, count: items.length });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

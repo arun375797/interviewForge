@@ -14,6 +14,7 @@ router.get('/code/:id', ctrl.getCodeQuestionById);
 router.get('/code/:id/saved-code', ctrl.getSavedCode);
 router.patch('/code/:id/completed', ctrl.toggleCodeCompleted);
 router.put('/code/:id/save', ctrl.saveCode);
+router.get('/random/batch', ctrl.getRandomBatch);
 router.get('/random', ctrl.getRandomQuestion);
 router.get('/', ctrl.getQuestions);
 router.get('/:id', ctrl.getQuestionById);

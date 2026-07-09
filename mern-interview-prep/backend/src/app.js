@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const questionRoutes = require('./routes/questions');
 const authRoutes = require('./routes/auth');
+const planRoutes = require('./routes/plans');
 const { ensureSeeded } = require('./utils/seed');
 const { ensureAdminUser, protect } = require('./controllers/authController');
 
@@ -101,10 +102,12 @@ function createApp() {
   // Canonical routes
   app.use('/api/auth', authRoutes);
   app.use('/api/questions', protect, questionRoutes);
+  app.use('/api/plans', protect, planRoutes);
 
   // Aliases if VITE_API_URL was set without /api
   app.use('/auth', authRoutes);
   app.use('/questions', protect, questionRoutes);
+  app.use('/plans', protect, planRoutes);
 
   if (isProd && !onVercel && process.env.SERVE_FRONTEND === 'true') {
     const frontendDist = path.join(__dirname, '../../frontend/dist');

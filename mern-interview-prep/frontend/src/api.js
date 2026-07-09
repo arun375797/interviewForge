@@ -75,6 +75,12 @@ export const api = {
     ).toString();
     return request(`/questions/random${q ? `?${q}` : ''}`);
   },
+  getRandomBatch: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/random/batch${q ? `?${q}` : ''}`);
+  },
   getQuestions: (params = {}) => {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
@@ -119,6 +125,14 @@ export const api = {
   saveCode: (id, code) =>
     request(`/questions/code/${id}/save`, { method: 'PUT', body: JSON.stringify({ code }) }),
   getSavedCode: (id) => request(`/questions/code/${id}/saved-code`),
+  getActivePlans: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/plans/active${q ? `?${q}` : ''}`);
+  },
+  startPlan: (body) => request('/plans/start', { method: 'POST', body: JSON.stringify(body) }),
+  disablePlan: (id) => request(`/plans/${id}/disable`, { method: 'PATCH' }),
 };
 
 export const SUBJECT_META = {
