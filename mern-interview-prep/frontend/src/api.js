@@ -1,7 +1,17 @@
 const TOKEN_KEY = 'interviewforge_token';
 const USER_KEY = 'interviewforge_user';
 
-const API_BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
+function resolveApiBase() {
+  let base = (import.meta.env.VITE_API_URL || '/api').trim().replace(/\/$/, '');
+  // If someone set https://xxx.vercel.app without /api, append it
+  if (/^https?:\/\//i.test(base) && !/\/api$/i.test(base)) {
+    base = `${base}/api`;
+  }
+  if (!base) base = '/api';
+  return base;
+}
+
+const API_BASE = resolveApiBase();
 
 export function getStoredToken() {
   return localStorage.getItem(TOKEN_KEY);

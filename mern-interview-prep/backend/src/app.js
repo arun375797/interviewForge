@@ -9,43 +9,59 @@ const authRoutes = require('./routes/auth');
 const { ensureSeeded } = require('./utils/seed');
 const { ensureAdminUser, protect } = require('./controllers/authController');
 
+function parseOrigins() {
+  return (process.env.CLIENT_URL || '')
+    .split(',')
+    .map((s) => s.trim().replace(/\/$/, ''))
+    .filter(Boolean);
+}
+
 function createApp() {
   const app = express();
   const isProd = process.env.NODE_ENV === 'production' || process.env.SERVE_FRONTEND === 'true';
   const onVercel = Boolean(process.env.VERCEL);
+  const allowedOrigins = parseOrigins();
 
-  const allowedOrigins = (process.env.CLIENT_URL || '')
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean);
-
+  // CORS first — preflight must succeed even if DB is down
   app.use(
     cors({
-      origin: (origin, cb) => {
+      origin(origin, cb) {
         if (!origin) return cb(null, true);
         if (!allowedOrigins.length) return cb(null, true);
-        if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+        if (allowedOrigins.includes('*')) return cb(null, true);
+        if (allowedOrigins.includes(origin)) return cb(null, true);
+        // Allow Vercel preview URLs if any CLIENT_URL is a vercel.app host
+        if (
+          origin.endsWith('.vercel.app') &&
+          allowedOrigins.some((o) => o.includes('vercel.app'))
+        ) {
           return cb(null, true);
         }
+        console.warn(`CORS blocked origin: ${origin}; allowed: ${allowedOrigins.join(', ')}`);
         return cb(null, false);
       },
       credentials: true,
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
     })
   );
 
-  app.use(express.json({ limit: '2mb' }));
-  app.use(morgan(isProd ? 'combined' : 'dev'));
+  app.options('*', cors());
 
-  // Ensure DB + admin on each serverless cold start / request path
+  app.use(express.json({ limit: '2mb' }));
+  if (!onVercel) {
+    app.use(morgan(isProd ? 'combined' : 'dev'));
+  }
+
+  // Skip heavy boot for CORS preflight
   let bootPromise = null;
   app.use(async (req, res, next) => {
+    if (req.method === 'OPTIONS') return next();
     try {
       if (!bootPromise) {
         bootPromise = (async () => {
           await connectDB();
           await ensureAdminUser();
-          // Full question seed is too heavy for Vercel serverless timeouts.
-          // Run `npm run seed` locally against Atlas once, or set FORCE_SEED=true on a long-timeout host.
           const skipSeed =
             process.env.SKIP_AUTO_SEED === 'true' ||
             (onVercel && process.env.FORCE_SEED !== 'true');
@@ -64,6 +80,14 @@ function createApp() {
     }
   });
 
+  app.get('/', (_req, res) => {
+    res.json({
+      ok: true,
+      service: 'mern-interview-prep',
+      message: 'API is running. Use /api/health, /api/auth/login, /api/questions',
+    });
+  });
+
   app.get('/api/health', (_req, res) => {
     res.json({
       ok: true,
@@ -74,11 +98,14 @@ function createApp() {
     });
   });
 
+  // Canonical routes
   app.use('/api/auth', authRoutes);
   app.use('/api/questions', protect, questionRoutes);
 
-  // Serve React build only when explicitly enabled (Render single-service mode)
-  // Never do this on Vercel API project — frontend is a separate project.
+  // Aliases if VITE_API_URL was set without /api
+  app.use('/auth', authRoutes);
+  app.use('/questions', protect, questionRoutes);
+
   if (isProd && !onVercel && process.env.SERVE_FRONTEND === 'true') {
     const frontendDist = path.join(__dirname, '../../frontend/dist');
     app.use(
@@ -95,7 +122,7 @@ function createApp() {
 
     app.get('*', (req, res, next) => {
       if (req.method !== 'GET' && req.method !== 'HEAD') return next();
-      if (req.path.startsWith('/api')) {
+      if (req.path.startsWith('/api') || req.path.startsWith('/auth') || req.path.startsWith('/questions')) {
         return res.status(404).json({ message: 'API route not found' });
       }
       res.sendFile(path.join(frontendDist, 'index.html'), (err) => {
@@ -103,6 +130,14 @@ function createApp() {
       });
     });
   }
+
+  app.use((req, res) => {
+    res.status(404).json({
+      message: 'API route not found',
+      path: req.path,
+      hint: 'Use /api/auth/login or /api/questions',
+    });
+  });
 
   app.use((err, _req, res, _next) => {
     console.error(err);
