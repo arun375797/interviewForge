@@ -27,7 +27,7 @@ export default function Home({ subjects, stats, loading }) {
           </p>
           <div className="inline-flex rounded-2xl bg-white/95 p-3 shadow-xl shadow-ink/20 ring-1 ring-white/50">
             <img
-              src="/thinkmern-logo.png"
+              src="/thinkmern-logo.svg"
               alt="thinkMern"
               className="h-auto w-full max-w-[18rem] object-contain sm:max-w-sm md:max-w-md"
             />

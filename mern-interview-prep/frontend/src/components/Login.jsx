@@ -46,7 +46,7 @@ export default function Login() {
       <div className="relative w-full max-w-md animate-rise">
         <div className="mb-8 text-center">
           <img
-            src="/thinkmern-logo.png"
+            src="/thinkmern-logo.svg"
             alt="thinkMern"
             className="mx-auto mb-4 h-auto w-full max-w-xs object-contain"
           />

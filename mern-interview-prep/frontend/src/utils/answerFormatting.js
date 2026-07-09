@@ -1,5 +1,7 @@
 const INLINE_FORMAT_TAG_RE = /<\/?(?:mark|u)>/gi;
 const FORMAT_TOKEN_RE = /(<\/?mark>|<\/?u>)/gi;
+const LEGACY_BULLET_RE = /(^|\n)- /g;
+const ROUND_BULLET = '$1• ';
 
 export function stripAnswerFormatting(text = '') {
   return typeof text === 'string' ? text.replace(INLINE_FORMAT_TAG_RE, '') : '';
@@ -31,7 +33,7 @@ export function getFormattedAnswerParts(text = '') {
     if (!token) return;
 
     parts.push({
-      text: token,
+      text: token.replace(LEGACY_BULLET_RE, ROUND_BULLET),
       mark: state.mark,
       underline: state.underline,
     });

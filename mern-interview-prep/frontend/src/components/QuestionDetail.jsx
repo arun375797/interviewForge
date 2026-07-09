@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   X,
@@ -14,29 +14,47 @@ import { api } from '../api';
 import AnswerContent from './AnswerContent';
 import RichAnswerEditor from './RichAnswerEditor';
 
-export default function QuestionDetail({ question, onClose, onUpdated, onDeleted }) {
-  const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState({
+function formFromQuestion(question) {
+  return {
     question: question.question,
     answer: question.answer,
     topic: question.topic,
     difficulty: question.difficulty,
-    keyPoints: question.keyPoints || [],
+    keyPoints: [...(question.keyPoints || [])],
     notes: question.notes || '',
-  });
+  };
+}
+
+export default function QuestionDetail({ question, onClose, onUpdated, onDeleted }) {
+  const [editing, setEditing] = useState(false);
+  const [form, setForm] = useState(() => formFromQuestion(question));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  const resetDraft = useCallback(() => {
+    setForm(formFromQuestion(question));
+    setError('');
+    setConfirmDelete(false);
+  }, [question]);
+
+  const startEditing = useCallback(() => {
+    resetDraft();
+    setEditing(true);
+  }, [resetDraft]);
+
+  const cancelEditing = useCallback(() => {
+    resetDraft();
+    setEditing(false);
+  }, [resetDraft]);
+
+  const closeDetail = useCallback(() => {
+    resetDraft();
+    onClose();
+  }, [onClose, resetDraft]);
+
   useEffect(() => {
-    setForm({
-      question: question.question,
-      answer: question.answer,
-      topic: question.topic,
-      difficulty: question.difficulty,
-      keyPoints: question.keyPoints || [],
-      notes: question.notes || '',
-    });
+    setForm(formFromQuestion(question));
     setEditing(false);
     setConfirmDelete(false);
     setError('');
@@ -44,7 +62,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') closeDetail();
     };
     window.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
@@ -52,7 +70,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [onClose]);
+  }, [closeDetail]);
 
   const save = async () => {
     setSaving(true);
@@ -102,7 +120,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
         type="button"
         aria-label="Close overlay"
         className="absolute inset-0 bg-ink/45 backdrop-blur-[2px]"
-        onClick={onClose}
+        onClick={closeDetail}
       />
       <div className="animate-rise relative z-10 flex h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-line bg-[#fffcf6] shadow-2xl sm:h-auto sm:max-h-[92dvh] sm:rounded-3xl">
         <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
@@ -116,7 +134,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={closeDetail}
             className="rounded-lg border border-line p-2 hover:bg-paper-2"
           >
             <X className="h-4 w-4" />
@@ -185,8 +203,9 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                   </div>
                   <div className="space-y-2">
                     {(form.keyPoints || []).map((point, index) => (
-                      <div key={index} className="flex flex-col gap-2 sm:flex-row">
-                        <input
+                      <div key={index} className="flex flex-col gap-2">
+                        <textarea
+                          rows={3}
                           value={point}
                           onChange={(e) =>
                             setForm((f) => ({
@@ -197,7 +216,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                             }))
                           }
                           placeholder="Key point"
-                          className="min-w-0 flex-1 rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                          className="min-h-24 w-full resize-y rounded-xl border border-line bg-paper px-3 py-2 leading-6 outline-none focus:border-accent"
                         />
                         <button
                           type="button"
@@ -207,7 +226,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                               keyPoints: (f.keyPoints || []).filter((_, i) => i !== index),
                             }))
                           }
-                          className="rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700 hover:bg-rose-50"
+                          className="self-start rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700 hover:bg-rose-50"
                         >
                           Remove
                         </button>
@@ -288,7 +307,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
               </button>
               <button
                 type="button"
-                onClick={() => setEditing(false)}
+                onClick={cancelEditing}
                 className="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2 text-sm"
               >
                 <RotateCcw className="h-4 w-4" />
@@ -331,7 +350,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
               </button>
               <button
                 type="button"
-                onClick={() => setEditing(true)}
+                onClick={startEditing}
                 className="inline-flex items-center gap-2 rounded-xl border border-line px-3 py-2 text-sm"
               >
                 <Pencil className="h-4 w-4" />

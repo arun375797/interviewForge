@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { answerToEditableHtml, stripAnswerFormatting } from '../utils/answerFormatting';
 
 const BLOCK_TAGS = new Set(['div', 'p', 'li']);
+const BULLET_PREFIX = '• ';
+const LEGACY_BULLET_PREFIX = '- ';
 
 function wrapText(text, state) {
   if (!text) return '';
@@ -70,6 +72,103 @@ function answerFromParts(parts) {
     .join('')
     .replace(/\n{3,}/g, '\n\n')
     .replace(/\n$/, '');
+}
+
+function partsToLines(parts) {
+  const lines = [[]];
+
+  for (const part of parts) {
+    const chunks = part.text.split('\n');
+    chunks.forEach((chunk, index) => {
+      if (chunk) {
+        lines.at(-1).push({ ...part, text: chunk });
+      }
+      if (index < chunks.length - 1) {
+        lines.push([]);
+      }
+    });
+  }
+
+  return lines;
+}
+
+function linesToParts(lines) {
+  return lines.flatMap((line, index) => {
+    const next = index < lines.length - 1 ? [{ text: '\n', mark: false, underline: false }] : [];
+    return [...line, ...next];
+  });
+}
+
+function lineText(line) {
+  return line.map((part) => part.text).join('');
+}
+
+function removeLeadingChars(line, count) {
+  let remaining = count;
+  const nextLine = [];
+
+  for (const part of line) {
+    if (remaining <= 0) {
+      nextLine.push(part);
+      continue;
+    }
+
+    if (part.text.length <= remaining) {
+      remaining -= part.text.length;
+      continue;
+    }
+
+    nextLine.push({ ...part, text: part.text.slice(remaining) });
+    remaining = 0;
+  }
+
+  return nextLine;
+}
+
+function bulletPrefixForLine(line) {
+  const text = lineText(line);
+  if (text.startsWith(BULLET_PREFIX)) return BULLET_PREFIX;
+  if (text.startsWith(LEGACY_BULLET_PREFIX)) return LEGACY_BULLET_PREFIX;
+  return '';
+}
+
+function getSelectedLineIndexes(lines, from, to) {
+  let cursor = 0;
+  let first = -1;
+  let last = -1;
+
+  lines.forEach((line, index) => {
+    const start = cursor;
+    const end = start + lineText(line).length;
+    const selected = from === to ? from >= start && from <= end : from <= end && to >= start;
+
+    if (selected) {
+      if (first === -1) first = index;
+      last = index;
+    }
+
+    cursor = end + 1;
+  });
+
+  if (first === -1) return [0, 0];
+  return [first, last];
+}
+
+function toggleBulletLines(parts, from, to) {
+  const lines = partsToLines(parts);
+  const [first, last] = getSelectedLineIndexes(lines, from, to);
+  const selectedLines = lines
+    .slice(first, last + 1)
+    .filter((line) => lineText(line).trim());
+  const shouldRemove = selectedLines.length > 0 && selectedLines.every((line) => bulletPrefixForLine(line));
+
+  const nextLines = lines.map((line, index) => {
+    if (index < first || index > last || !lineText(line).trim()) return line;
+    if (shouldRemove) return removeLeadingChars(line, bulletPrefixForLine(line).length);
+    return [{ text: BULLET_PREFIX, mark: false, underline: false }, ...line];
+  });
+
+  return linesToParts(nextLines);
 }
 
 function serializeEditor(root) {
@@ -199,6 +298,29 @@ export default function RichAnswerEditor({ value, onChange, rows = 10, placehold
     editor.focus();
   };
 
+  const toggleBullets = () => {
+    const editor = editorRef.current;
+    const selection = window.getSelection();
+    if (!editor || !selection?.rangeCount) return;
+
+    const range = selection.getRangeAt(0);
+    if (!editor.contains(range.commonAncestorContainer)) {
+      editor.focus();
+      return;
+    }
+
+    const start = offsetWithin(editor, range.startContainer, range.startOffset);
+    const end = offsetWithin(editor, range.endContainer, range.endOffset);
+    const [from, to] = start < end ? [start, end] : [end, start];
+    const next = answerFromParts(toggleBulletLines(partsFromEditor(editor), from, to));
+
+    lastValueRef.current = next;
+    setIsEmpty(!stripAnswerFormatting(next).trim());
+    onChange(next);
+    editor.innerHTML = answerToEditableHtml(next);
+    editor.focus();
+  };
+
   const pastePlainText = (event) => {
     event.preventDefault();
     const text = event.clipboardData.getData('text/plain');
@@ -225,6 +347,14 @@ export default function RichAnswerEditor({ value, onChange, rows = 10, placehold
           className="rounded-lg border border-line px-3 py-1.5 text-xs font-semibold underline decoration-accent decoration-2 underline-offset-4 hover:bg-paper-2"
         >
           Underline
+        </button>
+        <button
+          type="button"
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={toggleBullets}
+          className="rounded-lg border border-line px-3 py-1.5 text-xs font-semibold hover:bg-paper-2"
+        >
+          • Bullet
         </button>
         <span className="w-full text-xs text-muted sm:w-auto">Select text, then apply formatting.</span>
       </div>

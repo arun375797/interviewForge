@@ -49,7 +49,7 @@ export default function Layout({ children }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:gap-3 sm:px-6">
           <Link to="/" className="group flex min-w-0 flex-1 items-center lg:flex-none">
             <img
-              src="/thinkmern-logo.png"
+              src="/thinkmern-logo.svg"
               alt="thinkMern"
               className="h-9 w-auto max-w-[10.5rem] shrink-0 object-contain transition group-hover:scale-[1.02] sm:h-10 sm:max-w-[12.5rem] lg:max-w-[9.5rem] xl:max-w-[12.5rem]"
             />

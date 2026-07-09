@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /add
+Disallow: /bookmarks
+Disallow: /plan
+Disallow: /login
+
+Sitemap: https://interviewforge.vercel.app/sitemap.xml

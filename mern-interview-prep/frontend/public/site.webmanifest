@@ -1,0 +1,17 @@
+{
+  "name": "thinkMern - MERN Interview Prep",
+  "short_name": "thinkMern",
+  "description": "Topic-wise MERN interview preparation for JavaScript, React, Node.js, DSA, coding practice, and mock interviews.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3eb",
+  "theme_color": "#0C1222",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
