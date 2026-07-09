@@ -16,16 +16,43 @@
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html {
+    overflow-x: hidden;
     scroll-behavior: smooth;
+    text-size-adjust: 100%;
   }
 
   body {
-    @apply m-0 min-h-screen font-sans text-ink antialiased;
+    @apply m-0 min-h-screen overflow-x-hidden font-sans text-ink antialiased;
     background:
       radial-gradient(1200px 600px at 10% -10%, rgba(15, 118, 110, 0.12), transparent 55%),
       radial-gradient(900px 500px at 100% 0%, rgba(194, 65, 12, 0.10), transparent 50%),
       linear-gradient(180deg, #f7f3eb 0%, #efe8db 45%, #e9e2d4 100%);
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  pre,
+  code {
+    overflow-wrap: anywhere;
   }
 
   ::selection {
@@ -50,6 +77,19 @@
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  .overflow-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 
   .animate-rise {

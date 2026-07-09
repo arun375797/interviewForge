@@ -12,6 +12,18 @@ function resolveApiBase() {
 }
 
 const API_BASE = resolveApiBase();
+const GET_CACHE_TTL_MS = 30 * 1000;
+const responseCache = new Map();
+const pendingRequests = new Map();
+
+function cacheKeyFor(url, token) {
+  return `${token || 'anonymous'}:${url}`;
+}
+
+function clearApiCache() {
+  responseCache.clear();
+  pendingRequests.clear();
+}
 
 export function getStoredToken() {
   return localStorage.getItem(TOKEN_KEY);
@@ -34,29 +46,60 @@ export function setSession(token, user) {
 export function clearSession() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
+  clearApiCache();
 }
 
 async function request(path, options = {}) {
   const url = `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`;
   const token = getStoredToken();
+  const method = (options.method || 'GET').toUpperCase();
+  const canUseCache = method === 'GET' && options.cache !== 'no-store';
+  const cacheKey = canUseCache ? cacheKeyFor(url, token) : '';
+
+  if (canUseCache) {
+    const cached = responseCache.get(cacheKey);
+    if (cached && cached.expiresAt > Date.now()) return cached.data;
+    if (pendingRequests.has(cacheKey)) return pendingRequests.get(cacheKey);
+  }
+
   const headers = {
     'Content-Type': 'application/json',
     ...(options.headers || {}),
   };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(url, { cache: 'no-store', ...options, headers });
-  const data = await res.json().catch(() => ({}));
+  const requestPromise = (async () => {
+    const res = await fetch(url, { ...options, method, headers });
+    const data = await res.json().catch(() => ({}));
 
-  if (res.status === 401 && !path.includes('/auth/login')) {
-    clearSession();
-    if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/login')) {
-      window.location.assign('/login');
+    if (res.status === 401 && !path.includes('/auth/login')) {
+      clearSession();
+      if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/login')) {
+        window.location.assign('/login');
+      }
+    }
+
+    if (!res.ok) throw new Error(data.message || `Request failed (${res.status})`);
+    if (method !== 'GET') clearApiCache();
+    if (canUseCache) {
+      responseCache.set(cacheKey, {
+        data,
+        expiresAt: Date.now() + GET_CACHE_TTL_MS,
+      });
+    }
+    return data;
+  })();
+
+  if (canUseCache) {
+    pendingRequests.set(cacheKey, requestPromise);
+    try {
+      return await requestPromise;
+    } finally {
+      pendingRequests.delete(cacheKey);
     }
   }
 
-  if (!res.ok) throw new Error(data.message || `Request failed (${res.status})`);
-  return data;
+  return requestPromise;
 }
 
 export const api = {

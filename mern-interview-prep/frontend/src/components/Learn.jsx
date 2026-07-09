@@ -127,7 +127,7 @@ export default function Learn() {
           <button
             type="button"
             onClick={continueLearning}
-            className="inline-flex items-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-paper"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-paper sm:w-auto"
           >
             Continue learning
             <ArrowUpRight className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default function Learn() {
       </div>
 
       <div>
-        <div className="mb-4 flex items-end justify-between gap-3">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h3 className="font-display text-xl font-semibold">Topics</h3>
             <p className="mt-1 text-sm text-muted">

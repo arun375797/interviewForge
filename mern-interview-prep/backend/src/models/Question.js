@@ -12,6 +12,7 @@ const questionSchema = new mongoose.Schema(
     topicOrder: { type: Number, default: 0 },
     question: { type: String, required: true },
     answer: { type: String, required: true },
+    answerManuallyAdded: { type: Boolean, default: false, index: true },
     keyPoints: [{ type: String }],
     difficulty: {
       type: String,

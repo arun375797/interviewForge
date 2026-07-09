@@ -147,8 +147,8 @@ export default function SubjectPage() {
 
   return (
     <div className="animate-fade space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="min-w-0">
           <div className="mb-2 flex items-center gap-2 text-sm text-muted">
             <Link to="/" className="hover:text-ink">
               Subjects
@@ -163,7 +163,7 @@ export default function SubjectPage() {
         </div>
         <Link
           to={`/add?subject=${subject}${topic ? `&topic=${encodeURIComponent(topic)}` : ''}`}
-          className="inline-flex items-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-paper transition hover:opacity-90 sm:w-auto"
         >
           <Plus className="h-4 w-4" />
           Add question
@@ -204,8 +204,8 @@ export default function SubjectPage() {
         ) : null}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-        <aside className="glass-panel h-fit max-h-[70vh] overflow-hidden rounded-2xl lg:sticky lg:top-24">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
+        <aside className="glass-panel h-fit max-h-[min(55vh,420px)] overflow-hidden rounded-2xl lg:sticky lg:top-24 lg:max-h-[70vh]">
           <div className="border-b border-line p-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">Topics</p>
             <div className="relative">
@@ -227,7 +227,7 @@ export default function SubjectPage() {
               All topics
             </button>
           </div>
-          <div className="max-h-[52vh] overflow-y-auto p-2">
+          <div className="max-h-[min(40vh,300px)] overflow-y-auto p-2 lg:max-h-[52vh]">
             {loading
               ? Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="skeleton mb-2 h-10 rounded-lg" />
@@ -254,7 +254,7 @@ export default function SubjectPage() {
           </div>
         </aside>
 
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <div className="glass-panel flex flex-col gap-3 rounded-2xl p-4 sm:flex-row sm:items-center">
             <div className="relative flex-1">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
@@ -275,7 +275,7 @@ export default function SubjectPage() {
                 className="w-full rounded-xl border border-line bg-paper py-2.5 pl-10 pr-3 text-sm outline-none focus:border-accent disabled:cursor-not-allowed disabled:opacity-55"
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
               <Filter className="h-4 w-4 text-muted" />
               <select
                 value={difficulty}
@@ -283,7 +283,7 @@ export default function SubjectPage() {
                   setDifficulty(e.target.value);
                   setPage(1);
                 }}
-                className="rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none focus:border-accent"
+                className="w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none focus:border-accent sm:w-auto"
               >
                 <option value="">All levels</option>
                 <option value="easy">Easy</option>
@@ -301,7 +301,7 @@ export default function SubjectPage() {
           />
 
           {pages > 1 && (
-            <div className="flex items-center justify-center gap-2 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
               <button
                 type="button"
                 disabled={page <= 1}

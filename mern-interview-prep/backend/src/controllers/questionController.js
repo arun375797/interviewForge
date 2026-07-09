@@ -17,24 +17,43 @@ const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 
 exports.getSubjects = async (_req, res) => {
   try {
-    const subjects = await Subject.find().sort({ label: 1 });
-    const withLiveCounts = await Promise.all(
-      subjects.map(async (s) => {
-        const questionCount = await Question.countDocuments({ subject: s.key, ...PUBLIC_QUESTION_FILTER });
-        const topics = await Question.distinct('topic', { subject: s.key, ...PUBLIC_QUESTION_FILTER });
-        const bookmarked = await Question.countDocuments({ subject: s.key, bookmarked: true, ...PUBLIC_QUESTION_FILTER });
-        const mastered = await Question.countDocuments({ subject: s.key, mastered: true, ...PUBLIC_QUESTION_FILTER });
-        const learned = await Question.countDocuments({ subject: s.key, learned: true, ...PUBLIC_QUESTION_FILTER });
-        return {
-          ...s.toObject(),
-          questionCount,
-          topicCount: topics.length,
-          bookmarked,
-          mastered,
-          learned,
-        };
-      })
-    );
+    const [subjects, counts] = await Promise.all([
+      Subject.find().sort({ label: 1 }).lean(),
+      Question.aggregate([
+        { $match: PUBLIC_QUESTION_FILTER },
+        {
+          $group: {
+            _id: '$subject',
+            questionCount: { $sum: 1 },
+            topics: { $addToSet: '$topic' },
+            bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
+            mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
+            learned: { $sum: { $cond: ['$learned', 1, 0] } },
+          },
+        },
+        {
+          $project: {
+            questionCount: 1,
+            topicCount: { $size: '$topics' },
+            bookmarked: 1,
+            mastered: 1,
+            learned: 1,
+          },
+        },
+      ]),
+    ]);
+    const countsBySubject = new Map(counts.map((item) => [item._id, item]));
+    const withLiveCounts = subjects.map((subject) => {
+      const live = countsBySubject.get(subject.key);
+      return {
+        ...subject,
+        questionCount: live?.questionCount || 0,
+        topicCount: live?.topicCount || 0,
+        bookmarked: live?.bookmarked || 0,
+        mastered: live?.mastered || 0,
+        learned: live?.learned || 0,
+      };
+    });
     res.json(withLiveCounts);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -85,6 +104,7 @@ exports.getQuestions = async (req, res) => {
       bookmarked,
       mastered,
       learned,
+      manualAnswer,
       page = 1,
       limit = 50,
       sort = 'order',
@@ -98,6 +118,8 @@ exports.getQuestions = async (req, res) => {
     if (mastered === 'true') filter.mastered = true;
     if (learned === 'true') filter.learned = true;
     if (learned === 'false') filter.learned = false;
+    if (manualAnswer === 'true') filter.answerManuallyAdded = true;
+    if (manualAnswer === 'false') filter.answerManuallyAdded = { $ne: true };
     if (search && search.trim()) {
       filter.$text = { $search: search.trim() };
     }
@@ -148,6 +170,7 @@ exports.getQuestionById = async (req, res) => {
 exports.createQuestion = async (req, res) => {
   try {
     const { subject, topic, question, answer, difficulty, keyPoints, notes, tags } = req.body;
+    const hasManualAnswer = typeof answer === 'string' && answer.trim().length > 0;
     if (!subject || !topic || !question) {
       return res.status(400).json({ message: 'subject, topic, and question are required' });
     }
@@ -163,7 +186,8 @@ exports.createQuestion = async (req, res) => {
       topic,
       topicOrder,
       question,
-      answer: answer || generateAnswer(question, subject, topic),
+      answer: hasManualAnswer ? answer : generateAnswer(question, subject, topic),
+      answerManuallyAdded: hasManualAnswer,
       keyPoints: keyPoints?.length ? keyPoints : generateKeyPoints(question, subject, topic),
       difficulty: difficulty || difficultyFromQuestion(question, topic),
       tags: tags || [subject],
@@ -183,6 +207,7 @@ exports.updateQuestion = async (req, res) => {
     const allowed = [
       'question',
       'answer',
+      'answerManuallyAdded',
       'topic',
       'subject',
       'difficulty',
@@ -199,6 +224,9 @@ exports.updateQuestion = async (req, res) => {
     const updates = {};
     for (const key of allowed) {
       if (req.body[key] !== undefined) updates[key] = req.body[key];
+    }
+    if (req.body.answer !== undefined && req.body.answerManuallyAdded === undefined) {
+      updates.answerManuallyAdded = true;
     }
 
     const item = await Question.findByIdAndUpdate(req.params.id, updates, {
@@ -328,17 +356,19 @@ function isValidCodeSubject(subject) {
   return !subject || CODE_SUBJECTS.includes(subject);
 }
 
-async function loadCodeQuestions({ subject, topic, completed, search } = {}) {
+async function loadCodeQuestions({ subject, topic, completed, manualAnswer, search } = {}) {
   const filter = {
     subject: subject || { $in: CODE_SUBJECTS },
     $or: [{ question: CODE_KEYWORD_RE }, { codeOnly: true }],
   };
   if (completed === 'true') filter.codeCompleted = true;
   if (completed === 'false') filter.codeCompleted = false;
+  if (manualAnswer === 'true') filter.answerManuallyAdded = true;
+  if (manualAnswer === 'false') filter.answerManuallyAdded = { $ne: true };
 
   const docs = await Question.find(filter)
     .sort({ topicOrder: 1, order: 1 })
-    .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+    .select('+savedCode subject topic topicOrder question answer answerManuallyAdded difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
     .lean();
 
   const query = search?.trim().toLowerCase();
@@ -422,6 +452,7 @@ exports.getCodeQuestions = async (req, res) => {
       topic,
       search,
       completed,
+      manualAnswer,
       page = 1,
       limit = 40,
     } = req.query;
@@ -430,7 +461,7 @@ exports.getCodeQuestions = async (req, res) => {
       return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
     }
 
-    const allItems = await loadCodeQuestions({ subject, topic, completed, search });
+    const allItems = await loadCodeQuestions({ subject, topic, completed, manualAnswer, search });
     const pageNum = Math.max(1, parseInt(page, 10) || 1);
     const lim = Math.min(100, Math.max(1, parseInt(limit, 10) || 40));
     const skip = (pageNum - 1) * lim;
@@ -450,7 +481,7 @@ exports.getCodeQuestions = async (req, res) => {
 exports.getCodeQuestionById = async (req, res) => {
   try {
     const item = await Question.findById(req.params.id)
-      .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+      .select('+savedCode subject topic topicOrder question answer answerManuallyAdded difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
       .lean();
     if (!item || !isCodePracticeQuestion(item)) {
       return res.status(404).json({ message: 'Code question not found' });
@@ -470,7 +501,7 @@ exports.toggleCodeCompleted = async (req, res) => {
     item.codeCompleted = !item.codeCompleted;
     await item.save();
     const safeItem = await Question.findById(item._id)
-      .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+      .select('+savedCode subject topic topicOrder question answer answerManuallyAdded difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
       .lean();
     res.json(toCodeQuestion(safeItem));
   } catch (err) {
@@ -524,15 +555,40 @@ exports.getSavedCode = async (req, res) => {
 
 exports.getStats = async (_req, res) => {
   try {
-    const [total, bookmarked, mastered, learned, bySubject, byDifficulty] = await Promise.all([
-      Question.countDocuments(PUBLIC_QUESTION_FILTER),
-      Question.countDocuments({ bookmarked: true, ...PUBLIC_QUESTION_FILTER }),
-      Question.countDocuments({ mastered: true, ...PUBLIC_QUESTION_FILTER }),
-      Question.countDocuments({ learned: true, ...PUBLIC_QUESTION_FILTER }),
-      Question.aggregate([{ $match: PUBLIC_QUESTION_FILTER }, { $group: { _id: '$subject', count: { $sum: 1 } } }]),
-      Question.aggregate([{ $match: PUBLIC_QUESTION_FILTER }, { $group: { _id: '$difficulty', count: { $sum: 1 } } }]),
+    const [stats] = await Question.aggregate([
+      { $match: PUBLIC_QUESTION_FILTER },
+      {
+        $facet: {
+          totals: [
+            {
+              $group: {
+                _id: null,
+                total: { $sum: 1 },
+                bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
+                mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
+                learned: { $sum: { $cond: ['$learned', 1, 0] } },
+              },
+            },
+          ],
+          bySubject: [{ $group: { _id: '$subject', count: { $sum: 1 } } }],
+          byDifficulty: [{ $group: { _id: '$difficulty', count: { $sum: 1 } } }],
+        },
+      },
     ]);
-    res.json({ total, bookmarked, mastered, learned, bySubject, byDifficulty });
+    const totals = stats?.totals?.[0] || {
+      total: 0,
+      bookmarked: 0,
+      mastered: 0,
+      learned: 0,
+    };
+    res.json({
+      total: totals.total,
+      bookmarked: totals.bookmarked,
+      mastered: totals.mastered,
+      learned: totals.learned,
+      bySubject: stats?.bySubject || [],
+      byDifficulty: stats?.byDifficulty || [],
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

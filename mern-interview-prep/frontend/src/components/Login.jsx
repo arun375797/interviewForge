@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { Brain, Eye, EyeOff, Lock, User } from 'lucide-react';
+import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
@@ -45,12 +45,11 @@ export default function Login() {
 
       <div className="relative w-full max-w-md animate-rise">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-ink text-paper shadow-lg">
-            <Brain className="h-7 w-7" />
-          </div>
-          <h1 className="font-display text-3xl font-semibold tracking-tight text-ink">
-            InterviewForge
-          </h1>
+          <img
+            src="/thinkmern-logo.png"
+            alt="thinkMern"
+            className="mx-auto mb-4 h-auto w-full max-w-xs object-contain"
+          />
           <p className="mt-2 text-sm text-muted">Sign in to access your interview question bank.</p>
         </div>
 

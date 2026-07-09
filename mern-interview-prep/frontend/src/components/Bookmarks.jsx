@@ -111,7 +111,7 @@ export default function Bookmarks() {
             </p>
           </div>
 
-          <div className="flex gap-2">
+          <div className="grid w-full grid-cols-2 gap-2 sm:w-auto">
             {['bookmarked', 'mastered'].map((m) => (
               <button
                 key={m}

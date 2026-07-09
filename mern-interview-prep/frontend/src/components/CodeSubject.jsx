@@ -128,7 +128,7 @@ export default function CodeSubject() {
   return (
     <div className="animate-fade space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2 text-sm text-muted">
             <Link to="/code" className="hover:text-ink">
               Code
@@ -168,8 +168,8 @@ export default function CodeSubject() {
         </label>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-        <aside className="glass-panel h-fit max-h-[70vh] overflow-hidden rounded-2xl lg:sticky lg:top-24">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
+        <aside className="glass-panel h-fit max-h-[min(55vh,420px)] overflow-hidden rounded-2xl lg:sticky lg:top-24 lg:max-h-[70vh]">
           <div className="border-b border-line p-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
               Practical topics
@@ -193,7 +193,7 @@ export default function CodeSubject() {
               All topics
             </button>
           </div>
-          <div className="max-h-[52vh] overflow-y-auto p-2">
+          <div className="max-h-[min(40vh,300px)] overflow-y-auto p-2 lg:max-h-[52vh]">
             {loading
               ? Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="skeleton mb-2 h-12 rounded-lg" />
@@ -233,7 +233,7 @@ export default function CodeSubject() {
           </div>
         </aside>
 
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           {topic && activeTopic ? (
             <div className="glass-panel rounded-2xl p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted">
@@ -264,7 +264,7 @@ export default function CodeSubject() {
                 className="w-full rounded-xl border border-line bg-paper py-2.5 pl-10 pr-3 text-sm outline-none focus:border-accent"
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
               <Filter className="h-4 w-4 text-muted" />
               {[
                 { id: 'all', label: 'All' },
@@ -275,7 +275,7 @@ export default function CodeSubject() {
                   key={f.id}
                   type="button"
                   onClick={() => setFilter(f.id)}
-                  className={`rounded-lg px-3 py-2 text-sm ${
+                  className={`flex-1 rounded-lg px-3 py-2 text-sm sm:flex-none ${
                     filterMode === f.id ? 'bg-ink text-paper' : 'border border-line bg-paper'
                   }`}
                 >
@@ -342,7 +342,7 @@ export default function CodeSubject() {
                             >
                               {q.codePrompt?.title || q.question}
                             </p>
-                            <p className="mt-1.5 text-xs text-muted">{q.codePrompt?.task}</p>
+                            <p className="overflow-anywhere mt-1.5 text-xs text-muted">{q.codePrompt?.task}</p>
                           </div>
                         </div>
                       </button>
@@ -360,7 +360,7 @@ export default function CodeSubject() {
           </div>
 
           {pages > 1 && (
-            <div className="flex items-center justify-center gap-2 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
               <button
                 type="button"
                 disabled={page <= 1}

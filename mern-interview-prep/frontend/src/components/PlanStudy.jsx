@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CalendarDays, CheckCircle2, Circle, Code2, GraduationCap, Power, Rocket } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
 import QuestionDetail from './QuestionDetail';
@@ -175,7 +175,7 @@ export default function PlanStudy() {
         </div>
       ) : null}
 
-      <div className="glass-panel rounded-3xl p-5">
+      <div className="glass-panel rounded-2xl p-4 sm:rounded-3xl sm:p-5">
         <div className="grid gap-4 lg:grid-cols-[1fr_220px_280px_auto] lg:items-end">
           <div>
             <span className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted">
@@ -222,7 +222,7 @@ export default function PlanStudy() {
             <span className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted">
               Days
             </span>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {PLAN_DAYS.map((option) => (
                 <button
                   key={option}
@@ -242,7 +242,7 @@ export default function PlanStudy() {
             type="button"
             onClick={startPlan}
             disabled={starting}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white disabled:opacity-50"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white disabled:opacity-50 lg:w-auto"
           >
             <Rocket className="h-4 w-4" />
             {starting ? 'Starting...' : activePlan ? 'Restart plan' : 'Start'}
@@ -254,7 +254,7 @@ export default function PlanStudy() {
         <div className="skeleton h-64 rounded-3xl" />
       ) : activePlan ? (
         <section className="space-y-5">
-          <div className="glass-panel rounded-3xl p-5">
+          <div className="glass-panel rounded-2xl p-4 sm:rounded-3xl sm:p-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p
@@ -275,7 +275,7 @@ export default function PlanStudy() {
               <button
                 type="button"
                 onClick={() => disablePlan(activePlan._id)}
-                className="inline-flex items-center gap-2 rounded-xl border border-rose-200 px-4 py-2.5 text-sm font-medium text-rose-700 hover:bg-rose-50"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-rose-200 px-4 py-2.5 text-sm font-medium text-rose-700 hover:bg-rose-50 sm:w-auto"
               >
                 <Power className="h-4 w-4" />
                 Disable active plan
@@ -356,13 +356,13 @@ export default function PlanStudy() {
                               className="block w-full text-left"
                             >
                               <p
-                                className={`text-sm font-medium leading-snug ${
+                                className={`overflow-anywhere text-sm font-medium leading-snug ${
                                   question.done ? 'text-muted line-through' : 'text-ink'
                                 }`}
                               >
                                 {question.question}
                               </p>
-                              <p className="mt-1 text-xs text-muted">{question.topic}</p>
+                              <p className="overflow-anywhere mt-1 text-xs text-muted">{question.topic}</p>
                             </button>
                           </div>
                         </div>

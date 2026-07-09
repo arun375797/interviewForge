@@ -40,7 +40,7 @@ export default function AddQuestion() {
         Leave the answer blank to auto-generate an interview-style response.
       </p>
 
-      <form onSubmit={submit} className="glass-panel mt-6 space-y-4 rounded-2xl p-6">
+      <form onSubmit={submit} className="glass-panel mt-6 space-y-4 rounded-2xl p-4 sm:p-6">
         {error && <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
 
         <label className="block text-sm">
@@ -106,7 +106,7 @@ export default function AddQuestion() {
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-ink px-5 py-2.5 text-sm font-medium text-paper disabled:opacity-50"
+          className="w-full rounded-xl bg-ink px-5 py-2.5 text-sm font-medium text-paper disabled:opacity-50 sm:w-auto"
         >
           {saving ? 'Saving…' : 'Create question'}
         </button>

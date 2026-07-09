@@ -187,7 +187,7 @@ export default function Mock() {
           </p>
         </div>
 
-        <div className="glass-panel space-y-6 rounded-3xl p-6 sm:p-8">
+        <div className="glass-panel space-y-6 rounded-2xl p-5 sm:rounded-3xl sm:p-8">
           <div>
             <label className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-muted">
               Language / subject
@@ -245,7 +245,7 @@ export default function Mock() {
                 );
               })}
             </div>
-            <div className="mt-3 flex items-center gap-2">
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
               <input
                 type="number"
                 min={1}
@@ -253,7 +253,7 @@ export default function Mock() {
                 placeholder="Custom minutes"
                 value={customMinutes}
                 onChange={(e) => setCustomMinutes(e.target.value)}
-                className="w-40 rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none focus:border-accent"
+                className="w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none focus:border-accent sm:w-40"
               />
               <span className="text-sm text-muted">minutes (1–120)</span>
             </div>
@@ -311,8 +311,8 @@ export default function Mock() {
 
   return (
     <div className="mx-auto max-w-3xl animate-rise space-y-6">
-      <div className="glass-panel flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3 sm:px-5">
-        <div className="flex items-center gap-3">
+      <div className="glass-panel flex flex-col gap-3 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+        <div className="flex flex-wrap items-center gap-3">
           <span
             className="font-mono text-xs uppercase tracking-[0.18em]"
             style={{ color: accent }}
@@ -321,7 +321,7 @@ export default function Mock() {
           </span>
           <span className="text-xs text-muted">Question {seen}</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <div
             className={`inline-flex items-center gap-2 rounded-xl px-3 py-2 font-mono text-lg font-semibold tabular-nums ${
               urgent ? 'bg-rose-100 text-rose-800' : 'bg-ink text-paper'
@@ -345,22 +345,22 @@ export default function Mock() {
       {error && <p className="text-sm text-rose-700">{error}</p>}
 
       {question && (
-        <div className="glass-panel rounded-3xl p-6 sm:p-8">
+        <div className="glass-panel rounded-2xl p-5 sm:rounded-3xl sm:p-8">
           <p
             className="font-mono text-xs uppercase tracking-[0.18em]"
             style={{ color: accent }}
           >
             {question.topic} · {question.difficulty}
           </p>
-          <h2 className="mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">
+          <h2 className="overflow-anywhere mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">
             {question.question}
           </h2>
 
-          <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-8 grid gap-2 sm:flex sm:flex-wrap">
             <button
               type="button"
               onClick={() => setReveal((r) => !r)}
-              className="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-medium"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-medium"
             >
               {reveal ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               {reveal ? 'Hide answer' : 'Reveal answer'}
@@ -369,7 +369,7 @@ export default function Mock() {
               type="button"
               onClick={nextQuestion}
               disabled={nextLoading}
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white disabled:opacity-60"
             >
               <RefreshCw className={`h-4 w-4 ${nextLoading ? 'animate-spin' : ''}`} />
               {nextLoading ? 'Shuffling…' : 'Next question'}

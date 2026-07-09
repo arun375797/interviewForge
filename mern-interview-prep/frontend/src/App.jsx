@@ -1,23 +1,34 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/Layout';
-import Home from './components/Home';
-import SubjectPage from './components/SubjectPage';
-import Practice from './components/Practice';
-import Mock from './components/Mock';
-import Bookmarks from './components/Bookmarks';
-import AddQuestion from './components/AddQuestion';
-import Learn from './components/Learn';
-import LearnSubject from './components/LearnSubject';
-import Code from './components/Code';
-import CodeSubject from './components/CodeSubject';
-import CodeWorkspace from './components/CodeWorkspace';
-import PlanStudy from './components/PlanStudy';
-import NotFound from './components/NotFound';
-import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { api } from './api';
+
+const Home = lazy(() => import('./components/Home'));
+const SubjectPage = lazy(() => import('./components/SubjectPage'));
+const Practice = lazy(() => import('./components/Practice'));
+const Mock = lazy(() => import('./components/Mock'));
+const Bookmarks = lazy(() => import('./components/Bookmarks'));
+const AddQuestion = lazy(() => import('./components/AddQuestion'));
+const AdminAnswers = lazy(() => import('./components/AdminAnswers'));
+const Learn = lazy(() => import('./components/Learn'));
+const LearnSubject = lazy(() => import('./components/LearnSubject'));
+const Code = lazy(() => import('./components/Code'));
+const CodeSubject = lazy(() => import('./components/CodeSubject'));
+const CodeWorkspace = lazy(() => import('./components/CodeWorkspace'));
+const PlanStudy = lazy(() => import('./components/PlanStudy'));
+const NotFound = lazy(() => import('./components/NotFound'));
+const Login = lazy(() => import('./components/Login'));
+
+function PageFallback() {
+  return (
+    <div className="space-y-4">
+      <div className="skeleton h-24 rounded-3xl" />
+      <div className="skeleton h-48 rounded-3xl" />
+    </div>
+  );
+}
 
 function AppRoutes() {
   const { isAuthenticated, booting } = useAuth();
@@ -57,7 +68,14 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/login"
+        element={
+          <Suspense fallback={<PageFallback />}>
+            <Login />
+          </Suspense>
+        }
+      />
       <Route
         path="/*"
         element={
@@ -68,25 +86,28 @@ function AppRoutes() {
                   {error}
                 </div>
               )}
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home subjects={subjects} stats={stats} loading={loading} />}
-                />
-                <Route path="/subject/:subject" element={<SubjectPage />} />
-                <Route path="/learn" element={<Learn />} />
-                <Route path="/learn/:subject" element={<LearnSubject />} />
-                <Route path="/code" element={<Code />} />
-                <Route path="/code/:subject" element={<CodeSubject />} />
-                <Route path="/code/:subject/:id" element={<CodeWorkspace />} />
-                <Route path="/plan" element={<PlanStudy />} />
-                <Route path="/practice" element={<Practice />} />
-                <Route path="/mock" element={<Mock />} />
-                <Route path="/bookmarks" element={<Bookmarks />} />
-                <Route path="/add" element={<AddQuestion />} />
-                <Route path="/login" element={<Navigate to="/" replace />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Suspense fallback={<PageFallback />}>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<Home subjects={subjects} stats={stats} loading={loading} />}
+                  />
+                  <Route path="/subject/:subject" element={<SubjectPage />} />
+                  <Route path="/learn" element={<Learn />} />
+                  <Route path="/learn/:subject" element={<LearnSubject />} />
+                  <Route path="/code" element={<Code />} />
+                  <Route path="/code/:subject" element={<CodeSubject />} />
+                  <Route path="/code/:subject/:id" element={<CodeWorkspace />} />
+                  <Route path="/plan" element={<PlanStudy />} />
+                  <Route path="/practice" element={<Practice />} />
+                  <Route path="/mock" element={<Mock />} />
+                  <Route path="/bookmarks" element={<Bookmarks />} />
+                  <Route path="/add" element={<AddQuestion />} />
+                  <Route path="/admin" element={<AdminAnswers />} />
+                  <Route path="/login" element={<Navigate to="/" replace />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
             </Layout>
           </ProtectedRoute>
         }

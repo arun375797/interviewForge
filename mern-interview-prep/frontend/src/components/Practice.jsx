@@ -63,7 +63,7 @@ export default function Practice() {
         <select
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
-          className="rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none focus:border-accent"
+          className="w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none focus:border-accent sm:w-auto"
         >
           <option value="">Any difficulty</option>
           <option value="easy">Easy</option>
@@ -84,23 +84,23 @@ export default function Practice() {
       {error && <p className="text-sm text-rose-700">{error}</p>}
 
       {question && (
-        <div className="glass-panel rounded-3xl p-6 sm:p-8">
+        <div className="glass-panel rounded-2xl p-5 sm:rounded-3xl sm:p-8">
           <p
             className="font-mono text-xs uppercase tracking-[0.18em]"
             style={{ color: SUBJECT_META[question.subject]?.accent }}
           >
             {SUBJECT_META[question.subject]?.label || question.subject} · {question.difficulty}
           </p>
-          <h2 className="mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">
+          <h2 className="overflow-anywhere mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">
             {question.question}
           </h2>
-          <p className="mt-3 text-sm text-muted">{question.topic}</p>
+          <p className="overflow-anywhere mt-3 text-sm text-muted">{question.topic}</p>
 
-          <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-8 grid gap-2 sm:flex sm:flex-wrap">
             <button
               type="button"
               onClick={() => setReveal((r) => !r)}
-              className="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-medium"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-medium"
             >
               {reveal ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               {reveal ? 'Hide answer' : 'Reveal answer'}
@@ -108,14 +108,14 @@ export default function Practice() {
             <button
               type="button"
               onClick={() => setOpenDetail(true)}
-              className="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm"
             >
               Edit / bookmark
             </button>
             <button
               type="button"
               onClick={load}
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white"
             >
               <RefreshCw className="h-4 w-4" />
               Next

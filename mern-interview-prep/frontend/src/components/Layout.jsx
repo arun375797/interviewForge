@@ -1,5 +1,5 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { BookOpen, Bookmark, Brain, Shuffle, Plus, LogOut, GraduationCap, Code2, CalendarDays, Timer } from 'lucide-react';
+import { BookOpen, Bookmark, Shuffle, Plus, LogOut, GraduationCap, Code2, CalendarDays, Timer, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const links = [
@@ -11,6 +11,7 @@ const links = [
   { to: '/mock', label: 'Mock', icon: Timer },
   { to: '/bookmarks', label: 'Bookmarks', icon: Bookmark },
   { to: '/add', label: 'Add', icon: Plus },
+  { to: '/admin', label: 'Admin', icon: ShieldCheck },
 ];
 
 export default function Layout({ children }) {
@@ -22,45 +23,45 @@ export default function Layout({ children }) {
     navigate('/login', { replace: true });
   };
 
+  const renderLink = ({ to, label, icon: Icon, end }, variant = 'desktop') => (
+    <NavLink
+      key={`${variant}-${to}`}
+      to={to}
+      end={end}
+      className={({ isActive }) =>
+        `flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition ${
+          variant === 'mobile' ? 'whitespace-nowrap' : ''
+        } ${
+          isActive
+            ? 'bg-ink text-paper'
+            : 'text-muted hover:bg-paper-2 hover:text-ink'
+        }`
+      }
+    >
+      <Icon className="h-4 w-4 shrink-0" />
+      <span className={variant === 'desktop' ? 'hidden xl:inline' : ''}>{label}</span>
+    </NavLink>
+  );
+
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-40 border-b border-line/80 bg-[#f7f3eb]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link to="/" className="group flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-paper shadow-sm transition group-hover:scale-[1.03]">
-              <Brain className="h-5 w-5" />
-            </span>
-            <div className="leading-tight">
-              <p className="font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
-                InterviewForge
-              </p>
-              <p className="hidden text-xs text-muted sm:block">MERN stack · JS · React · Node · DSA</p>
-            </div>
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:gap-3 sm:px-6">
+          <Link to="/" className="group flex min-w-0 flex-1 items-center lg:flex-none">
+            <img
+              src="/thinkmern-logo.png"
+              alt="thinkMern"
+              className="h-9 w-auto max-w-[10.5rem] shrink-0 object-contain transition group-hover:scale-[1.02] sm:h-10 sm:max-w-[12.5rem] lg:max-w-[9.5rem] xl:max-w-[12.5rem]"
+            />
           </Link>
 
-          <div className="flex items-center gap-1 sm:gap-2">
-            <nav className="flex items-center gap-1 sm:gap-2">
-              {links.map(({ to, label, icon: Icon, end }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  end={end}
-                  className={({ isActive }) =>
-                    `flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-medium transition sm:px-3 ${
-                      isActive
-                        ? 'bg-ink text-paper'
-                        : 'text-muted hover:bg-paper-2 hover:text-ink'
-                    }`
-                  }
-                >
-                  <Icon className="h-4 w-4" />
-                  <span className="hidden sm:inline">{label}</span>
-                </NavLink>
-              ))}
+          <div className="flex shrink-0 items-center gap-2">
+            <nav className="hidden items-center gap-1 lg:flex">
+              {links.map((link) => renderLink(link))}
             </nav>
 
-            <div className="ml-1 hidden items-center gap-2 border-l border-line pl-3 sm:flex">
-              <span className="max-w-[120px] truncate text-xs text-muted" title={user?.email}>
+            <div className="hidden items-center gap-2 border-l border-line pl-3 md:flex">
+              <span className="max-w-[120px] truncate text-xs text-muted lg:max-w-[96px] xl:max-w-[140px]" title={user?.email}>
                 {user?.email}
               </span>
               <button
@@ -84,12 +85,20 @@ export default function Layout({ children }) {
             </button>
           </div>
         </div>
+
+        <nav className="scrollbar-none mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 pb-3 sm:px-6 lg:hidden">
+          {links.map((link) => renderLink(link, 'mobile'))}
+        </nav>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">{children}</main>
+      <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-10">{children}</main>
 
-      <footer className="border-t border-line/70 py-8 text-center text-sm text-muted">
-        InterviewForge — practice like you speak in interviews.
+      <footer className="border-t border-line/70 px-4 py-8 text-center text-sm text-muted">
+        <span className="font-semibold">
+          <span className="text-[#071b45]">think</span>
+          <span className="text-[#08c999]">Mern</span>
+        </span>{' '}
+        — Learn. Build. Crack Interviews.
       </footer>
     </div>
   );

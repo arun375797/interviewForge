@@ -91,7 +91,7 @@ export default function Code() {
               const meta = SUBJECT_META[card.key] || {};
               const percent = card.progress?.percent || 0;
               return (
-                <div key={card.key} className="glass-panel rounded-3xl p-6">
+                <div key={card.key} className="glass-panel rounded-2xl p-5 sm:rounded-3xl sm:p-6">
                   <div className="mb-5 flex items-start justify-between gap-3">
                     <div>
                       <p
@@ -109,7 +109,7 @@ export default function Code() {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-3">
                     <div>
                       <p className="text-xs text-muted">Solved</p>
                       <p className="mt-1 font-display text-2xl font-semibold">
@@ -137,18 +137,18 @@ export default function Code() {
                     />
                   </div>
 
-                  <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap">
                     <button
                       type="button"
                       onClick={() => continuePractice(card)}
-                      className="inline-flex items-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-paper"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-paper"
                     >
                       Continue coding
                       <ArrowUpRight className="h-4 w-4" />
                     </button>
                     <Link
                       to={`/code/${card.key}`}
-                      className="inline-flex items-center rounded-xl border border-line bg-paper px-4 py-2.5 text-sm font-medium hover:bg-paper-2"
+                      className="inline-flex items-center justify-center rounded-xl border border-line bg-paper px-4 py-2.5 text-sm font-medium hover:bg-paper-2"
                     >
                       View all topics
                     </Link>

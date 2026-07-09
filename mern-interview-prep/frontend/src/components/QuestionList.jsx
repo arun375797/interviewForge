@@ -42,7 +42,7 @@ export default function QuestionList({ questions, loading, onSelect, selectedId 
               {String(q.order || idx + 1).padStart(2, '0')}
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium leading-snug text-ink sm:text-[15px]">{q.question}</p>
+              <p className="overflow-anywhere text-sm font-medium leading-snug text-ink sm:text-[15px]">{q.question}</p>
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 <span
                   className={`rounded-md px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${
@@ -51,7 +51,7 @@ export default function QuestionList({ questions, loading, onSelect, selectedId 
                 >
                   {q.difficulty}
                 </span>
-                <span className="truncate text-xs text-muted">{q.topic}</span>
+                <span className="overflow-anywhere text-xs text-muted">{q.topic}</span>
                 {q.bookmarked && <Bookmark className="h-3.5 w-3.5 fill-accent-2 text-accent-2" />}
                 {q.mastered && <CheckCircle2 className="h-3.5 w-3.5 text-accent" />}
               </div>

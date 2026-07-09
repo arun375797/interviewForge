@@ -303,7 +303,7 @@ export default function CodeWorkspace() {
       ) : null}
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2 text-sm text-muted">
             <Link to="/code" className="hover:text-ink">
               Code
@@ -315,16 +315,16 @@ export default function CodeWorkspace() {
             <ChevronRight className="h-3.5 w-3.5" />
             <span className="max-w-[240px] truncate">{question.codePrompt?.topic}</span>
           </div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h1 className="overflow-anywhere font-display text-2xl font-semibold tracking-tight sm:text-3xl">
             {question.codePrompt?.title || question.question}
           </h1>
-          <p className="mt-2 max-w-3xl text-sm text-muted">{question.codePrompt?.task}</p>
+          <p className="overflow-anywhere mt-2 max-w-3xl text-sm text-muted">{question.codePrompt?.task}</p>
         </div>
 
         <button
           type="button"
           onClick={toggleCompleted}
-          className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium ${
+          className={`inline-flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium sm:w-auto ${
             question.codeCompleted
               ? 'border-accent bg-teal-50 text-accent'
               : 'border-line bg-paper text-ink hover:bg-paper-2'
@@ -346,10 +346,10 @@ export default function CodeWorkspace() {
         </div>
       ) : null}
 
-      <div className="grid gap-6 xl:grid-cols-[1fr_420px]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(340px,420px)]">
         <section className="glass-panel overflow-hidden rounded-3xl">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
-            <div>
+          <div className="flex flex-col gap-3 border-b border-line px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+            <div className="min-w-0">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
                 JavaScript editor
               </p>
@@ -358,13 +358,13 @@ export default function CodeWorkspace() {
                 <span className="font-mono">console.log</span> to see output.
               </p>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap">
               {question.hasSavedCode ? (
                 <button
                   type="button"
                   onClick={getSavedCode}
                   disabled={retrieving}
-                  className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2 disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2 disabled:opacity-50"
                 >
                   <UploadCloud className="h-4 w-4" />
                   {retrieving ? 'Loading...' : 'Get saved code'}
@@ -373,7 +373,7 @@ export default function CodeWorkspace() {
               <button
                 type="button"
                 onClick={resetStarter}
-                className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2"
               >
                 <RotateCcw className="h-4 w-4" />
                 Reset
@@ -382,7 +382,7 @@ export default function CodeWorkspace() {
                 type="button"
                 onClick={saveCode}
                 disabled={saving}
-                className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2 disabled:opacity-50"
               >
                 <Save className="h-4 w-4" />
                 {saving ? 'Saving...' : 'Save code'}
@@ -391,7 +391,7 @@ export default function CodeWorkspace() {
                 type="button"
                 onClick={runCode}
                 disabled={running}
-                className="inline-flex items-center gap-2 rounded-xl bg-ink px-3 py-2 text-sm font-medium text-paper disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-3 py-2 text-sm font-medium text-paper disabled:opacity-50"
               >
                 <Play className="h-4 w-4" />
                 {running ? 'Running...' : 'Run code'}
@@ -419,7 +419,7 @@ export default function CodeWorkspace() {
                     <span className="font-mono text-sm font-semibold">{formatCountdown(timeLeft)}</span>
                   )}
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold">Coding timer</p>
                   <p className={`mt-1 text-xs ${timerExpired ? 'text-rose-800' : 'text-muted'}`}>
                     {timerExpired
@@ -431,7 +431,7 @@ export default function CodeWorkspace() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-end gap-2">
+              <div className="grid gap-2 sm:flex sm:flex-wrap sm:items-end">
                 <label className="block">
                   <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">
                     Minutes
@@ -448,7 +448,7 @@ export default function CodeWorkspace() {
                     }}
                     disabled={timerRunning}
                     aria-label="Timer minutes"
-                    className="w-24 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium outline-none focus:border-accent disabled:opacity-60"
+                    className="w-full rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium outline-none focus:border-accent disabled:opacity-60 sm:w-24"
                   />
                 </label>
                 <button
@@ -459,7 +459,7 @@ export default function CodeWorkspace() {
                     !Number.isFinite(Number(timerMinutes)) ||
                     Number(timerMinutes) <= 0
                   }
-                  className="inline-flex items-center gap-2 rounded-xl bg-ink px-3 py-2 text-sm font-medium text-paper disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-3 py-2 text-sm font-medium text-paper disabled:opacity-50"
                 >
                   <Play className="h-4 w-4" />
                   {timerRunning ? 'Counting...' : 'Start'}
@@ -468,7 +468,7 @@ export default function CodeWorkspace() {
                   type="button"
                   onClick={resetCountdown}
                   disabled={!timerRunning && timeLeft === 0 && !timerExpired}
-                  className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2 disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2 disabled:opacity-50"
                 >
                   <RotateCcw className="h-4 w-4" />
                   Reset timer
@@ -481,15 +481,15 @@ export default function CodeWorkspace() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             spellCheck="false"
-            className="min-h-[520px] w-full resize-y border-0 bg-[#12100c] p-4 font-mono text-sm leading-6 text-[#f7f3eb] outline-none"
+            className="min-h-[360px] w-full resize-y border-0 bg-[#12100c] p-4 font-mono text-sm leading-6 text-[#f7f3eb] outline-none sm:min-h-[460px] lg:min-h-[520px]"
           />
         </section>
 
-        <aside className="space-y-4">
+        <aside className="min-w-0 space-y-4">
           <div className="glass-panel rounded-2xl p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-accent">Question</p>
-            <p className="mt-2 text-sm font-medium leading-relaxed">{question.question}</p>
-            <p className="mt-3 text-xs text-muted">{question.codePrompt?.topic}</p>
+            <p className="overflow-anywhere mt-2 text-sm font-medium leading-relaxed">{question.question}</p>
+            <p className="overflow-anywhere mt-3 text-xs text-muted">{question.codePrompt?.topic}</p>
           </div>
 
           <div className="glass-panel rounded-2xl p-4">

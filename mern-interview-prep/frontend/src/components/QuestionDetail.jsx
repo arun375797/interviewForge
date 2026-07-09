@@ -97,20 +97,20 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
+    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4">
       <button
         type="button"
         aria-label="Close overlay"
         className="absolute inset-0 bg-ink/45 backdrop-blur-[2px]"
         onClick={onClose}
       />
-      <div className="animate-rise relative z-10 flex h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-line bg-[#fffcf6] shadow-2xl sm:rounded-3xl">
+      <div className="animate-rise relative z-10 flex h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-line bg-[#fffcf6] shadow-2xl sm:h-auto sm:max-h-[92dvh] sm:rounded-3xl">
         <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
           <div className="min-w-0">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
               {question.subject} · {question.difficulty}
             </p>
-            <h2 className="mt-1 font-display text-xl font-semibold leading-snug sm:text-2xl">
+            <h2 className="overflow-anywhere mt-1 font-display text-xl font-semibold leading-snug sm:text-2xl">
               {editing ? 'Edit question' : 'Interview answer'}
             </h2>
           </div>
@@ -129,134 +129,114 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
           )}
 
           {editing ? (
-            <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
-              <div className="space-y-4">
-              <label className="hidden text-sm lg:block">
-                <span className="mb-1 block font-medium">Question</span>
-                <textarea
-                  rows={3}
-                  value={form.question}
-                  onChange={(e) => setForm((f) => ({ ...f, question: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                />
-              </label>
-              <label className="block text-sm lg:hidden">
-                <span className="mb-1 block font-medium">Topic</span>
-                <input
-                  value={form.topic}
-                  onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                />
-              </label>
-              <label className="block text-sm lg:hidden">
-                <span className="mb-1 block font-medium">Difficulty</span>
-                <select
-                  value={form.difficulty}
-                  onChange={(e) => setForm((f) => ({ ...f, difficulty: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                >
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                </select>
-              </label>
-              <label className="hidden text-sm lg:block">
-                <span className="mb-1 block font-medium">Answer</span>
-                <RichAnswerEditor
-                  rows={18}
-                  value={form.answer}
-                  onChange={(answer) => setForm((f) => ({ ...f, answer }))}
-                />
-              </label>
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,280px)]">
+              <div className="min-w-0 space-y-4">
+                <label className="block text-sm">
+                  <span className="mb-1 block font-medium">Question</span>
+                  <textarea
+                    rows={3}
+                    value={form.question}
+                    onChange={(e) => setForm((f) => ({ ...f, question: e.target.value }))}
+                    className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                  />
+                </label>
+                <label className="block text-sm">
+                  <span className="mb-1 block font-medium">Answer</span>
+                  <RichAnswerEditor
+                    rows={18}
+                    value={form.answer}
+                    onChange={(answer) => setForm((f) => ({ ...f, answer }))}
+                  />
+                </label>
               </div>
-              <div className="space-y-4">
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium">Topic</span>
-                <input
-                  value={form.topic}
-                  onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                />
-              </label>
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium">Difficulty</span>
-                <select
-                  value={form.difficulty}
-                  onChange={(e) => setForm((f) => ({ ...f, difficulty: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                >
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
-                </select>
-              </label>
-              <div className="block text-sm">
-                <div className="mb-2 flex items-center justify-between gap-3">
-                  <span className="block font-medium">Key talking points</span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setForm((f) => ({ ...f, keyPoints: [...(f.keyPoints || []), ''] }))
-                    }
-                    className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium hover:bg-paper-2"
+              <div className="min-w-0 space-y-4">
+                <label className="block text-sm">
+                  <span className="mb-1 block font-medium">Topic</span>
+                  <input
+                    value={form.topic}
+                    onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
+                    className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                  />
+                </label>
+                <label className="block text-sm">
+                  <span className="mb-1 block font-medium">Difficulty</span>
+                  <select
+                    value={form.difficulty}
+                    onChange={(e) => setForm((f) => ({ ...f, difficulty: e.target.value }))}
+                    className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
                   >
-                    Add point
-                  </button>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                  </select>
+                </label>
+                <div className="block text-sm">
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
+                    <span className="block font-medium">Key talking points</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm((f) => ({ ...f, keyPoints: [...(f.keyPoints || []), ''] }))
+                      }
+                      className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium hover:bg-paper-2"
+                    >
+                      Add point
+                    </button>
+                  </div>
+                  <div className="space-y-2">
+                    {(form.keyPoints || []).map((point, index) => (
+                      <div key={index} className="flex flex-col gap-2 sm:flex-row">
+                        <input
+                          value={point}
+                          onChange={(e) =>
+                            setForm((f) => ({
+                              ...f,
+                              keyPoints: (f.keyPoints || []).map((p, i) =>
+                                i === index ? e.target.value : p
+                              ),
+                            }))
+                          }
+                          placeholder="Key point"
+                          className="min-w-0 flex-1 rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setForm((f) => ({
+                              ...f,
+                              keyPoints: (f.keyPoints || []).filter((_, i) => i !== index),
+                            }))
+                          }
+                          className="rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700 hover:bg-rose-50"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                    {!form.keyPoints?.length ? (
+                      <p className="rounded-xl border border-dashed border-line p-3 text-sm text-muted">
+                        No key points yet. Add one if you want it to appear below the answer.
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  {(form.keyPoints || []).map((point, index) => (
-                    <div key={index} className="flex gap-2">
-                      <input
-                        value={point}
-                        onChange={(e) =>
-                          setForm((f) => ({
-                            ...f,
-                            keyPoints: (f.keyPoints || []).map((p, i) =>
-                              i === index ? e.target.value : p
-                            ),
-                          }))
-                        }
-                        placeholder="Key point"
-                        className="flex-1 rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                      />
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setForm((f) => ({
-                            ...f,
-                            keyPoints: (f.keyPoints || []).filter((_, i) => i !== index),
-                          }))
-                        }
-                        className="rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700 hover:bg-rose-50"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                  {!form.keyPoints?.length ? (
-                    <p className="rounded-xl border border-dashed border-line p-3 text-sm text-muted">
-                      No key points yet. Add one if you want it to appear below the answer.
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium">Personal notes</span>
-                <textarea
-                  rows={3}
-                  value={form.notes}
-                  onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
-                />
-              </label>
+                <label className="block text-sm">
+                  <span className="mb-1 block font-medium">Personal notes</span>
+                  <textarea
+                    rows={3}
+                    value={form.notes}
+                    onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
+                    className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                  />
+                </label>
               </div>
             </div>
           ) : (
             <>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-muted">Question</p>
-                <p className="mt-2 text-lg font-medium leading-snug">{question.question}</p>
-                <p className="mt-2 text-sm text-muted">{question.topic}</p>
+                <p className="overflow-anywhere mt-2 text-lg font-medium leading-snug">{question.question}</p>
+                <p className="overflow-anywhere mt-2 text-sm text-muted">{question.topic}</p>
               </div>
 
               <div className="rounded-2xl border border-line bg-paper/70 p-4 sm:p-5">

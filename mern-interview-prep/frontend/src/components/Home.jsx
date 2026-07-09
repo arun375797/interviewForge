@@ -4,8 +4,8 @@ import { SUBJECT_META } from '../api';
 
 export default function Home({ subjects, stats, loading }) {
   return (
-    <div className="space-y-12">
-      <section className="relative overflow-hidden rounded-3xl border border-line bg-ink px-6 py-12 text-paper sm:px-10 sm:py-16">
+    <div className="space-y-10 sm:space-y-12">
+      <section className="relative overflow-hidden rounded-2xl border border-line bg-ink px-5 py-10 text-paper sm:rounded-3xl sm:px-10 sm:py-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
@@ -23,25 +23,29 @@ export default function Home({ subjects, stats, loading }) {
 
         <div className="relative animate-rise max-w-3xl">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-paper/70">
-            MERN Interview Prep
+            Learn. Build. Crack Interviews.
           </p>
-          <h1 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-balance sm:text-5xl md:text-6xl">
-            InterviewForge
-          </h1>
+          <div className="inline-flex rounded-2xl bg-white/95 p-3 shadow-xl shadow-ink/20 ring-1 ring-white/50">
+            <img
+              src="/thinkmern-logo.png"
+              alt="thinkMern"
+              className="h-auto w-full max-w-[18rem] object-contain sm:max-w-sm md:max-w-md"
+            />
+          </div>
           <p className="mt-4 max-w-xl text-base text-paper/80 sm:text-lg">
             Every question from your JS, React, Node.js, and DSA banks — arranged by topic,
             with interview-style answers you can edit anytime.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               to="/learn"
-              className="rounded-xl bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-white"
+              className="rounded-xl bg-paper px-5 py-2.5 text-center text-sm font-semibold text-ink transition hover:bg-white"
             >
               Start learning
             </Link>
             <Link
               to="/practice"
-              className="rounded-xl border border-paper/30 px-5 py-2.5 text-sm font-medium text-paper transition hover:bg-white/10"
+              className="rounded-xl border border-paper/30 px-5 py-2.5 text-center text-sm font-medium text-paper transition hover:bg-white/10"
             >
               Practice mode
             </Link>
@@ -90,15 +94,15 @@ export default function Home({ subjects, stats, loading }) {
                   style={{ background: meta.accent || s.color }}
                 />
                 <div className="relative flex items-start justify-between gap-3">
-                  <div>
+                  <div className="min-w-0">
                     <p
                       className="font-mono text-xs uppercase tracking-[0.18em]"
                       style={{ color: meta.accent || s.color }}
                     >
                       {meta.short || s.label}
                     </p>
-                    <h3 className="mt-2 font-display text-2xl font-semibold">{s.label}</h3>
-                    <p className="mt-2 max-w-sm text-sm text-muted">{s.description || meta.blurb}</p>
+                    <h3 className="overflow-anywhere mt-2 font-display text-2xl font-semibold">{s.label}</h3>
+                    <p className="overflow-anywhere mt-2 max-w-sm text-sm text-muted">{s.description || meta.blurb}</p>
                   </div>
                   <span className="rounded-full border border-line bg-paper p-2 text-ink transition group-hover:bg-ink group-hover:text-paper">
                     <ArrowUpRight className="h-4 w-4" />
