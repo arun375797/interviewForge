@@ -9,10 +9,22 @@ const authRoutes = require('./routes/auth');
 const { ensureSeeded } = require('./utils/seed');
 const { ensureAdminUser, protect } = require('./controllers/authController');
 
+function normalizeOrigin(value) {
+  let origin = String(value || '')
+    .trim()
+    .replace(/\/$/, '');
+  if (!origin) return '';
+  if (origin === '*') return '*';
+  if (!/^https?:\/\//i.test(origin)) {
+    origin = `https://${origin}`;
+  }
+  return origin;
+}
+
 function parseOrigins() {
   return (process.env.CLIENT_URL || '')
     .split(',')
-    .map((s) => s.trim().replace(/\/$/, ''))
+    .map(normalizeOrigin)
     .filter(Boolean);
 }
 
@@ -22,7 +34,6 @@ function createApp() {
   const onVercel = Boolean(process.env.VERCEL);
   const allowedOrigins = parseOrigins();
 
-  // CORS first — preflight must succeed even if DB is down
   app.use(
     cors({
       origin(origin, cb) {
@@ -30,10 +41,9 @@ function createApp() {
         if (!allowedOrigins.length) return cb(null, true);
         if (allowedOrigins.includes('*')) return cb(null, true);
         if (allowedOrigins.includes(origin)) return cb(null, true);
-        // Allow Vercel preview URLs if any CLIENT_URL is a vercel.app host
         if (
           origin.endsWith('.vercel.app') &&
-          allowedOrigins.some((o) => o.includes('vercel.app'))
+          allowedOrigins.some((o) => o.includes('vercel.app') || o.includes('thinkmern.online'))
         ) {
           return cb(null, true);
         }
@@ -53,7 +63,6 @@ function createApp() {
     app.use(morgan(isProd ? 'combined' : 'dev'));
   }
 
-  // Skip heavy boot for CORS preflight
   let bootPromise = null;
   app.use(async (req, res, next) => {
     if (req.method === 'OPTIONS') return next();
@@ -98,11 +107,8 @@ function createApp() {
     });
   });
 
-  // Canonical routes
   app.use('/api/auth', authRoutes);
   app.use('/api/questions', protect, questionRoutes);
-
-  // Aliases if VITE_API_URL was set without /api
   app.use('/auth', authRoutes);
   app.use('/questions', protect, questionRoutes);
 
@@ -122,7 +128,11 @@ function createApp() {
 
     app.get('*', (req, res, next) => {
       if (req.method !== 'GET' && req.method !== 'HEAD') return next();
-      if (req.path.startsWith('/api') || req.path.startsWith('/auth') || req.path.startsWith('/questions')) {
+      if (
+        req.path.startsWith('/api') ||
+        req.path.startsWith('/auth') ||
+        req.path.startsWith('/questions')
+      ) {
         return res.status(404).json({ message: 'API route not found' });
       }
       res.sendFile(path.join(frontendDist, 'index.html'), (err) => {
