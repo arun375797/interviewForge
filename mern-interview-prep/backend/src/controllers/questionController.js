@@ -15,12 +15,14 @@ exports.getSubjects = async (_req, res) => {
         const topics = await Question.distinct('topic', { subject: s.key });
         const bookmarked = await Question.countDocuments({ subject: s.key, bookmarked: true });
         const mastered = await Question.countDocuments({ subject: s.key, mastered: true });
+        const learned = await Question.countDocuments({ subject: s.key, learned: true });
         return {
           ...s.toObject(),
           questionCount,
           topicCount: topics.length,
           bookmarked,
           mastered,
+          learned,
         };
       })
     );
@@ -42,6 +44,7 @@ exports.getTopics = async (req, res) => {
           count: { $sum: 1 },
           bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
           mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
+          learned: { $sum: { $cond: ['$learned', 1, 0] } },
         },
       },
       { $sort: { topicOrder: 1, _id: 1 } },
@@ -53,6 +56,7 @@ exports.getTopics = async (req, res) => {
           count: 1,
           bookmarked: 1,
           mastered: 1,
+          learned: 1,
         },
       },
     ]);
@@ -71,6 +75,7 @@ exports.getQuestions = async (req, res) => {
       search,
       bookmarked,
       mastered,
+      learned,
       page = 1,
       limit = 50,
       sort = 'order',
@@ -82,6 +87,8 @@ exports.getQuestions = async (req, res) => {
     if (difficulty) filter.difficulty = difficulty;
     if (bookmarked === 'true') filter.bookmarked = true;
     if (mastered === 'true') filter.mastered = true;
+    if (learned === 'true') filter.learned = true;
+    if (learned === 'false') filter.learned = false;
     if (search && search.trim()) {
       filter.$text = { $search: search.trim() };
     }
@@ -175,6 +182,7 @@ exports.updateQuestion = async (req, res) => {
       'tags',
       'bookmarked',
       'mastered',
+      'learned',
       'order',
       'topicOrder',
     ];
@@ -229,16 +237,94 @@ exports.toggleMastered = async (req, res) => {
   }
 };
 
+exports.toggleLearned = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Question not found' });
+    item.learned = !item.learned;
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getLearnProgress = async (req, res) => {
+  try {
+    const { subject } = req.query;
+    const match = subject ? { subject } : {};
+
+    const [totals, bySubject, byTopic] = await Promise.all([
+      Question.aggregate([
+        { $match: match },
+        {
+          $group: {
+            _id: null,
+            total: { $sum: 1 },
+            learned: { $sum: { $cond: ['$learned', 1, 0] } },
+          },
+        },
+      ]),
+      Question.aggregate([
+        { $match: match },
+        {
+          $group: {
+            _id: '$subject',
+            total: { $sum: 1 },
+            learned: { $sum: { $cond: ['$learned', 1, 0] } },
+          },
+        },
+        { $sort: { _id: 1 } },
+      ]),
+      Question.aggregate([
+        { $match: match },
+        {
+          $group: {
+            _id: { subject: '$subject', topic: '$topic' },
+            topicOrder: { $min: '$topicOrder' },
+            total: { $sum: 1 },
+            learned: { $sum: { $cond: ['$learned', 1, 0] } },
+          },
+        },
+        { $sort: { '_id.subject': 1, topicOrder: 1, '_id.topic': 1 } },
+        {
+          $project: {
+            _id: 0,
+            subject: '$_id.subject',
+            topic: '$_id.topic',
+            topicOrder: 1,
+            total: 1,
+            learned: 1,
+          },
+        },
+      ]),
+    ]);
+
+    const summary = totals[0] || { total: 0, learned: 0 };
+    res.json({
+      total: summary.total,
+      learned: summary.learned,
+      remaining: Math.max(0, summary.total - summary.learned),
+      percent: summary.total ? Math.round((summary.learned / summary.total) * 100) : 0,
+      bySubject,
+      byTopic,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 exports.getStats = async (_req, res) => {
   try {
-    const [total, bookmarked, mastered, bySubject, byDifficulty] = await Promise.all([
+    const [total, bookmarked, mastered, learned, bySubject, byDifficulty] = await Promise.all([
       Question.countDocuments(),
       Question.countDocuments({ bookmarked: true }),
       Question.countDocuments({ mastered: true }),
+      Question.countDocuments({ learned: true }),
       Question.aggregate([{ $group: { _id: '$subject', count: { $sum: 1 } } }]),
       Question.aggregate([{ $group: { _id: '$difficulty', count: { $sum: 1 } } }]),
     ]);
-    res.json({ total, bookmarked, mastered, bySubject, byDifficulty });
+    res.json({ total, bookmarked, mastered, learned, bySubject, byDifficulty });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

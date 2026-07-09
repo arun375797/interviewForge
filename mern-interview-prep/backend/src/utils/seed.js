@@ -55,6 +55,7 @@ async function buildAndInsert() {
           tags: [key, topic.name.split(/[,&/]/)[0].trim().toLowerCase()].filter(Boolean),
           bookmarked: false,
           mastered: false,
+          learned: false,
           notes: '',
           order: idx + 1,
         });

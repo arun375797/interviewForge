@@ -87,6 +87,13 @@ export const api = {
   deleteQuestion: (id) => request(`/questions/${id}`, { method: 'DELETE' }),
   toggleBookmark: (id) => request(`/questions/${id}/bookmark`, { method: 'PATCH' }),
   toggleMastered: (id) => request(`/questions/${id}/mastered`, { method: 'PATCH' }),
+  toggleLearned: (id) => request(`/questions/${id}/learned`, { method: 'PATCH' }),
+  getLearnProgress: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/learn/progress${q ? `?${q}` : ''}`);
+  },
 };
 
 export const SUBJECT_META = {

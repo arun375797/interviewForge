@@ -22,6 +22,7 @@ const questionSchema = new mongoose.Schema(
     tags: [{ type: String }],
     bookmarked: { type: Boolean, default: false, index: true },
     mastered: { type: Boolean, default: false, index: true },
+    learned: { type: Boolean, default: false, index: true },
     notes: { type: String, default: '' },
     order: { type: Number, default: 0 },
   },

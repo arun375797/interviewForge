@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/subjects', ctrl.getSubjects);
 router.get('/subjects/:subject/topics', ctrl.getTopics);
 router.get('/stats', ctrl.getStats);
+router.get('/learn/progress', ctrl.getLearnProgress);
 router.get('/random', ctrl.getRandomQuestion);
 router.get('/', ctrl.getQuestions);
 router.get('/:id', ctrl.getQuestionById);
@@ -14,5 +15,6 @@ router.put('/:id', ctrl.updateQuestion);
 router.delete('/:id', ctrl.deleteQuestion);
 router.patch('/:id/bookmark', ctrl.toggleBookmark);
 router.patch('/:id/mastered', ctrl.toggleMastered);
+router.patch('/:id/learned', ctrl.toggleLearned);
 
 module.exports = router;

@@ -34,16 +34,16 @@ export default function Home({ subjects, stats, loading }) {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              to="/practice"
+              to="/learn"
               className="rounded-xl bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-white"
             >
-              Start practice mode
+              Start learning
             </Link>
             <Link
-              to="/bookmarks"
+              to="/practice"
               className="rounded-xl border border-paper/30 px-5 py-2.5 text-sm font-medium text-paper transition hover:bg-white/10"
             >
-              View bookmarks
+              Practice mode
             </Link>
           </div>
         </div>

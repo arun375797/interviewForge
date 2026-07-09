@@ -3,6 +3,7 @@ import {
   X,
   Bookmark,
   CheckCircle2,
+  Check,
   Pencil,
   Trash2,
   Save,
@@ -67,7 +68,9 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
       const updated =
         kind === 'bookmark'
           ? await api.toggleBookmark(question._id)
-          : await api.toggleMastered(question._id);
+          : kind === 'learned'
+            ? await api.toggleLearned(question._id)
+            : await api.toggleMastered(question._id);
       onUpdated(updated);
     } catch (err) {
       setError(err.message);
@@ -233,6 +236,16 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
             </>
           ) : (
             <>
+              <button
+                type="button"
+                onClick={() => toggle('learned')}
+                className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm ${
+                  question.learned ? 'border-accent bg-teal-50 text-accent' : 'border-line'
+                }`}
+              >
+                <Check className="h-4 w-4" />
+                {question.learned ? 'Covered' : 'Mark covered'}
+              </button>
               <button
                 type="button"
                 onClick={() => toggle('bookmark')}
