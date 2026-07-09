@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   Check,
   ChevronRight,
@@ -11,8 +11,16 @@ import {
 import { api, SUBJECT_META } from '../api';
 import QuestionDetail from './QuestionDetail';
 
+const LANGUAGE_OPTIONS = [
+  { key: 'javascript', label: 'JavaScript' },
+  { key: 'react', label: 'React' },
+  { key: 'nodejs', label: 'Node.js' },
+  { key: 'dsa', label: 'DSA' },
+];
+
 export default function LearnSubject() {
   const { subject } = useParams();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const topic = searchParams.get('topic') || '';
   const selectedId = searchParams.get('q') || '';
@@ -38,6 +46,7 @@ export default function LearnSubject() {
   useEffect(() => {
     let alive = true;
     setLoading(true);
+    setPage(1);
     api
       .getTopics(subject)
       .then((data) => alive && setTopics(data))
@@ -101,6 +110,10 @@ export default function LearnSubject() {
     ? Math.round(((activeTopic.learned || 0) / activeTopic.count) * 100)
     : 0;
 
+  const onLanguageChange = (key) => {
+    navigate(`/learn/${key}`, { replace: true });
+  };
+
   const setTopic = (name) => {
     const next = new URLSearchParams(searchParams);
     if (name) next.set('topic', name);
@@ -137,7 +150,9 @@ export default function LearnSubject() {
     setTogglingId(q._id);
     try {
       const updated = await api.toggleLearned(q._id);
-      setQuestions((prev) => prev.map((item) => (item._id === updated._id ? { ...item, ...updated } : item)));
+      setQuestions((prev) =>
+        prev.map((item) => (item._id === updated._id ? { ...item, ...updated } : item))
+      );
       if (selected?._id === updated._id) setSelected(updated);
       refreshTopics();
     } catch (err) {
@@ -161,26 +176,45 @@ export default function LearnSubject() {
 
   return (
     <div className="animate-fade space-y-6">
-      <div>
-        <div className="mb-2 flex flex-wrap items-center gap-2 text-sm text-muted">
-          <Link to="/learn" className="hover:text-ink">
-            Learn
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5" />
-          <span style={{ color: meta.accent }}>{meta.label}</span>
-          {topic ? (
-            <>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <span className="max-w-[240px] truncate">{topic}</span>
-            </>
-          ) : null}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div className="mb-2 flex flex-wrap items-center gap-2 text-sm text-muted">
+            <Link to={`/learn?lang=${subject}`} className="hover:text-ink">
+              Learn
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5" />
+            <span style={{ color: meta.accent }}>{meta.label}</span>
+            {topic ? (
+              <>
+                <ChevronRight className="h-3.5 w-3.5" />
+                <span className="max-w-[240px] truncate">{topic}</span>
+              </>
+            ) : null}
+          </div>
+          <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            Learn · {meta.label}
+          </h1>
+          <p className="mt-1 text-sm text-muted">
+            Tick questions as you cover them. Your progress is saved automatically.
+          </p>
         </div>
-        <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Learn · {meta.label}
-        </h1>
-        <p className="mt-1 text-sm text-muted">
-          Tick questions as you cover them. Your progress is saved automatically.
-        </p>
+
+        <label className="block w-full sm:w-56">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted">
+            Language
+          </span>
+          <select
+            value={subject}
+            onChange={(e) => onLanguageChange(e.target.value)}
+            className="w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm font-medium outline-none focus:border-accent"
+          >
+            {LANGUAGE_OPTIONS.map((opt) => (
+              <option key={opt.key} value={opt.key}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
