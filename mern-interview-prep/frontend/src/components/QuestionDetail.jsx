@@ -10,6 +10,8 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { api } from '../api';
+import AnswerContent from './AnswerContent';
+import RichAnswerEditor from './RichAnswerEditor';
 
 export default function QuestionDetail({ question, onClose, onUpdated, onDeleted }) {
   const [editing, setEditing] = useState(false);
@@ -18,6 +20,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
     answer: question.answer,
     topic: question.topic,
     difficulty: question.difficulty,
+    keyPoints: question.keyPoints || [],
     notes: question.notes || '',
   });
   const [saving, setSaving] = useState(false);
@@ -30,6 +33,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
       answer: question.answer,
       topic: question.topic,
       difficulty: question.difficulty,
+      keyPoints: question.keyPoints || [],
       notes: question.notes || '',
     });
     setEditing(false);
@@ -53,7 +57,10 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
     setSaving(true);
     setError('');
     try {
-      const updated = await api.updateQuestion(question._id, form);
+      const updated = await api.updateQuestion(question._id, {
+        ...form,
+        keyPoints: (form.keyPoints || []).map((p) => p.trim()).filter(Boolean),
+      });
       onUpdated(updated);
       setEditing(false);
     } catch (err) {
@@ -96,7 +103,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
         className="absolute inset-0 bg-ink/45 backdrop-blur-[2px]"
         onClick={onClose}
       />
-      <div className="animate-rise relative z-10 flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-3xl border border-line bg-[#fffcf6] shadow-2xl sm:rounded-3xl">
+      <div className="animate-rise relative z-10 flex h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-line bg-[#fffcf6] shadow-2xl sm:rounded-3xl">
         <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
           <div className="min-w-0">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
@@ -121,8 +128,9 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
           )}
 
           {editing ? (
-            <div className="space-y-4">
-              <label className="block text-sm">
+            <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
+              <div className="space-y-4">
+              <label className="hidden text-sm lg:block">
                 <span className="mb-1 block font-medium">Question</span>
                 <textarea
                   rows={3}
@@ -131,6 +139,36 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                   className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
                 />
               </label>
+              <label className="block text-sm lg:hidden">
+                <span className="mb-1 block font-medium">Topic</span>
+                <input
+                  value={form.topic}
+                  onChange={(e) => setForm((f) => ({ ...f, topic: e.target.value }))}
+                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                />
+              </label>
+              <label className="block text-sm lg:hidden">
+                <span className="mb-1 block font-medium">Difficulty</span>
+                <select
+                  value={form.difficulty}
+                  onChange={(e) => setForm((f) => ({ ...f, difficulty: e.target.value }))}
+                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                >
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </label>
+              <label className="hidden text-sm lg:block">
+                <span className="mb-1 block font-medium">Answer</span>
+                <RichAnswerEditor
+                  rows={18}
+                  value={form.answer}
+                  onChange={(answer) => setForm((f) => ({ ...f, answer }))}
+                />
+              </label>
+              </div>
+              <div className="space-y-4">
               <label className="block text-sm">
                 <span className="mb-1 block font-medium">Topic</span>
                 <input
@@ -151,15 +189,56 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                   <option value="hard">Hard</option>
                 </select>
               </label>
-              <label className="block text-sm">
-                <span className="mb-1 block font-medium">Answer (interview style)</span>
-                <textarea
-                  rows={12}
-                  value={form.answer}
-                  onChange={(e) => setForm((f) => ({ ...f, answer: e.target.value }))}
-                  className="w-full rounded-xl border border-line bg-paper px-3 py-2 font-sans leading-relaxed outline-none focus:border-accent"
-                />
-              </label>
+              <div className="block text-sm">
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <span className="block font-medium">Key talking points</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setForm((f) => ({ ...f, keyPoints: [...(f.keyPoints || []), ''] }))
+                    }
+                    className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium hover:bg-paper-2"
+                  >
+                    Add point
+                  </button>
+                </div>
+                <div className="space-y-2">
+                  {(form.keyPoints || []).map((point, index) => (
+                    <div key={index} className="flex gap-2">
+                      <input
+                        value={point}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            keyPoints: (f.keyPoints || []).map((p, i) =>
+                              i === index ? e.target.value : p
+                            ),
+                          }))
+                        }
+                        placeholder="Key point"
+                        className="flex-1 rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setForm((f) => ({
+                            ...f,
+                            keyPoints: (f.keyPoints || []).filter((_, i) => i !== index),
+                          }))
+                        }
+                        className="rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700 hover:bg-rose-50"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                  {!form.keyPoints?.length ? (
+                    <p className="rounded-xl border border-dashed border-line p-3 text-sm text-muted">
+                      No key points yet. Add one if you want it to appear below the answer.
+                    </p>
+                  ) : null}
+                </div>
+              </div>
               <label className="block text-sm">
                 <span className="mb-1 block font-medium">Personal notes</span>
                 <textarea
@@ -169,6 +248,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                   className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
                 />
               </label>
+              </div>
             </div>
           ) : (
             <>
@@ -182,8 +262,8 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                 <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                   Answer
                 </p>
-                <div className="mt-3 whitespace-pre-wrap text-[15px] leading-relaxed text-ink-soft">
-                  {question.answer}
+                <div className="mt-3">
+                  <AnswerContent>{question.answer}</AnswerContent>
                 </div>
               </div>
 

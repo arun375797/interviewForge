@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Shuffle, Eye, EyeOff, RefreshCw } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
+import AnswerContent from './AnswerContent';
 import QuestionDetail from './QuestionDetail';
 
 export default function Practice() {
@@ -126,8 +127,8 @@ export default function Practice() {
               <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                 Answer
               </p>
-              <div className="mt-3 whitespace-pre-wrap text-[15px] leading-relaxed">
-                {question.answer}
+              <div className="mt-3">
+                <AnswerContent>{question.answer}</AnswerContent>
               </div>
             </div>
           )}

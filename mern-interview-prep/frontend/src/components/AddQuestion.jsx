@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api, SUBJECT_META } from '../api';
+import RichAnswerEditor from './RichAnswerEditor';
 
 export default function AddQuestion() {
   const [params] = useSearchParams();
@@ -81,12 +82,11 @@ export default function AddQuestion() {
 
         <label className="block text-sm">
           <span className="mb-1 block font-medium">Answer (optional)</span>
-          <textarea
+          <RichAnswerEditor
             rows={8}
             value={form.answer}
-            onChange={(e) => setForm((f) => ({ ...f, answer: e.target.value }))}
-            placeholder="Write how you'd answer in an interview…"
-            className="w-full rounded-xl border border-line bg-paper px-3 py-2.5 outline-none focus:border-accent"
+            onChange={(answer) => setForm((f) => ({ ...f, answer }))}
+            placeholder="Write the direct answer..."
           />
         </label>
 
