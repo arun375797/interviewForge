@@ -1,0 +1,902 @@
+[
+  {
+    "category": "express",
+    "topic": "Express.js Basics, App Methods & Routing",
+    "question": "express.urlencoded(), express.static()",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "express",
+    "topic": "Express.js Basics, App Methods & Routing",
+    "question": "router level",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "express",
+    "topic": "Express.js Basics, App Methods & Routing",
+    "question": "http server vs express",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware, Validation & Request Handling",
+    "question": "Middlewares",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "express",
+    "topic": "Practical Node.js / Express Coding Tasks",
+    "question": "OPTION - preflight request",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 1",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 2",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 3",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 4",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 5",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 6",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 7",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 8",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 9",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 10",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 11",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 12",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 13",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 14",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 15",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 16",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 17",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 18",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 19",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 20",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 21",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 22",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 23",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 24",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 25",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 26",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 27",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 28",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 29",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 30",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 31",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 32",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 33",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 34",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 35",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 36",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 37",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 38",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 39",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 40",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 41",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 42",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 43",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 44",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 45",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 46",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 47",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 48",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 49",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 50",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 51",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 52",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 53",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 54",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 55",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 56",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 57",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 58",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 59",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 60",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 61",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 62",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 63",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 64",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 65",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 66",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 67",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 68",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 69",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 70",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 71",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 72",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 73",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 74",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 75",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 76",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 77",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 78",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 79",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 80",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 81",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 82",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 83",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 84",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 85",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 86",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 87",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 88",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 89",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "CORS",
+    "question": "Enable CORS for a React frontend in an Express API.",
+    "explanation": "Allow the frontend origin and handle OPTIONS preflight requests for non-simple calls.",
+    "text": "import cors from \"cors\";\n\napp.use(\n  cors({\n    origin: \"http://localhost:5173\",\n    methods: [\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"],\n    credentials: true,\n  })\n);",
+    "label": "CORS 90",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Server Setup",
+    "question": "Create a basic Express server on port 3000.",
+    "explanation": "Import express, create app, add routes, and listen on a port from env or default.",
+    "text": "import express from \"express\";\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.json());\n\napp.get(\"/health\", (req, res) => {\n  res.status(200).json({ status: \"ok\" });\n});\n\napp.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+    "label": "Server Setup 91",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Routing",
+    "question": "Create an Express router with CRUD routes for users.",
+    "explanation": "Use express.Router(), define HTTP verbs, and mount the router on /users.",
+    "text": "import express from \"express\";\n\nconst router = express.Router();\n\nrouter.get(\"/\", (req, res) => {\n  res.json([{ id: 1, name: \"Asha\" }]);\n});\n\nrouter.get(\"/:id\", (req, res) => {\n  res.json({ id: Number(req.params.id), name: \"Asha\" });\n});\n\nrouter.post(\"/\", (req, res) => {\n  res.status(201).json({ id: 2, ...req.body });\n});\n\nrouter.delete(\"/:id\", (req, res) => {\n  res.status(204).send();\n});\n\nexport default router;",
+    "label": "Routing 92",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Middleware",
+    "question": "Write Express middleware to block all POST requests.",
+    "explanation": "Middleware runs before routes. Call next() to continue or send a response to stop the chain.",
+    "text": "function blockPostRequests(req, res, next) {\n  if (req.method === \"POST\") {\n    return res.status(405).json({ error: \"POST requests are blocked\" });\n  }\n  next();\n}\n\napp.use(blockPostRequests);",
+    "label": "Middleware 93",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Error Handling",
+    "question": "Add centralized error handling middleware in Express.",
+    "explanation": "Error middleware has four arguments. Send a safe JSON response and log the real error server-side.",
+    "text": "app.use((err, req, res, next) => {\n  console.error(err);\n  res.status(err.status || 500).json({\n    error: err.message || \"Internal server error\",\n  });\n});",
+    "label": "Error Handling 94",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "express",
+    "topic": "Static Files",
+    "question": "Serve static files from a public folder in Express.",
+    "explanation": "express.static mounts a directory so CSS, images, and built frontend files are served directly.",
+    "text": "import path from \"node:path\";\nimport express from \"express\";\n\nconst app = express();\n\napp.use(express.static(path.join(process.cwd(), \"public\")));",
+    "label": "Static Files 95",
+    "source": "thinkmern-practical-templates"
+  }
+]

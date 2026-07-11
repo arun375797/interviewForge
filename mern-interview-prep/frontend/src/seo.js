@@ -23,6 +23,10 @@ const INDEXABLE_ROUTES = new Set([
   '/code',
   '/practice',
   '/mock',
+  '/review',
+  '/flashcards',
+  '/weak-spots',
+  '/feynman',
   '/subject/javascript',
   '/subject/react',
   '/subject/nodejs',
@@ -180,10 +184,47 @@ function routeSeo(pathname) {
   if (section === 'practice') {
     return {
       ...base,
-      title: `Random Interview Practice | ${SITE_NAME}`,
+      title: `Active Recall Practice | ${SITE_NAME}`,
       description:
-        'Draw random MERN interview questions, answer out loud, and reveal concise interview-style explanations.',
-      keywords: [...DEFAULT_KEYWORDS, 'random interview questions', 'mock interview practice'],
+        'Write your answer before revealing, rate your recall, and use interleaved practice to mix topics like a real interview.',
+      keywords: [...DEFAULT_KEYWORDS, 'active recall', 'interleaved practice', 'interview practice'],
+    };
+  }
+
+  if (section === 'review') {
+    return {
+      ...base,
+      title: `Daily Spaced Repetition Review | ${SITE_NAME}`,
+      description: 'Manually add questions to your daily review queue and practice spaced repetition when they are due.',
+      keywords: [...DEFAULT_KEYWORDS, 'spaced repetition', 'daily review'],
+    };
+  }
+
+  if (section === 'flashcards') {
+    return {
+      ...base,
+      title: `Interview Flashcards | ${SITE_NAME}`,
+      description: 'Quick flashcard drills from question key points for fast micro-reviews.',
+      keywords: [...DEFAULT_KEYWORDS, 'interview flashcards', 'MERN flashcards'],
+    };
+  }
+
+  if (section === 'weak-spots') {
+    return {
+      ...base,
+      title: `Weak Spots Dashboard | ${SITE_NAME}`,
+      description: 'Questions you manually mark as weak for extra review and practice.',
+      keywords: [...DEFAULT_KEYWORDS, 'weak spots', 'study focus'],
+      indexable: false,
+    };
+  }
+
+  if (section === 'feynman') {
+    return {
+      ...base,
+      title: `Explain Mode — Feynman Practice | ${SITE_NAME}`,
+      description: 'Explain concepts out loud or in writing, then reveal the model answer and key points.',
+      keywords: [...DEFAULT_KEYWORDS, 'feynman technique', 'explain interview answers'],
     };
   }
 
@@ -192,8 +233,19 @@ function routeSeo(pathname) {
       ...base,
       title: `Timed Mock Interviews | ${SITE_NAME}`,
       description:
-        'Run timed mock interview sessions across JavaScript, React, Node.js, and DSA questions.',
+        'Run timed mock interviews with self-rating, follow-up prompts, and a session debrief of weak questions.',
       keywords: [...DEFAULT_KEYWORDS, 'timed mock interview', 'MERN mock interview'],
+    };
+  }
+
+  if (section === 'typing') {
+    return {
+      ...base,
+      title: `Typing Speed Practice | ${SITE_NAME}`,
+      description:
+        'Improve typing speed with English interview phrases and MERN stack code snippets for JavaScript, React, Node.js, Express, DSA, and MongoDB.',
+      keywords: [...DEFAULT_KEYWORDS, 'typing speed practice', 'code typing drill', 'MERN typing'],
+      indexable: false,
     };
   }
 

@@ -58,6 +58,14 @@ export function AuthProvider({ children }) {
     return data.user;
   }, []);
 
+  const loginWithGoogle = useCallback(async (credential) => {
+    const data = await api.googleLogin(credential);
+    setSession(data.token, data.user);
+    setToken(data.token);
+    setUser(data.user);
+    return data.user;
+  }, []);
+
   const logout = useCallback(() => {
     clearSession();
     setToken(null);
@@ -69,11 +77,13 @@ export function AuthProvider({ children }) {
       user,
       token,
       isAuthenticated: Boolean(token && user),
+      isAdmin: Boolean(user?.isAdmin),
       booting,
       login,
+      loginWithGoogle,
       logout,
     }),
-    [user, token, booting, login, logout]
+    [user, token, booting, login, loginWithGoogle, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

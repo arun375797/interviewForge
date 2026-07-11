@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Code2, TerminalSquare } from 'lucide-react';
+import { ArrowUpRight, Code2, Keyboard, TerminalSquare } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
 
 const CODE_LANGUAGES = [
@@ -81,6 +81,24 @@ export default function Code() {
           this page.
         </div>
       ) : null}
+
+      <div className="flex flex-wrap gap-3">
+        <Link
+          to="/ide"
+          className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-4 py-2.5 text-sm font-medium hover:bg-paper-2"
+        >
+          <TerminalSquare className="h-4 w-4" />
+          Open IDE
+        </Link>
+        <Link
+          to="/typing"
+          className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-4 py-2.5 text-sm font-medium hover:bg-paper-2"
+        >
+          <Keyboard className="h-4 w-4" />
+          Typing speed
+          <ArrowUpRight className="h-4 w-4" />
+        </Link>
+      </div>
 
       <div className="grid gap-5 md:grid-cols-2">
         {loading

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "generate:typing": "node scripts/build-typing-qa.mjs",
     "prebuild": "npm run generate:sitemap",
     "build": "vite build",
     "lint": "oxlint",
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "@react-oauth/google": "^0.13.5",
     "@tiptap/extension-code-block-lowlight": "^3.27.3",
     "@tiptap/extension-highlight": "^3.27.3",
     "@tiptap/extension-link": "^3.27.3",

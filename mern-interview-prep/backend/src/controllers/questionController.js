@@ -263,6 +263,18 @@ exports.toggleBookmark = async (req, res) => {
   }
 };
 
+exports.toggleWeakSpot = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Question not found' });
+    item.weakSpot = !item.weakSpot;
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 exports.toggleMastered = async (req, res) => {
   try {
     const item = await Question.findById(req.params.id);
@@ -280,6 +292,36 @@ exports.toggleLearned = async (req, res) => {
     const item = await Question.findById(req.params.id);
     if (!item) return res.status(404).json({ message: 'Question not found' });
     item.learned = !item.learned;
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.toggleDailyReview = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Question not found' });
+    item.inDailyReview = !item.inDailyReview;
+    if (item.inDailyReview) {
+      const { scheduleInitialReview } = require('../utils/spacedRepetition');
+      const schedule = scheduleInitialReview();
+      item.nextReviewAt = schedule.nextReviewAt;
+      if (!item.reviewCount) item.reviewCount = 0;
+    }
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.toggleExplainList = async (req, res) => {
+  try {
+    const item = await Question.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Question not found' });
+    item.inExplainList = !item.inExplainList;
     await item.save();
     res.json(item);
   } catch (err) {

@@ -1,8 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Layers, Bookmark, CheckCircle2 } from 'lucide-react';
-import { SUBJECT_META } from '../api';
+import {
+  ArrowUpRight,
+  Layers,
+  Bookmark,
+  CheckCircle2,
+  Brain,
+  Target,
+  Layers2,
+  Mic,
+  Zap,
+  Keyboard,
+} from 'lucide-react';
+import { api, SUBJECT_META } from '../api';
+import { ReviewDueBanner } from './RatingButtons';
+
+const LEARNING_TOOLS = [
+  { to: '/review', label: 'Daily review', desc: 'Spaced repetition queue', icon: Brain },
+  { to: '/flashcards', label: 'Flashcards', desc: 'Quick key-point drills', icon: Layers2 },
+  { to: '/weak-spots', label: 'Weak spots', desc: 'Questions you mark as weak', icon: Target },
+  { to: '/feynman', label: 'Explain mode', desc: 'Practice explaining aloud', icon: Mic },
+  { to: '/practice', label: 'Active recall', desc: 'Answer before revealing', icon: Zap },
+  { to: '/typing', label: 'Type speed', desc: 'English + MERN code drills', icon: Keyboard },
+];
 
 export default function Home({ subjects, stats, loading }) {
+  const [reviewSummary, setReviewSummary] = useState(null);
+
+  useEffect(() => {
+    api.getReviewSummary().then(setReviewSummary).catch(() => null);
+  }, []);
+
   return (
     <div className="space-y-10 sm:space-y-12">
       <section className="relative overflow-hidden rounded-2xl border border-line bg-ink px-5 py-10 text-paper sm:rounded-3xl sm:px-10 sm:py-16">
@@ -33,23 +61,53 @@ export default function Home({ subjects, stats, loading }) {
             />
           </div>
           <p className="mt-4 max-w-xl text-base text-paper/80 sm:text-lg">
-            Every question from your JS, React, Node.js, and DSA banks — arranged by topic,
-            with interview-style answers you can edit anytime.
+            Full learning system — topic banks, spaced repetition, active recall, mock debriefs,
+            and code test cases.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
-              to="/learn"
+              to="/review"
               className="rounded-xl bg-paper px-5 py-2.5 text-center text-sm font-semibold text-ink transition hover:bg-white"
             >
-              Start learning
+              Daily review
             </Link>
             <Link
               to="/practice"
               className="rounded-xl border border-paper/30 px-5 py-2.5 text-center text-sm font-medium text-paper transition hover:bg-white/10"
             >
-              Practice mode
+              Active recall
+            </Link>
+            <Link
+              to="/weak-spots"
+              className="rounded-xl border border-paper/30 px-5 py-2.5 text-center text-sm font-medium text-paper transition hover:bg-white/10"
+            >
+              Weak spots
             </Link>
           </div>
+        </div>
+      </section>
+
+      <ReviewDueBanner summary={reviewSummary} loading={loading} />
+
+      <section>
+        <h2 className="font-display text-2xl font-semibold tracking-tight">Learning tools</h2>
+        <p className="mt-1 text-sm text-muted">Features built to help you retain and recall faster.</p>
+        <div className="stagger mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {LEARNING_TOOLS.map(({ to, label, desc, icon: Icon }) => (
+            <Link
+              key={to}
+              to={to}
+              className="glass-panel group flex items-start gap-4 rounded-2xl p-4 transition hover:-translate-y-0.5 hover:border-accent/40"
+            >
+              <span className="rounded-xl bg-paper-2 p-2.5 text-accent transition group-hover:bg-accent group-hover:text-white">
+                <Icon className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="font-medium">{label}</p>
+                <p className="mt-0.5 text-sm text-muted">{desc}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 

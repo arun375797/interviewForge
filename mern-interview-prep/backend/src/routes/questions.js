@@ -1,5 +1,7 @@
 const express = require('express');
 const ctrl = require('../controllers/questionController');
+const learning = require('../controllers/learningController');
+const { requireAdmin } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -14,14 +16,30 @@ router.get('/code/:id', ctrl.getCodeQuestionById);
 router.get('/code/:id/saved-code', ctrl.getSavedCode);
 router.patch('/code/:id/completed', ctrl.toggleCodeCompleted);
 router.put('/code/:id/save', ctrl.saveCode);
+router.get('/review/summary', learning.getReviewSummary);
+router.get('/review/due', learning.getDueReviews);
+router.delete('/review/queue', learning.clearDailyReview);
+router.get('/weak-spots', learning.getWeakSpots);
+router.delete('/weak-spots', learning.clearWeakSpots);
+router.get('/explain-list', learning.getExplainList);
+router.delete('/explain-list', learning.clearExplainList);
+router.get('/flashcards', learning.getFlashcards);
+router.get('/random/interleaved', learning.getInterleaved);
 router.get('/random/batch', ctrl.getRandomBatch);
 router.get('/random', ctrl.getRandomQuestion);
+router.post('/from-question/page', learning.createPageFromQuestion);
 router.get('/', ctrl.getQuestions);
+router.get('/:id/follow-ups', learning.getFollowUps);
+router.post('/:id/review', learning.submitReview);
+router.post('/:id/feynman', learning.checkFeynman);
 router.get('/:id', ctrl.getQuestionById);
-router.post('/', ctrl.createQuestion);
-router.put('/:id', ctrl.updateQuestion);
-router.delete('/:id', ctrl.deleteQuestion);
+router.post('/', requireAdmin, ctrl.createQuestion);
+router.put('/:id', requireAdmin, ctrl.updateQuestion);
+router.delete('/:id', requireAdmin, ctrl.deleteQuestion);
 router.patch('/:id/bookmark', ctrl.toggleBookmark);
+router.patch('/:id/weak', ctrl.toggleWeakSpot);
+router.patch('/:id/daily-review', ctrl.toggleDailyReview);
+router.patch('/:id/explain-list', ctrl.toggleExplainList);
 router.patch('/:id/mastered', ctrl.toggleMastered);
 router.patch('/:id/learned', ctrl.toggleLearned);
 

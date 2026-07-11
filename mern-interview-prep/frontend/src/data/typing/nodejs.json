@@ -1,0 +1,902 @@
+[
+  {
+    "category": "nodejs",
+    "topic": "Core Modules: FS, Path, OS, URL, Crypto, Util, Zlib & Timers",
+    "question": "fs.writeFile()",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Core Modules: FS, Path, OS, URL, Crypto, Util, Zlib & Timers",
+    "question": "Process Management (`process.exit`, `process.env`)",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP, HTTPS, TCP/IP, URL & Networking",
+    "question": "Learn how to create HTTP servers and clients.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams, Buffers, Pipe & File Processing",
+    "question": "reateReadStream",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Events, EventEmitter, Event-Driven Architecture & Reactor Pattern",
+    "question": "event emitter",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter",
+    "source": "parsed-questions/nodejs"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 1",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 2",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 3",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 4",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 5",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 6",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 7",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 8",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 9",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 10",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 11",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 12",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 13",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 14",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 15",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 16",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 17",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 18",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 19",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 20",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 21",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 22",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 23",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 24",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 25",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 26",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 27",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 28",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 29",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 30",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 31",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 32",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 33",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 34",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 35",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 36",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 37",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 38",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 39",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 40",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 41",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 42",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 43",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 44",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 45",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 46",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 47",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 48",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 49",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 50",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 51",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 52",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 53",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 54",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 55",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 56",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 57",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 58",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 59",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 60",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 61",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 62",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 63",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 64",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 65",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 66",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 67",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 68",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 69",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 70",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 71",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 72",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 73",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 74",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 75",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 76",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 77",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 78",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 79",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 80",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 81",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 82",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 83",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 84",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 85",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 86",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 87",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 88",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 89",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 90",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "HTTP Server",
+    "question": "Create a basic HTTP server in Node.js without Express.",
+    "explanation": "Use the built-in http module, set headers, and send JSON from the request handler.",
+    "text": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { \"Content-Type\": \"application/json\" });\n  res.end(JSON.stringify({ message: \"Hello from Node.js\" }));\n});\n\nserver.listen(3000, () => {\n  console.log(\"HTTP server listening on port 3000\");\n});",
+    "label": "HTTP Server 91",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "File System",
+    "question": "Write the current date and time to a file using the Node.js fs module.",
+    "explanation": "Use fs/promises writeFile with UTF-8 encoding for async file writes.",
+    "text": "import { writeFile } from \"node:fs/promises\";\n\nconst content = new Date().toISOString();\n\nawait writeFile(\"current-time.txt\", content, \"utf8\");\nconsole.log(\"File written successfully\");",
+    "label": "File System 92",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Streams",
+    "question": "Read a large file using streams and pipe it to the response.",
+    "explanation": "Streams process data chunk by chunk and keep memory usage low for large files.",
+    "text": "import { createReadStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\napp.get(\"/download\", async (req, res) => {\n  res.setHeader(\"Content-Type\", \"text/plain\");\n  await pipeline(createReadStream(\"large-file.txt\"), res);\n});",
+    "label": "Streams 93",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Environment Variables",
+    "question": "Read configuration from environment variables in Node.js.",
+    "explanation": "Never hardcode secrets. Read from process.env and validate required values at startup.",
+    "text": "const PORT = Number(process.env.PORT) || 3000;\nconst MONGO_URL = process.env.MONGO_URL;\n\nif (!MONGO_URL) {\n  throw new Error(\"MONGO_URL is required\");\n}\n\nconsole.log(`Starting server on port ${PORT}`);",
+    "label": "Environment Variables 94",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "nodejs",
+    "topic": "Event Emitter",
+    "question": "Implement a simple event emitter pattern in Node.js.",
+    "explanation": "Listeners subscribe with on and the emitter triggers them with emit.",
+    "text": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\nbus.on(\"ready\", () => {\n  console.log(\"Service is ready\");\n});\n\nbus.emit(\"ready\");",
+    "label": "Event Emitter 95",
+    "source": "thinkmern-practical-templates"
+  }
+]

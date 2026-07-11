@@ -83,7 +83,7 @@ async function request(path, options = {}) {
     const res = await fetch(url, { ...options, method, headers });
     const data = await res.json().catch(() => ({}));
 
-    if (res.status === 401 && !path.includes('/auth/login')) {
+    if (res.status === 401 && !path.includes('/auth/login') && !path.includes('/auth/google')) {
       clearSession();
       if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/login')) {
         window.location.assign('/login');
@@ -119,6 +119,11 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
+  googleLogin: (credential) =>
+    request('/auth/google', {
+      method: 'POST',
+      body: JSON.stringify({ credential }),
+    }),
   me: () => request('/auth/me'),
   getSubjects: () => request('/questions/subjects'),
   getTopics: (subject) => request(`/questions/subjects/${subject}/topics`),
@@ -148,6 +153,9 @@ export const api = {
     request(`/questions/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
   deleteQuestion: (id) => request(`/questions/${id}`, { method: 'DELETE' }),
   toggleBookmark: (id) => request(`/questions/${id}/bookmark`, { method: 'PATCH' }),
+  toggleWeakSpot: (id) => request(`/questions/${id}/weak`, { method: 'PATCH' }),
+  toggleDailyReview: (id) => request(`/questions/${id}/daily-review`, { method: 'PATCH' }),
+  toggleExplainList: (id) => request(`/questions/${id}/explain-list`, { method: 'PATCH' }),
   toggleMastered: (id) => request(`/questions/${id}/mastered`, { method: 'PATCH' }),
   toggleLearned: (id) => request(`/questions/${id}/learned`, { method: 'PATCH' }),
   getLearnProgress: (params = {}) => {
@@ -210,6 +218,71 @@ export const api = {
     request('/ide/run', { method: 'POST', body: JSON.stringify(body), cache: 'no-store' }),
   resetIdeSandbox: () =>
     request('/ide/reset', { method: 'POST', cache: 'no-store' }),
+  getReviewSummary: () => request('/questions/review/summary'),
+  getDueReviews: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/review/due${q ? `?${q}` : ''}`);
+  },
+  clearDailyReview: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/review/queue${q ? `?${q}` : ''}`, { method: 'DELETE' });
+  },
+  submitReview: (id, rating) =>
+    request(`/questions/${id}/review`, {
+      method: 'POST',
+      body: JSON.stringify({ rating }),
+    }),
+  getWeakSpots: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/weak-spots${q ? `?${q}` : ''}`);
+  },
+  clearWeakSpots: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/weak-spots${q ? `?${q}` : ''}`, { method: 'DELETE' });
+  },
+  getExplainList: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/explain-list${q ? `?${q}` : ''}`);
+  },
+  clearExplainList: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/explain-list${q ? `?${q}` : ''}`, { method: 'DELETE' });
+  },
+  getFlashcards: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/flashcards${q ? `?${q}` : ''}`);
+  },
+  getInterleaved: (params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(`/questions/random/interleaved${q ? `?${q}` : ''}`);
+  },
+  getFollowUps: (id) => request(`/questions/${id}/follow-ups`),
+  checkFeynman: (id, answer) =>
+    request(`/questions/${id}/feynman`, {
+      method: 'POST',
+      body: JSON.stringify({ answer }),
+    }),
+  createPageFromQuestion: (body) =>
+    request('/questions/from-question/page', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
 };
 
 export const SUBJECT_META = {

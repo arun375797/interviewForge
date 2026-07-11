@@ -1,0 +1,902 @@
+[
+  {
+    "category": "english",
+    "topic": "Practical Coding / Algorithm Questions",
+    "question": "Input: \"How Are You",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication",
+    "source": "parsed-questions/javascript"
+  },
+  {
+    "category": "english",
+    "topic": "Practical Coding / Algorithm Questions",
+    "question": "Type safety at scale: JSDoc patterns and TypeScript migration paths",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design",
+    "source": "parsed-questions/javascript"
+  },
+  {
+    "category": "english",
+    "topic": "React Practical Tasks, Todo Apps, Counters, Forms & Mini Projects",
+    "question": "Implement useCallback in netflix project",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 1",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 2",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 3",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 4",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 5",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 6",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 7",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 8",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 9",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 10",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 11",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 12",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 13",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 14",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 15",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 16",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 17",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 18",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 19",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 20",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 21",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 22",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 23",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 24",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 25",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 26",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 27",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 28",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 29",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 30",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 31",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 32",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 33",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 34",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 35",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 36",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 37",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 38",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 39",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 40",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 41",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 42",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 43",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 44",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 45",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 46",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 47",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 48",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 49",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 50",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 51",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 52",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 53",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 54",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 55",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 56",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 57",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 58",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 59",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 60",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 61",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 62",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 63",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 64",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 65",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 66",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 67",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 68",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 69",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 70",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 71",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 72",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 73",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 74",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 75",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 76",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 77",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 78",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 79",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 80",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 81",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 82",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 83",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 84",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 85",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 86",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 87",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 88",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 89",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 90",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 91",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 92",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 93",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 94",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "System Design",
+    "question": "How would you explain scaling a MERN application in an interview?",
+    "explanation": "Mention bottlenecks, caching, horizontal scaling, database indexing, and observability.",
+    "text": "I would profile the slow endpoints first, add caching for read-heavy routes, scale the Node layer horizontally behind a load balancer, index the MongoDB queries used in production, and add logging and metrics so we can see failures before users report them.",
+    "label": "System Design 95",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Behavioral",
+    "question": "Describe a strong behavioral interview answer structure.",
+    "explanation": "Use situation, action, result, and a lesson learned.",
+    "text": "I describe the situation briefly, explain the exact actions I took, quantify the result where possible, and close with what I learned and how I would apply it on the next project.",
+    "label": "Behavioral 96",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "english",
+    "topic": "Interview Communication",
+    "question": "Explain how you would answer a technical question in an interview.",
+    "explanation": "Use a clear structure: definition, example, trade-off, and when you would use it.",
+    "text": "I would start by clarifying the requirement, then explain the concept in simple terms, give one practical example from my project experience, mention the trade-offs, and finish with when I would choose this approach in production.",
+    "label": "Interview Communication 97",
+    "source": "thinkmern-practical-templates"
+  }
+]

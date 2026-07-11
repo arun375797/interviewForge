@@ -12,8 +12,10 @@ import {
   RotateCcw,
   Save,
   UploadCloud,
+  FlaskConical,
 } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
+import { buildTestCases, runTestCases, testSummary } from '../utils/codeTests';
 
 function formatOutput(value) {
   if (value === undefined) return 'undefined';
@@ -108,6 +110,9 @@ export default function CodeWorkspace() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerExpired, setTimerExpired] = useState(false);
   const [showTimeUpPopup, setShowTimeUpPopup] = useState(false);
+  const [testResults, setTestResults] = useState(null);
+  const [testing, setTesting] = useState(false);
+  const [hintLevel, setHintLevel] = useState(0);
 
   useEffect(() => {
     let alive = true;
@@ -116,7 +121,8 @@ export default function CodeWorkspace() {
     setTimerRunning(false);
     setTimeLeft(0);
     setTimerExpired(false);
-    setShowTimeUpPopup(false);
+    setTestResults(null);
+    setHintLevel(0);
     api
       .getCodeQuestion(id)
       .then((data) => {
@@ -167,6 +173,11 @@ export default function CodeWorkspace() {
     [question?.codePrompt?.sampleInput]
   );
 
+  const testCases = useMemo(
+    () => buildTestCases(question?.codePrompt),
+    [question?.codePrompt]
+  );
+
   const runCode = async () => {
     setRunning(true);
     setRunResult(null);
@@ -175,6 +186,42 @@ export default function CodeWorkspace() {
     setRunResult(result);
     setRunning(false);
   };
+
+  const runTests = async () => {
+    if (!testCases.length) {
+      setNotice('No automated tests for this question — use Run code with sample data.');
+      return;
+    }
+    setTesting(true);
+    setTestResults(null);
+    setNotice('');
+    try {
+      const results = await runTestCases(code, testCases, runInWorker);
+      setTestResults(results);
+      const summary = testSummary(results);
+      if (summary.allPassed) {
+        setNotice(`All ${summary.total} test cases passed!`);
+        if (!question.codeCompleted) {
+          await api.toggleCodeCompleted(id);
+          setQuestion((prev) => (prev ? { ...prev, codeCompleted: true } : prev));
+        }
+      }
+    } finally {
+      setTesting(false);
+    }
+  };
+
+  const hints = useMemo(() => {
+    const list = [];
+    if (question?.codePrompt?.task) list.push(question.codePrompt.task);
+    if (question?.codePrompt?.sampleInput !== undefined) {
+      list.push(`Sample input: ${JSON.stringify(question.codePrompt.sampleInput)}`);
+    }
+    if (question?.codePrompt?.expectedOutput !== undefined) {
+      list.push(`Expected output: ${JSON.stringify(question.codePrompt.expectedOutput)}`);
+    }
+    return list;
+  }, [question?.codePrompt]);
 
   const startCountdown = () => {
     const minutes = Number(timerMinutes);
@@ -389,8 +436,17 @@ export default function CodeWorkspace() {
               </button>
               <button
                 type="button"
+                onClick={runTests}
+                disabled={testing || running}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-accent bg-teal-50 px-3 py-2 text-sm font-medium text-accent disabled:opacity-50"
+              >
+                <FlaskConical className="h-4 w-4" />
+                {testing ? 'Testing…' : 'Run tests'}
+              </button>
+              <button
+                type="button"
                 onClick={runCode}
-                disabled={running}
+                disabled={running || testing}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-3 py-2 text-sm font-medium text-paper disabled:opacity-50"
               >
                 <Play className="h-4 w-4" />
@@ -523,6 +579,50 @@ export default function CodeWorkspace() {
               </p>
             )}
           </div>
+
+          <div className="glass-panel rounded-2xl p-4">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted">Hints</p>
+              <button
+                type="button"
+                onClick={() => setHintLevel((h) => Math.min(h + 1, hints.length))}
+                disabled={hintLevel >= hints.length}
+                className="rounded-lg border border-line px-2 py-1 text-xs disabled:opacity-40"
+              >
+                Reveal hint
+              </button>
+            </div>
+            {hintLevel > 0 ? (
+              <ul className="mt-3 space-y-2 text-xs text-muted">
+                {hints.slice(0, hintLevel).map((h) => (
+                  <li key={h}>• {h}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-3 text-sm text-muted">Stuck? Reveal hints one at a time.</p>
+            )}
+          </div>
+
+          {testResults?.length > 0 && (
+            <div className="glass-panel rounded-2xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+                Test results ({testSummary(testResults).passed}/{testResults.length} passed)
+              </p>
+              <ul className="mt-3 space-y-2">
+                {testResults.map((t) => (
+                  <li
+                    key={t.label}
+                    className={`rounded-xl px-3 py-2 text-xs ${
+                      t.passed ? 'bg-teal-50 text-teal-800' : 'bg-rose-50 text-rose-800'
+                    }`}
+                  >
+                    <span className="font-semibold">{t.label}</span>
+                    {t.passed ? ' ✓' : ` ✗ — got ${t.actual ?? t.error}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="glass-panel rounded-2xl p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted">Run output</p>

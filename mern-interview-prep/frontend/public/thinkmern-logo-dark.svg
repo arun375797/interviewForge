@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">thinkMern</title>
+  <desc id="desc">thinkMern MERN interview prep logo for dark backgrounds</desc>
+  <g transform="translate(52 42)">
+    <rect width="96" height="96" rx="24" fill="#0C1222"/>
+    <path d="M26 61V35l22-13 22 13v26L48 74 26 61Z" fill="none" stroke="#F7F3EB" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="48" cy="48" r="10" fill="#08C999"/>
+  </g>
+  <g font-family="Sora, Arial, sans-serif" font-weight="700">
+    <text x="176" y="104" font-size="64" fill="#EDE9FE">think</text>
+    <text x="356" y="104" font-size="64" fill="#F472B6">Mern</text>
+  </g>
+  <text x="180" y="134" font-family="IBM Plex Mono, Consolas, monospace" font-size="18" letter-spacing="4" fill="#A78BFA">LEARN BUILD CRACK INTERVIEWS</text>
+</svg>

@@ -9,8 +9,12 @@ import {
   Trash2,
   Save,
   RotateCcw,
+  Target,
+  Brain,
+  Mic,
 } from 'lucide-react';
 import { api } from '../api';
+import { useAuth } from '../context/AuthContext';
 import AnswerContent from './AnswerContent';
 import RichAnswerEditor from './RichAnswerEditor';
 
@@ -26,6 +30,7 @@ function formFromQuestion(question) {
 }
 
 export default function QuestionDetail({ question, onClose, onUpdated, onDeleted }) {
+  const { isAdmin } = useAuth();
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(() => formFromQuestion(question));
   const [saving, setSaving] = useState(false);
@@ -94,9 +99,15 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
       const updated =
         kind === 'bookmark'
           ? await api.toggleBookmark(question._id)
-          : kind === 'learned'
-            ? await api.toggleLearned(question._id)
-            : await api.toggleMastered(question._id);
+          : kind === 'weakSpot'
+            ? await api.toggleWeakSpot(question._id)
+            : kind === 'dailyReview'
+              ? await api.toggleDailyReview(question._id)
+              : kind === 'explainList'
+                ? await api.toggleExplainList(question._id)
+                : kind === 'learned'
+                  ? await api.toggleLearned(question._id)
+                  : await api.toggleMastered(question._id);
       onUpdated(updated);
     } catch (err) {
       setError(err.message);
@@ -259,9 +270,45 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
               </div>
 
               <div className="rounded-2xl border border-line bg-paper/70 p-4 sm:p-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                  Answer
-                </p>
+                <div className="flex flex-wrap items-center justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => toggle('explainList')}
+                    className={`inline-flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-medium ${
+                      question.inExplainList
+                        ? 'border-accent bg-teal-50 text-accent'
+                        : 'border-line text-muted hover:border-accent/40 hover:text-accent'
+                    }`}
+                  >
+                    <Mic className="h-3.5 w-3.5" />
+                    {question.inExplainList ? 'In explain list' : 'Add to explain'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => toggle('dailyReview')}
+                    className={`inline-flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-medium ${
+                      question.inDailyReview
+                        ? 'border-accent bg-teal-50 text-accent'
+                        : 'border-line text-muted hover:border-accent/40 hover:text-accent'
+                    }`}
+                  >
+                    <Brain className="h-3.5 w-3.5" />
+                    {question.inDailyReview ? 'In daily review' : 'Add to daily review'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => toggle('weakSpot')}
+                    className={`inline-flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-medium ${
+                      question.weakSpot
+                        ? 'border-rose-300 bg-rose-50 text-rose-800'
+                        : 'border-line text-muted hover:border-rose-200 hover:text-rose-700'
+                    }`}
+                  >
+                    <Target className="h-3.5 w-3.5" />
+                    {question.weakSpot ? 'Remove from weak' : 'Add to weak'}
+                  </button>
+                </div>
+                <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-accent">Answer</p>
                 <div className="mt-3">
                   <AnswerContent>{question.answer}</AnswerContent>
                 </div>
@@ -340,6 +387,42 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
               </button>
               <button
                 type="button"
+                onClick={() => toggle('explainList')}
+                className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm ${
+                  question.inExplainList
+                    ? 'border-accent bg-teal-50 text-accent'
+                    : 'border-line'
+                }`}
+              >
+                <Mic className="h-4 w-4" />
+                {question.inExplainList ? 'In explain list' : 'Add to explain'}
+              </button>
+              <button
+                type="button"
+                onClick={() => toggle('weakSpot')}
+                className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm ${
+                  question.weakSpot
+                    ? 'border-rose-300 bg-rose-50 text-rose-800'
+                    : 'border-line'
+                }`}
+              >
+                <Target className="h-4 w-4" />
+                {question.weakSpot ? 'In weak spots' : 'Add to weak'}
+              </button>
+              <button
+                type="button"
+                onClick={() => toggle('dailyReview')}
+                className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm ${
+                  question.inDailyReview
+                    ? 'border-accent bg-teal-50 text-accent'
+                    : 'border-line'
+                }`}
+              >
+                <Brain className="h-4 w-4" />
+                {question.inDailyReview ? 'In daily review' : 'Add to daily review'}
+              </button>
+              <button
+                type="button"
                 onClick={() => toggle('mastered')}
                 className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm ${
                   question.mastered ? 'border-accent bg-teal-50 text-accent' : 'border-line'
@@ -348,33 +431,37 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                 <CheckCircle2 className="h-4 w-4" />
                 {question.mastered ? 'Mastered' : 'Mark mastered'}
               </button>
-              <button
-                type="button"
-                onClick={startEditing}
-                className="inline-flex items-center gap-2 rounded-xl border border-line px-3 py-2 text-sm"
-              >
-                <Pencil className="h-4 w-4" />
-                Edit
-              </button>
-              {confirmDelete ? (
-                <button
-                  type="button"
-                  onClick={remove}
-                  disabled={saving}
-                  className="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-3 py-2 text-sm font-medium text-white"
-                >
-                  Confirm delete
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setConfirmDelete(true)}
-                  className="inline-flex items-center gap-2 rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Delete
-                </button>
-              )}
+              {isAdmin ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={startEditing}
+                    className="inline-flex items-center gap-2 rounded-xl border border-line px-3 py-2 text-sm"
+                  >
+                    <Pencil className="h-4 w-4" />
+                    Edit
+                  </button>
+                  {confirmDelete ? (
+                    <button
+                      type="button"
+                      onClick={remove}
+                      disabled={saving}
+                      className="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-3 py-2 text-sm font-medium text-white"
+                    >
+                      Confirm delete
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setConfirmDelete(true)}
+                      className="inline-flex items-center gap-2 rounded-xl border border-rose-200 px-3 py-2 text-sm text-rose-700"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      Delete
+                    </button>
+                  )}
+                </>
+              ) : null}
             </>
           )}
         </div>

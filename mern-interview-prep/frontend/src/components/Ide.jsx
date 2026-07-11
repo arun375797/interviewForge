@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import {
+  BookMarked,
   Database,
   FileCode2,
   Play,
@@ -10,6 +11,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { api } from '../api';
+import SaveToNotebookModal from './SaveToNotebookModal';
 import {
   IDE_MODES,
   loadIdeWorkspace,
@@ -44,6 +46,7 @@ export default function Ide() {
   const [sandboxInfo, setSandboxInfo] = useState(null);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
 
   const mode = IDE_MODES[activeMode];
   const code = codes[activeMode];
@@ -155,14 +158,13 @@ export default function Ide() {
   };
 
   return (
-    <div className="animate-fade space-y-6">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div className="animate-fade space-y-4">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Workspace</p>
-          <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight">IDE</h1>
-          <p className="mt-2 max-w-3xl text-sm text-muted">
-            A free-play coding workspace for JavaScript, MongoDB queries, and Node/Express routes.
-            No starter questions — write anything and run it.
+          <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight sm:text-3xl">IDE</h1>
+          <p className="mt-1 max-w-3xl text-sm text-muted">
+            Run JavaScript, MongoDB queries, or Node/Express routes — no starter questions required.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -199,14 +201,22 @@ export default function Ide() {
         </div>
       ) : null}
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(320px,380px)]">
-        <section className="glass-panel overflow-hidden rounded-3xl">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] xl:items-stretch">
+        <section className="glass-panel flex flex-col overflow-hidden rounded-3xl">
           <div className="flex flex-col gap-3 border-b border-line px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">{mode.label}</p>
               <p className="mt-1 text-xs text-muted">{mode.description}</p>
             </div>
             <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setSaveModalOpen(true)}
+                className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-3 py-2 text-sm font-medium hover:bg-paper-2"
+              >
+                <BookMarked className="h-4 w-4" />
+                Save to notebook
+              </button>
               <button
                 type="button"
                 onClick={resetMode}
@@ -270,11 +280,11 @@ export default function Ide() {
             </div>
           ) : null}
 
-          <div className="ide-editor-shell min-h-[420px]">
+          <div className="ide-editor-shell min-h-0 flex-1">
             <Editor
               key={activeMode}
               path={`ide-${activeMode}`}
-              height="520px"
+              height="100%"
               language={mode.language}
               theme="vs-dark"
               value={code}
@@ -293,7 +303,7 @@ export default function Ide() {
           </div>
         </section>
 
-        <aside className="space-y-4">
+        <aside className="flex flex-col gap-4 xl:min-h-0 xl:self-stretch">
           {activeMode === 'mongodb' && sandboxInfo ? (
             <div className="glass-panel rounded-2xl p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-accent">Sandbox data</p>
@@ -337,7 +347,7 @@ export default function Ide() {
             </div>
           ) : null}
 
-          <div className="glass-panel rounded-2xl p-4">
+          <div className="glass-panel flex min-h-0 flex-1 flex-col rounded-2xl p-4 xl:overflow-hidden">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <TerminalSquare className="h-4 w-4 text-muted" />
@@ -353,7 +363,7 @@ export default function Ide() {
             </div>
 
             {result ? (
-              <div className="mt-3 space-y-3">
+              <div className="mt-3 min-h-0 flex-1 space-y-3 overflow-y-auto">
                 {result.logs?.length ? (
                   <div>
                     <p className="mb-1 text-xs font-medium text-muted">Console</p>
@@ -411,6 +421,14 @@ export default function Ide() {
           </div>
         </aside>
       </div>
+
+      <SaveToNotebookModal
+        open={saveModalOpen}
+        onClose={() => setSaveModalOpen(false)}
+        code={code}
+        modeLabel={mode.label}
+        language={mode.language}
+      />
     </div>
   );
 }

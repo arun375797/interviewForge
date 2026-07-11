@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookMarked, Plus, Trash2, X } from 'lucide-react';
 import { api } from '../api';
+import { useConfirm } from '../context/ConfirmDialogContext';
 import { NOTEBOOK_COLORS } from '../utils/notebookConstants';
 
 function formatDate(value) {
@@ -147,6 +148,7 @@ function CreateNotebookModal({ open, onClose, onCreated }) {
 
 export default function NotebookList() {
   const navigate = useNavigate();
+  const confirm = useConfirm();
   const [notebooks, setNotebooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -172,7 +174,12 @@ export default function NotebookList() {
   const removeNotebook = async (event, id) => {
     event.preventDefault();
     event.stopPropagation();
-    if (!window.confirm('Delete this notebook and all its pages?')) return;
+    const confirmed = await confirm({
+      title: 'Delete notebook',
+      message: 'Delete this notebook and all its pages? This cannot be undone.',
+      confirmLabel: 'Delete notebook',
+    });
+    if (!confirmed) return;
     setDeletingId(id);
     try {
       await api.deleteNotebook(id);

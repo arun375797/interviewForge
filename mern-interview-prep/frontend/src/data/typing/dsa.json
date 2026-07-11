@@ -1,0 +1,902 @@
+[
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Find Largest Element: Return the largest number in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function findLargest(input) {\n  return Math.max(...input);\n}\n\nconst sampleInput = [\n  4,\n  9,\n  2,\n  17,\n  6\n];\nreturn findLargest(sampleInput);",
+    "label": "Find Largest Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Find Second Largest: Return the second largest distinct number.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function findSecondLargest(input) {\n  const unique = [...new Set(input)].sort((a, b) => b - a);\n  return unique[1];\n}\n\nconst sampleInput = [\n  12,\n  35,\n  1,\n  10,\n  34,\n  1\n];\nreturn findSecondLargest(sampleInput);",
+    "label": "Find Second Largest",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Find Second Smallest: Return the second smallest distinct number.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function findSecondSmallest(input) {\n  const unique = [...new Set(input)].sort((a, b) => a - b);\n  return unique[1];\n}\n\nconst sampleInput = [\n  12,\n  35,\n  1,\n  10,\n  34,\n  1\n];\nreturn findSecondSmallest(sampleInput);",
+    "label": "Find Second Smallest",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Sum of Second Largest and Second Smallest: Return the sum of the second largest and second smallest distinct numbers.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumSecondLargestSmallest(input) {\n  const unique = [...new Set(input)].sort((a, b) => a - b);\n  return unique[1] + unique[unique.length - 2];\n}\n\nconst sampleInput = [\n  12,\n  35,\n  1,\n  10,\n  34,\n  1\n];\nreturn sumSecondLargestSmallest(sampleInput);",
+    "label": "Sum of Second Largest and Second Smallest",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Highest Even Number: Return the highest even number in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function highestEven(input) {\n  const evens = input.filter((n) => n % 2 === 0);\n  return evens.length ? Math.max(...evens) : undefined;\n}\n\nconst sampleInput = [\n  7,\n  12,\n  9,\n  24,\n  15,\n  18\n];\nreturn highestEven(sampleInput);",
+    "label": "Highest Even Number",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Highest Odd Number: Return the highest odd number in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function highestOdd(input) {\n  const odds = input.filter((n) => n % 2 !== 0);\n  return odds.length ? Math.max(...odds) : undefined;\n}\n\nconst sampleInput = [\n  7,\n  12,\n  9,\n  24,\n  15,\n  18\n];\nreturn highestOdd(sampleInput);",
+    "label": "Highest Odd Number",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Largest Odd Using Reduce: Return the largest odd number using a reduce-style approach.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function largestOddUsingReduce(input) {\n  return input.filter((n) => n % 2 !== 0).reduce((max, n) => (n > max ? n : max), -Infinity);\n}\n\nconst sampleInput = [\n  10,\n  15,\n  3,\n  22,\n  19\n];\nreturn largestOddUsingReduce(sampleInput);",
+    "label": "Largest Odd Using Reduce",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Missing Number (1 to n): Return the missing number from 1 to n.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function missingNumber(input) {\n  const { nums, n } = input;\n  const expected = (n * (n + 1)) / 2;\n  const actual = nums.reduce((sum, num) => sum + num, 0);\n  return expected - actual;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    4,\n    5\n  ],\n  \"n\": 5\n};\nreturn missingNumber(sampleInput);",
+    "label": "Missing Number (1 to n)",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Return Nth Element: Return the element at the given zero-based index.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function returnNthElement(input) {\n  return input.nums[input.index];\n}\n\nconst sampleInput = {\n  \"nums\": [\n    \"a\",\n    \"b\",\n    \"c\",\n    \"d\"\n  ],\n  \"index\": 2\n};\nreturn returnNthElement(sampleInput);",
+    "label": "Return Nth Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Check Specific Elements Exist: Return true if every required element exists in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function hasAllElements(input) {\n  return input.required.every((value) => input.nums.includes(value));\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    4\n  ],\n  \"required\": [\n    2,\n    4\n  ]\n};\nreturn hasAllElements(sampleInput);",
+    "label": "Check Specific Elements Exist",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Searching & Finding",
+    "question": "Search Two Elements: Return true if both target values exist in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function searchTwoElements(input) {\n  return input.nums.includes(input.first) && input.nums.includes(input.second);\n}\n\nconst sampleInput = {\n  \"nums\": [\n    5,\n    8,\n    11,\n    20\n  ],\n  \"first\": 8,\n  \"second\": 20\n};\nreturn searchTwoElements(sampleInput);",
+    "label": "Search Two Elements",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum of Array: Return the sum of all numbers in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumArray(input) {\n  return input.reduce((sum, n) => sum + n, 0);\n}\n\nconst sampleInput = [\n  5,\n  10,\n  15\n];\nreturn sumArray(sampleInput);",
+    "label": "Sum of Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum Using Reduce: Return the sum using a reduce-style approach.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumUsingReduce(input) {\n  return input.reduce((sum, n) => sum + n, 0);\n}\n\nconst sampleInput = [\n  4,\n  8,\n  15,\n  16\n];\nreturn sumUsingReduce(sampleInput);",
+    "label": "Sum Using Reduce",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum Using forEach: Return the sum using a forEach-style approach.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumUsingForEach(input) {\n  let total = 0;\n  input.forEach((n) => { total += n; });\n  return total;\n}\n\nconst sampleInput = [\n  3,\n  6,\n  9\n];\nreturn sumUsingForEach(sampleInput);",
+    "label": "Sum Using forEach",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum Using Arrow Function: Return the sum using an arrow-function based approach.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumUsingArrow(input) {\n  return input.reduce((sum, n) => sum + n, 0);\n}\n\nconst sampleInput = [\n  2,\n  4,\n  6,\n  8\n];\nreturn sumUsingArrow(sampleInput);",
+    "label": "Sum Using Arrow Function",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum of Even Numbers: Return the sum of even numbers only.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumEvenNumbers(input) {\n  return input.filter((n) => n % 2 === 0).reduce((sum, n) => sum + n, 0);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4,\n  5,\n  6\n];\nreturn sumEvenNumbers(sampleInput);",
+    "label": "Sum of Even Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum of Positive Numbers: Return the sum of positive numbers only.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumPositiveNumbers(input) {\n  return input.filter((n) => n > 0).reduce((sum, n) => sum + n, 0);\n}\n\nconst sampleInput = [\n  -5,\n  10,\n  -2,\n  7,\n  0\n];\nreturn sumPositiveNumbers(sampleInput);",
+    "label": "Sum of Positive Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Sum Problems",
+    "question": "Sum of Prime Numbers: Return the sum of prime numbers in the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sumPrimeNumbers(input) {\n  const isPrime = (n) => {\n    if (n < 2) return false;\n    for (let i = 2; i * i <= n; i += 1) if (n % i === 0) return false;\n    return true;\n  };\n  return input.filter(isPrime).reduce((sum, n) => sum + n, 0);\n}\n\nconst sampleInput = [\n  2,\n  3,\n  4,\n  5,\n  6,\n  7\n];\nreturn sumPrimeNumbers(sampleInput);",
+    "label": "Sum of Prime Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Count Occurrences of all elements: Return an object containing the frequency of every element.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function countOccurrences(input) {\n  return input.reduce((freq, value) => {\n    freq[value] = (freq[value] || 0) + 1;\n    return freq;\n  }, {});\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  3,\n  3\n];\nreturn countOccurrences(sampleInput);",
+    "label": "Count Occurrences of all elements",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Most Frequent Element: Return the element with the highest frequency.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function mostFrequentElement(input) {\n  const freq = countOccurrences(input);\n  return Number(Object.entries(freq).sort((a, b) => b[1] - a[1])[0][0]);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  3,\n  3,\n  4\n];\nreturn mostFrequentElement(sampleInput);",
+    "label": "Most Frequent Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Least Frequent Element: Return the element with the lowest frequency.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function leastFrequentElement(input) {\n  const freq = countOccurrences(input);\n  return Number(Object.entries(freq).sort((a, b) => a[1] - b[1])[0][0]);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  3,\n  3\n];\nreturn leastFrequentElement(sampleInput);",
+    "label": "Least Frequent Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Second Most Frequent Element: Return the element with the second highest frequency.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function secondMostFrequentElement(input) {\n  const freq = countOccurrences(input);\n  return Number(Object.entries(freq).sort((a, b) => b[1] - a[1])[1][0]);\n}\n\nconst sampleInput = [\n  1,\n  1,\n  2,\n  2,\n  2,\n  3,\n  3,\n  4\n];\nreturn secondMostFrequentElement(sampleInput);",
+    "label": "Second Most Frequent Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Duplicate Elements: Return elements that appear more than once.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function duplicateElements(input) {\n  const seen = new Set();\n  const dup = new Set();\n  input.forEach((value) => {\n    if (seen.has(value)) dup.add(value);\n    seen.add(value);\n  });\n  return [...dup];\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  3,\n  3,\n  4\n];\nreturn duplicateElements(sampleInput);",
+    "label": "Duplicate Elements",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Unique Elements: Return elements that appear exactly once.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function uniqueElements(input) {\n  const freq = countOccurrences(input);\n  return input.filter((value, index) => freq[value] === 1 && input.indexOf(value) === index);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  4,\n  4\n];\nreturn uniqueElements(sampleInput);",
+    "label": "Unique Elements",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "First Repeating Element: Return the first element whose value repeats later.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function firstRepeatingElement(input) {\n  const seen = new Set();\n  for (const value of input) {\n    if (seen.has(value)) return value;\n    seen.add(value);\n  }\n  return undefined;\n}\n\nconst sampleInput = [\n  4,\n  5,\n  6,\n  5,\n  4\n];\nreturn firstRepeatingElement(sampleInput);",
+    "label": "First Repeating Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "First Non-Repeating Element: Return the first element that appears only once.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function firstNonRepeatingElement(input) {\n  const freq = countOccurrences(input);\n  return input.find((value) => freq[value] === 1);\n}\n\nconst sampleInput = [\n  4,\n  5,\n  4,\n  6,\n  5\n];\nreturn firstNonRepeatingElement(sampleInput);",
+    "label": "First Non-Repeating Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Elements Occurring Exactly Twice: Return all elements that occur exactly twice.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function occurringExactlyTwice(input) {\n  const freq = countOccurrences(input);\n  return [...new Set(input.filter((value) => freq[value] === 2))];\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  3,\n  3,\n  4,\n  4\n];\nreturn occurringExactlyTwice(sampleInput);",
+    "label": "Elements Occurring Exactly Twice",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Frequency Problems",
+    "question": "Elements Occurring More Than K Times: Return elements that occur more than k times.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function occurringMoreThanK(input) {\n  const freq = countOccurrences(input.nums);\n  return [...new Set(input.nums.filter((value) => freq[value] > input.k))];\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    2,\n    3,\n    3,\n    3,\n    4\n  ],\n  \"k\": 2\n};\nreturn occurringMoreThanK(sampleInput);",
+    "label": "Elements Occurring More Than K Times",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Duplicates: Return an array with duplicates removed.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeDuplicates(input) {\n  return [...new Set(input)];\n}\n\nconst sampleInput = [\n  1,\n  2,\n  2,\n  3,\n  1\n];\nreturn removeDuplicates(sampleInput);",
+    "label": "Remove Duplicates",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Duplicate Even Numbers: Remove repeated even numbers but keep other values.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeDuplicateEvenNumbers(input) {\n  const seenEven = new Set();\n  return input.filter((n) => {\n    if (n % 2 !== 0) return true;\n    if (seenEven.has(n)) return false;\n    seenEven.add(n);\n    return true;\n  });\n}\n\nconst sampleInput = [\n  2,\n  2,\n  3,\n  4,\n  4,\n  5,\n  2\n];\nreturn removeDuplicateEvenNumbers(sampleInput);",
+    "label": "Remove Duplicate Even Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Even Numbers: Return the array after removing even numbers.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeEvenNumbers(input) {\n  return input.filter((n) => n % 2 !== 0);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4,\n  5,\n  6\n];\nreturn removeEvenNumbers(sampleInput);",
+    "label": "Remove Even Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Odd Numbers: Return the array after removing odd numbers.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeOddNumbers(input) {\n  return input.filter((n) => n % 2 === 0);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4,\n  5,\n  6\n];\nreturn removeOddNumbers(sampleInput);",
+    "label": "Remove Odd Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Consecutive Odd Numbers: Remove odd numbers that are adjacent to another odd number.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeConsecutiveOddNumbers(input) {\n  return input.filter((n, index) => {\n    if (n % 2 === 0) return true;\n    const prevOdd = index > 0 && input[index - 1] % 2 !== 0;\n    const nextOdd = index < input.length - 1 && input[index + 1] % 2 !== 0;\n    return !(prevOdd || nextOdd);\n  });\n}\n\nconst sampleInput = [\n  1,\n  3,\n  4,\n  5,\n  7,\n  8\n];\nreturn removeConsecutiveOddNumbers(sampleInput);",
+    "label": "Remove Consecutive Odd Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Multiples of 3: Return the array after removing multiples of 3.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeMultiplesOfThree(input) {\n  return input.filter((n) => n % 3 !== 0);\n}\n\nconst sampleInput = [\n  3,\n  4,\n  6,\n  8,\n  9,\n  10\n];\nreturn removeMultiplesOfThree(sampleInput);",
+    "label": "Remove Multiples of 3",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Prime Numbers: Return the array after removing prime numbers.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removePrimeNumbers(input) {\n  const isPrime = (n) => {\n    if (n < 2) return false;\n    for (let i = 2; i * i <= n; i += 1) if (n % i === 0) return false;\n    return true;\n  };\n  return input.filter((n) => !isPrime(n));\n}\n\nconst sampleInput = [\n  2,\n  3,\n  4,\n  5,\n  6,\n  8\n];\nreturn removePrimeNumbers(sampleInput);",
+    "label": "Remove Prime Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Smallest Element: Remove the smallest value from the array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeSmallestElement(input) {\n  const min = Math.min(...input);\n  const index = input.indexOf(min);\n  return input.filter((_, i) => i !== index);\n}\n\nconst sampleInput = [\n  4,\n  2,\n  8,\n  1,\n  5\n];\nreturn removeSmallestElement(sampleInput);",
+    "label": "Remove Smallest Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Falsy Values: Return the array after removing falsy values.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeFalsyValues(input) {\n  return input.filter(Boolean);\n}\n\nconst sampleInput = [\n  0,\n  1,\n  false,\n  2,\n  \"\",\n  3,\n  null\n];\nreturn removeFalsyValues(sampleInput);",
+    "label": "Remove Falsy Values",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Zeros: Return the array after removing all zeros.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeZeros(input) {\n  return input.filter((n) => n !== 0);\n}\n\nconst sampleInput = [\n  0,\n  1,\n  0,\n  2,\n  3,\n  0\n];\nreturn removeZeros(sampleInput);",
+    "label": "Remove Zeros",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Negative Numbers: Return the array after removing negative numbers.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeNegativeNumbers(input) {\n  return input.filter((n) => n >= 0);\n}\n\nconst sampleInput = [\n  -3,\n  4,\n  -1,\n  0,\n  8\n];\nreturn removeNegativeNumbers(sampleInput);",
+    "label": "Remove Negative Numbers",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Numbers Greater Than X: Return values less than or equal to x.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeGreaterThanX(input) {\n  return input.nums.filter((n) => n <= input.x);\n}\n\nconst sampleInput = {\n  \"nums\": [\n    3,\n    9,\n    12,\n    5\n  ],\n  \"x\": 8\n};\nreturn removeGreaterThanX(sampleInput);",
+    "label": "Remove Numbers Greater Than X",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Remove/Delete Problems",
+    "question": "Remove Elements Present in Another Array: Remove all values that are present in the second array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeElementsFromAnotherArray(input) {\n  const remove = new Set(input.remove);\n  return input.nums.filter((n) => !remove.has(n));\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"remove\": [\n    2,\n    4\n  ]\n};\nreturn removeElementsFromAnotherArray(sampleInput);",
+    "label": "Remove Elements Present in Another Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Insert at Given Index: Insert the value at the given index.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function insertAtIndex(input) {\n  const result = [...input.nums];\n  result.splice(input.index, 0, input.value);\n  return result;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    4\n  ],\n  \"index\": 2,\n  \"value\": 3\n};\nreturn insertAtIndex(sampleInput);",
+    "label": "Insert at Given Index",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Insert into Sorted Array: Insert the value while keeping the array sorted.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function insertIntoSortedArray(input) {\n  const result = [...input.nums, input.value].sort((a, b) => a - b);\n  return result;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    3,\n    5\n  ],\n  \"value\": 4\n};\nreturn insertIntoSortedArray(sampleInput);",
+    "label": "Insert into Sorted Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Insert Before Element: Insert the value before the target element.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function insertBeforeElement(input) {\n  const index = input.nums.indexOf(input.target);\n  const result = [...input.nums];\n  result.splice(index, 0, input.value);\n  return result;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    3,\n    4\n  ],\n  \"target\": 3,\n  \"value\": 2\n};\nreturn insertBeforeElement(sampleInput);",
+    "label": "Insert Before Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Insert After Element: Insert the value after the target element.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function insertAfterElement(input) {\n  const index = input.nums.indexOf(input.target);\n  const result = [...input.nums];\n  result.splice(index + 1, 0, input.value);\n  return result;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    4\n  ],\n  \"target\": 2,\n  \"value\": 3\n};\nreturn insertAfterElement(sampleInput);",
+    "label": "Insert After Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Delete by Value: Delete all occurrences of the given value.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function deleteByValue(input) {\n  return input.nums.filter((n) => n !== input.value);\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    2\n  ],\n  \"value\": 2\n};\nreturn deleteByValue(sampleInput);",
+    "label": "Delete by Value",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Delete First Occurrence: Delete only the first occurrence of the value.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function deleteFirstOccurrence(input) {\n  const index = input.nums.indexOf(input.value);\n  return input.nums.filter((_, i) => i !== index);\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    2\n  ],\n  \"value\": 2\n};\nreturn deleteFirstOccurrence(sampleInput);",
+    "label": "Delete First Occurrence",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Delete Nth Occurrence: Delete the nth occurrence of the value.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function deleteNthOccurrence(input) {\n  let count = 0;\n  return input.nums.filter((value) => {\n    if (value !== input.value) return true;\n    count += 1;\n    return count !== input.occurrence;\n  });\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    2,\n    4,\n    2\n  ],\n  \"value\": 2,\n  \"occurrence\": 2\n};\nreturn deleteNthOccurrence(sampleInput);",
+    "label": "Delete Nth Occurrence",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Delete All Occurrences: Delete all occurrences of the value.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function deleteAllOccurrences(input) {\n  return input.nums.filter((n) => n !== input.value);\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    2,\n    3\n  ],\n  \"value\": 2\n};\nreturn deleteAllOccurrences(sampleInput);",
+    "label": "Delete All Occurrences",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Delete Last Element: Return the array without the last element.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function deleteLastElement(input) {\n  return input.slice(0, -1);\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4\n];\nreturn deleteLastElement(sampleInput);",
+    "label": "Delete Last Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Insert/Delete Operations",
+    "question": "Delete Second Last Element: Return the array without the second last element.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function deleteSecondLastElement(input) {\n  const result = [...input];\n  result.splice(result.length - 2, 1);\n  return result;\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4\n];\nreturn deleteSecondLastElement(sampleInput);",
+    "label": "Delete Second Last Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Reverse Array: Return the array in reverse order.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseArray(input) {\n  return [...input].reverse();\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4\n];\nreturn reverseArray(sampleInput);",
+    "label": "Reverse Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Reverse In-Place: Reverse the array and return it.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseInPlace(input) {\n  return [...input].reverse();\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4\n];\nreturn reverseInPlace(sampleInput);",
+    "label": "Reverse In-Place",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Rotate Left: Rotate the array left by one position.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function rotateLeft(input) {\n  return [...input.slice(1), input[0]];\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4\n];\nreturn rotateLeft(sampleInput);",
+    "label": "Rotate Left",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Rotate Right: Rotate the array right by one position.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function rotateRight(input) {\n  return [input[input.length - 1], ...input.slice(0, -1)];\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4\n];\nreturn rotateRight(sampleInput);",
+    "label": "Rotate Right",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Rotate by K: Rotate the array right by k positions.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function rotateByK(input) {\n  const { nums, k } = input;\n  const size = nums.length;\n  const shift = k % size;\n  return [...nums.slice(size - shift), ...nums.slice(0, size - shift)];\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"k\": 2\n};\nreturn rotateByK(sampleInput);",
+    "label": "Rotate by K",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Move Zeros to End: Move all zeros to the end while keeping non-zero order.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function moveZerosToEnd(input) {\n  const nonZero = input.filter((n) => n !== 0);\n  const zeros = input.filter((n) => n === 0);\n  return [...nonZero, ...zeros];\n}\n\nconst sampleInput = [\n  0,\n  1,\n  0,\n  3,\n  12\n];\nreturn moveZerosToEnd(sampleInput);",
+    "label": "Move Zeros to End",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Move Zeros to Beginning: Move all zeros to the beginning while keeping non-zero order.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function moveZerosToBeginning(input) {\n  const nonZero = input.filter((n) => n !== 0);\n  const zeros = input.filter((n) => n === 0);\n  return [...zeros, ...nonZero];\n}\n\nconst sampleInput = [\n  0,\n  1,\n  0,\n  3,\n  12\n];\nreturn moveZerosToBeginning(sampleInput);",
+    "label": "Move Zeros to Beginning",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Move Negatives to Front: Move negative numbers to the front.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function moveNegativesToFront(input) {\n  const negatives = input.filter((n) => n < 0);\n  const others = input.filter((n) => n >= 0);\n  return [...negatives, ...others];\n}\n\nconst sampleInput = [\n  1,\n  -2,\n  3,\n  -4,\n  5\n];\nreturn moveNegativesToFront(sampleInput);",
+    "label": "Move Negatives to Front",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Alternate Positive and Negative: Return values alternating positive and negative when possible.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function alternatePositiveNegative(input) {\n  const positives = input.filter((n) => n > 0);\n  const negatives = input.filter((n) => n < 0);\n  const result = [];\n  while (positives.length || negatives.length) {\n    if (positives.length) result.push(positives.shift());\n    if (negatives.length) result.push(negatives.shift());\n  }\n  return result;\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  -1,\n  -2,\n  -3\n];\nreturn alternatePositiveNegative(sampleInput);",
+    "label": "Alternate Positive and Negative",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Alternate Even and Odd: Return values alternating even and odd when possible.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function alternateEvenOdd(input) {\n  const evens = input.filter((n) => n % 2 === 0);\n  const odds = input.filter((n) => n % 2 !== 0);\n  const result = [];\n  while (evens.length || odds.length) {\n    if (evens.length) result.push(evens.shift());\n    if (odds.length) result.push(odds.shift());\n  }\n  return result;\n}\n\nconst sampleInput = [\n  2,\n  4,\n  6,\n  1,\n  3,\n  5\n];\nreturn alternateEvenOdd(sampleInput);",
+    "label": "Alternate Even and Odd",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Rearrangement",
+    "question": "Separate Even and Odd: Return evens first and odds after them.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function separateEvenOdd(input) {\n  return [...input.filter((n) => n % 2 === 0), ...input.filter((n) => n % 2 !== 0)];\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3,\n  4,\n  5,\n  6\n];\nreturn separateEvenOdd(sampleInput);",
+    "label": "Separate Even and Odd",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Pair/Triplet Problems",
+    "question": "Pair Sum Closest to Zero: Return the pair whose sum is closest to zero.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function pairSumClosestToZero(input) {\n  let left = 0;\n  let right = input.length - 1;\n  let bestPair = [input[left], input[right]];\n  let bestDiff = Math.abs(input[left] + input[right]);\n  while (left < right) {\n    const sum = input[left] + input[right];\n    const diff = Math.abs(sum);\n    if (diff < bestDiff) {\n      bestDiff = diff;\n      bestPair = [input[left], input[right]];\n    }\n    if (sum < 0) left += 1;\n    else right -= 1;\n  }\n  return bestPair;\n}\n\nconst sampleInput = [\n  -8,\n  -3,\n  4,\n  5,\n  9\n];\nreturn pairSumClosestToZero(sampleInput);",
+    "label": "Pair Sum Closest to Zero",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Pair/Triplet Problems",
+    "question": "Pair with Given Sum: Return a pair whose sum equals the target.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function pairWithGivenSum(input) {\n  const map = new Map();\n  for (const num of input.nums) {\n    const need = input.target - num;\n    if (map.has(need)) return [need, num];\n    map.set(num, true);\n  }\n  return null;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    2,\n    7,\n    11,\n    15\n  ],\n  \"target\": 9\n};\nreturn pairWithGivenSum(sampleInput);",
+    "label": "Pair with Given Sum",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Pair/Triplet Problems",
+    "question": "Pair with Given Difference: Return a pair whose difference equals the target.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function pairWithGivenDifference(input) {\n  const set = new Set(input.nums);\n  for (const num of input.nums) {\n    if (set.has(num + input.diff)) return [num, num + input.diff];\n  }\n  return null;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    5,\n    20,\n    3,\n    2,\n    50,\n    80\n  ],\n  \"diff\": 78\n};\nreturn pairWithGivenDifference(sampleInput);",
+    "label": "Pair with Given Difference",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Pair/Triplet Problems",
+    "question": "Triplets with Given Sum: Return one triplet whose sum equals the target.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function tripletsWithGivenSum(input) {\n  const nums = [...input.nums].sort((a, b) => a - b);\n  for (let i = 0; i < nums.length - 2; i += 1) {\n    let left = i + 1;\n    let right = nums.length - 1;\n    while (left < right) {\n      const sum = nums[i] + nums[left] + nums[right];\n      if (sum === input.target) return [nums[i], nums[left], nums[right]];\n      if (sum < input.target) left += 1;\n      else right -= 1;\n    }\n  }\n  return null;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    4,\n    45,\n    6,\n    10,\n    8\n  ],\n  \"target\": 22\n};\nreturn tripletsWithGivenSum(sampleInput);",
+    "label": "Triplets with Given Sum",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Pair/Triplet Problems",
+    "question": "Duplicate Pairs: Return pairs that appear more than once.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function duplicatePairs(input) {\n  const seen = new Map();\n  const result = [];\n  for (const pair of input) {\n    const key = JSON.stringify(pair);\n    seen.set(key, (seen.get(key) || 0) + 1);\n    if (seen.get(key) === 2) result.push(pair);\n  }\n  return result;\n}\n\nconst sampleInput = [\n  [\n    1,\n    2\n  ],\n  [\n    3,\n    4\n  ],\n  [\n    1,\n    2\n  ],\n  [\n    5,\n    6\n  ]\n];\nreturn duplicatePairs(sampleInput);",
+    "label": "Duplicate Pairs",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Merge Arrays: Return one array containing both arrays.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function mergeArrays(input) {\n  return [...input.first, ...input.second];\n}\n\nconst sampleInput = {\n  \"first\": [\n    1,\n    2\n  ],\n  \"second\": [\n    3,\n    4\n  ]\n};\nreturn mergeArrays(sampleInput);",
+    "label": "Merge Arrays",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Merge Without Duplicates: Merge arrays and remove duplicates.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function mergeWithoutDuplicates(input) {\n  return [...new Set([...input.first, ...input.second])];\n}\n\nconst sampleInput = {\n  \"first\": [\n    1,\n    2,\n    3\n  ],\n  \"second\": [\n    3,\n    4,\n    5\n  ]\n};\nreturn mergeWithoutDuplicates(sampleInput);",
+    "label": "Merge Without Duplicates",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Flatten Nested Arrays: Return a flat array from the nested array.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function flattenNestedArrays(input) {\n  return input.flat(Infinity);\n}\n\nconst sampleInput = [\n  1,\n  [\n    2,\n    3\n  ],\n  [\n    4,\n    [\n      5\n    ]\n  ]\n];\nreturn flattenNestedArrays(sampleInput);",
+    "label": "Flatten Nested Arrays",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Chunk Array: Split the array into chunks of the given size.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function chunkArray(input) {\n  const result = [];\n  for (let i = 0; i < input.nums.length; i += input.size) {\n    result.push(input.nums.slice(i, i + input.size));\n  }\n  return result;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"size\": 2\n};\nreturn chunkArray(sampleInput);",
+    "label": "Chunk Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Shuffle Array: Return the same values in any shuffled order.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function shuffleArray(input) {\n  const result = [...input];\n  for (let i = result.length - 1; i > 0; i -= 1) {\n    const j = Math.floor(Math.random() * (i + 1));\n    [result[i], result[j]] = [result[j], result[i]];\n  }\n  return result;\n}\n\nconst sampleInput = [\n  1,\n  2,\n  3\n];\nreturn shuffleArray(sampleInput);",
+    "label": "Shuffle Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Sort Without .sort(): Return the numbers sorted ascending without using Array.sort.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function sortWithoutSort(input) {\n  const result = [...input];\n  for (let i = 0; i < result.length; i += 1) {\n    for (let j = i + 1; j < result.length; j += 1) {\n      if (result[j] < result[i]) [result[i], result[j]] = [result[j], result[i]];\n    }\n  }\n  return result;\n}\n\nconst sampleInput = [\n  5,\n  1,\n  4,\n  2\n];\nreturn sortWithoutSort(sampleInput);",
+    "label": "Sort Without .sort()",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Equilibrium Index: Return the index where left sum equals right sum.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function equilibriumIndex(input) {\n  const total = input.reduce((sum, n) => sum + n, 0);\n  let left = 0;\n  for (let i = 0; i < input.length; i += 1) {\n    if (left === total - left - input[i]) return i;\n    left += input[i];\n  }\n  return -1;\n}\n\nconst sampleInput = [\n  -7,\n  1,\n  5,\n  2,\n  -4,\n  3,\n  0\n];\nreturn equilibriumIndex(sampleInput);",
+    "label": "Equilibrium Index",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Leaders in Array: Return elements greater than all elements to their right.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function leadersInArray(input) {\n  const result = [];\n  let maxRight = -Infinity;\n  for (let i = input.length - 1; i >= 0; i -= 1) {\n    if (input[i] >= maxRight) {\n      result.unshift(input[i]);\n      maxRight = input[i];\n    }\n  }\n  return result;\n}\n\nconst sampleInput = [\n  16,\n  17,\n  4,\n  3,\n  5,\n  2\n];\nreturn leadersInArray(sampleInput);",
+    "label": "Leaders in Array",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Majority Element: Return the element appearing more than n/2 times.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function majorityElement(input) {\n  const freq = countOccurrences(input);\n  const threshold = input.length / 2;\n  return Number(Object.entries(freq).find(([, count]) => count > threshold)[0]);\n}\n\nconst sampleInput = [\n  3,\n  3,\n  4,\n  2,\n  3,\n  3,\n  5\n];\nreturn majorityElement(sampleInput);",
+    "label": "Majority Element",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "FizzBuzz: Return FizzBuzz values from 1 to n.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function fizzBuzz(input) {\n  const result = [];\n  for (let i = 1; i <= input; i += 1) {\n    if (i % 15 === 0) result.push('FizzBuzz');\n    else if (i % 3 === 0) result.push('Fizz');\n    else if (i % 5 === 0) result.push('Buzz');\n    else result.push(i);\n  }\n  return result;\n}\n\nconst sampleInput = 5;\nreturn fizzBuzz(sampleInput);",
+    "label": "FizzBuzz",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "Other Array Problems",
+    "question": "Swap Elements: Swap values at the two given indexes.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function swapElements(input) {\n  const result = [...input.nums];\n  [result[input.i], result[input.j]] = [result[input.j], result[input.i]];\n  return result;\n}\n\nconst sampleInput = {\n  \"nums\": [\n    1,\n    2,\n    3,\n    4\n  ],\n  \"i\": 1,\n  \"j\": 3\n};\nreturn swapElements(sampleInput);",
+    "label": "Swap Elements",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Vowels: Return the string without vowels.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeVowels(input) {\n  return input.replace(/[aeiou]/gi, '');\n}\n\nconst sampleInput = \"hello world\";\nreturn removeVowels(sampleInput);",
+    "label": "Remove Vowels",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Consonants: Return only vowels and spaces from the string.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeConsonants(input) {\n  return input.replace(/[^aeiou\\s]/gi, '');\n}\n\nconst sampleInput = \"hello world\";\nreturn removeConsonants(sampleInput);",
+    "label": "Remove Consonants",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Duplicate Characters: Return the string with duplicate characters removed.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeDuplicateCharacters(input) {\n  const seen = new Set();\n  return [...input].filter((char) => {\n    if (seen.has(char)) return false;\n    seen.add(char);\n    return true;\n  }).join('');\n}\n\nconst sampleInput = \"programming\";\nreturn removeDuplicateCharacters(sampleInput);",
+    "label": "Remove Duplicate Characters",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Duplicate Words: Return the sentence with duplicate words removed.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeDuplicateWords(input) {\n  const seen = new Set();\n  return input.split(' ').filter((word) => {\n    if (seen.has(word)) return false;\n    seen.add(word);\n    return true;\n  }).join(' ');\n}\n\nconst sampleInput = \"this is is good good\";\nreturn removeDuplicateWords(sampleInput);",
+    "label": "Remove Duplicate Words",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Special Characters: Return only letters, numbers, and spaces.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeSpecialCharacters(input) {\n  return input.replace(/[^a-zA-Z0-9\\s]/g, '');\n}\n\nconst sampleInput = \"Hi! JS@2026\";\nreturn removeSpecialCharacters(sampleInput);",
+    "label": "Remove Special Characters",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Digits: Return the string without digits.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeDigits(input) {\n  return input.replace(/\\d/g, '');\n}\n\nconst sampleInput = \"a1b2c3\";\nreturn removeDigits(sampleInput);",
+    "label": "Remove Digits",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Keep Only Digits: Return only the digits from the string.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function keepOnlyDigits(input) {\n  return input.replace(/\\D/g, '');\n}\n\nconst sampleInput = \"a1b2c3\";\nreturn keepOnlyDigits(sampleInput);",
+    "label": "Keep Only Digits",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Whitespaces: Return the string without whitespace.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeWhitespaces(input) {\n  return input.replace(/\\s/g, '');\n}\n\nconst sampleInput = \"a b c d\";\nreturn removeWhitespaces(sampleInput);",
+    "label": "Remove Whitespaces",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Basic Manipulations",
+    "question": "Remove Specific Character: Remove all occurrences of the given character.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function removeSpecificCharacter(input) {\n  return input.text.split(input.char).join('');\n}\n\nconst sampleInput = {\n  \"text\": \"banana\",\n  \"char\": \"a\"\n};\nreturn removeSpecificCharacter(sampleInput);",
+    "label": "Remove Specific Character",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "Reverse String: Return the reversed string.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseString(input) {\n  return [...input].reverse().join('');\n}\n\nconst sampleInput = \"javascript\";\nreturn reverseString(sampleInput);",
+    "label": "Reverse String",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "Reverse Without Built-ins: Reverse the string without using built-in reverse.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseWithoutBuiltIns(input) {\n  let reversed = '';\n  for (let i = input.length - 1; i >= 0; i -= 1) reversed += input[i];\n  return reversed;\n}\n\nconst sampleInput = \"hello\";\nreturn reverseWithoutBuiltIns(sampleInput);",
+    "label": "Reverse Without Built-ins",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "Reverse Word Order: Reverse the order of words.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseWordOrder(input) {\n  return input.split(' ').reverse().join(' ');\n}\n\nconst sampleInput = \"hello world\";\nreturn reverseWordOrder(sampleInput);",
+    "label": "Reverse Word Order",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "Reverse Alternate Words: Reverse every alternate word.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseAlternateWords(input) {\n  return input.split(' ').map((word, index) => (index % 2 === 1 ? [...word].reverse().join('') : word)).join(' ');\n}\n\nconst sampleInput = \"one two three four\";\nreturn reverseAlternateWords(sampleInput);",
+    "label": "Reverse Alternate Words",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "Reverse Vowels: Reverse only vowels in the string.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseVowels(input) {\n  const vowels = input.match(/[aeiou]/gi) || [];\n  return input.replace(/[aeiou]/gi, () => vowels.pop());\n}\n\nconst sampleInput = \"hello\";\nreturn reverseVowels(sampleInput);",
+    "label": "Reverse Vowels",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "Reverse Consonants: Reverse only consonants in the string.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseConsonants(input) {\n  const consonants = input.match(/[^aeiou\\s]/gi) || [];\n  return input.replace(/[^aeiou\\s]/gi, () => consonants.pop());\n}\n\nconst sampleInput = \"hello\";\nreturn reverseConsonants(sampleInput);",
+    "label": "Reverse Consonants",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "\"How Are You\" -> \"woH erA uoY\": Reverse each word but keep word order.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseEachWord(input) {\n  return input.split(' ').map((word) => [...word].reverse().join('')).join(' ');\n}\n\nconst sampleInput = \"How Are You\";\nreturn reverseEachWord(sampleInput);",
+    "label": "\"How Are You\" -> \"woH erA uoY\"",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Reversal Problems",
+    "question": "\"hello world\" -> \"olleh dleow\": Reverse letters inside each word.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function reverseEachWordLetters(input) {\n  return input.split(' ').map((word) => [...word].reverse().join('')).join(' ');\n}\n\nconst sampleInput = \"hello world\";\nreturn reverseEachWordLetters(sampleInput);",
+    "label": "\"hello world\" -> \"olleh dleow\"",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Counting Problems",
+    "question": "Count Vowels: Return the number of vowels.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function countVowels(input) {\n  return (input.match(/[aeiou]/gi) || []).length;\n}\n\nconst sampleInput = \"Interview Forge\";\nreturn countVowels(sampleInput);",
+    "label": "Count Vowels",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Counting Problems",
+    "question": "Count Consonants: Return the number of consonants.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function countConsonants(input) {\n  return (input.match(/[^aeiou\\s]/gi) || []).length;\n}\n\nconst sampleInput = \"hello world\";\nreturn countConsonants(sampleInput);",
+    "label": "Count Consonants",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Counting Problems",
+    "question": "Count Words: Return the number of words.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function countWords(input) {\n  return input.trim().split(/\\s+/).length;\n}\n\nconst sampleInput = \"hello world again\";\nreturn countWords(sampleInput);",
+    "label": "Count Words",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Counting Problems",
+    "question": "Word Frequency: Return word frequencies.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function wordFrequency(input) {\n  return input.split(' ').reduce((freq, word) => {\n    freq[word] = (freq[word] || 0) + 1;\n    return freq;\n  }, {});\n}\n\nconst sampleInput = \"cat dog cat bird\";\nreturn wordFrequency(sampleInput);",
+    "label": "Word Frequency",
+    "source": "curated-code-practice"
+  },
+  {
+    "category": "dsa",
+    "topic": "String Character Problems",
+    "question": "Unique Characters: Return characters that appear only once.",
+    "explanation": "Return the expected output for the sample input.",
+    "text": "function uniqueCharacters(input) {\n  const freq = countOccurrences([...input]);\n  return [...input].filter((char, index) => freq[char] === 1 && input.indexOf(char) === index);\n}\n\nconst sampleInput = \"programming\";\nreturn uniqueCharacters(sampleInput);",
+    "label": "Unique Characters",
+    "source": "curated-code-practice"
+  }
+]

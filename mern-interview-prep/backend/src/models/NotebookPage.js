@@ -34,6 +34,11 @@ const notebookPageSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    questionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Question',
+      index: true,
+    },
   },
   { timestamps: true }
 );

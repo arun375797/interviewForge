@@ -15,6 +15,7 @@ import {
   X,
 } from 'lucide-react';
 import { api } from '../api';
+import { useConfirm } from '../context/ConfirmDialogContext';
 import NotebookEditor from './NotebookEditor';
 import { NOTEBOOK_COLORS } from '../utils/notebookConstants';
 import {
@@ -183,6 +184,7 @@ function IndexSidebar({
 export default function NotebookView() {
   const { notebookId, pageId } = useParams();
   const navigate = useNavigate();
+  const confirm = useConfirm();
   const saveTimer = useRef(null);
   const pendingSave = useRef(null);
 
@@ -196,6 +198,7 @@ export default function NotebookView() {
   const [content, setContent] = useState('');
   const [saveState, setSaveState] = useState('idle');
   const [creatingPage, setCreatingPage] = useState(false);
+  const [addingSubtopic, setAddingSubtopic] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [indexSearch, setIndexSearch] = useState('');
   const [expandedTopics, setExpandedTopics] = useState(() => new Set());
@@ -210,6 +213,33 @@ export default function NotebookView() {
 
   const indexGroups = useMemo(() => buildIndexGroups(sortedPages), [sortedPages]);
 
+  const isSubtopicPage = useMemo(() => {
+    if (!page) return false;
+    return normalizeSubtopics(page).length > 0;
+  }, [page]);
+
+  const childSubtopicPages = useMemo(() => {
+    if (!page || isSubtopicPage) return [];
+    const topicKey = (page.topic || 'Untitled').trim().toLowerCase();
+    return sortedPages.filter((item) => {
+      if (normalizeSubtopics(item).length === 0) return false;
+      return (item.topic || 'Untitled').trim().toLowerCase() === topicKey;
+    });
+  }, [page, isSubtopicPage, sortedPages]);
+
+  const parentTopicPage = useMemo(() => {
+    if (!page || !isSubtopicPage) return null;
+    const topicKey = (page.topic || 'Untitled').trim().toLowerCase();
+    return (
+      sortedPages.find(
+        (item) =>
+          item._id !== page._id &&
+          normalizeSubtopics(item).length === 0 &&
+          (item.topic || 'Untitled').trim().toLowerCase() === topicKey
+      ) || null
+    );
+  }, [page, isSubtopicPage, sortedPages]);
+
   const loadNotebook = useCallback(async () => {
     const data = await api.getNotebook(notebookId);
     setNotebook(data);
@@ -222,7 +252,7 @@ export default function NotebookView() {
       setPage(data);
       setTopic(data.topic);
       const nextSubtopics = normalizeSubtopics(data);
-      setSubtopics(nextSubtopics.length ? nextSubtopics : ['']);
+      setSubtopics(nextSubtopics);
       setPageNumber(String(data.pageNumber));
       setContent(data.content || '');
       setSaveState('idle');
@@ -331,18 +361,41 @@ export default function NotebookView() {
     scheduleSave({ subtopics: sanitizeSubtopics(next) });
   };
 
-  const onSubtopicChange = (index, value) => {
-    const next = subtopics.map((item, i) => (i === index ? value : item));
-    saveSubtopics(next);
+  const onSubtopicChange = (value) => {
+    saveSubtopics([value]);
   };
 
-  const addSubtopic = () => {
-    saveSubtopics([...subtopics, '']);
-  };
-
-  const removeSubtopic = (index) => {
-    const next = subtopics.filter((_, i) => i !== index);
-    saveSubtopics(next.length ? next : ['']);
+  const addSubtopic = async () => {
+    if (!page || addingSubtopic) return;
+    setAddingSubtopic(true);
+    setError('');
+    try {
+      const topicKey = (topic || 'Untitled').trim().toLowerCase();
+      const siblings = sortedPages.filter(
+        (item) =>
+          normalizeSubtopics(item).length > 0 &&
+          (item.topic || 'Untitled').trim().toLowerCase() === topicKey
+      );
+      const nextNumber =
+        sortedPages.length > 0 ? Math.max(...sortedPages.map((item) => item.pageNumber)) + 1 : 1;
+      const created = await api.createNotebookPage(notebookId, {
+        pageNumber: nextNumber,
+        topic: topic.trim() || 'Untitled',
+        subtopics: [`Subtopic ${siblings.length + 1}`],
+        content: '',
+      });
+      setNotebook((prev) => ({
+        ...prev,
+        pages: [...(prev?.pages || []), { ...created, subtopics: normalizeSubtopics(created) }],
+      }));
+      const key = (created.topic || 'Untitled').trim().toLowerCase();
+      setExpandedTopics((prev) => new Set([...prev, key]));
+      navigate(`/notebook/${notebookId}/page/${created._id}`);
+    } catch (err) {
+      setError(err.message || 'Could not create subtopic page');
+    } finally {
+      setAddingSubtopic(false);
+    }
   };
 
   const onPageNumberChange = (value) => {
@@ -393,7 +446,12 @@ export default function NotebookView() {
 
   const deleteCurrentPage = async () => {
     if (!page) return;
-    if (!window.confirm('Delete this page permanently?')) return;
+    const confirmed = await confirm({
+      title: 'Delete page',
+      message: 'Delete this page permanently? This cannot be undone.',
+      confirmLabel: 'Delete page',
+    });
+    if (!confirmed) return;
     try {
       await api.deleteNotebookPage(notebookId, page._id);
       const nb = await loadNotebook();
@@ -546,39 +604,87 @@ export default function NotebookView() {
                 </label>
 
                 <div className="sm:col-span-2">
-                  <div className="mb-1.5 flex items-center justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-accent">
-                      Subtopics
-                    </span>
-                    <button
-                      type="button"
-                      onClick={addSubtopic}
-                      className="inline-flex items-center gap-1 rounded-lg border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink hover:bg-paper-2"
-                    >
-                      <Plus className="h-3.5 w-3.5" />
-                      Add
-                    </button>
-                  </div>
-                  <div className="space-y-2">
-                    {subtopics.map((sub, index) => (
-                      <div key={`subtopic-${index}`} className="flex gap-2">
+                  {isSubtopicPage ? (
+                    <div>
+                      {parentTopicPage ? (
+                        <Link
+                          to={`/notebook/${notebookId}/page/${parentTopicPage._id}`}
+                          className="mb-2 inline-flex items-center gap-1 text-xs text-muted hover:text-accent"
+                        >
+                          <ArrowLeft className="h-3.5 w-3.5" />
+                          Back to {parentTopicPage.topic || 'topic'}
+                        </Link>
+                      ) : null}
+                      <label className="block">
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-accent">
+                            Subtopic
+                          </span>
+                          <button
+                            type="button"
+                            onClick={addSubtopic}
+                            disabled={addingSubtopic}
+                            className="inline-flex items-center gap-1 rounded-lg border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink hover:bg-paper-2 disabled:opacity-60"
+                          >
+                            <Plus className="h-3.5 w-3.5" />
+                            {addingSubtopic ? 'Adding…' : 'Add'}
+                          </button>
+                        </div>
                         <input
-                          value={sub}
-                          onChange={(event) => onSubtopicChange(index, event.target.value)}
-                          placeholder={`Subtopic ${index + 1}…`}
-                          className="min-w-0 flex-1 rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
+                          value={subtopics[0] || ''}
+                          onChange={(event) => onSubtopicChange(event.target.value)}
+                          placeholder="Subtopic name…"
+                          className="w-full rounded-xl border border-line bg-paper px-3 py-2 outline-none focus:border-accent"
                         />
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="mb-1.5 flex items-center justify-between">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-accent">
+                          Subtopics
+                        </span>
                         <button
                           type="button"
-                          onClick={() => removeSubtopic(index)}
-                          className="shrink-0 rounded-xl border border-line px-3 py-2 text-muted hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700"
-                          title="Remove subtopic"
+                          onClick={addSubtopic}
+                          disabled={addingSubtopic}
+                          className="inline-flex items-center gap-1 rounded-lg border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink hover:bg-paper-2 disabled:opacity-60"
                         >
-                          <X className="h-4 w-4" />
+                          <Plus className="h-3.5 w-3.5" />
+                          {addingSubtopic ? 'Adding…' : 'Add'}
                         </button>
                       </div>
-                    ))}
-                  </div>
+                      {childSubtopicPages.length ? (
+                        <ul className="space-y-1.5">
+                          {childSubtopicPages.map((child) => {
+                            const label = normalizeSubtopics(child)[0] || 'Untitled';
+                            const active = child._id === page._id;
+                            return (
+                              <li key={child._id}>
+                                <Link
+                                  to={`/notebook/${notebookId}/page/${child._id}`}
+                                  className={`flex items-center justify-between rounded-xl border px-3 py-2 text-sm transition ${
+                                    active
+                                      ? 'border-accent bg-accent/5 text-ink'
+                                      : 'border-line bg-paper text-ink-soft hover:border-accent/40 hover:text-ink'
+                                  }`}
+                                >
+                                  <span className="truncate">{label}</span>
+                                  <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
+                                    p.{child.pageNumber}
+                                  </span>
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      ) : (
+                        <p className="rounded-xl border border-dashed border-line bg-paper/60 px-3 py-3 text-sm text-muted">
+                          Each subtopic gets its own page so you can write separate notes.
+                        </p>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
 

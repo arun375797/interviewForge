@@ -1,0 +1,902 @@
+[
+  {
+    "category": "react",
+    "topic": "Hooks Rules & Core Hooks: useState, useEffect & useRef",
+    "question": "[] in useEffect,",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks Rules & Core Hooks: useState, useEffect & useRef",
+    "question": "Focus the add todo input field upon loading of the page (useEffect + useRef)",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "react",
+    "topic": "Advanced Hooks: useMemo, useCallback, useReducer, useContext, useLayoutEffect, useId & Custom Hooks",
+    "question": "Create counter app using using useCallback",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "react",
+    "topic": "Context API & Global State Management",
+    "question": "Context - provider, consumer",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "react",
+    "topic": "React Practical Tasks, Todo Apps, Counters, Forms & Mini Projects",
+    "question": "add form validation for forms",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "react",
+    "topic": "React Practical Tasks, Todo Apps, Counters, Forms & Mini Projects",
+    "question": "Add pagination on the user list",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists",
+    "source": "parsed-questions/react"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 1",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 2",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 3",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 4",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 5",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 6",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 7",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 8",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 9",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 10",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 11",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 12",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 13",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 14",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 15",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 16",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 17",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 18",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 19",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 20",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 21",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 22",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 23",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 24",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 25",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 26",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 27",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 28",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 29",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 30",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 31",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 32",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 33",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 34",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 35",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 36",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 37",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 38",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 39",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 40",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 41",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 42",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 43",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 44",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 45",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 46",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 47",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 48",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 49",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 50",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 51",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 52",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 53",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 54",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 55",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 56",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 57",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 58",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 59",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 60",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 61",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 62",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 63",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 64",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 65",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 66",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 67",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 68",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 69",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 70",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 71",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 72",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 73",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 74",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 75",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 76",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 77",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 78",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 79",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 80",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 81",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 82",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 83",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 84",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 85",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 86",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 87",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Hooks",
+    "question": "Create a custom React hook for debounced search input.",
+    "explanation": "useEffect watches the value and updates debounced state after a delay with cleanup.",
+    "text": "import { useEffect, useState } from \"react\";\n\nexport function useDebounce(value, delay = 400) {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport default function SearchBox() {\n  const [query, setQuery] = useState(\"\");\n  const debouncedQuery = useDebounce(query);\n\n  useEffect(() => {\n    if (!debouncedQuery) return;\n    console.log(\"Search for:\", debouncedQuery);\n  }, [debouncedQuery]);\n\n  return <input value={query} onChange={(e) => setQuery(e.target.value)} />;\n}",
+    "label": "Hooks 88",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Context API",
+    "question": "Share authenticated user data across React components using Context API.",
+    "explanation": "Create a context, provide value at the top, and consume it in child components.",
+    "text": "import { createContext, useContext, useState } from \"react\";\n\nconst AuthContext = createContext(null);\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n\n  const login = (nextUser) => setUser(nextUser);\n  const logout = () => setUser(null);\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\nexport function useAuth() {\n  const value = useContext(AuthContext);\n  if (!value) throw new Error(\"useAuth must be used inside AuthProvider\");\n  return value;\n}",
+    "label": "Context API 89",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Lists",
+    "question": "Render and filter a list of users in React.",
+    "explanation": "Keep the source list in state, derive filtered results, and map them into JSX.",
+    "text": "import { useMemo, useState } from \"react\";\n\nconst USERS = [\n  { id: 1, name: \"Asha\", role: \"admin\" },\n  { id: 2, name: \"Ravi\", role: \"user\" },\n  { id: 3, name: \"Maya\", role: \"user\" },\n];\n\nexport default function UserList() {\n  const [query, setQuery] = useState(\"\");\n\n  const filteredUsers = useMemo(\n    () => USERS.filter((user) => user.name.toLowerCase().includes(query.toLowerCase())),\n    [query]\n  );\n\n  return (\n    <section>\n      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder=\"Search users\" />\n      <ul>\n        {filteredUsers.map((user) => (\n          <li key={user.id}>{user.name} — {user.role}</li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Lists 90",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Local Storage",
+    "question": "Persist todo items in localStorage in a React app.",
+    "explanation": "Read initial state from localStorage and write back whenever todos change.",
+    "text": "import { useEffect, useState } from \"react\";\n\nconst STORAGE_KEY = \"todos\";\n\nexport default function PersistentTodos() {\n  const [todos, setTodos] = useState(() => {\n    const saved = localStorage.getItem(STORAGE_KEY);\n    return saved ? JSON.parse(saved) : [];\n  });\n\n  useEffect(() => {\n    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));\n  }, [todos]);\n\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}",
+    "label": "Local Storage 91",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Counters & State",
+    "question": "Build a React counter that increments and decrements.",
+    "explanation": "useState holds the count. Event handlers call the setter with the next value.",
+    "text": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button type=\"button\" onClick={() => setCount((value) => value + 1)}>\n        Increment\n      </button>\n      <button type=\"button\" onClick={() => setCount((value) => value - 1)}>\n        Decrement\n      </button>\n    </div>\n  );\n}",
+    "label": "Counters & State 92",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Todo Apps",
+    "question": "Implement a todo list where users can add tasks and mark them complete.",
+    "explanation": "Store todos in state. Toggle done with map and track completed count separately.",
+    "text": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    if (!text.trim()) return;\n    setTodos((prev) => [...prev, { id: Date.now(), text, done: false }]);\n    setText(\"\");\n  };\n\n  const toggleTodo = (id) => {\n    setTodos((prev) =>\n      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))\n    );\n  };\n\n  const completedCount = todos.filter((todo) => todo.done).length;\n\n  return (\n    <section>\n      <input value={text} onChange={(e) => setText(e.target.value)} />\n      <button type=\"button\" onClick={addTodo}>Add</button>\n      <p>Completed: {completedCount}</p>\n      <ul>\n        {todos.map((todo) => (\n          <li key={todo.id}>\n            <button type=\"button\" onClick={() => toggleTodo(todo.id)}>\n              {todo.done ? \"Undo\" : \"Done\"}\n            </button>\n            <span style={{ textDecoration: todo.done ? \"line-through\" : \"none\" }}>\n              {todo.text}\n            </span>\n          </li>\n        ))}\n      </ul>\n    </section>\n  );\n}",
+    "label": "Todo Apps 93",
+    "source": "thinkmern-practical-templates"
+  },
+  {
+    "category": "react",
+    "topic": "Forms",
+    "question": "Add form validation for a signup form in React.",
+    "explanation": "Validate on submit, store field errors in state, and block submit until inputs are valid.",
+    "text": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const validate = () => {\n    const next = {};\n    if (!form.email.includes(\"@\")) next.email = \"Enter a valid email\";\n    if (form.password.length < 8) next.password = \"Password must be at least 8 characters\";\n    setErrors(next);\n    return Object.keys(next).length === 0;\n  };\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    if (!validate()) return;\n    console.log(\"Submitted\", form);\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <label>\n        Email\n        <input\n          value={form.email}\n          onChange={(e) => setForm({ ...form, email: e.target.value })}\n        />\n        {errors.email ? <p>{errors.email}</p> : null}\n      </label>\n      <label>\n        Password\n        <input\n          type=\"password\"\n          value={form.password}\n          onChange={(e) => setForm({ ...form, password: e.target.value })}\n        />\n        {errors.password ? <p>{errors.password}</p> : null}\n      </label>\n      <button type=\"submit\">Sign up</button>\n    </form>\n  );\n}",
+    "label": "Forms 94",
+    "source": "thinkmern-practical-templates"
+  }
+]

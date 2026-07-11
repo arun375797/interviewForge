@@ -98,12 +98,29 @@
     linear-gradient(180deg, #120a28 0%, #1a1035 45%, #150d2e 100%);
 }
 
-/* Night canvas — force true black on every layer */
+/* Theme canvas — keep the full viewport filled on every theme */
+html[data-theme="paper"],
+html[data-theme="paper"] body,
+html[data-theme="paper"] #root {
+  min-height: 100%;
+  background-color: #efe8db;
+  background: var(--body-bg);
+}
+
+html[data-theme="jellyfish"],
+html[data-theme="jellyfish"] body,
+html[data-theme="jellyfish"] #root {
+  min-height: 100%;
+  background-color: #150d2e;
+  background: var(--body-bg);
+}
+
 html[data-theme="night"],
 html[data-theme="night"] body,
 html[data-theme="night"] #root,
 html[data-theme="night"] .bg-body {
   background-color: #000000;
+  background: var(--body-bg);
 }
 
 @layer base {
@@ -403,6 +420,15 @@ html[data-theme="night"] .bg-body {
 
 .ide-editor-shell {
   border-top: 1px solid color-mix(in srgb, var(--color-line) 45%, transparent);
+  height: calc(100dvh - 15.5rem);
+  min-height: 28rem;
+}
+
+@media (min-width: 1024px) {
+  .ide-editor-shell {
+    height: calc(100dvh - 13.5rem);
+    min-height: 32rem;
+  }
 }
 
 .ide-editor-shell .monaco-editor,

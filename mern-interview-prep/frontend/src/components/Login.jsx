@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
+const googleEnabled = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
+
 export default function Login() {
-  const { login, isAuthenticated, booting } = useAuth();
+  const { login, loginWithGoogle, isAuthenticated, booting } = useAuth();
   const { theme, themes, setTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,10 +19,28 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   if (!booting && isAuthenticated) {
     return <Navigate to={from} replace />;
   }
+
+  const onGoogleSuccess = async (response) => {
+    setError('');
+    setGoogleLoading(true);
+    try {
+      await loginWithGoogle(response.credential);
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err.message || 'Google sign-in failed');
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
+  const onGoogleError = () => {
+    setError('Google sign-in was cancelled or failed');
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -122,11 +143,33 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || googleLoading}
             className="w-full rounded-xl bg-ink py-3 text-sm font-semibold text-paper transition hover:opacity-90 disabled:opacity-50"
           >
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
+
+          {googleEnabled && (
+            <>
+              <div className="my-5 flex items-center gap-3">
+                <span className="h-px flex-1 bg-line" />
+                <span className="text-xs text-muted">or</span>
+                <span className="h-px flex-1 bg-line" />
+              </div>
+
+              <div className="flex justify-center">
+                <GoogleLogin
+                  onSuccess={onGoogleSuccess}
+                  onError={onGoogleError}
+                  theme="outline"
+                  size="large"
+                  text="continue_with"
+                  shape="pill"
+                  width="320"
+                />
+              </div>
+            </>
+          )}
         </form>
       </div>
     </div>
