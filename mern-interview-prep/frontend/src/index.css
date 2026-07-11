@@ -44,6 +44,9 @@
   --body-bg: radial-gradient(1200px 600px at 10% -10%, rgba(15, 118, 110, 0.12), transparent 55%),
     radial-gradient(900px 500px at 100% 0%, rgba(194, 65, 12, 0.10), transparent 50%),
     linear-gradient(180deg, #f7f3eb 0%, #efe8db 45%, #e9e2d4 100%);
+  --ide-editor-bg: #12100c;
+  --ide-editor-fg: #f7f3eb;
+  --ide-editor-gutter: #6b6560;
 }
 
 /* Night — OLED black, inspired by GitHub / Linear / Vercel dark */
@@ -68,6 +71,9 @@
   --selection-bg: rgba(88, 166, 255, 0.28);
   --login-glow: none;
   --body-bg: #000000;
+  --ide-editor-bg: #0a0a0a;
+  --ide-editor-fg: #f0f6fc;
+  --ide-editor-gutter: #484f58;
 }
 
 /* Jellyfish — colorful coder theme */
@@ -96,6 +102,9 @@
     radial-gradient(900px 500px at 100% 0%, rgba(0, 229, 255, 0.14), transparent 50%),
     radial-gradient(700px 450px at 50% 100%, rgba(167, 139, 250, 0.12), transparent 55%),
     linear-gradient(180deg, #120a28 0%, #1a1035 45%, #150d2e 100%);
+  --ide-editor-bg: #120a28;
+  --ide-editor-fg: #ede9fe;
+  --ide-editor-gutter: #6d5cae;
 }
 
 /* Theme canvas — keep the full viewport filled on every theme */
@@ -434,5 +443,23 @@ html[data-theme="night"] .bg-body {
 .ide-editor-shell .monaco-editor,
 .ide-editor-shell .monaco-editor-background,
 .ide-editor-shell .monaco-editor .margin {
-  background-color: #12100c !important;
+  background-color: var(--ide-editor-bg) !important;
+}
+
+.ide-editor-shell .monaco-editor,
+.ide-editor-shell .monaco-editor .inputarea.ime-input {
+  color: var(--ide-editor-fg);
+}
+
+.ide-editor-shell .monaco-editor .margin .line-numbers {
+  color: var(--ide-editor-gutter) !important;
+}
+
+.ide-editor-shell .monaco-editor .margin .line-numbers.active-line-number {
+  color: var(--ide-editor-fg) !important;
+}
+
+.ide-express-body {
+  background-color: var(--ide-editor-bg);
+  color: var(--ide-editor-fg);
 }

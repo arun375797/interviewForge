@@ -12,7 +12,9 @@ import {
 } from 'lucide-react';
 import { api } from '../api';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import SaveToNotebookModal from './SaveToNotebookModal';
+import { getIdeMonacoTheme, registerIdeMonacoThemes } from '../utils/ideMonacoTheme';
 import {
   IDE_MODES,
   loadIdeWorkspace,
@@ -27,6 +29,7 @@ const MODE_ICONS = {
 };
 
 export default function Ide() {
+  const { theme } = useTheme();
   const { user } = useAuth();
   const userId = user?.id;
   const isAdmin = Boolean(user?.isAdmin);
@@ -308,11 +311,12 @@ export default function Ide() {
 
           <div className="ide-editor-shell min-h-0 flex-1">
             <Editor
-              key={activeMode}
+              key={`${activeMode}-${theme}`}
               path={`ide-${activeMode}`}
               height="100%"
               language={mode.language}
-              theme="vs-dark"
+              theme={getIdeMonacoTheme(theme)}
+              beforeMount={registerIdeMonacoThemes}
               value={code}
               onChange={(value) => setCode(value ?? '')}
               options={{
@@ -355,7 +359,7 @@ export default function Ide() {
                 value={testBody}
                 onChange={(e) => setTestBody(e.target.value)}
                 spellCheck={false}
-                className="mt-3 min-h-[140px] w-full rounded-xl border border-line bg-[#12100c] p-3 font-mono text-xs leading-5 text-[#f7f3eb] outline-none focus:border-accent"
+                className="ide-express-body mt-3 min-h-[140px] w-full rounded-xl border border-line p-3 font-mono text-xs leading-5 outline-none focus:border-accent"
               />
             </div>
           ) : null}
