@@ -22,12 +22,9 @@ Open http://localhost:5173
 
 ### Login
 
-The app requires authentication. Default admin (created on first boot):
+The app requires authentication. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `backend/.env` — the admin account is created on first boot from those values.
 
-- **Email / username:** `arun375797`
-- **Password:** `Job@2026`
-
-Override with `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `JWT_SECRET` in `backend/.env`.
+Use a strong `JWT_SECRET` (32+ characters) before deploying to production.
 
 ## Deploy on Vercel (Frontend + Backend separately)
 
@@ -70,9 +67,9 @@ Do **not** commit `backend/.env`.
 | `MONGO_URI` | `mongodb+srv://.../mern_interview_prep?retryWrites=true&w=majority` |
 | `JWT_SECRET` | long random string |
 | `JWT_EXPIRES` | `7d` |
-| `ADMIN_EMAIL` | `arun375797` |
-| `ADMIN_PASSWORD` | `Job@2026` |
-| `ADMIN_NAME` | `Arun` |
+| `ADMIN_EMAIL` | your admin email |
+| `ADMIN_PASSWORD` | strong password (12+ chars in production) |
+| `ADMIN_NAME` | `Admin` |
 | `CLIENT_URL` | *(set after frontend deploy — your frontend URL)* |
 | `SKIP_AUTO_SEED` | `true` |
 | `NODE_ENV` | `production` |
@@ -116,7 +113,7 @@ Redeploy the backend (Deployments → … → Redeploy).
 
 ### 5. Login
 
-Open the frontend URL → sign in with `arun375797` / `Job@2026`.
+Open the frontend URL → sign in with the `ADMIN_EMAIL` / `ADMIN_PASSWORD` from your backend env.
 
 ---
 
@@ -161,8 +158,8 @@ Make sure `.env` is **not** committed (it is in `.gitignore`).
 | `SERVE_FRONTEND` | `true` |
 | `MONGO_URI` | your Atlas URI (with DB name) |
 | `JWT_SECRET` | long random string |
-| `ADMIN_EMAIL` | `arun375797` |
-| `ADMIN_PASSWORD` | `Job@2026` |
+| `ADMIN_EMAIL` | your admin email |
+| `ADMIN_PASSWORD` | strong password (12+ chars in production) |
 | `CLIENT_URL` | *(optional)* leave empty when UI is served from the same service |
 
 On first boot, if the database is empty, the server **auto-seeds** ~7,135 questions (may take 1–2 minutes). Health check still passes because the server listens first.

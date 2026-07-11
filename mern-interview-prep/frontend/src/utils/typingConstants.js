@@ -1,10 +1,3 @@
-import english from '../data/typing/english.json';
-import javascript from '../data/typing/javascript.json';
-import react from '../data/typing/react.json';
-import nodejs from '../data/typing/nodejs.json';
-import express from '../data/typing/express.json';
-import dsa from '../data/typing/dsa.json';
-import mongodb from '../data/typing/mongodb.json';
 import manifest from '../data/typing/manifest.json';
 
 export const TYPING_CATEGORIES = [
@@ -31,16 +24,39 @@ export const TYPING_DURATIONS = [
   { key: 'snippet', label: 'Full answer' },
 ];
 
-export const TYPING_SNIPPETS = [
-  ...english,
-  ...javascript,
-  ...react,
-  ...nodejs,
-  ...express,
-  ...dsa,
-  ...mongodb,
-];
+const CATEGORY_LOADERS = {
+  english: () => import('../data/typing/english.json'),
+  javascript: () => import('../data/typing/javascript.json'),
+  react: () => import('../data/typing/react.json'),
+  nodejs: () => import('../data/typing/nodejs.json'),
+  express: () => import('../data/typing/express.json'),
+  dsa: () => import('../data/typing/dsa.json'),
+  mongodb: () => import('../data/typing/mongodb.json'),
+};
+
+const snippetCache = new Map();
 
 export const TYPING_SNIPPET_COUNTS = manifest;
 
+export const TYPING_SNIPPET_TOTAL = Object.values(manifest).reduce((sum, count) => sum + count, 0);
+
 export const TYPING_STORAGE_KEY = 'thinkmern_typing_stats_v1';
+
+export async function loadTypingSnippets(category = 'all') {
+  if (snippetCache.has(category)) return snippetCache.get(category);
+
+  let snippets;
+  if (category === 'all') {
+    const categories = Object.keys(CATEGORY_LOADERS);
+    const modules = await Promise.all(categories.map((key) => CATEGORY_LOADERS[key]()));
+    snippets = modules.flatMap((mod) => mod.default || mod);
+  } else {
+    const loader = CATEGORY_LOADERS[category];
+    if (!loader) return [];
+    const mod = await loader();
+    snippets = mod.default || mod;
+  }
+
+  snippetCache.set(category, snippets);
+  return snippets;
+}

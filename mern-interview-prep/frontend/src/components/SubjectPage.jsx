@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { Search, ChevronRight, Filter, Plus, X } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
+import { useDebounce } from '../utils/useDebounce';
 import QuestionList from './QuestionList';
 import QuestionDetail from './QuestionDetail';
 
@@ -18,6 +19,8 @@ export default function SubjectPage() {
   const [pages, setPages] = useState(1);
   const [globalSearch, setGlobalSearch] = useState(searchParams.get('qsearch') || '');
   const [topicSearch, setTopicSearch] = useState(searchParams.get('search') || '');
+  const debouncedGlobalSearch = useDebounce(globalSearch, 300);
+  const debouncedTopicSearch = useDebounce(topicSearch, 300);
   const [difficulty, setDifficulty] = useState('');
   const [loading, setLoading] = useState(true);
   const [listLoading, setListLoading] = useState(false);
@@ -25,7 +28,7 @@ export default function SubjectPage() {
   const [topicQuery, setTopicQuery] = useState('');
 
   const meta = SUBJECT_META[subject] || { label: subject, accent: '#0f766e' };
-  const isGlobalSearch = Boolean(globalSearch.trim());
+  const isGlobalSearch = Boolean(debouncedGlobalSearch.trim());
 
   useEffect(() => {
     let alive = true;
@@ -47,7 +50,9 @@ export default function SubjectPage() {
 
     // Top search = whole language (ignore selected topic)
     // Side/main search = within current topic (when no global search)
-    const activeSearch = isGlobalSearch ? globalSearch.trim() : topicSearch.trim() || undefined;
+    const activeSearch = isGlobalSearch
+      ? debouncedGlobalSearch.trim()
+      : debouncedTopicSearch.trim() || undefined;
 
     api
       .getQuestions({
@@ -69,7 +74,7 @@ export default function SubjectPage() {
     return () => {
       alive = false;
     };
-  }, [subject, topic, globalSearch, topicSearch, difficulty, page, isGlobalSearch]);
+  }, [subject, topic, debouncedGlobalSearch, debouncedTopicSearch, difficulty, page, isGlobalSearch]);
 
   useEffect(() => {
     if (!selectedId) {

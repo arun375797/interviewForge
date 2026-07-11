@@ -11,6 +11,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { api } from '../api';
+import { useAuth } from '../context/AuthContext';
 import SaveToNotebookModal from './SaveToNotebookModal';
 import {
   IDE_MODES,
@@ -26,19 +27,22 @@ const MODE_ICONS = {
 };
 
 export default function Ide() {
+  const { user } = useAuth();
+  const userId = user?.id;
+  const isAdmin = Boolean(user?.isAdmin);
   const [activeMode, setActiveMode] = useState('javascript');
   const [codes, setCodes] = useState(() => {
-    const saved = loadIdeWorkspace();
+    const saved = loadIdeWorkspace(userId, isAdmin);
     return {
       javascript: saved?.code?.javascript ?? IDE_MODES.javascript.starter,
       mongodb: saved?.code?.mongodb ?? IDE_MODES.mongodb.starter,
       express: saved?.code?.express ?? IDE_MODES.express.starter,
     };
   });
-  const [testMethod, setTestMethod] = useState(() => loadIdeWorkspace()?.testMethod || 'GET');
-  const [testPath, setTestPath] = useState(() => loadIdeWorkspace()?.testPath || '/users');
+  const [testMethod, setTestMethod] = useState(() => loadIdeWorkspace(userId, isAdmin)?.testMethod || 'GET');
+  const [testPath, setTestPath] = useState(() => loadIdeWorkspace(userId, isAdmin)?.testPath || '/users');
   const [testBody, setTestBody] = useState(
-    () => loadIdeWorkspace()?.testBody || '{\n  "name": "New user",\n  "role": "user"\n}'
+    () => loadIdeWorkspace(userId, isAdmin)?.testBody || '{\n  "name": "New user",\n  "role": "user"\n}'
   );
   const [running, setRunning] = useState(false);
   const [resetting, setResetting] = useState(false);
@@ -52,13 +56,35 @@ export default function Ide() {
   const code = codes[activeMode];
 
   useEffect(() => {
-    saveIdeWorkspace({
-      code: codes,
-      testMethod,
-      testPath,
-      testBody,
+    const saved = loadIdeWorkspace(userId, isAdmin);
+    setCodes({
+      javascript: saved?.code?.javascript ?? IDE_MODES.javascript.starter,
+      mongodb: saved?.code?.mongodb ?? IDE_MODES.mongodb.starter,
+      express: saved?.code?.express ?? IDE_MODES.express.starter,
     });
-  }, [codes, testMethod, testPath, testBody]);
+    setTestMethod(saved?.testMethod || 'GET');
+    setTestPath(saved?.testPath || '/users');
+    setTestBody(saved?.testBody || '{\n  "name": "New user",\n  "role": "user"\n}');
+    setResult(null);
+    setError('');
+  }, [userId, isAdmin]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      saveIdeWorkspace(
+        {
+          code: codes,
+          testMethod,
+          testPath,
+          testBody,
+        },
+        userId,
+        isAdmin
+      );
+    }, 500);
+
+    return () => window.clearTimeout(timer);
+  }, [codes, testMethod, testPath, testBody, userId, isAdmin]);
 
   useEffect(() => {
     let alive = true;

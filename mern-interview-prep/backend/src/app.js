@@ -2,15 +2,21 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const { validateEnv, isProduction } = require('./config/env');
 const questionRoutes = require('./routes/questions');
 const authRoutes = require('./routes/auth');
 const planRoutes = require('./routes/plans');
 const notebookRoutes = require('./routes/notebooks');
 const ideRoutes = require('./routes/ide');
 const { ensureSeeded } = require('./utils/seed');
+const { ensureUserProgressMigration } = require('./utils/migrateUserProgress');
 const { ensureAdminUser, protect } = require('./controllers/authController');
+
+validateEnv();
 
 function parseOrigins() {
   return (process.env.CLIENT_URL || '')
@@ -19,17 +25,44 @@ function parseOrigins() {
     .filter(Boolean);
 }
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many login attempts. Please try again later.' },
+});
+
+const ideLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 40,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many IDE requests. Please slow down.' },
+});
+
 function createApp() {
   const app = express();
-  const isProd = process.env.NODE_ENV === 'production' || process.env.SERVE_FRONTEND === 'true';
+  const isProd = isProduction() || process.env.SERVE_FRONTEND === 'true';
   const onVercel = Boolean(process.env.VERCEL);
   const allowedOrigins = parseOrigins();
+
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginEmbedderPolicy: false,
+    })
+  );
 
   // CORS first — preflight must succeed even if DB is down
   app.use(
     cors({
       origin(origin, cb) {
         if (!origin) return cb(null, true);
+        if (isProduction() && !allowedOrigins.length) {
+          console.warn(`CORS blocked origin in production: ${origin}`);
+          return cb(null, false);
+        }
         if (!allowedOrigins.length) return cb(null, true);
         if (allowedOrigins.includes('*')) return cb(null, true);
         if (allowedOrigins.includes(origin)) return cb(null, true);
@@ -48,7 +81,6 @@ function createApp() {
       allowedHeaders: ['Content-Type', 'Authorization'],
     })
   );
-
   app.options('*', cors());
 
   app.use(express.json({ limit: '2mb' }));
@@ -71,6 +103,7 @@ function createApp() {
         if (!skipSeed) {
           await ensureSeeded();
         }
+        await ensureUserProgressMigration();
       })().catch((err) => {
         bootPromise = null;
         throw err;
@@ -107,25 +140,25 @@ function createApp() {
       ok: true,
       service: 'mern-interview-prep',
       time: new Date().toISOString(),
-      env: process.env.NODE_ENV || 'development',
-      vercel: onVercel,
     });
   });
 
   // Canonical routes
+  app.use('/api/auth/login', authLimiter);
+  app.use('/api/auth/google', authLimiter);
+  app.use('/auth/login', authLimiter);
+  app.use('/auth/google', authLimiter);
   app.use('/api/auth', authRoutes);
   app.use('/api/questions', protect, questionRoutes);
   app.use('/api/plans', protect, planRoutes);
   app.use('/api/notebooks', protect, notebookRoutes);
-  app.use('/api/ide', protect, ideRoutes);
-
+  app.use('/api/ide', protect, ideLimiter, ideRoutes);
   // Aliases if VITE_API_URL was set without /api
   app.use('/auth', authRoutes);
   app.use('/questions', protect, questionRoutes);
   app.use('/plans', protect, planRoutes);
   app.use('/notebooks', protect, notebookRoutes);
-  app.use('/ide', protect, ideRoutes);
-
+  app.use('/ide', protect, ideLimiter, ideRoutes);
   if (isProd && !onVercel && process.env.SERVE_FRONTEND === 'true') {
     const frontendDist = path.join(__dirname, '../../frontend/dist');
     app.use(
@@ -165,9 +198,13 @@ function createApp() {
 
   app.use((err, _req, res, _next) => {
     console.error(err);
-    res.status(err.status || 500).json({ message: err.message || 'Server error' });
+    const status = err.status || 500;
+    const message =
+      status >= 500 && isProduction()
+        ? 'Internal server error'
+        : err.message || 'Server error';
+    res.status(status).json({ message });
   });
-
   return app;
 }
 

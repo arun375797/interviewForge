@@ -25,7 +25,7 @@ function formFromQuestion(question) {
     topic: question.topic,
     difficulty: question.difficulty,
     keyPoints: [...(question.keyPoints || [])],
-    notes: question.notes || '',
+    notes: question.editorNotes || '',
   };
 }
 
@@ -33,6 +33,8 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
   const { isAdmin } = useAuth();
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(() => formFromQuestion(question));
+  const [personalNotes, setPersonalNotes] = useState(question.notes || '');
+  const [savingNotes, setSavingNotes] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -60,6 +62,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
 
   useEffect(() => {
     setForm(formFromQuestion(question));
+    setPersonalNotes(question.notes || '');
     setEditing(false);
     setConfirmDelete(false);
     setError('');
@@ -91,6 +94,19 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
       setError(err.message);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const savePersonalNotes = async () => {
+    setSavingNotes(true);
+    setError('');
+    try {
+      const updated = await api.updatePersonalNotes(question._id, personalNotes);
+      onUpdated(updated);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSavingNotes(false);
     }
   };
 
@@ -251,7 +267,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                   </div>
                 </div>
                 <label className="block text-sm">
-                  <span className="mb-1 block font-medium">Personal notes</span>
+                  <span className="mb-1 block font-medium">Editor notes</span>
                   <textarea
                     rows={3}
                     value={form.notes}
@@ -330,10 +346,37 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
                 </div>
               )}
 
-              {question.notes ? (
+              {question.notes || !isAdmin ? (
                 <div className="rounded-xl border border-dashed border-line p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted">Notes</p>
-                  <p className="mt-2 whitespace-pre-wrap text-sm">{question.notes}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+                    Personal notes
+                  </p>
+                  {isAdmin ? (
+                    question.notes ? (
+                      <p className="mt-2 whitespace-pre-wrap text-sm">{question.notes}</p>
+                    ) : (
+                      <p className="mt-2 text-sm text-muted">No personal notes yet.</p>
+                    )
+                  ) : (
+                    <>
+                      <textarea
+                        rows={3}
+                        value={personalNotes}
+                        onChange={(e) => setPersonalNotes(e.target.value)}
+                        placeholder="Add your own notes for this question…"
+                        className="mt-2 w-full rounded-xl border border-line bg-paper px-3 py-2 text-sm outline-none focus:border-accent"
+                      />
+                      <button
+                        type="button"
+                        onClick={savePersonalNotes}
+                        disabled={savingNotes}
+                        className="mt-2 inline-flex items-center gap-2 rounded-xl bg-ink px-3 py-1.5 text-xs font-medium text-paper disabled:opacity-50"
+                      >
+                        <Save className="h-3.5 w-3.5" />
+                        {savingNotes ? 'Saving…' : 'Save notes'}
+                      </button>
+                    </>
+                  )}
                 </div>
               ) : null}
             </>

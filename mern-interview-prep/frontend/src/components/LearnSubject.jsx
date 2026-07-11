@@ -9,6 +9,7 @@ import {
   Search,
 } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
+import { useDebounce } from '../utils/useDebounce';
 import QuestionDetail from './QuestionDetail';
 
 const LANGUAGE_OPTIONS = [
@@ -32,6 +33,7 @@ export default function LearnSubject() {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
   const [loading, setLoading] = useState(true);
   const [listLoading, setListLoading] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -62,7 +64,7 @@ export default function LearnSubject() {
     const params = {
       subject,
       topic: topic || undefined,
-      search: search || undefined,
+      search: debouncedSearch || undefined,
       page,
       limit: 50,
     };
@@ -82,7 +84,7 @@ export default function LearnSubject() {
     return () => {
       alive = false;
     };
-  }, [subject, topic, search, page, filterMode]);
+  }, [subject, topic, debouncedSearch, page, filterMode]);
 
   useEffect(() => {
     if (!selectedId) {

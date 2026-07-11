@@ -42,5 +42,6 @@ router.patch('/:id/daily-review', ctrl.toggleDailyReview);
 router.patch('/:id/explain-list', ctrl.toggleExplainList);
 router.patch('/:id/mastered', ctrl.toggleMastered);
 router.patch('/:id/learned', ctrl.toggleLearned);
+router.patch('/:id/personal-notes', ctrl.updatePersonalNotes);
 
 module.exports = router;

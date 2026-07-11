@@ -37,7 +37,7 @@ async function runCode(req, res) {
   } catch (err) {
     return res.json({
       ok: false,
-      error: err && err.stack ? err.stack : String(err),
+      error: err?.message || String(err),
       logs: [],
     });
   }

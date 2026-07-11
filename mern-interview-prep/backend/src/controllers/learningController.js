@@ -1,4 +1,5 @@
 const Question = require('../models/Question');
+const UserProgress = require('../models/UserProgress');
 const Notebook = require('../models/Notebook');
 const NotebookPage = require('../models/NotebookPage');
 const mongoose = require('mongoose');
@@ -9,19 +10,29 @@ const {
 } = require('../utils/spacedRepetition');
 const { generateFollowUps } = require('../utils/followUpGenerator');
 const { checkFeynmanAnswer } = require('../utils/feynmanCheck');
+const {
+  mergeQuestions,
+  mergeQuestionWithProgress,
+  getOrCreateProgress,
+  countProgressBySubject,
+  clearProgressFlags,
+  formatQuestionResponse,
+} = require('../utils/userProgressService');
+const { getProgressOwnerId } = require('../utils/progressScope');
 
 const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 
-exports.getReviewSummary = async (_req, res) => {
+exports.getReviewSummary = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const now = startOfDay();
     const endOfToday = new Date(now);
     endOfToday.setHours(23, 59, 59, 999);
 
-    const base = { ...PUBLIC_QUESTION_FILTER, inDailyReview: true };
+    const base = { userId, inDailyReview: true };
 
     const [dueToday, overdue, upcoming, inQueue] = await Promise.all([
-      Question.countDocuments({
+      UserProgress.countDocuments({
         ...base,
         $or: [
           { nextReviewAt: { $lte: endOfToday } },
@@ -29,15 +40,15 @@ exports.getReviewSummary = async (_req, res) => {
           { nextReviewAt: null },
         ],
       }),
-      Question.countDocuments({
+      UserProgress.countDocuments({
         ...base,
         nextReviewAt: { $lt: now },
       }),
-      Question.countDocuments({
+      UserProgress.countDocuments({
         ...base,
         nextReviewAt: { $gt: endOfToday },
       }),
-      Question.countDocuments(base),
+      UserProgress.countDocuments(base),
     ]);
 
     res.json({ dueToday, overdue, upcoming, inQueue });
@@ -48,18 +59,14 @@ exports.getReviewSummary = async (_req, res) => {
 
 exports.getDueReviews = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 50));
     const subject = req.query.subject;
     const mode = req.query.mode || 'due';
     const endOfToday = new Date(startOfDay());
     endOfToday.setHours(23, 59, 59, 999);
 
-    const filter = {
-      ...PUBLIC_QUESTION_FILTER,
-      inDailyReview: true,
-    };
-    if (subject) filter.subject = subject;
-
+    const filter = { userId, inDailyReview: true };
     if (mode === 'due') {
       filter.$or = [
         { nextReviewAt: { $lte: endOfToday } },
@@ -68,22 +75,34 @@ exports.getDueReviews = async (req, res) => {
       ];
     }
 
-    const items = await Question.find(filter)
+    const progressRows = await UserProgress.find(filter)
       .sort({ nextReviewAt: 1, failCount: -1, updatedAt: -1 })
       .limit(limit)
       .lean();
 
-    const counts = await Question.aggregate([
-      { $match: { ...PUBLIC_QUESTION_FILTER, inDailyReview: true } },
-      { $group: { _id: '$subject', count: { $sum: 1 } } },
-    ]);
-    const countBySubject = Object.fromEntries(counts.map((row) => [row._id, row.count]));
-    const totalAll = counts.reduce((sum, row) => sum + row.count, 0);
+    const questionIds = progressRows.map((row) => row.questionId);
+    const questions = await Question.find({
+      _id: { $in: questionIds },
+      ...PUBLIC_QUESTION_FILTER,
+      ...(subject ? { subject } : {}),
+    }).lean();
+    const questionMap = new Map(questions.map((q) => [String(q._id), q]));
+
+    const items = [];
+    for (const row of progressRows) {
+      const question = questionMap.get(String(row.questionId));
+      if (!question) continue;
+      if (subject && question.subject !== subject) continue;
+      items.push(mergeQuestionWithProgress(question, row));
+      if (items.length >= limit) break;
+    }
+
+    const counts = await countProgressBySubject(userId, { inDailyReview: true });
 
     res.json({
       items,
       total: items.length,
-      counts: { all: totalAll, bySubject: countBySubject },
+      counts: { all: counts.totalAll, bySubject: counts.countBySubject },
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -92,14 +111,10 @@ exports.getDueReviews = async (req, res) => {
 
 exports.clearDailyReview = async (req, res) => {
   try {
-    const { subject } = req.query;
-    const filter = { inDailyReview: true };
-    if (subject) filter.subject = subject;
-
-    const result = await Question.updateMany(filter, {
-      $set: { inDailyReview: false },
+    const cleared = await clearProgressFlags(getProgressOwnerId(req), 'inDailyReview', {
+      subject: req.query.subject,
     });
-    res.json({ cleared: result.modifiedCount });
+    res.json({ cleared });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -110,33 +125,34 @@ exports.submitReview = async (req, res) => {
     const { rating } = req.body;
     if (!rating) return res.status(400).json({ message: 'rating is required' });
 
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
+    const question = await Question.findById(req.params.id);
+    if (!question) return res.status(404).json({ message: 'Question not found' });
 
+    const progress = await getOrCreateProgress(getProgressOwnerId(req), question._id);
     const schedule = computeNextReview({
-      reviewCount: item.reviewCount || 0,
-      easeFactor: item.easeFactor || 2.5,
+      reviewCount: progress.reviewCount || 0,
+      easeFactor: progress.easeFactor || 2.5,
       rating,
     });
 
-    item.reviewCount = schedule.reviewCount;
-    item.easeFactor = schedule.easeFactor;
-    item.nextReviewAt = schedule.nextReviewAt;
-    item.lastReviewRating = String(rating).toLowerCase();
-    item.lastReviewedAt = new Date();
+    progress.reviewCount = schedule.reviewCount;
+    progress.easeFactor = schedule.easeFactor;
+    progress.nextReviewAt = schedule.nextReviewAt;
+    progress.lastReviewRating = String(rating).toLowerCase();
+    progress.lastReviewedAt = new Date();
 
     const score = ['again', 'blank', 'partial', 'shaky', 'hard'].includes(
-      item.lastReviewRating
+      progress.lastReviewRating
     )
       ? 0
       : 1;
-    if (score === 0) item.failCount = (item.failCount || 0) + 1;
-    if (['good', 'easy', 'confident'].includes(item.lastReviewRating) && !item.mastered) {
-      item.mastered = item.reviewCount >= 3;
+    if (score === 0) progress.failCount = (progress.failCount || 0) + 1;
+    if (['good', 'easy', 'confident'].includes(progress.lastReviewRating) && !progress.mastered) {
+      progress.mastered = progress.reviewCount >= 3;
     }
 
-    await item.save();
-    res.json(item);
+    await progress.save();
+    res.json(await formatQuestionResponse(getProgressOwnerId(req), question._id));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -144,35 +160,37 @@ exports.submitReview = async (req, res) => {
 
 exports.getWeakSpots = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const { subject } = req.query;
-    const filter = {
-      ...PUBLIC_QUESTION_FILTER,
-      weakSpot: true,
-    };
-    if (subject) filter.subject = subject;
+    const limit = Math.min(200, Math.max(1, parseInt(req.query.limit, 10) || 100));
+    const filter = { userId, weakSpot: true };
+    const progressRows = await UserProgress.find(filter).sort({ updatedAt: -1 }).limit(limit).lean();
+    const questionIds = progressRows.map((row) => row.questionId);
 
-    const questions = await Question.find(filter)
+    const questions = await Question.find({
+      _id: { $in: questionIds },
+      ...PUBLIC_QUESTION_FILTER,
+      ...(subject ? { subject } : {}),
+    })
       .sort({ subject: 1, topicOrder: 1, order: 1, updatedAt: -1 })
       .lean();
 
+    const progressMap = new Map(progressRows.map((row) => [String(row.questionId), row]));
+    const merged = questions.map((q) => mergeQuestionWithProgress(q, progressMap.get(String(q._id))));
+
     const bySubject = {};
-    for (const q of questions) {
+    for (const q of merged) {
       if (!bySubject[q.subject]) bySubject[q.subject] = [];
       bySubject[q.subject].push(q);
     }
 
-    const counts = await Question.aggregate([
-      { $match: { ...PUBLIC_QUESTION_FILTER, weakSpot: true } },
-      { $group: { _id: '$subject', count: { $sum: 1 } } },
-    ]);
-    const countBySubject = Object.fromEntries(counts.map((row) => [row._id, row.count]));
-    const totalAll = counts.reduce((sum, row) => sum + row.count, 0);
+    const counts = await countProgressBySubject(userId, { weakSpot: true });
 
     res.json({
-      questions,
+      questions: merged,
       bySubject,
-      total: questions.length,
-      counts: { all: totalAll, bySubject: countBySubject },
+      total: merged.length,
+      counts: { all: counts.totalAll, bySubject: counts.countBySubject },
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -181,12 +199,10 @@ exports.getWeakSpots = async (req, res) => {
 
 exports.clearWeakSpots = async (req, res) => {
   try {
-    const { subject } = req.query;
-    const filter = { weakSpot: true };
-    if (subject) filter.subject = subject;
-
-    const result = await Question.updateMany(filter, { $set: { weakSpot: false } });
-    res.json({ cleared: result.modifiedCount });
+    const cleared = await clearProgressFlags(getProgressOwnerId(req), 'weakSpot', {
+      subject: req.query.subject,
+    });
+    res.json({ cleared });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -194,28 +210,32 @@ exports.clearWeakSpots = async (req, res) => {
 
 exports.getExplainList = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const { subject } = req.query;
-    const filter = {
-      ...PUBLIC_QUESTION_FILTER,
-      inExplainList: true,
-    };
-    if (subject) filter.subject = subject;
+    const limit = Math.min(200, Math.max(1, parseInt(req.query.limit, 10) || 100));
+    const progressRows = await UserProgress.find({ userId, inExplainList: true })
+      .sort({ updatedAt: -1 })
+      .limit(limit)
+      .lean();
+    const questionIds = progressRows.map((row) => row.questionId);
 
-    const questions = await Question.find(filter)
+    const questions = await Question.find({
+      _id: { $in: questionIds },
+      ...PUBLIC_QUESTION_FILTER,
+      ...(subject ? { subject } : {}),
+    })
       .sort({ subject: 1, topicOrder: 1, order: 1, updatedAt: -1 })
       .lean();
 
-    const counts = await Question.aggregate([
-      { $match: { ...PUBLIC_QUESTION_FILTER, inExplainList: true } },
-      { $group: { _id: '$subject', count: { $sum: 1 } } },
-    ]);
-    const countBySubject = Object.fromEntries(counts.map((row) => [row._id, row.count]));
-    const totalAll = counts.reduce((sum, row) => sum + row.count, 0);
+    const progressMap = new Map(progressRows.map((row) => [String(row.questionId), row]));
+    const merged = questions.map((q) => mergeQuestionWithProgress(q, progressMap.get(String(q._id))));
+
+    const counts = await countProgressBySubject(userId, { inExplainList: true });
 
     res.json({
-      questions,
-      total: questions.length,
-      counts: { all: totalAll, bySubject: countBySubject },
+      questions: merged,
+      total: merged.length,
+      counts: { all: counts.totalAll, bySubject: counts.countBySubject },
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -224,12 +244,10 @@ exports.getExplainList = async (req, res) => {
 
 exports.clearExplainList = async (req, res) => {
   try {
-    const { subject } = req.query;
-    const filter = { inExplainList: true };
-    if (subject) filter.subject = subject;
-
-    const result = await Question.updateMany(filter, { $set: { inExplainList: false } });
-    res.json({ cleared: result.modifiedCount });
+    const cleared = await clearProgressFlags(getProgressOwnerId(req), 'inExplainList', {
+      subject: req.query.subject,
+    });
+    res.json({ cleared });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -237,18 +255,27 @@ exports.clearExplainList = async (req, res) => {
 
 exports.getFlashcards = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const subject = req.query.subject;
     const source = req.query.source || 'all';
     const limit = Math.min(200, Math.max(1, parseInt(req.query.limit, 10) || 50));
 
-    const filter = { ...PUBLIC_QUESTION_FILTER };
-    if (subject) filter.subject = subject;
-    if (source === 'bookmarked') filter.bookmarked = true;
-    if (source === 'due') filter.inDailyReview = true;
-    if (source === 'weak') filter.weakSpot = true;
+    let questionFilter = { ...PUBLIC_QUESTION_FILTER };
+    if (subject) questionFilter.subject = subject;
+
+    if (source === 'bookmarked') {
+      const ids = await UserProgress.find({ userId, bookmarked: true }).distinct('questionId');
+      questionFilter._id = { $in: ids.length ? ids : [new mongoose.Types.ObjectId()] };
+    } else if (source === 'due') {
+      const ids = await UserProgress.find({ userId, inDailyReview: true }).distinct('questionId');
+      questionFilter._id = { $in: ids.length ? ids : [new mongoose.Types.ObjectId()] };
+    } else if (source === 'weak') {
+      const ids = await UserProgress.find({ userId, weakSpot: true }).distinct('questionId');
+      questionFilter._id = { $in: ids.length ? ids : [new mongoose.Types.ObjectId()] };
+    }
 
     const questions = await Question.aggregate([
-      { $match: filter },
+      { $match: questionFilter },
       { $sample: { size: limit } },
     ]);
 
@@ -298,9 +325,7 @@ exports.getInterleaved = async (req, res) => {
     const topics = await Question.distinct('topic', match);
     if (!topics.length) return res.status(404).json({ message: 'No questions found' });
 
-    const perTopic = Math.max(1, Math.ceil(count / Math.min(topics.length, count)));
     const items = [];
-
     const shuffledTopics = [...topics].sort(() => Math.random() - 0.5);
     for (const topic of shuffledTopics) {
       if (items.length >= count) break;
@@ -320,7 +345,8 @@ exports.getInterleaved = async (req, res) => {
       items.push(q);
     }
 
-    res.json({ items: items.slice(0, count) });
+    const merged = await mergeQuestions(getProgressOwnerId(req), items.slice(0, count));
+    res.json({ items: merged });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -353,6 +379,7 @@ exports.checkFeynman = async (req, res) => {
 
 exports.createPageFromQuestion = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const questionId = req.body.questionId || req.params.questionId;
     if (!mongoose.Types.ObjectId.isValid(questionId)) {
       return res.status(400).json({ message: 'Valid questionId is required' });
@@ -363,13 +390,13 @@ exports.createPageFromQuestion = async (req, res) => {
 
     let notebookId = req.body.notebookId;
     if (notebookId) {
-      const nb = await Notebook.findOne({ _id: notebookId, userId: req.user.id });
+      const nb = await Notebook.findOne({ _id: notebookId, userId });
       if (!nb) return res.status(404).json({ message: 'Notebook not found' });
     } else {
-      let nb = await Notebook.findOne({ userId: req.user.id }).sort({ updatedAt: -1 });
+      let nb = await Notebook.findOne({ userId }).sort({ updatedAt: -1 });
       if (!nb) {
         nb = await Notebook.create({
-          userId: req.user.id,
+          userId,
           title: 'Study Notes',
           color: '#0f766e',
           description: 'Auto-created for question notes',
@@ -378,7 +405,7 @@ exports.createPageFromQuestion = async (req, res) => {
       notebookId = nb._id;
     }
 
-    const latest = await NotebookPage.findOne({ notebookId, userId: req.user.id })
+    const latest = await NotebookPage.findOne({ notebookId, userId })
       .sort({ pageNumber: -1 })
       .select('pageNumber')
       .lean();
@@ -398,7 +425,7 @@ ${keyPointsHtml ? `<ul>${keyPointsHtml}</ul>` : '<p></p>'}
 
     const page = await NotebookPage.create({
       notebookId,
-      userId: req.user.id,
+      userId,
       pageNumber,
       topic: question.topic,
       subtopics: [question.question.slice(0, 80)],
@@ -406,7 +433,10 @@ ${keyPointsHtml ? `<ul>${keyPointsHtml}</ul>` : '<p></p>'}
       questionId: question._id,
     });
 
-    await Question.findByIdAndUpdate(question._id, { linkedNotebookPageId: page._id });
+    const progress = await getOrCreateProgress(userId, question._id);
+    progress.linkedNotebookPageId = page._id;
+    await progress.save();
+
     await Notebook.findByIdAndUpdate(notebookId, { updatedAt: new Date() });
 
     res.status(201).json({

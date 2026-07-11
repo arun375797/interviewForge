@@ -1,10 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
+const Plan = require('../models/Plan');
+const UserProgress = require('../models/UserProgress');
+const Notebook = require('../models/Notebook');
+const NotebookPage = require('../models/NotebookPage');
 const { isAdminEmail } = require('../utils/adminAccess');
+const { getJwtSecret, getJwtExpires, getAdminCredentials } = require('../config/env');
 
-const JWT_SECRET = () => process.env.JWT_SECRET || 'interviewforge-dev-secret-change-me';
-const JWT_EXPIRES = process.env.JWT_EXPIRES || '7d';
+const AUTH_CACHE_TTL_MS = 2 * 60 * 1000;
+const authUserCache = new Map();
 
 function toPublicUser(user) {
   return {
@@ -48,8 +53,8 @@ async function recordLogin(user) {
 function signToken(user) {
   return jwt.sign(
     { id: user._id, email: user.email },
-    JWT_SECRET(),
-    { expiresIn: JWT_EXPIRES }
+    getJwtSecret(),
+    { expiresIn: getJwtExpires() }
   );
 }
 
@@ -181,7 +186,13 @@ exports.protect = async (req, res, next) => {
       return res.status(401).json({ message: 'Authentication required' });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET());
+    const decoded = jwt.verify(token, getJwtSecret());
+    const cached = authUserCache.get(decoded.id);
+    if (cached && cached.expiresAt > Date.now()) {
+      req.user = cached.user;
+      return next();
+    }
+
     const user = await User.findById(decoded.id).select('_id email isBlocked').lean();
     if (!user) {
       return res.status(401).json({ message: 'User no longer exists' });
@@ -195,6 +206,10 @@ exports.protect = async (req, res, next) => {
       email: user.email,
       isAdmin: isAdminEmail(user.email),
     };
+    authUserCache.set(String(user._id), {
+      user: req.user,
+      expiresAt: Date.now() + AUTH_CACHE_TTL_MS,
+    });
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Invalid or expired token' });
@@ -235,7 +250,37 @@ exports.setUserBlocked = async (req, res) => {
 
     user.isBlocked = blocked;
     await user.save();
+    authUserCache.delete(String(user._id));
     res.json(toManagedUser(user));
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (isAdminEmail(user.email)) {
+      return res.status(403).json({ message: 'Admin accounts cannot be deleted' });
+    }
+    if (String(user._id) === String(req.user.id)) {
+      return res.status(403).json({ message: 'You cannot delete your own account' });
+    }
+
+    const userId = user._id;
+    const email = user.email;
+
+    await Promise.all([
+      UserProgress.deleteMany({ userId }),
+      Plan.deleteMany({ userId }),
+      NotebookPage.deleteMany({ userId }),
+      Notebook.deleteMany({ userId }),
+    ]);
+    await user.deleteOne();
+
+    res.json({ message: 'User and all related data deleted', email });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -248,9 +293,7 @@ exports.ensureAdminUser = async () => {
   if (adminEnsurePromise) return adminEnsurePromise;
 
   adminEnsurePromise = (async () => {
-    const email = (process.env.ADMIN_EMAIL || 'arun375797').trim().toLowerCase();
-    const password = process.env.ADMIN_PASSWORD || 'Job@2026';
-    const name = process.env.ADMIN_NAME || 'Arun';
+    const { email, password, name } = getAdminCredentials();
     const syncPassword = process.env.SYNC_ADMIN_PASSWORD === 'true';
 
     let user = await User.findOne({ email }).select(syncPassword ? '+password' : 'email name');

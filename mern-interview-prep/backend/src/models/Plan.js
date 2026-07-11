@@ -11,6 +11,12 @@ const planDaySchema = new mongoose.Schema(
 
 const planSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      index: true,
+    },
     mode: {
       type: String,
       enum: ['study', 'code'],
@@ -37,6 +43,6 @@ const planSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-planSchema.index({ mode: 1, subject: 1, active: 1 });
+planSchema.index({ userId: 1, mode: 1, subject: 1, active: 1 });
 
 module.exports = mongoose.model('Plan', planSchema);

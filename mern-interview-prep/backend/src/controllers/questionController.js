@@ -1,5 +1,6 @@
 const Question = require('../models/Question');
 const Subject = require('../models/Subject');
+const UserProgress = require('../models/UserProgress');
 const mongoose = require('mongoose');
 const {
   generateAnswer,
@@ -12,37 +13,29 @@ const {
   isCodePracticeQuestion,
   toCodeQuestion,
 } = require('../utils/codePracticeGenerator');
+const {
+  mergeQuestions,
+  mergeQuestionWithProgress,
+  getOrCreateProgress,
+  questionIdsForProgressFilter,
+  formatQuestionResponse,
+  aggregateSubjectStats,
+  aggregateTopicStats,
+  toggleDailyReview,
+} = require('../utils/userProgressService');
+const { computeNextReview } = require('../utils/spacedRepetition');
+const { getProgressOwnerId } = require('../utils/progressScope');
 
 const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 
-exports.getSubjects = async (_req, res) => {
+exports.getSubjects = async (req, res) => {
   try {
-    const [subjects, counts] = await Promise.all([
+    const userId = getProgressOwnerId(req);
+    const [subjects, liveCounts] = await Promise.all([
       Subject.find().sort({ label: 1 }).lean(),
-      Question.aggregate([
-        { $match: PUBLIC_QUESTION_FILTER },
-        {
-          $group: {
-            _id: '$subject',
-            questionCount: { $sum: 1 },
-            topics: { $addToSet: '$topic' },
-            bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
-            mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
-            learned: { $sum: { $cond: ['$learned', 1, 0] } },
-          },
-        },
-        {
-          $project: {
-            questionCount: 1,
-            topicCount: { $size: '$topics' },
-            bookmarked: 1,
-            mastered: 1,
-            learned: 1,
-          },
-        },
-      ]),
+      aggregateSubjectStats(userId),
     ]);
-    const countsBySubject = new Map(counts.map((item) => [item._id, item]));
+    const countsBySubject = new Map(liveCounts.map((item) => [item.subject, item]));
     const withLiveCounts = subjects.map((subject) => {
       const live = countsBySubject.get(subject.key);
       return {
@@ -63,31 +56,7 @@ exports.getSubjects = async (_req, res) => {
 exports.getTopics = async (req, res) => {
   try {
     const { subject } = req.params;
-    const topics = await Question.aggregate([
-      { $match: { subject, ...PUBLIC_QUESTION_FILTER } },
-      {
-        $group: {
-          _id: '$topic',
-          topicOrder: { $min: '$topicOrder' },
-          count: { $sum: 1 },
-          bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
-          mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
-          learned: { $sum: { $cond: ['$learned', 1, 0] } },
-        },
-      },
-      { $sort: { topicOrder: 1, _id: 1 } },
-      {
-        $project: {
-          _id: 0,
-          name: '$_id',
-          topicOrder: 1,
-          count: 1,
-          bookmarked: 1,
-          mastered: 1,
-          learned: 1,
-        },
-      },
-    ]);
+    const topics = await aggregateTopicStats(getProgressOwnerId(req), subject);
     res.json(topics);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -96,6 +65,7 @@ exports.getTopics = async (req, res) => {
 
 exports.getQuestions = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const {
       subject,
       topic,
@@ -105,6 +75,7 @@ exports.getQuestions = async (req, res) => {
       mastered,
       learned,
       manualAnswer,
+      includeAnswer,
       page = 1,
       limit = 50,
       sort = 'order',
@@ -114,14 +85,27 @@ exports.getQuestions = async (req, res) => {
     if (subject) filter.subject = subject;
     if (topic) filter.topic = topic;
     if (difficulty) filter.difficulty = difficulty;
-    if (bookmarked === 'true') filter.bookmarked = true;
-    if (mastered === 'true') filter.mastered = true;
-    if (learned === 'true') filter.learned = true;
-    if (learned === 'false') filter.learned = false;
     if (manualAnswer === 'true') filter.answerManuallyAdded = true;
     if (manualAnswer === 'false') filter.answerManuallyAdded = { $ne: true };
     if (search && search.trim()) {
       filter.$text = { $search: search.trim() };
+    }
+
+    if (bookmarked === 'true') {
+      const ids = await questionIdsForProgressFilter(userId, { bookmarked: true }, { subject });
+      filter._id = { $in: ids.length ? ids : [new mongoose.Types.ObjectId()] };
+    }
+    if (mastered === 'true') {
+      const ids = await questionIdsForProgressFilter(userId, { mastered: true }, { subject });
+      filter._id = { $in: ids.length ? ids : [new mongoose.Types.ObjectId()] };
+    }
+    if (learned === 'true') {
+      const ids = await questionIdsForProgressFilter(userId, { learned: true }, { subject });
+      filter._id = { $in: ids.length ? ids : [new mongoose.Types.ObjectId()] };
+    }
+    if (learned === 'false') {
+      const learnedIds = await questionIdsForProgressFilter(userId, { learned: true }, { subject });
+      if (learnedIds.length) filter._id = { ...(filter._id || {}), $nin: learnedIds };
     }
 
     const pageNum = Math.max(1, parseInt(page, 10) || 1);
@@ -140,13 +124,16 @@ exports.getQuestions = async (req, res) => {
     const projection =
       search && search.trim() ? { score: { $meta: 'textScore' } } : undefined;
 
-    const [items, total] = await Promise.all([
-      Question.find(filter, projection).sort(sortObj).skip(skip).limit(lim).lean(),
-      Question.countDocuments(filter),
-    ]);
+    const listQuery = Question.find(filter, projection).sort(sortObj).skip(skip).limit(lim);
+    if (includeAnswer !== 'true') {
+      listQuery.select('-answer -keyPoints');
+    }
 
+    const [items, total] = await Promise.all([listQuery.lean(), Question.countDocuments(filter)]);
+
+    const merged = await mergeQuestions(userId, items);
     res.json({
-      items,
+      items: merged,
       total,
       page: pageNum,
       pages: Math.ceil(total / lim) || 1,
@@ -159,7 +146,7 @@ exports.getQuestions = async (req, res) => {
 
 exports.getQuestionById = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
+    const item = await formatQuestionResponse(getProgressOwnerId(req), req.params.id);
     if (!item) return res.status(404).json({ message: 'Question not found' });
     res.json(item);
   } catch (err) {
@@ -196,7 +183,7 @@ exports.createQuestion = async (req, res) => {
     });
 
     await Subject.findOneAndUpdate({ key: subject }, { $inc: { questionCount: 1 } });
-    res.status(201).json(doc);
+    res.status(201).json(mergeQuestionWithProgress(doc.toObject(), null));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -214,10 +201,6 @@ exports.updateQuestion = async (req, res) => {
       'keyPoints',
       'notes',
       'tags',
-      'bookmarked',
-      'mastered',
-      'learned',
-      'codeCompleted',
       'order',
       'topicOrder',
     ];
@@ -234,7 +217,29 @@ exports.updateQuestion = async (req, res) => {
       runValidators: true,
     });
     if (!item) return res.status(404).json({ message: 'Question not found' });
-    res.json(item);
+    const merged = await formatQuestionResponse(getProgressOwnerId(req), item._id);
+    res.json(merged);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.updatePersonalNotes = async (req, res) => {
+  try {
+    const notes = typeof req.body.notes === 'string' ? req.body.notes : '';
+    if (notes.length > 10000) {
+      return res.status(400).json({ message: 'Notes are too long' });
+    }
+
+    const question = await Question.findById(req.params.id).select('_id');
+    if (!question) return res.status(404).json({ message: 'Question not found' });
+
+    const progress = await getOrCreateProgress(getProgressOwnerId(req), question._id);
+    progress.notes = notes;
+    await progress.save();
+
+    const merged = await formatQuestionResponse(getProgressOwnerId(req), question._id);
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -244,6 +249,7 @@ exports.deleteQuestion = async (req, res) => {
   try {
     const item = await Question.findByIdAndDelete(req.params.id);
     if (!item) return res.status(404).json({ message: 'Question not found' });
+    await UserProgress.deleteMany({ questionId: item._id });
     await Subject.findOneAndUpdate({ key: item.subject }, { $inc: { questionCount: -1 } });
     res.json({ message: 'Deleted', id: item._id });
   } catch (err) {
@@ -251,13 +257,20 @@ exports.deleteQuestion = async (req, res) => {
   }
 };
 
+async function toggleAndRespond(userId, questionId, field) {
+  const question = await Question.findById(questionId);
+  if (!question) return null;
+  const progress = await getOrCreateProgress(userId, questionId);
+  progress[field] = !progress[field];
+  await progress.save();
+  return formatQuestionResponse(userId, questionId);
+}
+
 exports.toggleBookmark = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
-    item.bookmarked = !item.bookmarked;
-    await item.save();
-    res.json(item);
+    const merged = await toggleAndRespond(getProgressOwnerId(req), req.params.id, 'bookmarked');
+    if (!merged) return res.status(404).json({ message: 'Question not found' });
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -265,11 +278,9 @@ exports.toggleBookmark = async (req, res) => {
 
 exports.toggleWeakSpot = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
-    item.weakSpot = !item.weakSpot;
-    await item.save();
-    res.json(item);
+    const merged = await toggleAndRespond(getProgressOwnerId(req), req.params.id, 'weakSpot');
+    if (!merged) return res.status(404).json({ message: 'Question not found' });
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -277,11 +288,9 @@ exports.toggleWeakSpot = async (req, res) => {
 
 exports.toggleMastered = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
-    item.mastered = !item.mastered;
-    await item.save();
-    res.json(item);
+    const merged = await toggleAndRespond(getProgressOwnerId(req), req.params.id, 'mastered');
+    if (!merged) return res.status(404).json({ message: 'Question not found' });
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -289,11 +298,9 @@ exports.toggleMastered = async (req, res) => {
 
 exports.toggleLearned = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
-    item.learned = !item.learned;
-    await item.save();
-    res.json(item);
+    const merged = await toggleAndRespond(getProgressOwnerId(req), req.params.id, 'learned');
+    if (!merged) return res.status(404).json({ message: 'Question not found' });
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -301,17 +308,11 @@ exports.toggleLearned = async (req, res) => {
 
 exports.toggleDailyReview = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
-    item.inDailyReview = !item.inDailyReview;
-    if (item.inDailyReview) {
-      const { scheduleInitialReview } = require('../utils/spacedRepetition');
-      const schedule = scheduleInitialReview();
-      item.nextReviewAt = schedule.nextReviewAt;
-      if (!item.reviewCount) item.reviewCount = 0;
-    }
-    await item.save();
-    res.json(item);
+    const question = await Question.findById(req.params.id);
+    if (!question) return res.status(404).json({ message: 'Question not found' });
+    await toggleDailyReview(getProgressOwnerId(req), question._id);
+    const merged = await formatQuestionResponse(getProgressOwnerId(req), question._id);
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -319,11 +320,9 @@ exports.toggleDailyReview = async (req, res) => {
 
 exports.toggleExplainList = async (req, res) => {
   try {
-    const item = await Question.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: 'Question not found' });
-    item.inExplainList = !item.inExplainList;
-    await item.save();
-    res.json(item);
+    const merged = await toggleAndRespond(getProgressOwnerId(req), req.params.id, 'inExplainList');
+    if (!merged) return res.status(404).json({ message: 'Question not found' });
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -331,17 +330,28 @@ exports.toggleExplainList = async (req, res) => {
 
 exports.getLearnProgress = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const { subject } = req.query;
     const match = subject ? { subject, ...PUBLIC_QUESTION_FILTER } : { ...PUBLIC_QUESTION_FILTER };
 
-    const [totals, bySubject, byTopic] = await Promise.all([
-      Question.aggregate([
-        { $match: match },
+    const [totalCount, learnedRows, bySubjectQuestions, byTopicQuestions] = await Promise.all([
+      Question.countDocuments(match),
+      UserProgress.aggregate([
+        { $match: { userId, learned: true } },
+        {
+          $lookup: {
+            from: 'questions',
+            localField: 'questionId',
+            foreignField: '_id',
+            as: 'question',
+          },
+        },
+        { $unwind: '$question' },
+        { $match: { 'question.codeOnly': { $ne: true }, ...(subject ? { 'question.subject': subject } : {}) } },
         {
           $group: {
             _id: null,
-            total: { $sum: 1 },
-            learned: { $sum: { $cond: ['$learned', 1, 0] } },
+            learned: { $sum: 1 },
           },
         },
       ]),
@@ -351,7 +361,6 @@ exports.getLearnProgress = async (req, res) => {
           $group: {
             _id: '$subject',
             total: { $sum: 1 },
-            learned: { $sum: { $cond: ['$learned', 1, 0] } },
           },
         },
         { $sort: { _id: 1 } },
@@ -363,29 +372,71 @@ exports.getLearnProgress = async (req, res) => {
             _id: { subject: '$subject', topic: '$topic' },
             topicOrder: { $min: '$topicOrder' },
             total: { $sum: 1 },
-            learned: { $sum: { $cond: ['$learned', 1, 0] } },
           },
         },
         { $sort: { '_id.subject': 1, topicOrder: 1, '_id.topic': 1 } },
-        {
-          $project: {
-            _id: 0,
-            subject: '$_id.subject',
-            topic: '$_id.topic',
-            topicOrder: 1,
-            total: 1,
-            learned: 1,
-          },
-        },
       ]),
     ]);
 
-    const summary = totals[0] || { total: 0, learned: 0 };
+    const learnedCount = learnedRows[0]?.learned || 0;
+    const learnedBySubject = await UserProgress.aggregate([
+      { $match: { userId, learned: true } },
+      {
+        $lookup: {
+          from: 'questions',
+          localField: 'questionId',
+          foreignField: '_id',
+          as: 'question',
+        },
+      },
+      { $unwind: '$question' },
+      { $match: { 'question.codeOnly': { $ne: true }, ...(subject ? { 'question.subject': subject } : {}) } },
+      { $group: { _id: '$question.subject', learned: { $sum: 1 } } },
+    ]);
+    const learnedSubjectMap = new Map(learnedBySubject.map((row) => [row._id, row.learned]));
+
+    const learnedByTopic = await UserProgress.aggregate([
+      { $match: { userId, learned: true } },
+      {
+        $lookup: {
+          from: 'questions',
+          localField: 'questionId',
+          foreignField: '_id',
+          as: 'question',
+        },
+      },
+      { $unwind: '$question' },
+      { $match: { 'question.codeOnly': { $ne: true }, ...(subject ? { 'question.subject': subject } : {}) } },
+      {
+        $group: {
+          _id: { subject: '$question.subject', topic: '$question.topic' },
+          learned: { $sum: 1 },
+        },
+      },
+    ]);
+    const learnedTopicMap = new Map(
+      learnedByTopic.map((row) => [`${row._id.subject}:${row._id.topic}`, row.learned])
+    );
+
+    const bySubject = bySubjectQuestions.map((row) => ({
+      _id: row._id,
+      total: row.total,
+      learned: learnedSubjectMap.get(row._id) || 0,
+    }));
+
+    const byTopic = byTopicQuestions.map((row) => ({
+      subject: row._id.subject,
+      topic: row._id.topic,
+      topicOrder: row.topicOrder,
+      total: row.total,
+      learned: learnedTopicMap.get(`${row._id.subject}:${row._id.topic}`) || 0,
+    }));
+
     res.json({
-      total: summary.total,
-      learned: summary.learned,
-      remaining: Math.max(0, summary.total - summary.learned),
-      percent: summary.total ? Math.round((summary.learned / summary.total) * 100) : 0,
+      total: totalCount,
+      learned: learnedCount,
+      remaining: Math.max(0, totalCount - learnedCount),
+      percent: totalCount ? Math.round((learnedCount / totalCount) * 100) : 0,
       bySubject,
       byTopic,
     });
@@ -398,23 +449,21 @@ function isValidCodeSubject(subject) {
   return !subject || CODE_SUBJECTS.includes(subject);
 }
 
-async function loadCodeQuestions({ subject, topic, completed, manualAnswer, search } = {}) {
+async function loadCodeQuestions(userId, { subject, topic, completed, manualAnswer, search, includeSavedCode = false } = {}) {
   const filter = {
     subject: subject || { $in: CODE_SUBJECTS },
     $or: [{ question: CODE_KEYWORD_RE }, { codeOnly: true }],
   };
-  if (completed === 'true') filter.codeCompleted = true;
-  if (completed === 'false') filter.codeCompleted = false;
   if (manualAnswer === 'true') filter.answerManuallyAdded = true;
   if (manualAnswer === 'false') filter.answerManuallyAdded = { $ne: true };
 
   const docs = await Question.find(filter)
     .sort({ topicOrder: 1, order: 1 })
-    .select('+savedCode subject topic topicOrder question answer answerManuallyAdded difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+    .select('subject topic topicOrder question answer answerManuallyAdded difficulty tags order createdAt updatedAt codeOnly')
     .lean();
 
   const query = search?.trim().toLowerCase();
-  return docs
+  let items = docs
     .filter((doc) => isCodePracticeQuestion(doc))
     .map((doc) => toCodeQuestion(doc))
     .filter((doc) => {
@@ -430,6 +479,13 @@ async function loadCodeQuestions({ subject, topic, completed, manualAnswer, sear
         (a.codePrompt.topicOrder || 99) - (b.codePrompt.topicOrder || 99) ||
         (a.order || 0) - (b.order || 0)
     );
+
+  items = await mergeQuestions(userId, items, { includeSavedCode });
+
+  if (completed === 'true') items = items.filter((q) => q.codeCompleted);
+  if (completed === 'false') items = items.filter((q) => !q.codeCompleted);
+
+  return items;
 }
 
 exports.getCodeProgress = async (req, res) => {
@@ -439,7 +495,7 @@ exports.getCodeProgress = async (req, res) => {
       return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
     }
 
-    const items = await loadCodeQuestions({ subject });
+    const items = await loadCodeQuestions(getProgressOwnerId(req), { subject });
     const completed = items.filter((q) => q.codeCompleted).length;
     res.json({
       total: items.length,
@@ -459,7 +515,7 @@ exports.getCodeTopics = async (req, res) => {
       return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
     }
 
-    const items = await loadCodeQuestions({ subject });
+    const items = await loadCodeQuestions(getProgressOwnerId(req), { subject });
     const topics = new Map();
     for (const item of items) {
       const codeTopic = item.codePrompt.topic;
@@ -503,7 +559,13 @@ exports.getCodeQuestions = async (req, res) => {
       return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
     }
 
-    const allItems = await loadCodeQuestions({ subject, topic, completed, manualAnswer, search });
+    const allItems = await loadCodeQuestions(getProgressOwnerId(req), {
+      subject,
+      topic,
+      completed,
+      manualAnswer,
+      search,
+    });
     const pageNum = Math.max(1, parseInt(page, 10) || 1);
     const lim = Math.min(100, Math.max(1, parseInt(limit, 10) || 40));
     const skip = (pageNum - 1) * lim;
@@ -523,12 +585,15 @@ exports.getCodeQuestions = async (req, res) => {
 exports.getCodeQuestionById = async (req, res) => {
   try {
     const item = await Question.findById(req.params.id)
-      .select('+savedCode subject topic topicOrder question answer answerManuallyAdded difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
+      .select('subject topic topicOrder question answer answerManuallyAdded difficulty tags order createdAt updatedAt codeOnly')
       .lean();
     if (!item || !isCodePracticeQuestion(item)) {
       return res.status(404).json({ message: 'Code question not found' });
     }
-    res.json(toCodeQuestion(item));
+    const [merged] = await mergeQuestions(getProgressOwnerId(req), [toCodeQuestion(item)], {
+      includeSavedCode: true,
+    });
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -540,12 +605,11 @@ exports.toggleCodeCompleted = async (req, res) => {
     if (!item || !isCodePracticeQuestion(item)) {
       return res.status(404).json({ message: 'Code question not found' });
     }
-    item.codeCompleted = !item.codeCompleted;
-    await item.save();
-    const safeItem = await Question.findById(item._id)
-      .select('+savedCode subject topic topicOrder question answer answerManuallyAdded difficulty tags codeCompleted savedCodeUpdatedAt order createdAt updatedAt')
-      .lean();
-    res.json(toCodeQuestion(safeItem));
+    const progress = await getOrCreateProgress(getProgressOwnerId(req), item._id);
+    progress.codeCompleted = !progress.codeCompleted;
+    await progress.save();
+    const merged = await formatQuestionResponse(getProgressOwnerId(req), item._id, { includeSavedCode: true });
+    res.json(toCodeQuestion(merged));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -563,13 +627,14 @@ exports.saveCode = async (req, res) => {
       return res.status(404).json({ message: 'Code question not found' });
     }
 
-    item.savedCode = code;
-    item.savedCodeUpdatedAt = new Date();
-    await item.save();
+    const progress = await getOrCreateProgress(getProgressOwnerId(req), item._id);
+    progress.savedCode = code;
+    progress.savedCodeUpdatedAt = new Date();
+    await progress.save();
     res.json({
       id: item._id,
       hasSavedCode: Boolean(code),
-      savedCodeUpdatedAt: item.savedCodeUpdatedAt,
+      savedCodeUpdatedAt: progress.savedCodeUpdatedAt,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -579,57 +644,74 @@ exports.saveCode = async (req, res) => {
 exports.getSavedCode = async (req, res) => {
   try {
     const item = await Question.findById(req.params.id)
-      .select('+savedCode subject topic question savedCodeUpdatedAt')
+      .select('subject topic question codeOnly')
       .lean();
     if (!item || !isCodePracticeQuestion(item)) {
       return res.status(404).json({ message: 'Code question not found' });
     }
+    const progress = await UserProgress.findOne({
+      userId: getProgressOwnerId(req),
+      questionId: item._id,
+    })
+      .select('+savedCode')
+      .lean();
     res.json({
       id: item._id,
-      code: item.savedCode || '',
-      savedCodeUpdatedAt: item.savedCodeUpdatedAt,
-      hasSavedCode: Boolean(item.savedCode),
+      code: progress?.savedCode || '',
+      savedCodeUpdatedAt: progress?.savedCodeUpdatedAt,
+      hasSavedCode: Boolean(progress?.savedCode),
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-exports.getStats = async (_req, res) => {
+exports.getStats = async (req, res) => {
   try {
-    const [stats] = await Question.aggregate([
-      { $match: PUBLIC_QUESTION_FILTER },
-      {
-        $facet: {
-          totals: [
-            {
-              $group: {
-                _id: null,
-                total: { $sum: 1 },
-                bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
-                mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
-                learned: { $sum: { $cond: ['$learned', 1, 0] } },
-              },
-            },
-          ],
-          bySubject: [{ $group: { _id: '$subject', count: { $sum: 1 } } }],
-          byDifficulty: [{ $group: { _id: '$difficulty', count: { $sum: 1 } } }],
+    const userId = getProgressOwnerId(req);
+    const [questionStats, progressStats] = await Promise.all([
+      Question.aggregate([
+        { $match: PUBLIC_QUESTION_FILTER },
+        {
+          $facet: {
+            totals: [{ $group: { _id: null, total: { $sum: 1 } } }],
+            bySubject: [{ $group: { _id: '$subject', count: { $sum: 1 } } }],
+            byDifficulty: [{ $group: { _id: '$difficulty', count: { $sum: 1 } } }],
+          },
         },
-      },
+      ]),
+      UserProgress.aggregate([
+        { $match: { userId } },
+        {
+          $lookup: {
+            from: 'questions',
+            localField: 'questionId',
+            foreignField: '_id',
+            as: 'question',
+          },
+        },
+        { $unwind: '$question' },
+        { $match: { 'question.codeOnly': { $ne: true } } },
+        {
+          $group: {
+            _id: null,
+            bookmarked: { $sum: { $cond: ['$bookmarked', 1, 0] } },
+            mastered: { $sum: { $cond: ['$mastered', 1, 0] } },
+            learned: { $sum: { $cond: ['$learned', 1, 0] } },
+          },
+        },
+      ]),
     ]);
-    const totals = stats?.totals?.[0] || {
-      total: 0,
-      bookmarked: 0,
-      mastered: 0,
-      learned: 0,
-    };
+
+    const totals = questionStats?.[0]?.totals?.[0] || { total: 0 };
+    const progress = progressStats[0] || { bookmarked: 0, mastered: 0, learned: 0 };
     res.json({
       total: totals.total,
-      bookmarked: totals.bookmarked,
-      mastered: totals.mastered,
-      learned: totals.learned,
-      bySubject: stats?.bySubject || [],
-      byDifficulty: stats?.byDifficulty || [],
+      bookmarked: progress.bookmarked,
+      mastered: progress.mastered,
+      learned: progress.learned,
+      bySubject: questionStats?.[0]?.bySubject || [],
+      byDifficulty: questionStats?.[0]?.byDifficulty || [],
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -638,14 +720,14 @@ exports.getStats = async (_req, res) => {
 
 exports.getRandomQuestion = async (req, res) => {
   try {
-    const filter = {};
-    Object.assign(filter, PUBLIC_QUESTION_FILTER);
+    const filter = { ...PUBLIC_QUESTION_FILTER };
     if (req.query.subject) filter.subject = req.query.subject;
     if (req.query.topic) filter.topic = req.query.topic;
     if (req.query.difficulty) filter.difficulty = req.query.difficulty;
     const [item] = await Question.aggregate([{ $match: filter }, { $sample: { size: 1 } }]);
     if (!item) return res.status(404).json({ message: 'No questions found' });
-    res.json(item);
+    const [merged] = await mergeQuestions(getProgressOwnerId(req), [item]);
+    res.json(merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -653,8 +735,7 @@ exports.getRandomQuestion = async (req, res) => {
 
 exports.getRandomBatch = async (req, res) => {
   try {
-    const filter = {};
-    Object.assign(filter, PUBLIC_QUESTION_FILTER);
+    const filter = { ...PUBLIC_QUESTION_FILTER };
     if (req.query.subject) filter.subject = req.query.subject;
     if (req.query.topic) filter.topic = req.query.topic;
     if (req.query.difficulty) filter.difficulty = req.query.difficulty;
@@ -679,7 +760,8 @@ exports.getRandomBatch = async (req, res) => {
 
     const items = await Question.aggregate([{ $match: filter }, { $sample: { size: count } }]);
     if (!items.length) return res.status(404).json({ message: 'No questions found' });
-    res.json({ items, count: items.length });
+    const merged = await mergeQuestions(getProgressOwnerId(req), items);
+    res.json({ items: merged, count: merged.length });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

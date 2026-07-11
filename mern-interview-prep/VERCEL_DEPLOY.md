@@ -29,14 +29,15 @@ npm run seed
 
 ```
 MONGO_URI=mongodb+srv://USER:PASS@cluster.../mern_interview_prep?retryWrites=true&w=majority
-JWT_SECRET=any-long-random-secret
+JWT_SECRET=generate-a-long-random-secret-at-least-32-characters
 JWT_EXPIRES=7d
-ADMIN_EMAIL=arun375797
-ADMIN_PASSWORD=Job@2026
-ADMIN_NAME=Arun
+ADMIN_EMAIL=your-admin@example.com
+ADMIN_PASSWORD=choose-a-strong-password-12chars-min
+ADMIN_NAME=Admin
+ADMIN_EMAILS=your-admin@example.com
 SKIP_AUTO_SEED=true
 NODE_ENV=production
-CLIENT_URL=
+CLIENT_URL=https://YOUR-FRONTEND.vercel.app
 ```
 
 7. Deploy  
@@ -79,7 +80,7 @@ Redeploy backend.
 ## D) Use the app
 
 1. Open frontend URL  
-2. Login: `arun375797` / `Job@2026`
+2. Login with the `ADMIN_EMAIL` / `ADMIN_PASSWORD` from your backend env vars.
 
 ---
 

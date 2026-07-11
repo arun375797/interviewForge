@@ -6,6 +6,8 @@ const {
   isCodePracticeQuestion,
   toCodeQuestion,
 } = require('../utils/codePracticeGenerator');
+const { loadProgressMap } = require('../utils/userProgressService');
+const { getProgressOwnerId } = require('../utils/progressScope');
 
 const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 const PLAN_DAYS = [3, 5, 10, 15];
@@ -51,7 +53,7 @@ async function loadCodeQuestionIds(subject) {
   };
   const docs = await Question.find(filter)
     .sort({ topicOrder: 1, order: 1 })
-    .select('+savedCode subject topic topicOrder question answer difficulty tags codeCompleted savedCodeUpdatedAt order codeOnly')
+    .select('subject topic topicOrder question answer difficulty tags order codeOnly')
     .lean();
 
   return docs
@@ -77,18 +79,20 @@ function validateStartPayload({ mode, subject, days }) {
   return '';
 }
 
-function progressForQuestion(question, mode) {
-  return mode === 'code' ? Boolean(question.codeCompleted) : Boolean(question.learned);
+function progressForQuestion(progress, mode) {
+  if (!progress) return false;
+  return mode === 'code' ? Boolean(progress.codeCompleted) : Boolean(progress.learned);
 }
 
-async function serializePlan(plan) {
+async function serializePlan(plan, userId) {
   if (!plan) return null;
 
   const ids = plan.planDays.flatMap((day) => day.questionIds);
   const questions = await Question.find({ _id: { $in: ids } })
-    .select('subject topic topicOrder question difficulty learned codeCompleted order codeOnly')
+    .select('subject topic topicOrder question difficulty order codeOnly')
     .lean();
   const byId = new Map(questions.map((q) => [String(q._id), q]));
+  const progressMap = await loadProgressMap(userId, ids);
 
   const planDays = plan.planDays.map((day) => {
     const dayQuestions = day.questionIds
@@ -96,7 +100,7 @@ async function serializePlan(plan) {
       .filter(Boolean)
       .map((q) => ({
         ...q,
-        done: progressForQuestion(q, plan.mode),
+        done: progressForQuestion(progressMap.get(String(q._id)), plan.mode),
       }));
     const completed = dayQuestions.filter((q) => q.done).length;
     return {
@@ -133,12 +137,13 @@ async function serializePlan(plan) {
 
 exports.getActivePlans = async (req, res) => {
   try {
-    const filter = { active: true };
+    const userId = getProgressOwnerId(req);
+    const filter = { userId, active: true };
     if (req.query.mode) filter.mode = req.query.mode;
     if (req.query.subject) filter.subject = req.query.subject;
 
     const plans = await Plan.find(filter).sort({ createdAt: -1 }).lean();
-    const serialized = await Promise.all(plans.map((plan) => serializePlan(plan)));
+    const serialized = await Promise.all(plans.map((plan) => serializePlan(plan, userId)));
     res.json(serialized);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -147,6 +152,7 @@ exports.getActivePlans = async (req, res) => {
 
 exports.startPlan = async (req, res) => {
   try {
+    const userId = getProgressOwnerId(req);
     const { mode, subject } = req.body;
     const days = Number(req.body.days);
     const error = validateStartPayload({ mode, subject, days });
@@ -162,8 +168,9 @@ exports.startPlan = async (req, res) => {
     const endDate = addDays(startDate, days - 1);
     const planDays = splitIntoDays(questionIds, days, startDate);
 
-    await Plan.updateMany({ mode, subject, active: true }, { $set: { active: false } });
+    await Plan.updateMany({ userId, mode, subject, active: true }, { $set: { active: false } });
     const plan = await Plan.create({
+      userId,
       mode,
       subject,
       days,
@@ -174,7 +181,7 @@ exports.startPlan = async (req, res) => {
       planDays,
     });
 
-    res.status(201).json(await serializePlan(plan.toObject()));
+    res.status(201).json(await serializePlan(plan.toObject(), userId));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -182,13 +189,14 @@ exports.startPlan = async (req, res) => {
 
 exports.disablePlan = async (req, res) => {
   try {
-    const plan = await Plan.findByIdAndUpdate(
-      req.params.id,
+    const userId = getProgressOwnerId(req);
+    const plan = await Plan.findOneAndUpdate(
+      { _id: req.params.id, userId },
       { $set: { active: false } },
       { new: true }
     ).lean();
     if (!plan) return res.status(404).json({ message: 'Plan not found' });
-    res.json(await serializePlan(plan));
+    res.json(await serializePlan(plan, userId));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

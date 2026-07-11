@@ -1,6 +1,6 @@
 /**
- * Regenerates answers for all questions without wiping Learn progress.
- * Preserves: learned, bookmarked, mastered, notes
+ * Regenerates answers for all questions without wiping user progress.
+ * User progress (bookmarks, learned, etc.) lives in UserProgress, not Question.
  */
 require('dotenv').config();
 const mongoose = require('mongoose');

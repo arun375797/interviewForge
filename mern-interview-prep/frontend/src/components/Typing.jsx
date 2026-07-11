@@ -1,12 +1,15 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Keyboard, RotateCcw, Trophy, Zap } from 'lucide-react';
 import {
   TYPING_CATEGORIES,
   TYPING_DURATIONS,
   TYPING_SNIPPET_COUNTS,
-  TYPING_SNIPPETS,
+  TYPING_SNIPPET_TOTAL,
   TYPING_STORAGE_KEY,
+  loadTypingSnippets,
 } from '../utils/typingConstants';
+import { useAuth } from '../context/AuthContext';
+import { userStorageKey } from '../utils/userStorage';
 import {
   calcAccuracy,
   calcWpm,
@@ -28,26 +31,68 @@ const STATUS_CLASS = {
   pending: 'text-muted/50',
 };
 
-function TargetText({ target, typed }) {
+function formatLineBreak(isLast) {
+  return isLast ? null : '↵\n';
+}
+
+const TargetText = memo(function TargetText({ target, typed }) {
+  const targetLines = target.split('\n');
+  const typedLines = typed.split('\n');
+  const currentLineIndex = typedLines.length - 1;
+
   return (
     <div
       className="overflow-anywhere whitespace-pre-wrap break-words font-mono text-sm leading-relaxed sm:text-base"
       aria-hidden
     >
-      {target.split('').map((char, index) => {
-        const status = getCharStatus(target, typed, index);
-        const display = char === '\n' ? '↵\n' : char === ' ' ? '\u00a0' : char;
+      {targetLines.map((line, lineIdx) => {
+        const typedLine = typedLines[lineIdx] ?? '';
+        const isLast = lineIdx === targetLines.length - 1;
+
+        if (lineIdx > currentLineIndex) {
+          return (
+            <span key={lineIdx} className={STATUS_CLASS.pending}>
+              {line}
+              {formatLineBreak(isLast)}
+            </span>
+          );
+        }
+
+        if (lineIdx < currentLineIndex) {
+          const lineCorrect = typedLine === line;
+          return (
+            <span
+              key={lineIdx}
+              className={lineCorrect ? STATUS_CLASS.correct : STATUS_CLASS.incorrect}
+            >
+              {line}
+              {formatLineBreak(isLast)}
+            </span>
+          );
+        }
+
         return (
-          <span key={`${index}-${char}`} className={STATUS_CLASS[status]}>
-            {display}
+          <span key={lineIdx}>
+            {line.split('').map((char, index) => {
+              const status = getCharStatus(line, typedLine, index);
+              const display = char === ' ' ? '\u00a0' : char;
+              return (
+                <span key={index} className={STATUS_CLASS[status]}>
+                  {display}
+                </span>
+              );
+            })}
+            {formatLineBreak(isLast)}
           </span>
         );
       })}
     </div>
   );
-}
+});
 
 export default function Typing() {
+  const { user } = useAuth();
+  const statsStorageKey = userStorageKey(TYPING_STORAGE_KEY, user?.id, user?.isAdmin);
   const inputRef = useRef(null);
   const typedRef = useRef('');
   const startedAtRef = useRef(null);
@@ -55,20 +100,55 @@ export default function Typing() {
 
   const [category, setCategory] = useState('all');
   const [duration, setDuration] = useState(60);
-  const [snippet, setSnippet] = useState(() => pickSnippet(TYPING_SNIPPETS, 'all'));
+  const [snippets, setSnippets] = useState([]);
+  const [snippetsLoading, setSnippetsLoading] = useState(true);
+  const [snippet, setSnippet] = useState(null);
   const [typed, setTyped] = useState('');
   typedRef.current = typed;
   const [elapsedMs, setElapsedMs] = useState(0);
   const [running, setRunning] = useState(false);
   const [finished, setFinished] = useState(false);
-  const [stats, setStats] = useState(() => loadTypingStats(TYPING_STORAGE_KEY));
+  const [stats, setStats] = useState(() => loadTypingStats(statsStorageKey));
 
-  const correctChars = useMemo(() => countCorrectChars(snippet.text, typed), [snippet.text, typed]);
-  const errors = useMemo(() => countErrors(snippet.text, typed), [snippet.text, typed]);
+  useEffect(() => {
+    setStats(loadTypingStats(statsStorageKey));
+  }, [statsStorageKey]);
+
+  useEffect(() => {
+    let alive = true;
+    setSnippetsLoading(true);
+    loadTypingSnippets(category)
+      .then((loaded) => {
+        if (!alive || !loaded.length) return;
+        setSnippets(loaded);
+        setSnippet(pickSnippet(loaded, category));
+        setTyped('');
+        setElapsedMs(0);
+        setRunning(false);
+        setFinished(false);
+        startedAtRef.current = null;
+      })
+      .finally(() => alive && setSnippetsLoading(false));
+    return () => {
+      alive = false;
+    };
+  }, [category]);
+
+  const correctChars = useMemo(
+    () => (snippet ? countCorrectChars(snippet.text, typed) : 0),
+    [snippet, typed]
+  );
+  const errors = useMemo(
+    () => (snippet ? countErrors(snippet.text, typed) : 0),
+    [snippet, typed]
+  );
   const wpm = useMemo(() => calcWpm(correctChars, elapsedMs || 1), [correctChars, elapsedMs]);
-  const accuracy = useMemo(() => calcAccuracy(correctChars, typed.length), [correctChars, typed.length]);
+  const accuracy = useMemo(
+    () => calcAccuracy(correctChars, typed.length),
+    [correctChars, typed.length]
+  );
   const bestWpm = stats[category]?.bestWpm || 0;
-  const isCodeCategory = snippet.category !== 'english';
+  const isCodeCategory = snippet?.category !== 'english';
 
   const stopTimer = useCallback(() => {
     if (timerRef.current) {
@@ -79,6 +159,7 @@ export default function Typing() {
 
   const finishSession = useCallback(
     (finalElapsed, typedValue = typedRef.current) => {
+      if (!snippet) return;
       stopTimer();
       setRunning(false);
       setFinished(true);
@@ -87,25 +168,29 @@ export default function Typing() {
       const finalWpm = calcWpm(finalCorrect, elapsed);
       setStats((prev) => {
         const next = updateBestScore(prev, category, finalWpm);
-        saveTypingStats(TYPING_STORAGE_KEY, next);
+        saveTypingStats(statsStorageKey, next);
         return next;
       });
     },
-    [category, elapsedMs, snippet.text, stopTimer]
+    [category, elapsedMs, snippet, statsStorageKey, stopTimer]
   );
 
   const resetSession = useCallback(
     (nextSnippet) => {
+      if (!snippets.length) return;
       stopTimer();
       startedAtRef.current = null;
-      setSnippet(nextSnippet || pickSnippet(TYPING_SNIPPETS, category, snippet.question || snippet.text));
+      setSnippet(
+        nextSnippet ||
+          pickSnippet(snippets, category, snippet?.question || snippet?.text)
+      );
       setTyped('');
       setElapsedMs(0);
       setRunning(false);
       setFinished(false);
       requestAnimationFrame(() => inputRef.current?.focus());
     },
-    [category, snippet.text, stopTimer]
+    [category, snippet, snippets, stopTimer]
   );
 
   const startIfNeeded = useCallback(() => {
@@ -119,18 +204,19 @@ export default function Typing() {
       if (typeof duration === 'number' && ms >= duration * 1000) {
         finishSession(ms);
       }
-    }, 100);
+    }, 1000);
   }, [duration, finishSession, stopTimer]);
 
   useEffect(() => () => stopTimer(), [stopTimer]);
 
   useEffect(() => {
-    resetSession(pickSnippet(TYPING_SNIPPETS, category));
+    if (!snippets.length) return;
+    resetSession(pickSnippet(snippets, category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, duration]);
+  }, [duration]);
 
   const onInput = (event) => {
-    if (finished) return;
+    if (finished || !snippet) return;
     const value = event.target.value;
     startIfNeeded();
     setTyped(value);
@@ -149,9 +235,17 @@ export default function Typing() {
   };
 
   const timeLeft =
-    typeof duration === 'number'
-      ? Math.max(0, duration * 1000 - elapsedMs)
-      : null;
+    typeof duration === 'number' ? Math.max(0, duration * 1000 - elapsedMs) : null;
+
+  if (snippetsLoading || !snippet) {
+    return (
+      <div className="mx-auto max-w-5xl animate-rise space-y-6">
+        <div className="skeleton h-10 w-48 rounded-xl" />
+        <div className="skeleton h-32 rounded-2xl" />
+        <div className="skeleton h-96 rounded-2xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-5xl animate-rise space-y-6">
@@ -164,7 +258,7 @@ export default function Typing() {
           Learn while you type. Read the practical interview question, understand the answer, then
           type the full solution to build speed and recall.{' '}
           <span className="text-ink">
-            {TYPING_SNIPPETS.length} question-and-answer drills from your thinkMern question bank.
+            {TYPING_SNIPPET_TOTAL} question-and-answer drills from your thinkMern question bank.
           </span>
         </p>
         <p className="mt-3 max-w-2xl rounded-xl border border-line bg-paper px-3 py-2 font-mono text-xs text-muted">

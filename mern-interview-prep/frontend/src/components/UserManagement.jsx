@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Ban, CheckCircle2, RefreshCw, Search, ShieldCheck, Users } from 'lucide-react';
+import { Ban, CheckCircle2, RefreshCw, Search, ShieldCheck, Trash2, Users } from 'lucide-react';
 import { api } from '../api';
 
 function formatWhen(value) {
@@ -80,6 +80,27 @@ export default function UserManagement() {
     }
   };
 
+  const deleteUser = async (user) => {
+    const label = user.name || user.email || 'this user';
+    const confirmed = window.confirm(
+      `Delete ${label} (${user.email})?\n\nThis permanently removes their account, progress, plans, and notebooks. They will need to sign up again.`
+    );
+    if (!confirmed) return;
+
+    setBusyId(user.id);
+    setMessage('');
+    setError('');
+    try {
+      const result = await api.deleteUser(user.id);
+      setUsers((prev) => prev.filter((item) => item.id !== user.id));
+      setMessage(`${result.email || user.email} has been deleted`);
+    } catch (err) {
+      setError(err.message || 'Could not delete user');
+    } finally {
+      setBusyId('');
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -87,7 +108,8 @@ export default function UserManagement() {
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Admin</p>
           <h1 className="mt-1 font-display text-3xl font-semibold">User management</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            See who has signed in and block or unblock access. Admin accounts cannot be blocked.
+            See who has signed in, block or unblock access, or permanently delete a user and all
+            their data. Admin accounts are protected.
           </p>
         </div>
         <button
@@ -228,24 +250,37 @@ export default function UserManagement() {
                     <td className="px-3 py-4">
                       {user.isAdmin ? (
                         <span className="text-xs text-muted">Protected</span>
-                      ) : user.isBlocked ? (
-                        <button
-                          type="button"
-                          disabled={busyId === user.id}
-                          onClick={() => toggleBlocked(user, false)}
-                          className="rounded-xl border border-line px-3 py-1.5 text-xs font-medium hover:bg-paper-2 disabled:opacity-50"
-                        >
-                          Unblock
-                        </button>
                       ) : (
-                        <button
-                          type="button"
-                          disabled={busyId === user.id}
-                          onClick={() => toggleBlocked(user, true)}
-                          className="rounded-xl border border-rose-200 px-3 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-50 disabled:opacity-50"
-                        >
-                          Block
-                        </button>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {user.isBlocked ? (
+                            <button
+                              type="button"
+                              disabled={busyId === user.id}
+                              onClick={() => toggleBlocked(user, false)}
+                              className="rounded-xl border border-line px-3 py-1.5 text-xs font-medium hover:bg-paper-2 disabled:opacity-50"
+                            >
+                              Unblock
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              disabled={busyId === user.id}
+                              onClick={() => toggleBlocked(user, true)}
+                              className="rounded-xl border border-rose-200 px-3 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-50 disabled:opacity-50"
+                            >
+                              Block
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            disabled={busyId === user.id}
+                            onClick={() => deleteUser(user)}
+                            className="inline-flex items-center gap-1 rounded-xl border border-rose-200 px-3 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-50 disabled:opacity-50"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                            Delete
+                          </button>
+                        </div>
                       )}
                     </td>
                   </tr>

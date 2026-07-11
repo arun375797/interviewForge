@@ -22,11 +22,6 @@ export function warmApi() {
   return fetch(healthUrl, { method: 'GET', cache: 'no-store' }).catch(() => null);
 }
 
-// Start warming immediately when this module loads
-if (typeof window !== 'undefined') {
-  warmApi();
-}
-
 function cacheKeyFor(url, token) {
   return `${token || 'anonymous'}:${url}`;
 }
@@ -34,6 +29,18 @@ function cacheKeyFor(url, token) {
 function clearApiCache() {
   responseCache.clear();
   pendingRequests.clear();
+}
+
+function invalidateCacheForPath(path) {
+  const segment = path.split('/').filter(Boolean)[0];
+  if (!segment) {
+    clearApiCache();
+    return;
+  }
+  const marker = `/${segment}`;
+  for (const key of responseCache.keys()) {
+    if (key.includes(marker)) responseCache.delete(key);
+  }
 }
 
 export function getStoredToken() {
@@ -102,7 +109,7 @@ async function request(path, options = {}) {
     }
 
     if (!res.ok) throw new Error(data.message || `Request failed (${res.status})`);
-    if (method !== 'GET') clearApiCache();
+    if (method !== 'GET') invalidateCacheForPath(path);
     if (canUseCache) {
       responseCache.set(cacheKey, {
         data,
@@ -143,6 +150,11 @@ export const api = {
       body: JSON.stringify({ blocked }),
       cache: 'no-store',
     }),
+  deleteUser: (id) =>
+    request(`/auth/users/${id}`, {
+      method: 'DELETE',
+      cache: 'no-store',
+    }),
   getSubjects: () => request('/questions/subjects'),
   getTopics: (subject) => request(`/questions/subjects/${subject}/topics`),
   getStats: () => request('/questions/stats'),
@@ -150,13 +162,13 @@ export const api = {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions/random${q ? `?${q}` : ''}`);
+    return request(`/questions/random${q ? `?${q}` : ''}`, { cache: 'no-store' });
   },
   getRandomBatch: (params = {}) => {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions/random/batch${q ? `?${q}` : ''}`);
+    return request(`/questions/random/batch${q ? `?${q}` : ''}`, { cache: 'no-store' });
   },
   getQuestions: (params = {}) => {
     const q = new URLSearchParams(
@@ -169,6 +181,11 @@ export const api = {
     request('/questions', { method: 'POST', body: JSON.stringify(body) }),
   updateQuestion: (id, body) =>
     request(`/questions/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
+  updatePersonalNotes: (id, notes) =>
+    request(`/questions/${id}/personal-notes`, {
+      method: 'PATCH',
+      body: JSON.stringify({ notes }),
+    }),
   deleteQuestion: (id) => request(`/questions/${id}`, { method: 'DELETE' }),
   toggleBookmark: (id) => request(`/questions/${id}/bookmark`, { method: 'PATCH' }),
   toggleWeakSpot: (id) => request(`/questions/${id}/weak`, { method: 'PATCH' }),
@@ -241,7 +258,7 @@ export const api = {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions/review/due${q ? `?${q}` : ''}`);
+    return request(`/questions/review/due${q ? `?${q}` : ''}`, { cache: 'no-store' });
   },
   clearDailyReview: (params = {}) => {
     const q = new URLSearchParams(
@@ -282,13 +299,13 @@ export const api = {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions/flashcards${q ? `?${q}` : ''}`);
+    return request(`/questions/flashcards${q ? `?${q}` : ''}`, { cache: 'no-store' });
   },
   getInterleaved: (params = {}) => {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions/random/interleaved${q ? `?${q}` : ''}`);
+    return request(`/questions/random/interleaved${q ? `?${q}` : ''}`, { cache: 'no-store' });
   },
   getFollowUps: (id) => request(`/questions/${id}/follow-ups`),
   checkFeynman: (id, answer) =>

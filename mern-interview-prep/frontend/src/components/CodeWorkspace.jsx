@@ -66,9 +66,16 @@ function runInWorker(code) {
     `;
 
     const blob = new Blob([workerSource], { type: 'application/javascript' });
-    const worker = new Worker(URL.createObjectURL(blob));
-    const timer = window.setTimeout(() => {
+    const workerUrl = URL.createObjectURL(blob);
+    const worker = new Worker(workerUrl);
+
+    const cleanup = () => {
       worker.terminate();
+      URL.revokeObjectURL(workerUrl);
+    };
+
+    const timer = window.setTimeout(() => {
+      cleanup();
       resolve({
         ok: false,
         error: 'Execution stopped after 3 seconds. Check for an infinite loop.',
@@ -78,13 +85,13 @@ function runInWorker(code) {
 
     worker.onmessage = (event) => {
       window.clearTimeout(timer);
-      worker.terminate();
+      cleanup();
       resolve(event.data);
     };
 
     worker.onerror = (event) => {
       window.clearTimeout(timer);
-      worker.terminate();
+      cleanup();
       resolve({ ok: false, error: event.message || 'Runtime error', logs: [] });
     };
 

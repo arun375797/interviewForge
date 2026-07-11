@@ -44,9 +44,16 @@ export function runJavaScriptInWorker(code) {
     `;
 
     const blob = new Blob([workerSource], { type: 'application/javascript' });
-    const worker = new Worker(URL.createObjectURL(blob));
-    const timer = window.setTimeout(() => {
+    const workerUrl = URL.createObjectURL(blob);
+    const worker = new Worker(workerUrl);
+
+    const cleanup = () => {
       worker.terminate();
+      URL.revokeObjectURL(workerUrl);
+    };
+
+    const timer = window.setTimeout(() => {
+      cleanup();
       resolve({
         ok: false,
         error: 'Execution stopped after 5 seconds. Check for an infinite loop.',
@@ -56,13 +63,13 @@ export function runJavaScriptInWorker(code) {
 
     worker.onmessage = (event) => {
       window.clearTimeout(timer);
-      worker.terminate();
+      cleanup();
       resolve(event.data);
     };
 
     worker.onerror = (event) => {
       window.clearTimeout(timer);
-      worker.terminate();
+      cleanup();
       resolve({ ok: false, error: event.message || 'Runtime error', logs: [] });
     };
 
@@ -127,7 +134,13 @@ app.get('/health', (_req, res) => {
   },
 };
 
-const STORAGE_KEY = 'thinkmern_ide_workspace_v2';
+const IDE_STORAGE_BASE_KEY = 'thinkmern_ide_workspace_v2';
+
+export function getIdeStorageKey(userId, isAdmin = false) {
+  if (isAdmin) return `${IDE_STORAGE_BASE_KEY}:admin-shared`;
+  if (!userId) return IDE_STORAGE_BASE_KEY;
+  return `${IDE_STORAGE_BASE_KEY}:${userId}`;
+}
 
 function looksLikeJavascriptSnippet(code) {
   return /const nums = \[4, 9, 2, 17, 6\]/.test(code) || /Write any JavaScript here/.test(code);
@@ -158,9 +171,10 @@ function normalizeModeCode(modeId, savedCode) {
   return savedCode;
 }
 
-export function loadIdeWorkspace() {
+export function loadIdeWorkspace(userId, isAdmin = false) {
+  const storageKey = getIdeStorageKey(userId, isAdmin);
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(storageKey);
     if (!raw) return null;
     const saved = JSON.parse(raw);
     return {
@@ -176,6 +190,6 @@ export function loadIdeWorkspace() {
   }
 }
 
-export function saveIdeWorkspace(workspace) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(workspace));
+export function saveIdeWorkspace(workspace, userId, isAdmin = false) {
+  localStorage.setItem(getIdeStorageKey(userId, isAdmin), JSON.stringify(workspace));
 }

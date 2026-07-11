@@ -76,6 +76,7 @@ export default function AdminAnswers() {
       limit: PAGE_SIZE,
       search: debouncedSearch || undefined,
       manualAnswer: activeStatus?.manualAnswer,
+      includeAnswer: mode === 'study' ? true : undefined,
     };
     const loadQuestions = mode === 'code' ? api.getCodeQuestions : api.getQuestions;
 

@@ -1,10 +1,4 @@
-const mongoose = require('mongoose');
-
-const SANDBOX_COLLECTIONS = {
-  users: 'ide_users',
-  products: 'ide_products',
-  orders: 'ide_orders',
-};
+const vm = require('vm');
 
 const SAMPLE_DATA = {
   users: [
@@ -30,7 +24,36 @@ const SAMPLE_DATA = {
   ],
 };
 
-let seeded = false;
+const BLOCKED_CODE_PATTERNS = [
+  /\bconstructor\b/i,
+  /\b__proto__\b/i,
+  /\bprototype\b/i,
+  /\bprocess\b/i,
+  /\brequire\b/i,
+  /\bimport\s*\(/i,
+  /\bimport\s+/i,
+  /\beval\b/i,
+  /\bFunction\b/i,
+  /\bglobalThis\b/i,
+  /\bglobal\b/i,
+  /\bchild_process\b/i,
+  /\bfs\b/i,
+  /\bmodule\b/i,
+  /\bexports\b/i,
+  /\bBuffer\b/i,
+  /\bfetch\b/i,
+  /\bXMLHttpRequest\b/i,
+  /\bWebAssembly\b/i,
+  /\bProxy\b/i,
+  /\bReflect\b/i,
+  /\bthis\b/i,
+];
+
+let memoryStore = null;
+
+function cloneSampleData() {
+  return JSON.parse(JSON.stringify(SAMPLE_DATA));
+}
 
 function formatValue(value) {
   if (value === undefined) return 'undefined';
@@ -43,69 +66,278 @@ function formatValue(value) {
   }
 }
 
-function getDb() {
-  if (mongoose.connection.readyState !== 1) {
-    throw new Error('Database is not connected');
+function withTimeout(promise, ms, message) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(message)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+function validateUserCode(code) {
+  for (const pattern of BLOCKED_CODE_PATTERNS) {
+    if (pattern.test(code)) {
+      throw new Error('Code contains blocked keywords or patterns');
+    }
   }
-  return mongoose.connection.db;
+}
+
+function getByPath(doc, path) {
+  return String(path)
+    .split('.')
+    .reduce((value, key) => (value == null ? undefined : value[key]), doc);
+}
+
+function matchesValue(fieldValue, condition) {
+  if (condition && typeof condition === 'object' && !Array.isArray(condition)) {
+    if (condition.$in) return condition.$in.includes(fieldValue);
+    if (condition.$ne !== undefined) return fieldValue !== condition.$ne;
+    if (condition.$gt !== undefined) return fieldValue > condition.$gt;
+    if (condition.$gte !== undefined) return fieldValue >= condition.$gte;
+    if (condition.$lt !== undefined) return fieldValue < condition.$lt;
+    if (condition.$lte !== undefined) return fieldValue <= condition.$lte;
+    if (condition.$exists !== undefined) {
+      return condition.$exists ? fieldValue !== undefined : fieldValue === undefined;
+    }
+    if (condition.$regex) {
+      const flags = condition.$options || '';
+      return new RegExp(condition.$regex, flags).test(String(fieldValue ?? ''));
+    }
+  }
+  if (Array.isArray(fieldValue) && Array.isArray(condition)) {
+    return condition.every((item) => fieldValue.includes(item));
+  }
+  return fieldValue === condition;
+}
+
+function matchesFilter(doc, filter = {}) {
+  if (!filter || typeof filter !== 'object') return true;
+  if (filter.$or) {
+    return filter.$or.some((clause) => matchesFilter(doc, clause));
+  }
+  if (filter.$and) {
+    return filter.$and.every((clause) => matchesFilter(doc, clause));
+  }
+
+  return Object.entries(filter).every(([key, value]) => {
+    if (key.startsWith('$')) return true;
+    return matchesValue(getByPath(doc, key), value);
+  });
+}
+
+function runAggregate(docs, pipeline = []) {
+  let rows = docs.map((doc) => ({ ...doc }));
+
+  for (const stage of pipeline) {
+    if (stage.$match) {
+      rows = rows.filter((doc) => matchesFilter(doc, stage.$match));
+      continue;
+    }
+
+    if (stage.$unwind) {
+      const field = String(stage.$unwind).replace(/^\$/, '');
+      const next = [];
+      for (const doc of rows) {
+        const value = getByPath(doc, field);
+        if (Array.isArray(value)) {
+          for (const item of value) {
+            next.push({ ...doc, [field]: item });
+          }
+        } else if (value !== undefined) {
+          next.push(doc);
+        }
+      }
+      rows = next;
+      continue;
+    }
+
+    if (stage.$group) {
+      const grouped = new Map();
+      for (const doc of rows) {
+        const idExpr = stage.$group._id;
+        let groupKey;
+        if (idExpr === null) groupKey = 'ALL';
+        else if (typeof idExpr === 'string' && idExpr.startsWith('$')) {
+          groupKey = String(getByPath(doc, idExpr.slice(1)));
+        } else {
+          groupKey = JSON.stringify(idExpr);
+        }
+
+        if (!grouped.has(groupKey)) {
+          grouped.set(groupKey, { _id: idExpr === null ? null : getByPath(doc, typeof idExpr === 'string' && idExpr.startsWith('$') ? idExpr.slice(1) : '_id') });
+        }
+        const bucket = grouped.get(groupKey);
+
+        for (const [field, expr] of Object.entries(stage.$group)) {
+          if (field === '_id') continue;
+          if (expr && expr.$sum === 1) {
+            bucket[field] = (bucket[field] || 0) + 1;
+          } else if (expr && expr.$sum !== undefined) {
+            const sumField =
+              typeof expr.$sum === 'string' && expr.$sum.startsWith('$')
+                ? getByPath(doc, expr.$sum.slice(1))
+                : expr.$sum;
+            bucket[field] = (bucket[field] || 0) + (Number(sumField) || 0);
+          } else if (expr && expr.$push !== undefined) {
+            if (!bucket[field]) bucket[field] = [];
+            const pushField =
+              typeof expr.$push === 'string' && expr.$push.startsWith('$')
+                ? getByPath(doc, expr.$push.slice(1))
+                : expr.$push;
+            bucket[field].push(pushField);
+          } else if (expr && expr.$avg !== undefined) {
+            if (!bucket[`__${field}`]) bucket[`__${field}`] = { sum: 0, count: 0 };
+            const avgField =
+              typeof expr.$avg === 'string' && expr.$avg.startsWith('$')
+                ? getByPath(doc, expr.$avg.slice(1))
+                : expr.$avg;
+            bucket[`__${field}`].sum += Number(avgField) || 0;
+            bucket[`__${field}`].count += 1;
+          }
+        }
+      }
+
+      rows = Array.from(grouped.values()).map((bucket) => {
+        for (const [key, value] of Object.entries(bucket)) {
+          if (key.startsWith('__') && value && typeof value === 'object' && 'sum' in value) {
+            const field = key.slice(2);
+            bucket[field] = value.count ? value.sum / value.count : 0;
+            delete bucket[key];
+          }
+        }
+        return bucket;
+      });
+      continue;
+    }
+
+    if (stage.$project) {
+      rows = rows.map((doc) => {
+        const projected = {};
+        for (const [field, expr] of Object.entries(stage.$project)) {
+          if (expr === 1 || expr === true) {
+            projected[field] = getByPath(doc, field);
+          } else if (expr === 0 || expr === false) {
+            continue;
+          } else if (typeof expr === 'string' && expr.startsWith('$')) {
+            projected[field] = getByPath(doc, expr.slice(1));
+          } else {
+            projected[field] = expr;
+          }
+        }
+        return projected;
+      });
+      continue;
+    }
+
+    if (stage.$sort) {
+      const sortSpec = stage.$sort;
+      rows.sort((a, b) => {
+        for (const [field, direction] of Object.entries(sortSpec)) {
+          const av = getByPath(a, field);
+          const bv = getByPath(b, field);
+          if (av === bv) continue;
+          const cmp = av > bv ? 1 : -1;
+          return direction < 0 ? -cmp : cmp;
+        }
+        return 0;
+      });
+      continue;
+    }
+
+    if (stage.$limit) {
+      rows = rows.slice(0, stage.$limit);
+    }
+  }
+
+  return rows;
+}
+
+function createInMemoryCollection(initialDocs) {
+  let docs = initialDocs.map((doc) => ({ ...doc }));
+
+  return {
+    find(filter = {}) {
+      const matched = docs.filter((doc) => matchesFilter(doc, filter));
+      return {
+        async toArray() {
+          return matched.map((doc) => ({ ...doc }));
+        },
+      };
+    },
+    async findOne(filter = {}) {
+      const doc = docs.find((item) => matchesFilter(item, filter));
+      return doc ? { ...doc } : null;
+    },
+    async countDocuments(filter = {}) {
+      return docs.filter((doc) => matchesFilter(doc, filter)).length;
+    },
+    aggregate(pipeline = []) {
+      const rows = runAggregate(docs, pipeline);
+      return {
+        async toArray() {
+          return rows.map((doc) => ({ ...doc }));
+        },
+      };
+    },
+  };
+}
+
+function buildInMemoryDb(store) {
+  const db = {};
+  for (const key of Object.keys(SAMPLE_DATA)) {
+    db[key] = createInMemoryCollection(store[key]);
+  }
+  return db;
+}
+
+function ensureMemoryStore() {
+  if (!memoryStore) {
+    memoryStore = cloneSampleData();
+  }
+  return memoryStore;
 }
 
 async function ensureSandboxSeeded() {
-  if (seeded) return;
-  const db = getDb();
-  for (const [key, collectionName] of Object.entries(SANDBOX_COLLECTIONS)) {
-    const col = db.collection(collectionName);
-    const count = await col.estimatedDocumentCount();
-    if (count === 0) {
-      await col.insertMany(SAMPLE_DATA[key]);
-    }
-  }
-  seeded = true;
+  ensureMemoryStore();
 }
 
 async function resetSandbox() {
-  const db = getDb();
-  for (const collectionName of Object.values(SANDBOX_COLLECTIONS)) {
-    await db.collection(collectionName).deleteMany({});
-  }
-  for (const [key, collectionName] of Object.entries(SANDBOX_COLLECTIONS)) {
-    await db.collection(collectionName).insertMany(SAMPLE_DATA[key]);
-  }
-  seeded = true;
+  memoryStore = cloneSampleData();
 }
 
-function buildDbProxy() {
-  const db = getDb();
-  const proxy = {};
-  for (const [alias, collectionName] of Object.entries(SANDBOX_COLLECTIONS)) {
-    proxy[alias] = db.collection(collectionName);
-  }
-  return proxy;
+function runInSandbox(code, sandbox, timeoutMs, label) {
+  validateUserCode(code);
+  const context = vm.createContext(sandbox);
+  const wrapped = `(async () => { "use strict"; ${code} })()`;
+  const script = new vm.Script(wrapped, { filename: `ide-${label}.js` });
+  const resultPromise = Promise.resolve(script.runInContext(context, { timeout: timeoutMs }));
+  return {
+    context,
+    result: withTimeout(
+      resultPromise,
+      timeoutMs,
+      `${label} timed out after ${timeoutMs / 1000} seconds`
+    ),
+  };
 }
 
 async function runMongoQuery(code) {
-  await ensureSandboxSeeded();
+  const store = ensureMemoryStore();
   const logs = [];
   const safeConsole = {
     log: (...args) => logs.push(args.map(formatValue).join(' ')),
     error: (...args) => logs.push(args.map(formatValue).join(' ')),
     warn: (...args) => logs.push(args.map(formatValue).join(' ')),
   };
-  const db = buildDbProxy();
+  const db = buildInMemoryDb(store);
 
-  const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-  const fn = new AsyncFunction('db', 'console', `"use strict";\n${code}`);
-  const result = await Promise.race([
-    fn(db, safeConsole),
-    new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('MongoDB query timed out after 5 seconds')), 5000);
-    }),
-  ]);
+  const { result } = runInSandbox(code, { db, console: safeConsole }, 5000, 'MongoDB query');
+  const value = await result;
 
   return {
     ok: true,
     logs,
-    result: formatValue(result),
+    result: formatValue(value),
   };
 }
 
@@ -208,14 +440,13 @@ async function runExpressCode(code, testRequest = {}) {
     return app;
   };
 
-  const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-  const fn = new AsyncFunction('express', 'console', `"use strict";\n${code}`);
-  await Promise.race([
-    fn(expressApi, safeConsole),
-    new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Express code timed out after 5 seconds')), 5000);
-    }),
-  ]);
+  const { context, result: registrationResult } = runInSandbox(
+    code,
+    { express: expressApi, console: safeConsole },
+    5000,
+    'Express code'
+  );
+  await registrationResult;
 
   const method = (testRequest.method || 'GET').toUpperCase();
   const path = testRequest.path || '/';
@@ -252,12 +483,17 @@ async function runExpressCode(code, testRequest = {}) {
     };
   }
 
-  await Promise.race([
-    matched.handler(req, res),
-    new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Route handler timed out after 3 seconds')), 3000);
-    }),
-  ]);
+  context.req = req;
+  context.res = res;
+  context.handler = matched.handler;
+  const handlerScript = new vm.Script('Promise.resolve(handler(req, res))', {
+    filename: 'ide-express-handler.js',
+  });
+  await withTimeout(
+    Promise.resolve(handlerScript.runInContext(context, { timeout: 3000 })),
+    3000,
+    'Route handler timed out after 3 seconds'
+  );
 
   const state = res.getState();
   return {
@@ -274,7 +510,7 @@ async function runExpressCode(code, testRequest = {}) {
 
 function getSandboxInfo() {
   return {
-    collections: Object.keys(SANDBOX_COLLECTIONS),
+    collections: Object.keys(SAMPLE_DATA),
     sampleSchemas: {
       users: '{ _id, name, email, role, age, status }',
       products: '{ _id, name, category, price, stock, tags[] }',

@@ -1,5 +1,6 @@
 const Notebook = require('../models/Notebook');
 const NotebookPage = require('../models/NotebookPage');
+const { getProgressOwnerId } = require('../utils/progressScope');
 
 const NOTEBOOK_COLORS = ['#0f766e', '#0891b2', '#ca8a04', '#c2410c', '#7c3aed', '#db2777', '#16a34a'];
 
@@ -45,12 +46,12 @@ function normalizePage(page) {
 
 exports.listNotebooks = async (req, res) => {
   try {
-    const notebooks = await Notebook.find({ userId: req.user.id })
+    const notebooks = await Notebook.find({ userId: getProgressOwnerId(req) })
       .sort({ updatedAt: -1 })
       .lean();
 
     const pageCounts = await NotebookPage.aggregate([
-      { $match: { userId: req.user.id } },
+      { $match: { userId: getProgressOwnerId(req) } },
       { $group: { _id: '$notebookId', count: { $sum: 1 } } },
     ]);
     const countByNotebook = new Map(pageCounts.map((row) => [String(row._id), row.count]));
@@ -76,7 +77,7 @@ exports.createNotebook = async (req, res) => {
     const description = String(req.body.description || '').trim();
 
     const notebook = await Notebook.create({
-      userId: req.user.id,
+      userId: getProgressOwnerId(req),
       title,
       color,
       description,
@@ -90,10 +91,10 @@ exports.createNotebook = async (req, res) => {
 
 exports.getNotebook = async (req, res) => {
   try {
-    const notebook = await assertNotebookOwner(req.params.id, req.user.id);
+    const notebook = await assertNotebookOwner(req.params.id, getProgressOwnerId(req));
     if (!notebook) return res.status(404).json({ message: 'Notebook not found' });
 
-    const pages = await NotebookPage.find({ notebookId: notebook._id, userId: req.user.id })
+    const pages = await NotebookPage.find({ notebookId: notebook._id, userId: getProgressOwnerId(req) })
       .sort({ pageNumber: 1 })
       .select('_id pageNumber topic subtopics subtopic updatedAt createdAt')
       .lean();
@@ -106,7 +107,7 @@ exports.getNotebook = async (req, res) => {
 
 exports.updateNotebook = async (req, res) => {
   try {
-    const notebook = await Notebook.findOne({ _id: req.params.id, userId: req.user.id });
+    const notebook = await Notebook.findOne({ _id: req.params.id, userId: getProgressOwnerId(req) });
     if (!notebook) return res.status(404).json({ message: 'Notebook not found' });
 
     if (req.body.title !== undefined) {
@@ -130,10 +131,10 @@ exports.updateNotebook = async (req, res) => {
 
 exports.deleteNotebook = async (req, res) => {
   try {
-    const notebook = await Notebook.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
+    const notebook = await Notebook.findOneAndDelete({ _id: req.params.id, userId: getProgressOwnerId(req) });
     if (!notebook) return res.status(404).json({ message: 'Notebook not found' });
 
-    await NotebookPage.deleteMany({ notebookId: notebook._id, userId: req.user.id });
+    await NotebookPage.deleteMany({ notebookId: notebook._id, userId: getProgressOwnerId(req) });
     res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -142,13 +143,13 @@ exports.deleteNotebook = async (req, res) => {
 
 exports.createPage = async (req, res) => {
   try {
-    const notebook = await assertNotebookOwner(req.params.id, req.user.id);
+    const notebook = await assertNotebookOwner(req.params.id, getProgressOwnerId(req));
     if (!notebook) return res.status(404).json({ message: 'Notebook not found' });
 
     const pageNumber =
       req.body.pageNumber !== undefined
         ? Number(req.body.pageNumber)
-        : await nextPageNumber(notebook._id, req.user.id);
+        : await nextPageNumber(notebook._id, getProgressOwnerId(req));
 
     if (!Number.isFinite(pageNumber) || pageNumber < 1) {
       return res.status(400).json({ message: 'Page number must be a positive number' });
@@ -156,7 +157,7 @@ exports.createPage = async (req, res) => {
 
     const duplicate = await NotebookPage.findOne({
       notebookId: notebook._id,
-      userId: req.user.id,
+      userId: getProgressOwnerId(req),
       pageNumber,
     }).lean();
     if (duplicate) {
@@ -169,7 +170,7 @@ exports.createPage = async (req, res) => {
 
     const page = await NotebookPage.create({
       notebookId: notebook._id,
-      userId: req.user.id,
+      userId: getProgressOwnerId(req),
       pageNumber,
       topic,
       subtopics,
@@ -188,7 +189,7 @@ exports.getPage = async (req, res) => {
     const page = await NotebookPage.findOne({
       _id: req.params.pageId,
       notebookId: req.params.id,
-      userId: req.user.id,
+      userId: getProgressOwnerId(req),
     }).lean();
 
     if (!page) return res.status(404).json({ message: 'Page not found' });
@@ -203,7 +204,7 @@ exports.updatePage = async (req, res) => {
     const page = await NotebookPage.findOne({
       _id: req.params.pageId,
       notebookId: req.params.id,
-      userId: req.user.id,
+      userId: getProgressOwnerId(req),
     });
 
     if (!page) return res.status(404).json({ message: 'Page not found' });
@@ -216,7 +217,7 @@ exports.updatePage = async (req, res) => {
       if (pageNumber !== page.pageNumber) {
         const duplicate = await NotebookPage.findOne({
           notebookId: page.notebookId,
-          userId: req.user.id,
+          userId: getProgressOwnerId(req),
           pageNumber,
           _id: { $ne: page._id },
         }).lean();
@@ -254,7 +255,7 @@ exports.deletePage = async (req, res) => {
     const page = await NotebookPage.findOneAndDelete({
       _id: req.params.pageId,
       notebookId: req.params.id,
-      userId: req.user.id,
+      userId: getProgressOwnerId(req),
     });
 
     if (!page) return res.status(404).json({ message: 'Page not found' });
