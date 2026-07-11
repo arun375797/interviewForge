@@ -90,6 +90,17 @@ async function request(path, options = {}) {
       }
     }
 
+    if (
+      res.status === 403 &&
+      data.message === 'Your account has been blocked' &&
+      typeof window !== 'undefined'
+    ) {
+      clearSession();
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.assign('/login');
+      }
+    }
+
     if (!res.ok) throw new Error(data.message || `Request failed (${res.status})`);
     if (method !== 'GET') clearApiCache();
     if (canUseCache) {
@@ -125,6 +136,13 @@ export const api = {
       body: JSON.stringify({ credential }),
     }),
   me: () => request('/auth/me'),
+  getUsers: () => request('/auth/users', { cache: 'no-store' }),
+  setUserBlocked: (id, blocked) =>
+    request(`/auth/users/${id}/block`, {
+      method: 'PATCH',
+      body: JSON.stringify({ blocked }),
+      cache: 'no-store',
+    }),
   getSubjects: () => request('/questions/subjects'),
   getTopics: (subject) => request(`/questions/subjects/${subject}/topics`),
   getStats: () => request('/questions/stats'),

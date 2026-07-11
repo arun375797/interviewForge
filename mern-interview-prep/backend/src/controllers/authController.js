@@ -13,7 +13,36 @@ function toPublicUser(user) {
     name: user.name,
     avatar: user.avatar || null,
     isAdmin: isAdminEmail(user.email),
+    isBlocked: Boolean(user.isBlocked),
   };
+}
+
+function toManagedUser(user) {
+  return {
+    id: user._id,
+    email: user.email,
+    name: user.name,
+    avatar: user.avatar || null,
+    authProvider: user.authProvider || 'local',
+    isAdmin: isAdminEmail(user.email),
+    isBlocked: Boolean(user.isBlocked),
+    lastLoginAt: user.lastLoginAt || null,
+    loginCount: user.loginCount || 0,
+    createdAt: user.createdAt,
+  };
+}
+
+async function rejectIfBlocked(user, res) {
+  if (isAdminEmail(user?.email)) return false;
+  if (!user?.isBlocked) return false;
+  res.status(403).json({ message: 'Your account has been blocked' });
+  return true;
+}
+
+async function recordLogin(user) {
+  user.lastLoginAt = new Date();
+  user.loginCount = (user.loginCount || 0) + 1;
+  await user.save();
 }
 
 function signToken(user) {
@@ -49,7 +78,13 @@ exports.login = async (req, res) => {
     if (!user || !user.password || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
+    if (await rejectIfBlocked(user, res)) return;
+    if (user.isBlocked && isAdminEmail(user.email)) {
+      user.isBlocked = false;
+      await user.save();
+    }
 
+    await recordLogin(user);
     const token = signToken(user);
     res.json({
       token,
@@ -64,6 +99,7 @@ exports.me = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     if (!user) return res.status(404).json({ message: 'User not found' });
+    if (await rejectIfBlocked(user, res)) return;
     res.json(toPublicUser(user));
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -104,6 +140,10 @@ exports.googleLogin = async (req, res) => {
     let user = await User.findOne({ $or: [{ googleId }, { email }] });
 
     if (user) {
+      if (await rejectIfBlocked(user, res)) return;
+      if (user.isBlocked && isAdminEmail(user.email)) {
+        user.isBlocked = false;
+      }
       if (!user.googleId) {
         user.googleId = googleId;
         user.authProvider = user.password ? 'local' : 'google';
@@ -121,6 +161,7 @@ exports.googleLogin = async (req, res) => {
       });
     }
 
+    await recordLogin(user);
     const token = signToken(user);
     res.json({
       token,
@@ -141,20 +182,12 @@ exports.protect = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET());
-    // Prefer claims from a valid JWT — skip an extra User.findById on every request.
-    // /auth/me still loads the live user document when needed.
-    if (decoded.id && decoded.email) {
-      req.user = {
-        id: decoded.id,
-        email: decoded.email,
-        isAdmin: isAdminEmail(decoded.email),
-      };
-      return next();
-    }
-
-    const user = await User.findById(decoded.id).select('_id email').lean();
+    const user = await User.findById(decoded.id).select('_id email isBlocked').lean();
     if (!user) {
       return res.status(401).json({ message: 'User no longer exists' });
+    }
+    if (user.isBlocked && !isAdminEmail(user.email)) {
+      return res.status(403).json({ message: 'Your account has been blocked' });
     }
 
     req.user = {
@@ -173,6 +206,39 @@ exports.requireAdmin = (req, res, next) => {
     return res.status(403).json({ message: 'Admin access required' });
   }
   return next();
+};
+
+exports.listUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+      .select('-password')
+      .sort({ lastLoginAt: -1, createdAt: -1 })
+      .lean();
+    res.json(users.map(toManagedUser));
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.setUserBlocked = async (req, res) => {
+  try {
+    const blocked = req.body.blocked === true;
+    const user = await User.findById(req.params.id).select('-password');
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (isAdminEmail(user.email)) {
+      return res.status(403).json({ message: 'Admin accounts cannot be blocked' });
+    }
+    if (String(user._id) === String(req.user.id) && blocked) {
+      return res.status(403).json({ message: 'You cannot block your own account' });
+    }
+
+    user.isBlocked = blocked;
+    await user.save();
+    res.json(toManagedUser(user));
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 /** Create/update the single admin account from env (or defaults). */

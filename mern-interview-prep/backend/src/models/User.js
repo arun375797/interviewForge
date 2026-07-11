@@ -29,6 +29,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'Admin',
     },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    lastLoginAt: Date,
+    loginCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
