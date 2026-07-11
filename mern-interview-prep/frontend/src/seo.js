@@ -197,11 +197,14 @@ function routeSeo(pathname) {
     };
   }
 
-  if (section === 'bookmarks' || section === 'plan' || section === 'add' || section === 'admin') {
+  if (section === 'bookmarks' || section === 'plan' || section === 'add' || section === 'admin' || section === 'ide' || section === 'notebook') {
     return {
       ...base,
-      title: `${cleanSegment(section)} | ${SITE_NAME}`,
-      description: 'Private study workspace for saved progress and admin tools.',
+      title: section === 'ide' ? `IDE Workspace | ${SITE_NAME}` : `${cleanSegment(section)} | ${SITE_NAME}`,
+      description:
+        section === 'ide'
+          ? 'Free-play IDE for JavaScript, MongoDB queries, and Node/Express route practice.'
+          : 'Private study workspace for saved progress and admin tools.',
       indexable: false,
     };
   }

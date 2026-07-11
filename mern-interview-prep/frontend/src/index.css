@@ -13,6 +13,97 @@
   --color-accent-2: #c2410c;
   --color-line: #d6cfc0;
   --color-muted: #5c6578;
+  --color-brand-1: #071b45;
+  --color-brand-2: #08c999;
+  --color-surface: #fffcf6;
+  --color-header: #f7f3eb;
+}
+
+/* Paper defaults — also used before JS hydrates */
+:root,
+[data-theme="paper"] {
+  --color-ink: #0c1222;
+  --color-ink-soft: #1a2336;
+  --color-paper: #f3efe6;
+  --color-paper-2: #e8e1d4;
+  --color-accent: #0f766e;
+  --color-accent-2: #c2410c;
+  --color-line: #d6cfc0;
+  --color-muted: #5c6578;
+  --color-brand-1: #071b45;
+  --color-brand-2: #08c999;
+  --color-surface: #fffcf6;
+  --color-header: #f7f3eb;
+  --glass-bg: rgba(255, 252, 246, 0.78);
+  --glass-border: rgba(214, 207, 192, 0.9);
+  --skeleton-from: #e8e1d4;
+  --skeleton-mid: #f3efe6;
+  --selection-bg: rgba(15, 118, 110, 0.25);
+  --login-glow: radial-gradient(900px 500px at 15% 10%, rgba(15, 118, 110, 0.18), transparent 55%),
+    radial-gradient(700px 420px at 90% 0%, rgba(194, 65, 12, 0.14), transparent 50%);
+  --body-bg: radial-gradient(1200px 600px at 10% -10%, rgba(15, 118, 110, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(194, 65, 12, 0.10), transparent 50%),
+    linear-gradient(180deg, #f7f3eb 0%, #efe8db 45%, #e9e2d4 100%);
+}
+
+/* Night — OLED black, inspired by GitHub / Linear / Vercel dark */
+[data-theme="night"] {
+  color-scheme: dark;
+  --color-ink: #f0f6fc;
+  --color-ink-soft: #c9d1d9;
+  --color-paper: #111111;
+  --color-paper-2: #1a1a1a;
+  --color-accent: #58a6ff;
+  --color-accent-2: #ffa657;
+  --color-line: #30363d;
+  --color-muted: #8b949e;
+  --color-brand-1: #f0f6fc;
+  --color-brand-2: #3fb950;
+  --color-surface: #111111;
+  --color-header: #000000;
+  --glass-bg: rgba(17, 17, 17, 0.92);
+  --glass-border: rgba(48, 54, 61, 0.95);
+  --skeleton-from: #1a1a1a;
+  --skeleton-mid: #262626;
+  --selection-bg: rgba(88, 166, 255, 0.28);
+  --login-glow: none;
+  --body-bg: #000000;
+}
+
+/* Jellyfish — colorful coder theme */
+[data-theme="jellyfish"] {
+  --color-ink: #ede9fe;
+  --color-ink-soft: #ddd6fe;
+  --color-paper: #1a1035;
+  --color-paper-2: #241548;
+  --color-accent: #ff6bcb;
+  --color-accent-2: #00e5ff;
+  --color-line: #3d2a6b;
+  --color-muted: #a78bfa;
+  --color-brand-1: #e9d5ff;
+  --color-brand-2: #f472b6;
+  --color-surface: #1f1240;
+  --color-header: #150d2e;
+  --glass-bg: rgba(31, 18, 64, 0.82);
+  --glass-border: rgba(124, 58, 237, 0.35);
+  --skeleton-from: #241548;
+  --skeleton-mid: #2d1a5c;
+  --selection-bg: rgba(255, 107, 203, 0.28);
+  --login-glow: radial-gradient(900px 500px at 10% 5%, rgba(255, 107, 203, 0.22), transparent 55%),
+    radial-gradient(700px 420px at 95% 0%, rgba(0, 229, 255, 0.18), transparent 50%),
+    radial-gradient(600px 400px at 50% 100%, rgba(167, 139, 250, 0.14), transparent 55%);
+  --body-bg: radial-gradient(1000px 560px at 5% -5%, rgba(255, 107, 203, 0.16), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(0, 229, 255, 0.14), transparent 50%),
+    radial-gradient(700px 450px at 50% 100%, rgba(167, 139, 250, 0.12), transparent 55%),
+    linear-gradient(180deg, #120a28 0%, #1a1035 45%, #150d2e 100%);
+}
+
+/* Night canvas — force true black on every layer */
+html[data-theme="night"],
+html[data-theme="night"] body,
+html[data-theme="night"] #root,
+html[data-theme="night"] .bg-body {
+  background-color: #000000;
 }
 
 @layer base {
@@ -26,14 +117,18 @@
     overflow-x: hidden;
     scroll-behavior: smooth;
     text-size-adjust: 100%;
+    background: var(--body-bg);
   }
 
   body {
     @apply m-0 min-h-screen overflow-x-hidden font-sans text-ink antialiased;
-    background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(15, 118, 110, 0.12), transparent 55%),
-      radial-gradient(900px 500px at 100% 0%, rgba(194, 65, 12, 0.10), transparent 50%),
-      linear-gradient(180deg, #f7f3eb 0%, #efe8db 45%, #e9e2d4 100%);
+    background: var(--body-bg);
+    transition: background-color 0.3s ease, color 0.25s ease;
+  }
+
+  #root {
+    min-height: 100vh;
+    background: inherit;
   }
 
   button,
@@ -56,7 +151,7 @@
   }
 
   ::selection {
-    background: rgba(15, 118, 110, 0.25);
+    background: var(--selection-bg);
   }
 }
 
@@ -70,9 +165,37 @@
   }
 
   .glass-panel {
-    background: rgba(255, 252, 246, 0.78);
-    border: 1px solid rgba(214, 207, 192, 0.9);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(14px);
+  }
+
+  .bg-header {
+    background-color: color-mix(in srgb, var(--color-header) 90%, transparent);
+  }
+
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+
+  .text-brand-1 {
+    color: var(--color-brand-1);
+  }
+
+  .text-brand-2 {
+    color: var(--color-brand-2);
+  }
+
+  .login-glow {
+    background: var(--login-glow);
+  }
+
+  .bg-body {
+    background: var(--body-bg);
+  }
+
+  [data-theme="night"] .login-glow {
+    display: none;
   }
 
   .text-balance {
@@ -134,7 +257,156 @@
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #e8e1d4 25%, #f3efe6 50%, #e8e1d4 75%);
+  background: linear-gradient(90deg, var(--skeleton-from) 25%, var(--skeleton-mid) 50%, var(--skeleton-from) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* Notebook rich editor */
+.notebook-prose {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+.notebook-prose p {
+  margin: 0.65rem 0;
+}
+
+.notebook-prose h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--color-ink);
+}
+
+.notebook-prose h3 {
+  margin: 1rem 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-ink);
+}
+
+.notebook-prose ul,
+.notebook-prose ol {
+  margin: 0.65rem 0;
+  padding-left: 1.35rem;
+}
+
+.notebook-prose li {
+  margin: 0.25rem 0;
+}
+
+.notebook-prose blockquote {
+  margin: 0.85rem 0;
+  padding: 0.35rem 0 0.35rem 1rem;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-muted);
+}
+
+.notebook-prose mark {
+  border-radius: 0.2rem;
+  background: rgba(251, 191, 36, 0.45);
+  padding: 0.05rem 0.15rem;
+}
+
+.notebook-prose hr {
+  margin: 1.25rem 0;
+  border: none;
+  border-top: 1px solid var(--color-line);
+}
+
+.notebook-prose p.is-editor-empty:first-child::before {
+  color: color-mix(in srgb, var(--color-muted) 65%, transparent);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* VS Code–style code blocks (Notion-like) */
+.notebook-editor pre.notebook-code-block,
+.notebook-prose pre.notebook-code-block {
+  margin: 1rem 0;
+  overflow-x: auto;
+  border-radius: 0.85rem;
+  border: 1px solid #2d2d2d;
+  background: #1e1e1e;
+  padding: 1rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #d4d4d4;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.notebook-editor pre.notebook-code-block code,
+.notebook-prose pre.notebook-code-block code {
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.notebook-code-block .hljs-keyword,
+.notebook-code-block .hljs-selector-tag,
+.notebook-code-block .hljs-built_in {
+  color: #569cd6;
+}
+
+.notebook-code-block .hljs-string,
+.notebook-code-block .hljs-attr,
+.notebook-code-block .hljs-attribute {
+  color: #ce9178;
+}
+
+.notebook-code-block .hljs-number,
+.notebook-code-block .hljs-literal {
+  color: #b5cea8;
+}
+
+.notebook-code-block .hljs-comment,
+.notebook-code-block .hljs-quote {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.notebook-code-block .hljs-function,
+.notebook-code-block .hljs-title.function_ {
+  color: #dcdcaa;
+}
+
+.notebook-code-block .hljs-variable,
+.notebook-code-block .hljs-params {
+  color: #9cdcfe;
+}
+
+.notebook-code-block .hljs-type,
+.notebook-code-block .hljs-class .hljs-title {
+  color: #4ec9b0;
+}
+
+.notebook-code-block .hljs-meta,
+.notebook-code-block .hljs-regexp {
+  color: #d16969;
+}
+
+.notebook-code-block .hljs-tag,
+.notebook-code-block .hljs-name {
+  color: #569cd6;
+}
+
+.notebook-code-block .hljs-selector-class,
+.notebook-code-block .hljs-selector-id {
+  color: #d7ba7d;
+}
+
+.ide-editor-shell {
+  border-top: 1px solid color-mix(in srgb, var(--color-line) 45%, transparent);
+}
+
+.ide-editor-shell .monaco-editor,
+.ide-editor-shell .monaco-editor-background,
+.ide-editor-shell .monaco-editor .margin {
+  background-color: #12100c !important;
 }

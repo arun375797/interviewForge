@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './components/Home';
@@ -21,6 +22,9 @@ const Code = lazy(() => import('./components/Code'));
 const CodeSubject = lazy(() => import('./components/CodeSubject'));
 const CodeWorkspace = lazy(() => import('./components/CodeWorkspace'));
 const PlanStudy = lazy(() => import('./components/PlanStudy'));
+const NotebookList = lazy(() => import('./components/NotebookList'));
+const NotebookView = lazy(() => import('./components/NotebookView'));
+const Ide = lazy(() => import('./components/Ide'));
 const NotFound = lazy(() => import('./components/NotFound'));
 
 function PageFallback() {
@@ -109,10 +113,14 @@ function AppRoutes() {
                     <Route path="/code" element={<Code />} />
                     <Route path="/code/:subject" element={<CodeSubject />} />
                     <Route path="/code/:subject/:id" element={<CodeWorkspace />} />
+                    <Route path="/ide" element={<Ide />} />
                     <Route path="/plan" element={<PlanStudy />} />
                     <Route path="/practice" element={<Practice />} />
                     <Route path="/mock" element={<Mock />} />
                     <Route path="/bookmarks" element={<Bookmarks />} />
+                    <Route path="/notebook" element={<NotebookList />} />
+                    <Route path="/notebook/:notebookId" element={<NotebookView />} />
+                    <Route path="/notebook/:notebookId/page/:pageId" element={<NotebookView />} />
                     <Route path="/add" element={<AddQuestion />} />
                     <Route path="/admin" element={<AdminAnswers />} />
                     <Route path="/login" element={<Navigate to="/" replace />} />
@@ -131,9 +139,11 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

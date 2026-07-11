@@ -187,6 +187,29 @@ export const api = {
   },
   startPlan: (body) => request('/plans/start', { method: 'POST', body: JSON.stringify(body) }),
   disablePlan: (id) => request(`/plans/${id}/disable`, { method: 'PATCH' }),
+  getNotebooks: () => request('/notebooks'),
+  createNotebook: (body) =>
+    request('/notebooks', { method: 'POST', body: JSON.stringify(body) }),
+  getNotebook: (id) => request(`/notebooks/${id}`),
+  updateNotebook: (id, body) =>
+    request(`/notebooks/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
+  deleteNotebook: (id) => request(`/notebooks/${id}`, { method: 'DELETE' }),
+  createNotebookPage: (notebookId, body) =>
+    request(`/notebooks/${notebookId}/pages`, { method: 'POST', body: JSON.stringify(body) }),
+  getNotebookPage: (notebookId, pageId) =>
+    request(`/notebooks/${notebookId}/pages/${pageId}`),
+  updateNotebookPage: (notebookId, pageId, body) =>
+    request(`/notebooks/${notebookId}/pages/${pageId}`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }),
+  deleteNotebookPage: (notebookId, pageId) =>
+    request(`/notebooks/${notebookId}/pages/${pageId}`, { method: 'DELETE' }),
+  getIdeInfo: () => request('/ide/info'),
+  runIdeCode: (body) =>
+    request('/ide/run', { method: 'POST', body: JSON.stringify(body), cache: 'no-store' }),
+  resetIdeSandbox: () =>
+    request('/ide/reset', { method: 'POST', cache: 'no-store' }),
 };
 
 export const SUBJECT_META = {

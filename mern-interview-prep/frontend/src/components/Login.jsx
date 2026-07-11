@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Login() {
   const { login, isAuthenticated, booting } = useAuth();
+  const { theme, themes, setTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -34,14 +36,32 @@ export default function Login() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center px-4 py-10">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-80"
-        style={{
-          background:
-            'radial-gradient(900px 500px at 15% 10%, rgba(15,118,110,0.18), transparent 55%), radial-gradient(700px 420px at 90% 0%, rgba(194,65,12,0.14), transparent 50%)',
-        }}
-      />
+    <div className="relative flex min-h-screen items-center justify-center bg-body px-4 py-10">
+      <div className="pointer-events-none absolute inset-0 opacity-80 login-glow" />
+
+      <div className="absolute right-4 top-4 z-10 flex gap-1 rounded-xl border border-line bg-surface p-1 shadow-lg sm:right-6 sm:top-6">
+        {themes.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            title={item.label}
+            onClick={() => setTheme(item.id)}
+            className={`rounded-lg p-2 transition ${
+              theme === item.id ? 'bg-paper-2 text-ink' : 'text-muted hover:bg-paper-2 hover:text-ink'
+            }`}
+          >
+            <span className="flex gap-0.5">
+              {item.preview.map((color) => (
+                <span
+                  key={color}
+                  className="h-3 w-3 rounded-full border border-line/60"
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </span>
+          </button>
+        ))}
+      </div>
 
       <div className="relative w-full max-w-md animate-rise">
         <div className="mb-8 text-center">

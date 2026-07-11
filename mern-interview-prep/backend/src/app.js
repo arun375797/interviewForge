@@ -7,6 +7,8 @@ const connectDB = require('./config/db');
 const questionRoutes = require('./routes/questions');
 const authRoutes = require('./routes/auth');
 const planRoutes = require('./routes/plans');
+const notebookRoutes = require('./routes/notebooks');
+const ideRoutes = require('./routes/ide');
 const { ensureSeeded } = require('./utils/seed');
 const { ensureAdminUser, protect } = require('./controllers/authController');
 
@@ -114,11 +116,15 @@ function createApp() {
   app.use('/api/auth', authRoutes);
   app.use('/api/questions', protect, questionRoutes);
   app.use('/api/plans', protect, planRoutes);
+  app.use('/api/notebooks', protect, notebookRoutes);
+  app.use('/api/ide', protect, ideRoutes);
 
   // Aliases if VITE_API_URL was set without /api
   app.use('/auth', authRoutes);
   app.use('/questions', protect, questionRoutes);
   app.use('/plans', protect, planRoutes);
+  app.use('/notebooks', protect, notebookRoutes);
+  app.use('/ide', protect, ideRoutes);
 
   if (isProd && !onVercel && process.env.SERVE_FRONTEND === 'true') {
     const frontendDist = path.join(__dirname, '../../frontend/dist');

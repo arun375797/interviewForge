@@ -122,7 +122,7 @@ export default function QuestionDetail({ question, onClose, onUpdated, onDeleted
         className="absolute inset-0 bg-ink/45 backdrop-blur-[2px]"
         onClick={closeDetail}
       />
-      <div className="animate-rise relative z-10 flex h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-line bg-[#fffcf6] shadow-2xl sm:h-auto sm:max-h-[92dvh] sm:rounded-3xl">
+      <div className="animate-rise relative z-10 flex h-[94dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl border border-line bg-surface shadow-2xl sm:h-auto sm:max-h-[92dvh] sm:rounded-3xl">
         <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
           <div className="min-w-0">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">

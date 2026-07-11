@@ -8,8 +8,8 @@ export default function NotFound() {
       <p className="mt-2 text-sm text-muted">
         That route doesn&apos;t exist in{' '}
         <span className="font-semibold">
-          <span className="text-[#071b45]">think</span>
-          <span className="text-[#08c999]">Mern</span>
+          <span className="text-brand-1">think</span>
+          <span className="text-brand-2">Mern</span>
         </span>
         .
       </p>
