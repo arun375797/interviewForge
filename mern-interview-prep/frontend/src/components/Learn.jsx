@@ -5,6 +5,7 @@ import { api, SUBJECT_META } from '../api';
 
 const LANGUAGE_OPTIONS = [
   { key: 'javascript', label: 'JavaScript' },
+  { key: 'mongodb', label: 'MongoDB' },
   { key: 'react', label: 'React' },
   { key: 'nodejs', label: 'Node.js' },
   { key: 'dsa', label: 'DSA' },

@@ -13,6 +13,8 @@ const {
 const DESCRIPTIONS = {
   javascript:
     'Core JavaScript interview questions — language fundamentals to async, DOM, and patterns.',
+  mongodb:
+    'MongoDB interview questions — documents, CRUD, indexes, aggregation, modeling, and operations.',
   react: 'React interview questions — components, hooks, Redux, performance, and modern patterns.',
   nodejs: 'Node.js & Express interview questions — runtime, APIs, middleware, security, and scaling.',
   dsa: 'Data Structures & Algorithms — complexity, arrays to graphs, with interview-ready explanations.',

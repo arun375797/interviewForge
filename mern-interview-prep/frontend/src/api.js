@@ -170,11 +170,11 @@ export const api = {
     ).toString();
     return request(`/questions/random/batch${q ? `?${q}` : ''}`, { cache: 'no-store' });
   },
-  getQuestions: (params = {}) => {
+  getQuestions: (params = {}, options = {}) => {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions?${q}`);
+    return request(`/questions?${q}`, options);
   },
   getQuestion: (id) => request(`/questions/${id}`),
   createQuestion: (body) =>
@@ -211,11 +211,11 @@ export const api = {
     ).toString();
     return request(`/questions/code/topics${q ? `?${q}` : ''}`);
   },
-  getCodeQuestions: (params = {}) => {
+  getCodeQuestions: (params = {}, options = {}) => {
     const q = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
     ).toString();
-    return request(`/questions/code${q ? `?${q}` : ''}`);
+    return request(`/questions/code${q ? `?${q}` : ''}`, options);
   },
   getCodeQuestion: (id) => request(`/questions/code/${id}`),
   toggleCodeCompleted: (id) => request(`/questions/code/${id}/completed`, { method: 'PATCH' }),
@@ -326,6 +326,12 @@ export const SUBJECT_META = {
     short: 'JS',
     accent: '#CA8A04',
     blurb: 'Language fundamentals, async, DOM & patterns',
+  },
+  mongodb: {
+    label: 'MongoDB',
+    short: 'Mongo',
+    accent: '#0F766E',
+    blurb: 'Documents, queries, indexes & aggregation',
   },
   react: {
     label: 'React',

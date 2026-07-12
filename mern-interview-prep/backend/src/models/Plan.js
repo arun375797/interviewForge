@@ -25,7 +25,7 @@ const planSchema = new mongoose.Schema(
     },
     subject: {
       type: String,
-      enum: ['javascript', 'react', 'nodejs', 'dsa'],
+      enum: ['javascript', 'mongodb', 'react', 'nodejs', 'dsa'],
       required: true,
       index: true,
     },

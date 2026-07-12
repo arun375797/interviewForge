@@ -25,10 +25,10 @@ import {
 } from '../utils/typingEngine';
 
 const STATUS_CLASS = {
-  correct: 'text-teal-600',
-  incorrect: 'bg-rose-500/20 text-rose-700 underline decoration-rose-500',
-  current: 'bg-accent/25 text-ink border-b-2 border-accent',
-  pending: 'text-muted/50',
+  correct: 'typing-char-correct',
+  incorrect: 'typing-char-incorrect',
+  current: 'typing-char-current',
+  pending: 'typing-char-pending',
 };
 
 function formatLineBreak(isLast) {
@@ -42,7 +42,7 @@ const TargetText = memo(function TargetText({ target, typed }) {
 
   return (
     <div
-      className="overflow-anywhere whitespace-pre-wrap break-words font-mono text-sm leading-relaxed sm:text-base"
+      className="overflow-anywhere whitespace-pre-wrap break-words font-mono text-base leading-relaxed tracking-wide sm:text-lg sm:leading-8"
       aria-hidden
     >
       {targetLines.map((line, lineIdx) => {
@@ -362,31 +362,32 @@ export default function Typing() {
           </button>
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-line bg-[#12100c] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] focus-within:ring-2 focus-within:ring-accent/60">
-          <div className="flex items-center justify-between border-b border-white/10 bg-[#1a1714] px-4 py-2">
-            <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted/70">
+        <div className="typing-editor overflow-hidden rounded-xl border focus-within:ring-2 focus-within:ring-accent/60">
+          <div className="typing-editor-chrome flex items-center justify-between border-b px-4 py-2">
+            <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em]">
               Full answer
             </span>
-            <span className="font-mono text-[0.65rem] text-muted/50">
+            <span className="font-mono text-[0.65rem] opacity-70">
               {snippet.text.split('\n').length} lines
             </span>
           </div>
 
           <div
-            className={`max-h-[20rem] overflow-y-auto border-b border-white/10 p-4 sm:max-h-[28rem] sm:p-5 ${
+            className={`max-h-[20rem] overflow-y-auto border-b p-4 sm:max-h-[28rem] sm:p-5 ${
               isCodeCategory ? 'font-mono' : 'font-sans'
-            } text-[#f7f3eb]`}
+            }`}
+            style={{ borderColor: 'var(--typing-chrome-border)', color: 'var(--ide-editor-fg)' }}
             onClick={() => inputRef.current?.focus()}
             role="presentation"
           >
             <TargetText target={snippet.text} typed={typed} />
           </div>
 
-          <div className="flex items-center justify-between border-b border-white/10 bg-[#1a1714] px-4 py-2">
+          <div className="typing-editor-chrome flex items-center justify-between border-b px-4 py-2">
             <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-accent">
               Your input
             </span>
-            <span className="font-mono text-[0.65rem] text-muted/50">
+            <span className="font-mono text-[0.65rem] opacity-70">
               Tab → next question
             </span>
           </div>
@@ -401,9 +402,10 @@ export default function Typing() {
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="off"
-            className={`min-h-[16rem] w-full resize-y border-0 bg-transparent px-4 py-4 font-mono text-sm leading-relaxed text-[#f7f3eb] outline-none placeholder:text-muted/40 disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[20rem] sm:px-5 sm:py-5 sm:text-base sm:leading-7 lg:min-h-[24rem] ${
+            className={`min-h-[16rem] w-full resize-y border-0 bg-transparent px-4 py-4 font-mono text-sm leading-relaxed outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[20rem] sm:px-5 sm:py-5 sm:text-base sm:leading-7 lg:min-h-[24rem] ${
               isCodeCategory ? '' : 'font-sans'
             }`}
+            style={{ color: 'var(--ide-editor-fg)' }}
             placeholder={
               finished
                 ? 'Session complete — try the next question'
@@ -421,12 +423,13 @@ export default function Typing() {
 
       {finished && (
         <div
-          className="glass-panel rounded-2xl border border-teal-200 bg-teal-50/80 p-5 sm:rounded-3xl"
+          className="glass-panel rounded-2xl border border-accent/30 bg-accent/10 p-5 sm:rounded-3xl"
           role="status"
         >
-          <p className="font-display text-xl font-semibold text-teal-900">Session complete</p>
-          <p className="mt-2 text-sm text-teal-900/90">
-            You typed at <strong>{wpm} WPM</strong> with <strong>{accuracy}% accuracy</strong>
+          <p className="font-display text-xl font-semibold text-ink">Session complete</p>
+          <p className="mt-2 text-sm text-muted">
+            You typed at <strong className="text-ink">{wpm} WPM</strong> with{' '}
+            <strong className="text-ink">{accuracy}% accuracy</strong>
             {bestWpm === wpm && wpm > 0 ? ' — new personal best for this category!' : '.'}
           </p>
           <button

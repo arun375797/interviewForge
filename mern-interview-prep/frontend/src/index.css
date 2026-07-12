@@ -47,6 +47,14 @@
   --ide-editor-bg: #12100c;
   --ide-editor-fg: #f7f3eb;
   --ide-editor-gutter: #6b6560;
+  --typing-pending: rgba(247, 243, 235, 0.72);
+  --typing-correct: #2dd4bf;
+  --typing-incorrect: #fb7185;
+  --typing-incorrect-bg: rgba(251, 113, 133, 0.35);
+  --typing-current: #ffffff;
+  --typing-current-bg: rgba(45, 212, 191, 0.45);
+  --typing-chrome: #1a1714;
+  --typing-chrome-border: rgba(255, 255, 255, 0.12);
 }
 
 /* Night — OLED black, inspired by GitHub / Linear / Vercel dark */
@@ -74,6 +82,14 @@
   --ide-editor-bg: #0a0a0a;
   --ide-editor-fg: #f0f6fc;
   --ide-editor-gutter: #484f58;
+  --typing-pending: rgba(240, 246, 252, 0.7);
+  --typing-correct: #56d364;
+  --typing-incorrect: #ff7b72;
+  --typing-incorrect-bg: rgba(255, 123, 114, 0.35);
+  --typing-current: #ffffff;
+  --typing-current-bg: rgba(88, 166, 255, 0.45);
+  --typing-chrome: #111111;
+  --typing-chrome-border: rgba(48, 54, 61, 0.95);
 }
 
 /* Jellyfish — colorful coder theme */
@@ -105,6 +121,14 @@
   --ide-editor-bg: #120a28;
   --ide-editor-fg: #ede9fe;
   --ide-editor-gutter: #6d5cae;
+  --typing-pending: rgba(237, 233, 254, 0.72);
+  --typing-correct: #4ade80;
+  --typing-incorrect: #fb7185;
+  --typing-incorrect-bg: rgba(251, 113, 133, 0.38);
+  --typing-current: #ffffff;
+  --typing-current-bg: rgba(255, 107, 203, 0.45);
+  --typing-chrome: #1a1035;
+  --typing-chrome-border: rgba(124, 58, 237, 0.35);
 }
 
 /* Theme canvas — keep the full viewport filled on every theme */
@@ -425,6 +449,50 @@ html[data-theme="night"] .bg-body {
 .notebook-code-block .hljs-selector-class,
 .notebook-code-block .hljs-selector-id {
   color: #d7ba7d;
+}
+
+.typing-editor {
+  background: var(--ide-editor-bg);
+  color: var(--ide-editor-fg);
+  border-color: var(--typing-chrome-border);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ide-editor-fg) 6%, transparent);
+}
+
+.typing-editor-chrome {
+  background: var(--typing-chrome);
+  border-color: var(--typing-chrome-border);
+  color: var(--typing-pending);
+}
+
+.typing-char-pending {
+  color: var(--typing-pending);
+}
+
+.typing-char-correct {
+  color: var(--typing-correct);
+  font-weight: 600;
+}
+
+.typing-char-incorrect {
+  color: var(--typing-incorrect);
+  background: var(--typing-incorrect-bg);
+  text-decoration: underline;
+  text-decoration-color: var(--typing-incorrect);
+  text-decoration-thickness: 2px;
+  font-weight: 600;
+}
+
+.typing-char-current {
+  color: var(--typing-current);
+  background: var(--typing-current-bg);
+  border-bottom: 2px solid var(--color-accent);
+  border-radius: 2px;
+  font-weight: 700;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+.typing-editor textarea::placeholder {
+  color: var(--typing-pending);
 }
 
 .ide-editor-shell {

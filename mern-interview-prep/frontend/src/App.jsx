@@ -19,6 +19,7 @@ const Mock = lazy(() => import('./components/Mock'));
 const Bookmarks = lazy(() => import('./components/Bookmarks'));
 const AddQuestion = lazy(() => import('./components/AddQuestion'));
 const AdminAnswers = lazy(() => import('./components/AdminAnswers'));
+const QuestionManagement = lazy(() => import('./components/QuestionManagement'));
 const UserManagement = lazy(() => import('./components/UserManagement'));
 const Learn = lazy(() => import('./components/Learn'));
 const LearnSubject = lazy(() => import('./components/LearnSubject'));
@@ -140,6 +141,14 @@ function AppRoutes() {
                       element={
                         <AdminRoute>
                           <AddQuestion />
+                        </AdminRoute>
+                      }
+                    />
+                    <Route
+                      path="/admin/questions"
+                      element={
+                        <AdminRoute>
+                          <QuestionManagement />
                         </AdminRoute>
                       }
                     />

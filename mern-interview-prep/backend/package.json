@@ -10,6 +10,8 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "seed": "node src/utils/seed.js",
+    "reorganize-subjects": "node src/utils/reorganizeSubjects.js",
+    "clean-js-dsa": "node src/utils/cleanJsDsaOverlap.js",
     "refresh-answers": "node src/utils/refreshAnswers.js",
     "upsert-code-practice": "node src/utils/upsertCodePracticeQuestions.js"
   },

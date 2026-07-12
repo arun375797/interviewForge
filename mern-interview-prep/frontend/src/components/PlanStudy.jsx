@@ -5,7 +5,7 @@ import { api, SUBJECT_META } from '../api';
 import QuestionDetail from './QuestionDetail';
 
 const PLAN_DAYS = [3, 5, 10, 15];
-const STUDY_LANGUAGES = ['javascript', 'react', 'nodejs', 'dsa'];
+const STUDY_LANGUAGES = ['javascript', 'mongodb', 'react', 'nodejs', 'dsa'];
 const CODE_LANGUAGES = ['javascript', 'dsa'];
 
 function formatDate(value) {

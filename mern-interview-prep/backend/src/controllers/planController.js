@@ -11,7 +11,7 @@ const { getProgressOwnerId } = require('../utils/progressScope');
 
 const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 const PLAN_DAYS = [3, 5, 10, 15];
-const STUDY_SUBJECTS = ['javascript', 'react', 'nodejs', 'dsa'];
+const STUDY_SUBJECTS = ['javascript', 'mongodb', 'react', 'nodejs', 'dsa'];
 
 function startOfToday() {
   const date = new Date();
@@ -71,7 +71,7 @@ function validateStartPayload({ mode, subject, days }) {
   if (!['study', 'code'].includes(mode)) return 'mode must be study or code';
   if (!PLAN_DAYS.includes(Number(days))) return 'days must be 3, 5, 10, or 15';
   if (mode === 'study' && !STUDY_SUBJECTS.includes(subject)) {
-    return 'study mode supports javascript, react, nodejs, and dsa';
+    return 'study mode supports javascript, mongodb, react, nodejs, and dsa';
   }
   if (mode === 'code' && !CODE_SUBJECTS.includes(subject)) {
     return 'code mode supports javascript and dsa only';

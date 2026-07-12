@@ -427,6 +427,8 @@ function topicFallback(subject, topic, question) {
   const topicAnswer = {
     javascript:
       'In JavaScript this is connected to runtime behavior, data types, scope, objects, functions, asynchronous execution, or browser APIs. The key is to understand what the engine does, what value is produced, and which edge cases can create unexpected output.',
+    mongodb:
+      'In MongoDB this is connected to documents, collections, queries, indexes, aggregation, schema design, or operational concerns like replication and sharding. The key is to understand how data is stored and retrieved efficiently for the access patterns you need.',
     react:
       'In React this is connected to component rendering, props, state, hooks, routing, global state, or performance. The key is to understand how data flows through components and how React decides when to render and update the UI.',
     nodejs:
