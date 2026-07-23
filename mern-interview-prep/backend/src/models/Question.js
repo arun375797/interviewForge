@@ -4,8 +4,9 @@ const questionSchema = new mongoose.Schema(
   {
     subject: {
       type: String,
-      enum: ['javascript', 'mongodb', 'react', 'nodejs', 'dsa'],
       required: true,
+      trim: true,
+      lowercase: true,
       index: true,
     },
     topic: { type: String, required: true, index: true },

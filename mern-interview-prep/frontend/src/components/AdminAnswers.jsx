@@ -10,7 +10,7 @@ const STUDY_LANGUAGES = Object.entries(SUBJECT_META).map(([key, meta]) => ({
 }));
 
 const CODE_LANGUAGES = STUDY_LANGUAGES.filter((item) =>
-  ['javascript', 'dsa'].includes(item.key)
+  ['javascript', 'dsa', 'nodejs', 'react'].includes(item.key)
 );
 
 const STATUS_FILTERS = [

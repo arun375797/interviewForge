@@ -1,0 +1,2484 @@
+{
+  "meta": {
+    "subject": "nodejs",
+    "count": 61,
+    "source": "mern-interview-prep site data",
+    "generatedAt": "2026-07-12"
+  },
+  "questions": [
+    {
+      "id": "node-node-start-port-79c54186",
+      "topic": "Node.js Fundamentals",
+      "title": "Start a Node.js Application on Port 3000",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a server that reads PORT from the environment, falls back to 3000, and logs the listening URL after startup.",
+      "functionName": "startANodeJsApplicationOn",
+      "starterCode": "const PORT = Number(process.env.PORT) || 3000;\n\n// TODO: create the server and listen on PORT",
+      "sampleInput": {
+        "PORT": null
+      },
+      "expectedOutput": {
+        "listeningPort": 3000
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "node-js-fundamentals",
+        "start",
+        "node",
+        "application",
+        "port",
+        "3000"
+      ],
+      "hint": "Use process.env.PORT and provide a numeric fallback.",
+      "sourceQuestions": [
+        "How to start a nodejs application in port 3000 (practical)"
+      ],
+      "implementationType": "server",
+      "status": "ready"
+    },
+    {
+      "id": "node-module-create-custom-b8fc3e11",
+      "topic": "Modules Fundamentals",
+      "title": "Create and Use a Custom Node.js Module",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a local module that exports an add function and import it from another file.",
+      "functionName": "add",
+      "starterCode": "// math.js\nexport function add(a, b) {\n  // TODO\n}\n\n// app.js\n// TODO: import and call add()",
+      "sampleInput": {
+        "a": 4,
+        "b": 6
+      },
+      "expectedOutput": {
+        "result": 10
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "modules-fundamentals",
+        "create",
+        "and",
+        "use",
+        "custom",
+        "node",
+        "module"
+      ],
+      "hint": "Use named ESM exports or module.exports/require consistently.",
+      "sourceQuestions": [
+        "create custom module"
+      ],
+      "implementationType": "multi-file",
+      "status": "ready"
+    },
+    {
+      "id": "node-npm-install-dev-dependency-4445a0ec",
+      "topic": "Dependencies, devDependencies & node_modules",
+      "title": "Install and Use a Development Dependency",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Initialize a package and install nodemon as a devDependency, then add a dev script that starts the application with nodemon.",
+      "functionName": "installAndUseADevelopmentDependency",
+      "starterCode": "// package.json\n{\n  \"scripts\": {\n    \"dev\": \"TODO\"\n  }\n}",
+      "sampleInput": {
+        "command": "npm install --save-dev nodemon"
+      },
+      "expectedOutput": {
+        "devDependency": "nodemon",
+        "script": "npm run dev"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "dependencies-devdependencies-node-modules",
+        "install",
+        "and",
+        "use",
+        "development",
+        "dependency"
+      ],
+      "hint": "Use npm install -D nodemon and set the dev script to nodemon app.js.",
+      "sourceQuestions": [
+        "Dev dependency installation - P"
+      ],
+      "implementationType": "configuration",
+      "status": "ready"
+    },
+    {
+      "id": "node-env-read-variable-212f6227",
+      "topic": "Environment Variables & Configuration",
+      "title": "Read and Validate Environment Variables",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Read configuration from process.env, convert PORT to a number, and throw a clear startup error when a required value is missing.",
+      "functionName": "readAndValidateEnvironmentVariables",
+      "starterCode": "const PORT = Number(process.env.PORT) || 3000;\nconst DATABASE_URL = process.env.DATABASE_URL;\n\n// TODO: validate configuration",
+      "sampleInput": {
+        "PORT": "4000",
+        "DATABASE_URL": "mongodb://localhost/app"
+      },
+      "expectedOutput": {
+        "PORT": 4000,
+        "configurationValid": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "environment-variables-configuration",
+        "read",
+        "and",
+        "validate",
+        "environment",
+        "variables"
+      ],
+      "hint": "Environment variables are strings; validate and convert them at startup.",
+      "sourceQuestions": [
+        "How to access a value in env file,",
+        "how to access .env variable"
+      ],
+      "implementationType": "configuration",
+      "status": "ready"
+    },
+    {
+      "id": "node-env-set-variable-without-dotenv-d9c44806",
+      "topic": "Environment Variables & Configuration",
+      "title": "Set Environment Variables Without dotenv",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Demonstrate how to set and read an environment variable using the operating-system shell and process.env.",
+      "functionName": "setEnvironmentVariablesWithoutDotenv",
+      "starterCode": "const value = process.env.APP_MODE;\n\n// TODO: validate and print APP_MODE",
+      "sampleInput": {
+        "shell": "APP_MODE=development node app.js"
+      },
+      "expectedOutput": {
+        "APP_MODE": "development"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "environment-variables-configuration",
+        "set",
+        "environment",
+        "variables",
+        "without",
+        "dotenv"
+      ],
+      "hint": "Use platform-appropriate shell syntax or cross-env for portable npm scripts.",
+      "sourceQuestions": [
+        "using environment variables without using .env",
+        "how to set an environment value",
+        "how to create an env variable"
+      ],
+      "implementationType": "configuration",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-create-or-read-file-c9921d8b",
+      "topic": "File System Module",
+      "title": "Create a File If Missing, Otherwise Read It",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "If a file does not exist, create it with default content. If it exists, read and return its content.",
+      "functionName": "createOrRead",
+      "starterCode": "import { readFile, writeFile } from \"node:fs/promises\";\n\nasync function createOrRead(filePath) {\n  // TODO\n}",
+      "sampleInput": {
+        "filePath": "data.txt",
+        "defaultContent": "New file"
+      },
+      "expectedOutput": {
+        "createdOrRead": true,
+        "content": "New file"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "create",
+        "file",
+        "missing",
+        "otherwise",
+        "read"
+      ],
+      "hint": "Attempt readFile() and handle ENOENT by calling writeFile().",
+      "sourceQuestions": [
+        "API endpoint to create a file if not exists else read it"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-create-file-58c411d9",
+      "topic": "File System Module",
+      "title": "Create a File with fs/promises",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a UTF-8 text file asynchronously and avoid overwriting it when it already exists.",
+      "functionName": "createFile",
+      "starterCode": "import { writeFile } from \"node:fs/promises\";\n\nasync function createFile(filePath, content) {\n  // TODO\n}",
+      "sampleInput": {
+        "filePath": "notes.txt",
+        "content": "Node.js notes"
+      },
+      "expectedOutput": {
+        "created": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "create",
+        "file",
+        "with",
+        "promises"
+      ],
+      "hint": "Use the wx flag and handle EEXIST.",
+      "sourceQuestions": [
+        "How to create a file using fs"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-get-read-file-faa1f33d",
+      "topic": "File System Module",
+      "title": "Create a GET Endpoint That Reads a File",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create GET /file that asynchronously reads a UTF-8 file and sends its content. Return 404 when the file is missing.",
+      "functionName": "createAGetEndpointThatReads",
+      "starterCode": "import { readFile } from \"node:fs/promises\";\n\napp.get(\"/file\", async (req, res, next) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/file"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "contentType": "text/plain"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "create",
+        "get",
+        "endpoint",
+        "that",
+        "reads",
+        "file"
+      ],
+      "hint": "Use async/await and distinguish ENOENT from unexpected errors.",
+      "sourceQuestions": [
+        "create http get endpoint to read content from a file"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-create-link-6a7d92da",
+      "topic": "File System Module",
+      "title": "Create a Hard Link with fs.link()",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a hard link from an existing source file to a new destination path and handle an existing destination cleanly.",
+      "functionName": "createHardLink",
+      "starterCode": "import { link } from \"node:fs/promises\";\n\nasync function createHardLink(source, destination) {\n  // TODO\n}",
+      "sampleInput": {
+        "source": "original.txt",
+        "destination": "linked.txt"
+      },
+      "expectedOutput": {
+        "linked": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "create",
+        "hard",
+        "link",
+        "with"
+      ],
+      "hint": "Use fs/promises link(source, destination).",
+      "sourceQuestions": [
+        "fs.link"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-delete-file-db3ff856",
+      "topic": "File System Module",
+      "title": "Delete a File with the FS Module",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Delete a file asynchronously. Return a useful result when the file does not exist.",
+      "functionName": "deleteFile",
+      "starterCode": "import { unlink } from \"node:fs/promises\";\n\nasync function deleteFile(filePath) {\n  // TODO\n}",
+      "sampleInput": {
+        "filePath": "old.txt"
+      },
+      "expectedOutput": {
+        "deleted": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "delete",
+        "file",
+        "with",
+        "the",
+        "module"
+      ],
+      "hint": "Catch ENOENT separately from unexpected errors.",
+      "sourceQuestions": [
+        "fs.unlink",
+        "fs.unlink()",
+        "delete a file using fs"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-operations-workout-21ffebc4",
+      "topic": "File System Module",
+      "title": "Practice Core File-System Operations",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Implement functions to create, read, update, rename, inspect, and delete a UTF-8 file using fs/promises.",
+      "functionName": "practiceCoreFileSystemOperations",
+      "starterCode": "import * as fs from \"node:fs/promises\";\n\n// TODO: implement create, read, update, rename, stat, and remove functions",
+      "sampleInput": {
+        "filePath": "sample.txt",
+        "content": "Hello"
+      },
+      "expectedOutput": {
+        "operationsCompleted": [
+          "create",
+          "read",
+          "update",
+          "rename",
+          "stat",
+          "delete"
+        ]
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "practice",
+        "core",
+        "file",
+        "system",
+        "operations"
+      ],
+      "hint": "Use writeFile, readFile, appendFile, rename, stat, and unlink.",
+      "sourceQuestions": [
+        "fs module practicals",
+        "fs module workout"
+      ],
+      "implementationType": "multi-function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-read-write-files-e0d6a60b",
+      "topic": "File System Module",
+      "title": "Reading & Writing Files (`fs.readFile`, `fs.writeFile`)",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Reading & Writing Files (`fs.readFile`, `fs.writeFile`)",
+      "functionName": "runTask",
+      "starterCode": "import { readFile, writeFile } from \"node:fs/promises\";\n\nasync function runTask() {\n  // TODO: implement\n}\n\nrunTask().catch(console.error);",
+      "sampleInput": {
+        "description": "Use the scenario described in the task."
+      },
+      "expectedOutput": {
+        "description": "The requested behavior is completed without unhandled errors."
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "reading",
+        "writing",
+        "files",
+        "readfile",
+        "writefile"
+      ],
+      "hint": "Break the task into setup, input handling, core logic, and error handling.",
+      "sourceQuestions": [
+        "Reading & Writing Files (`fs.readFile`, `fs.writeFile`)"
+      ],
+      "implementationType": "script",
+      "status": "ready"
+    },
+    {
+      "id": "node-generic-how-to-remove-a-file-in-node-js-7219d563",
+      "topic": "File System Module",
+      "title": "Remove a file in nodejs",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "how to remove a file in nodejs",
+      "functionName": "runTask",
+      "starterCode": "import { readFile, writeFile } from \"node:fs/promises\";\n\nasync function runTask() {\n  // TODO: implement\n}\n\nrunTask().catch(console.error);",
+      "sampleInput": {
+        "input": "Provide a valid input for the requested core-module operation."
+      },
+      "expectedOutput": {
+        "result": "Matches the requested operation."
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "remove",
+        "file",
+        "node"
+      ],
+      "hint": "Break the task into setup, input handling, core logic, and error handling.",
+      "sourceQuestions": [
+        "how to remove a file in nodejs,"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-rename-file-ba2bf813",
+      "topic": "File System Module",
+      "title": "Rename a File",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Rename a file asynchronously from an old path to a new path.",
+      "functionName": "renameFile",
+      "starterCode": "import { rename } from \"node:fs/promises\";\n\nasync function renameFile(oldPath, newPath) {\n  // TODO\n}",
+      "sampleInput": {
+        "oldPath": "old.txt",
+        "newPath": "new.txt"
+      },
+      "expectedOutput": {
+        "renamed": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "rename",
+        "file"
+      ],
+      "hint": "Use fs/promises rename().",
+      "sourceQuestions": [
+        "File System Operations (`fs.stat`, `fs.rename`)",
+        "renaming file"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-write-file-60625527",
+      "topic": "File System Module",
+      "title": "Write Content to a File",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Write UTF-8 text to a file asynchronously and report success or failure.",
+      "functionName": "saveText",
+      "starterCode": "import { writeFile } from \"node:fs/promises\";\n\nasync function saveText(filePath, content) {\n  // TODO\n}",
+      "sampleInput": {
+        "filePath": "sample.txt",
+        "content": "Hello Node.js"
+      },
+      "expectedOutput": {
+        "fileCreated": true,
+        "content": "Hello Node.js"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "write",
+        "content",
+        "file"
+      ],
+      "hint": "Use writeFile(filePath, content, \"utf8\").",
+      "sourceQuestions": [
+        "fs.writeFile()",
+        "write a text to file - p",
+        "write into a file",
+        "write content to a file using fs module",
+        "write content in to a file"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-write-current-datetime-e6f2ca5a",
+      "topic": "File System Module",
+      "title": "Write the Current Date and Time to a File",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Write the current ISO date and time to current-time.txt asynchronously using fs/promises.",
+      "functionName": "writeCurrentTime",
+      "starterCode": "import { writeFile } from \"node:fs/promises\";\n\nasync function writeCurrentTime() {\n  // TODO\n}",
+      "sampleInput": {
+        "file": "current-time.txt"
+      },
+      "expectedOutput": {
+        "fileCreated": true,
+        "contentFormat": "ISO-8601 date-time"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "write",
+        "the",
+        "current",
+        "date",
+        "and",
+        "time",
+        "file"
+      ],
+      "hint": "Use new Date().toISOString() and await writeFile(..., \"utf8\").",
+      "sourceQuestions": [
+        "Write current date and time to a file using fs module",
+        "Write current date into a file using fs module"
+      ],
+      "implementationType": "script",
+      "status": "ready"
+    },
+    {
+      "id": "node-generic-write-to-a-file-using-fs-a5932e1c",
+      "topic": "File System Module",
+      "title": "Write to a file using fs",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Write to a file using fs",
+      "functionName": "runTask",
+      "starterCode": "import { readFile, writeFile } from \"node:fs/promises\";\n\nasync function runTask() {\n  // TODO: implement\n}\n\nrunTask().catch(console.error);",
+      "sampleInput": {
+        "input": "Provide a valid input for the requested core-module operation."
+      },
+      "expectedOutput": {
+        "result": "Matches the requested operation."
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "file-system-module",
+        "write",
+        "file",
+        "using"
+      ],
+      "hint": "Break the task into setup, input handling, core logic, and error handling.",
+      "sourceQuestions": [
+        "Write to a file using fs - P"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-url-parse-7b559621",
+      "topic": "URL Module",
+      "title": "Parse a URL with the WHATWG URL API",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Parse a URL and return its protocol, hostname, port, pathname, and query parameters.",
+      "functionName": "parseUrl",
+      "starterCode": "function parseUrl(value) {\n  const url = new URL(value);\n  // TODO\n}",
+      "sampleInput": {
+        "url": "https://example.com:8080/users?page=2"
+      },
+      "expectedOutput": {
+        "protocol": "https:",
+        "hostname": "example.com",
+        "port": "8080",
+        "pathname": "/users",
+        "query": {
+          "page": "2"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "url-module",
+        "parse",
+        "url",
+        "with",
+        "the",
+        "whatwg",
+        "api"
+      ],
+      "hint": "Use new URL() and Object.fromEntries(url.searchParams).",
+      "sourceQuestions": [
+        "Parse a URL using URL module",
+        "Parse url using url module"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-http-create-server-62843086",
+      "topic": "HTTP Fundamentals",
+      "title": "Create a Basic Node.js HTTP Server",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an HTTP server without Express. Return a JSON response for GET / and return 404 for unknown routes.",
+      "functionName": "createABasicNodeJsHttp",
+      "starterCode": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  // TODO: handle GET / and unknown routes\n});\n\nserver.listen(3000);",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "message": "Hello from Node.js"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "http-fundamentals",
+        "create",
+        "basic",
+        "node",
+        "http",
+        "server"
+      ],
+      "hint": "Check req.method and req.url, set Content-Type, and finish with res.end().",
+      "sourceQuestions": [
+        "Create a basic server using nodejs - P",
+        "nodejs server - p",
+        "Create a server using Node js",
+        "Create a server using http",
+        "Create a server using HTTP - P"
+      ],
+      "implementationType": "server",
+      "status": "ready"
+    },
+    {
+      "id": "node-http-get-send-query-data-08d0210a",
+      "topic": "HTTP Methods",
+      "title": "Send Data with an HTTP GET Request",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a Node.js client request that sends values as URL query parameters and parses the JSON response.",
+      "functionName": "getWithQuery",
+      "starterCode": "import http from \"node:http\";\n\nfunction getWithQuery(baseUrl, params) {\n  // TODO\n}",
+      "sampleInput": {
+        "baseUrl": "http://localhost:3000/sum",
+        "params": {
+          "a": 2,
+          "b": 3
+        }
+      },
+      "expectedOutput": {
+        "requestUrl": "/sum?a=2&b=3",
+        "response": {
+          "sum": 5
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "http-methods",
+        "send",
+        "data",
+        "with",
+        "http",
+        "get",
+        "request"
+      ],
+      "hint": "Build the URL with URL and URLSearchParams; GET requests normally carry data in the URL.",
+      "sourceQuestions": [
+        "How to pass data in GET method",
+        "how to send data in http.get()"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-http-get-endpoint-59a11a38",
+      "topic": "HTTP Request & Response Cycle",
+      "title": "Create an HTTP GET Endpoint",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Handle GET /health with the Node.js http module and return a JSON health response. Return 404 for other routes.",
+      "functionName": "createAnHttpGetEndpoint",
+      "starterCode": "import http from \"node:http\";\n\nconst server = http.createServer((req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/health"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "status": "ok"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "http-request-response-cycle",
+        "create",
+        "http",
+        "get",
+        "endpoint"
+      ],
+      "hint": "Check both req.method and req.url.",
+      "sourceQuestions": [
+        "Http get request creation",
+        "Http get end point creation"
+      ],
+      "implementationType": "server",
+      "status": "ready"
+    },
+    {
+      "id": "node-http-writehead-headers-9105a7f3",
+      "topic": "HTTP Headers & Content Negotiation",
+      "title": "Set HTTP Status and Headers with writeHead()",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a response that uses writeHead() to send status 201 and a JSON Content-Type header, then end the response with JSON data.",
+      "functionName": "sendCreated",
+      "starterCode": "function sendCreated(res, data) {\n  // TODO\n}",
+      "sampleInput": {
+        "data": {
+          "id": 1
+        }
+      },
+      "expectedOutput": {
+        "statusCode": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "http-headers-content-negotiation",
+        "set",
+        "http",
+        "status",
+        "and",
+        "headers",
+        "with",
+        "writehead"
+      ],
+      "hint": "Call writeHead() before res.end().",
+      "sourceQuestions": [
+        "write head"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-arithmetic-divide-endpoint-836e3e2f",
+      "topic": "REST API Fundamentals",
+      "title": "Create a Division API Endpoint",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create GET /divide?a=NUMBER&b=NUMBER. Return the quotient, reject invalid numbers, and reject division by zero.",
+      "functionName": "createADivisionApiEndpoint",
+      "starterCode": "import express from \"express\";\nconst app = express();\n\napp.get(\"/divide\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/divide?a=20&b=4"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "result": 5
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "rest-api-fundamentals",
+        "create",
+        "division",
+        "api",
+        "endpoint"
+      ],
+      "hint": "Validate both values before performing division.",
+      "sourceQuestions": [
+        "api end point to divide 2 numbers,"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-add-numbers-endpoint-01088070",
+      "topic": "REST API Fundamentals",
+      "title": "Create an API to Add Two Numbers",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create POST /sum that accepts JSON with a and b, validates both numbers, and returns their sum.",
+      "functionName": "createAnApiToAddTwo",
+      "starterCode": "app.use(express.json());\n\napp.post(\"/sum\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "body": {
+          "a": 7,
+          "b": 8
+        }
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "sum": 15
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "rest-api-fundamentals",
+        "create",
+        "api",
+        "add",
+        "two",
+        "numbers"
+      ],
+      "hint": "Read req.body after express.json() and validate with Number.isFinite().",
+      "sourceQuestions": [
+        "api to add 2 numbers"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-http-fetch-json-api-3051f2c0",
+      "topic": "REST API Fundamentals",
+      "title": "Fetch JSON from a REST API in Node.js",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Call a REST endpoint with fetch(), verify response.ok, parse JSON, and handle network or HTTP errors.",
+      "functionName": "fetchJson",
+      "starterCode": "async function fetchJson(url) {\n  // TODO\n}",
+      "sampleInput": {
+        "url": "https://api.example.com/users/1"
+      },
+      "expectedOutput": {
+        "parsedJson": true,
+        "errorsHandled": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "rest-api-fundamentals",
+        "fetch",
+        "json",
+        "from",
+        "rest",
+        "api",
+        "node"
+      ],
+      "hint": "Check response.ok before calling response.json().",
+      "sourceQuestions": [
+        "read data from REST API and print it as JS object"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-create-server-537db7d0",
+      "topic": "Express.js Fundamentals",
+      "title": "Create a Basic Express Server",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an Express server with GET / that returns a JSON message and listen on port 3000.",
+      "functionName": "createABasicExpressServer",
+      "starterCode": "import express from \"express\";\n\nconst app = express();\n\n// TODO: add GET /\n\napp.listen(3000);",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "message": "Hello from Express"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "express-js-fundamentals",
+        "create",
+        "basic",
+        "express",
+        "server"
+      ],
+      "hint": "Create app with express(), register app.get(), then call app.listen().",
+      "sourceQuestions": [
+        "Create Server in Express",
+        "create http server using express",
+        "Create a server using express"
+      ],
+      "implementationType": "server",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-arithmetic-add-path-query-0940aa83",
+      "topic": "Route Parameters & Query Strings",
+      "title": "Add Two Numbers with Path and Query Parameters",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create endpoints that add two numbers: one using path parameters and one using query parameters. Validate numeric input.",
+      "functionName": "addTwoNumbersWithPathAnd",
+      "starterCode": "import express from \"express\";\nconst app = express();\n\napp.get(\"/sum/:a/:b\", (req, res) => {\n  // TODO\n});\n\napp.get(\"/sum\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "path": "/sum/10/5",
+        "query": "/sum?a=10&b=5"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "sum": 15
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "route-parameters-query-strings",
+        "add",
+        "two",
+        "numbers",
+        "with",
+        "path",
+        "and",
+        "query"
+      ],
+      "hint": "Convert strings with Number() and reject Number.isNaN() values.",
+      "sourceQuestions": [
+        "api end point add 2 numbers(path&query)"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-route-param-username-lookup-21687cc3",
+      "topic": "Route Parameters & Query Strings",
+      "title": "Find a User with a Route Parameter",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create GET /users/:userName. Search a predefined username array and return the user when found; otherwise return 404.",
+      "functionName": "findAUserWithARoute",
+      "starterCode": "import express from \"express\";\n\nconst app = express();\nconst users = [\"arun\", \"maya\", \"john\"];\n\napp.get(\"/users/:userName\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/users/arun"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "userName": "arun"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "route-parameters-query-strings",
+        "find",
+        "user",
+        "with",
+        "route",
+        "parameter"
+      ],
+      "hint": "Read req.params.userName and use Array.includes().",
+      "sourceQuestions": [
+        "Create a route with a path parameter userName and check whether it exists in a predefined array."
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-url-parameter-b3a35736",
+      "topic": "Route Parameters & Query Strings",
+      "title": "Read a URL Path Parameter",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create GET /products/:id and return the id from req.params. Reject an empty or invalid numeric id.",
+      "functionName": "readAUrlPathParameter",
+      "starterCode": "app.get(\"/products/:id\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "path": "/products/42"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "id": 42
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "route-parameters-query-strings",
+        "read",
+        "url",
+        "path",
+        "parameter"
+      ],
+      "hint": "Read req.params.id and convert it to a number when required.",
+      "sourceQuestions": [
+        "Pass a value as url parameter in api"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-multiple-query-params-f9915872",
+      "topic": "Route Parameters & Query Strings",
+      "title": "Read Multiple Query Parameters",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create GET /search that reads q, page, and limit from req.query, applies defaults, and returns the normalized values.",
+      "functionName": "readMultipleQueryParameters",
+      "starterCode": "app.get(\"/search\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "path": "/search?q=node&page=2&limit=10"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "body": {
+          "q": "node",
+          "page": 2,
+          "limit": 10
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "route-parameters-query-strings",
+        "read",
+        "multiple",
+        "query",
+        "parameters"
+      ],
+      "hint": "Query values are strings; convert and validate numeric fields.",
+      "sourceQuestions": [
+        "how to pass multiple queries in url"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-post-form-data-897b84ca",
+      "topic": "Request Body Parsing & Form Data",
+      "title": "Read User Input in a POST Route",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Configure JSON and URL-encoded body parsing, then create POST /users that reads and validates name and email from req.body.",
+      "functionName": "readUserInputInAPost",
+      "starterCode": "app.use(express.json());\napp.use(express.urlencoded({ extended: true }));\n\napp.post(\"/users\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "body": {
+          "name": "Arun",
+          "email": "arun@example.com"
+        }
+      },
+      "expectedOutput": {
+        "statusCode": 201,
+        "body": {
+          "name": "Arun",
+          "email": "arun@example.com"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "request-body-parsing-form-data",
+        "read",
+        "user",
+        "input",
+        "post",
+        "route"
+      ],
+      "hint": "Body-parsing middleware must be registered before the route.",
+      "sourceQuestions": [
+        "how to access userinput values in post method"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-serve-static-files-cb9d0854",
+      "topic": "Static Files",
+      "title": "Serve Static Files with Express",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Serve files from a public directory and make index.html available from the root URL.",
+      "functionName": "serveStaticFilesWithExpress",
+      "starterCode": "import express from \"express\";\nimport path from \"node:path\";\n\nconst app = express();\n\n// TODO: register express.static()",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/index.html"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "contentType": "text/html"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "static-files",
+        "serve",
+        "static",
+        "files",
+        "with",
+        "express"
+      ],
+      "hint": "Pass an absolute directory path to express.static().",
+      "sourceQuestions": [
+        "static file serving in nodejs - Practical"
+      ],
+      "implementationType": "server",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-add-middleware-38c7c977",
+      "topic": "Middleware Fundamentals",
+      "title": "Add Middleware to an API Route",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create reusable middleware that adds a request ID to req and include that ID in the API response.",
+      "functionName": "requestId",
+      "starterCode": "function requestId(req, res, next) {\n  // TODO\n}\n\napp.get(\"/api/data\", requestId, (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/api/data"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "bodyContains": "requestId"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-fundamentals",
+        "add",
+        "middleware",
+        "api",
+        "route"
+      ],
+      "hint": "Set req.requestId and call next().",
+      "sourceQuestions": [
+        "Add middleware for an api"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-middleware-log-request-parameters-ccd67330",
+      "topic": "Middleware Fundamentals",
+      "title": "Log Incoming Request Parameters",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create middleware that logs route parameters, query parameters, and body keys for every incoming request without logging sensitive values.",
+      "functionName": "logRequestParameters",
+      "starterCode": "function logRequestParameters(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "params": {
+          "id": "10"
+        },
+        "query": {
+          "page": "2"
+        },
+        "body": {
+          "email": "a@example.com",
+          "password": "secret"
+        }
+      },
+      "expectedOutput": {
+        "logged": [
+          "params",
+          "query",
+          "bodyKeys"
+        ],
+        "passwordValueLogged": false
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-fundamentals",
+        "log",
+        "incoming",
+        "request",
+        "parameters"
+      ],
+      "hint": "Log body field names rather than secrets such as passwords or tokens.",
+      "sourceQuestions": [
+        "middleware to log names of every incoming parameters,"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-middleware-block-all-78cd5ebc",
+      "topic": "Middleware Fundamentals",
+      "title": "Middleware to Block All Incoming Requests",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create middleware that immediately returns a maintenance response for every incoming request.",
+      "functionName": "maintenanceMode",
+      "starterCode": "function maintenanceMode(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/"
+      },
+      "expectedOutput": {
+        "statusCode": 503,
+        "body": {
+          "message": "Service temporarily unavailable"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-fundamentals",
+        "middleware",
+        "block",
+        "all",
+        "incoming",
+        "requests"
+      ],
+      "hint": "Send the response without calling next().",
+      "sourceQuestions": [
+        "block all incoming request to server using middle ware",
+        "create middleware to block request"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-middleware-block-delete-d714297e",
+      "topic": "Middleware Fundamentals",
+      "title": "Middleware to Block DELETE Requests",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create middleware that rejects DELETE requests with status 403 and passes all other requests to the next handler.",
+      "functionName": "blockDeleteRequests",
+      "starterCode": "function blockDeleteRequests(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "method": "DELETE",
+        "path": "/users/1"
+      },
+      "expectedOutput": {
+        "statusCode": 403
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-fundamentals",
+        "middleware",
+        "block",
+        "delete",
+        "requests"
+      ],
+      "hint": "Use req.method and return immediately after sending the response.",
+      "sourceQuestions": [
+        "middleware to block all DELETE methods"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-middleware-block-post-3654af31",
+      "topic": "Middleware Fundamentals",
+      "title": "Middleware to Block POST Requests",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create application middleware that rejects every POST request with status 403 and allows other methods to continue.",
+      "functionName": "blockPostRequests",
+      "starterCode": "function blockPostRequests(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "method": "POST",
+        "path": "/users"
+      },
+      "expectedOutput": {
+        "statusCode": 403,
+        "body": {
+          "message": "POST requests are blocked"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-fundamentals",
+        "middleware",
+        "block",
+        "post",
+        "requests"
+      ],
+      "hint": "Compare req.method and call next() only for allowed methods.",
+      "sourceQuestions": [
+        "middleware to block all POST requests,",
+        "middleware to block all POST method requests"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-router-endpoint-with-middleware-d6e1d16f",
+      "topic": "Middleware Types, Chaining & Positioning",
+      "title": "Create a Router Endpoint with Router-Level Middleware",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an Express Router, attach router-level logging middleware, and add GET /profile that returns JSON.",
+      "functionName": "createARouterEndpointWithRouter",
+      "starterCode": "import { Router } from \"express\";\nconst router = Router();\n\n// TODO: router middleware and GET /profile",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/api/profile"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "middlewareRan": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-types-chaining-positioning",
+        "create",
+        "router",
+        "endpoint",
+        "with",
+        "level",
+        "middleware"
+      ],
+      "hint": "Call router.use() before defining router.get().",
+      "sourceQuestions": [
+        "Practical: write an http endpoint and add a middleware in router level"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-application-middleware-859f0562",
+      "topic": "Middleware Types, Chaining & Positioning",
+      "title": "Create Application-Level Middleware",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create application-level middleware that logs the request method, path, and current time, then calls next().",
+      "functionName": "requestLogger",
+      "starterCode": "function requestLogger(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "method": "PUT",
+        "path": "/users/1"
+      },
+      "expectedOutput": {
+        "logged": true,
+        "nextCalled": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-types-chaining-positioning",
+        "create",
+        "application",
+        "level",
+        "middleware"
+      ],
+      "hint": "Read req.method and req.originalUrl, then call next().",
+      "sourceQuestions": [
+        "application level middleware to block GET Request and record other incoming request to a file (PUT - current time) -P",
+        "application level middleware to block GET Request and -record other incoming request to a file (PUT - current time)",
+        "Application level middleware - P"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-router-middleware-69512996",
+      "topic": "Middleware Types, Chaining & Positioning",
+      "title": "Create Router-Level Middleware",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an Express Router with middleware that runs only for routes registered on that router.",
+      "functionName": "createRouterLevelMiddleware",
+      "starterCode": "import { Router } from \"express\";\n\nconst router = Router();\n\nrouter.use((req, res, next) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/api/profile"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "middlewareScope": "router"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-types-chaining-positioning",
+        "create",
+        "router",
+        "level",
+        "middleware"
+      ],
+      "hint": "Register router.use() before the router routes.",
+      "sourceQuestions": [
+        "Create a router level middleware",
+        "how to setup router level middleware",
+        "how to setup a router level middleware",
+        "How to use router level middleware"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-custom-middleware-suite-326c2294",
+      "topic": "Middleware Types, Chaining & Positioning",
+      "title": "Implement Custom Express Middleware",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Implement request logging, header validation, and response-time middleware and demonstrate their registration order.",
+      "functionName": "requestLogger",
+      "starterCode": "function requestLogger(req, res, next) { /* TODO */ }\nfunction validateHeader(req, res, next) { /* TODO */ }\nfunction responseTime(req, res, next) { /* TODO */ }",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/api"
+      },
+      "expectedOutput": {
+        "middlewareOrder": [
+          "requestLogger",
+          "validateHeader",
+          "responseTime"
+        ]
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "middleware-types-chaining-positioning",
+        "implement",
+        "custom",
+        "express",
+        "middleware"
+      ],
+      "hint": "Every non-terminal middleware must call next() exactly once.",
+      "sourceQuestions": [
+        "Custom middleware practicals"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-middleware-validate-header-9d2638cf",
+      "topic": "Validation & Sanitization",
+      "title": "Validate a Required Request Header",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create middleware that requires an x-api-key header. Return 401 when it is missing or invalid; otherwise call next().",
+      "functionName": "requireApiKey",
+      "starterCode": "function requireApiKey(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "headers": {
+          "x-api-key": "valid-key"
+        }
+      },
+      "expectedOutput": {
+        "nextCalled": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "validation-sanitization",
+        "validate",
+        "required",
+        "request",
+        "header"
+      ],
+      "hint": "Use req.get() or req.headers and compare against configuration.",
+      "sourceQuestions": [
+        "middle ware to validate a particular header"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-validate-form-input-2b551a84",
+      "topic": "Validation & Sanitization",
+      "title": "Validate Express Form Input",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Validate required fields in req.body and return 400 with field-level messages when validation fails.",
+      "functionName": "validateUser",
+      "starterCode": "function validateUser(req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "body": {
+          "name": "",
+          "email": "invalid"
+        }
+      },
+      "expectedOutput": {
+        "statusCode": 400,
+        "errors": [
+          "name is required",
+          "email is invalid"
+        ]
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "validation-sanitization",
+        "validate",
+        "express",
+        "form",
+        "input"
+      ],
+      "hint": "Normalize input and keep validation middleware before the controller.",
+      "sourceQuestions": [
+        "implement form validation",
+        "add proper validations"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-configure-cors-00c6423a",
+      "topic": "CORS, Same-Origin Policy & Preflight",
+      "title": "Configure CORS in Express",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Configure CORS to allow a specified frontend origin and the GET, POST, PUT, PATCH, DELETE, and OPTIONS methods.",
+      "functionName": "configureCorsInExpress",
+      "starterCode": "import express from \"express\";\nimport cors from \"cors\";\n\nconst app = express();\n\n// TODO: configure cors()",
+      "sampleInput": {
+        "origin": "https://example.com",
+        "method": "OPTIONS"
+      },
+      "expectedOutput": {
+        "statusCode": 204,
+        "headers": {
+          "Access-Control-Allow-Origin": "https://example.com"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "cors-same-origin-policy-preflight",
+        "configure",
+        "cors",
+        "express"
+      ],
+      "hint": "Use the cors package with origin and methods options.",
+      "sourceQuestions": [
+        "How to configure CORS in nodejs",
+        "How to set up cors policy"
+      ],
+      "implementationType": "configuration",
+      "status": "ready"
+    },
+    {
+      "id": "node-http-options-preflight-22f11a84",
+      "topic": "CORS, Same-Origin Policy & Preflight",
+      "title": "Handle an OPTIONS Preflight Request",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Handle OPTIONS requests by returning the required CORS headers and a 204 response without a response body.",
+      "functionName": "handleAnOptionsPreflightRequest",
+      "starterCode": "app.options(\"*\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "method": "OPTIONS",
+        "origin": "https://frontend.example"
+      },
+      "expectedOutput": {
+        "statusCode": 204,
+        "corsHeadersPresent": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "cors-same-origin-policy-preflight",
+        "handle",
+        "options",
+        "preflight",
+        "request"
+      ],
+      "hint": "Set allow-origin, allow-methods, and allow-headers before ending the response.",
+      "sourceQuestions": [
+        "OPTION - preflight request",
+        "OPTIONS - preflight"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-protected-route-fb9ff944",
+      "topic": "Authorization & Role-Based Access Control",
+      "title": "Create a Protected Express Route",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create authentication middleware that verifies a bearer token and allows access to a protected route only when verification succeeds.",
+      "functionName": "authenticate",
+      "starterCode": "function authenticate(req, res, next) {\n  // TODO\n}\n\napp.get(\"/profile\", authenticate, (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "authorization": "Bearer valid-token"
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "authenticated": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "authorization-role-based-access-control",
+        "create",
+        "protected",
+        "express",
+        "route"
+      ],
+      "hint": "Extract the Authorization header, verify the token, attach the user to req, then call next().",
+      "sourceQuestions": [
+        "protected routes",
+        "Add protected routes"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-jwt-create-verify-66194510",
+      "topic": "JWT & Token Management",
+      "title": "Create and Verify a JWT",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a signed JWT containing a user ID and role, then verify it and return the decoded payload. Reject invalid or expired tokens.",
+      "functionName": "createToken",
+      "starterCode": "import jwt from \"jsonwebtoken\";\n\nfunction createToken(user, secret) {\n  // TODO\n}\n\nfunction verifyToken(token, secret) {\n  // TODO\n}",
+      "sampleInput": {
+        "user": {
+          "id": "u1",
+          "role": "admin"
+        },
+        "expiresIn": "1h"
+      },
+      "expectedOutput": {
+        "verified": true,
+        "payloadContains": [
+          "id",
+          "role",
+          "iat",
+          "exp"
+        ]
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "jwt-token-management",
+        "create",
+        "and",
+        "verify",
+        "jwt"
+      ],
+      "hint": "Use jwt.sign() and jwt.verify(); never hardcode the production secret.",
+      "sourceQuestions": [
+        "Create JWT token and verify token"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-session-initialize-and-use-be14252b",
+      "topic": "Sessions",
+      "title": "Initialize and Use Express Sessions",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Configure express-session, store a user identifier after login, and read it from a protected route.",
+      "functionName": "initializeAndUseExpressSessions",
+      "starterCode": "import session from \"express-session\";\n\napp.use(session({\n  // TODO\n}));",
+      "sampleInput": {
+        "loginBody": {
+          "userId": "u1"
+        }
+      },
+      "expectedOutput": {
+        "sessionCreated": true,
+        "protectedRouteStatus": 200
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "sessions",
+        "initialize",
+        "and",
+        "use",
+        "express"
+      ],
+      "hint": "Configure secret, resave, saveUninitialized, and cookie options.",
+      "sourceQuestions": [
+        "how to initialise session",
+        "handle sessions properly"
+      ],
+      "implementationType": "configuration",
+      "status": "ready"
+    },
+    {
+      "id": "node-cookie-set-expiry-599aa517",
+      "topic": "Cookies",
+      "title": "Set and Expire an HTTP Cookie",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Set an HTTP-only cookie with SameSite and Max-Age options, and provide a route that clears it.",
+      "functionName": "setAndExpireAnHttpCookie",
+      "starterCode": "app.get(\"/set-cookie\", (req, res) => {\n  // TODO\n});\n\napp.get(\"/clear-cookie\", (req, res) => {\n  // TODO\n});",
+      "sampleInput": {
+        "name": "sessionId",
+        "maxAgeMs": 3600000
+      },
+      "expectedOutput": {
+        "setCookieHeader": true,
+        "clearCookieHeader": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "cookies",
+        "set",
+        "and",
+        "expire",
+        "http",
+        "cookie"
+      ],
+      "hint": "Use res.cookie() and res.clearCookie() with matching options.",
+      "sourceQuestions": [
+        "How to set expiry for a cookies"
+      ],
+      "implementationType": "route",
+      "status": "ready"
+    },
+    {
+      "id": "node-async-callback-hell-to-promise-219e23c2",
+      "topic": "Asynchronous, Blocking & Non-Blocking I/O",
+      "title": "Convert Callback Hell to Promises",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Take a sequence of nested asynchronous callbacks and rewrite it using Promises, then consume it with async/await.",
+      "functionName": "runWithPromises",
+      "starterCode": "function runWithPromises() {\n  // TODO\n}",
+      "sampleInput": {
+        "steps": [
+          "read user",
+          "read orders",
+          "read products"
+        ]
+      },
+      "expectedOutput": {
+        "executionOrder": "sequential",
+        "errorHandling": "single catch"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "asynchronous-blocking-non-blocking-i-o",
+        "convert",
+        "callback",
+        "hell",
+        "promises"
+      ],
+      "hint": "Wrap callback APIs in Promise constructors or use util.promisify().",
+      "sourceQuestions": [
+        "Create a callback hell and convert the code into promise"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-worker-thread-cpu-task-04ba607b",
+      "topic": "Worker Threads",
+      "title": "Offload a CPU-Heavy Task to a Worker Thread",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Run a CPU-heavy calculation in a worker thread and send the result back to the main thread without blocking the server.",
+      "functionName": "offloadACpuHeavyTaskTo",
+      "starterCode": "import { Worker, isMainThread, parentPort, workerData } from \"node:worker_threads\";\n\nif (isMainThread) {\n  // TODO: start worker\n} else {\n  // TODO: calculate and post result\n}",
+      "sampleInput": {
+        "number": 40,
+        "operation": "fibonacci"
+      },
+      "expectedOutput": {
+        "result": 102334155,
+        "mainThreadResponsive": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "worker-threads",
+        "offload",
+        "cpu",
+        "heavy",
+        "task",
+        "worker",
+        "thread"
+      ],
+      "hint": "Pass input with workerData and respond with parentPort.postMessage().",
+      "sourceQuestions": [
+        "Create Worker thread",
+        "create a worker thread"
+      ],
+      "implementationType": "script",
+      "status": "ready"
+    },
+    {
+      "id": "node-child-process-run-command-56fbb058",
+      "topic": "Child Processes",
+      "title": "Run a Command with a Child Process",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Start a child process using spawn, capture stdout and stderr, and resolve with the exit code.",
+      "functionName": "runCommand",
+      "starterCode": "import { spawn } from \"node:child_process\";\n\nfunction runCommand(command, args = []) {\n  // TODO\n}",
+      "sampleInput": {
+        "command": "node",
+        "args": [
+          "--version"
+        ]
+      },
+      "expectedOutput": {
+        "exitCode": 0,
+        "stdout": "Node.js version string"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "child-processes",
+        "run",
+        "command",
+        "with",
+        "child",
+        "process"
+      ],
+      "hint": "Listen for data, error, and close events.",
+      "sourceQuestions": [
+        "Create child process",
+        "how to create child_process",
+        "How to create a child process"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-stream-read-large-file-646cfeb3",
+      "topic": "Streams",
+      "title": "Read a Large File with a Stream",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Read a large UTF-8 file using createReadStream and process it chunk by chunk.",
+      "functionName": "readLargeFile",
+      "starterCode": "import { createReadStream } from \"node:fs\";\n\nfunction readLargeFile(filePath) {\n  // TODO\n}",
+      "sampleInput": {
+        "filePath": "large-file.txt"
+      },
+      "expectedOutput": {
+        "processedWithStream": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "streams",
+        "read",
+        "large",
+        "file",
+        "with",
+        "stream"
+      ],
+      "hint": "Listen for data, end, and error events, or use for await...of.",
+      "sourceQuestions": [
+        "reateReadStream",
+        "implement readStream",
+        "Create stream and read file"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-stream-pipe-file-to-file-06255109",
+      "topic": "Pipe, Duplex & Transform Streams",
+      "title": "Transfer Data Between Files with pipe()",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Copy data from a source file to a destination file using readable.pipe(writable) or pipeline().",
+      "functionName": "copyFileWithStreams",
+      "starterCode": "import { createReadStream, createWriteStream } from \"node:fs\";\nimport { pipeline } from \"node:stream/promises\";\n\nasync function copyFileWithStreams(source, destination) {\n  // TODO\n}",
+      "sampleInput": {
+        "source": "input.txt",
+        "destination": "output.txt"
+      },
+      "expectedOutput": {
+        "copied": true
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "pipe-duplex-transform-streams",
+        "transfer",
+        "data",
+        "between",
+        "files",
+        "with",
+        "pipe"
+      ],
+      "hint": "pipeline() forwards errors and resolves when copying is complete.",
+      "sourceQuestions": [
+        "Create piping using stream",
+        "transfer data from one file to another using pipe"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-event-emitter-basic-3ba2b270",
+      "topic": "Events & EventEmitter",
+      "title": "Implement a Simple EventEmitter Flow",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an EventEmitter, subscribe to a custom event, emit it with data, and demonstrate the difference between on() and once().",
+      "functionName": "implementASimpleEventemitterFlow",
+      "starterCode": "import { EventEmitter } from \"node:events\";\n\nconst bus = new EventEmitter();\n\n// TODO: register and emit events",
+      "sampleInput": {
+        "event": "ready",
+        "payload": {
+          "service": "api"
+        }
+      },
+      "expectedOutput": {
+        "onListenerCalls": 2,
+        "onceListenerCalls": 1
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "events-eventemitter",
+        "implement",
+        "simple",
+        "eventemitter",
+        "flow"
+      ],
+      "hint": "Emit the same event twice after registering both on() and once().",
+      "sourceQuestions": [
+        "Implement event emitter"
+      ],
+      "implementationType": "script",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-setup-ejs-render-data-1023eab6",
+      "topic": "View Engines & EJS",
+      "title": "Configure EJS and Render Dynamic Data",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Configure EJS as the view engine and render a homepage that receives a username or email from the route handler.",
+      "functionName": "configureEjsAndRenderDynamicData",
+      "starterCode": "import express from \"express\";\nconst app = express();\n\n// TODO: configure EJS and render home.ejs",
+      "sampleInput": {
+        "method": "GET",
+        "path": "/",
+        "user": {
+          "name": "Arun"
+        }
+      },
+      "expectedOutput": {
+        "statusCode": 200,
+        "renderedView": "home",
+        "data": {
+          "name": "Arun"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "view-engines-ejs",
+        "configure",
+        "ejs",
+        "and",
+        "render",
+        "dynamic",
+        "data"
+      ],
+      "hint": "Use app.set(\"view engine\", \"ejs\") and res.render(view, data).",
+      "sourceQuestions": [
+        "workout: display current user's email id in the home page",
+        "display username in homepage",
+        "how to setup view engine",
+        "Render dynamic elements"
+      ],
+      "implementationType": "view",
+      "status": "ready"
+    },
+    {
+      "id": "node-express-error-middleware-1655977a",
+      "topic": "Error Handling & Error-Handling Middleware",
+      "title": "Create Express Error-Handling Middleware",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create four-argument Express error middleware that returns a consistent JSON error response.",
+      "functionName": "errorHandler",
+      "starterCode": "function errorHandler(err, req, res, next) {\n  // TODO\n}",
+      "sampleInput": {
+        "error": {
+          "message": "User not found",
+          "statusCode": 404
+        }
+      },
+      "expectedOutput": {
+        "statusCode": 404,
+        "body": {
+          "message": "User not found"
+        }
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "error-handling-error-handling-middleware",
+        "create",
+        "express",
+        "error",
+        "handling",
+        "middleware"
+      ],
+      "hint": "The signature must be (err, req, res, next), and the middleware should be registered last.",
+      "sourceQuestions": [
+        "Error handling middleware - P",
+        "Types of middleware, custom, and error handling middleware - practical",
+        "how to setup an error handling middleware"
+      ],
+      "implementationType": "middleware",
+      "status": "ready"
+    },
+    {
+      "id": "node-crypto-encrypt-decrypt-string-ffccb19b",
+      "topic": "Hashing, Encryption & bcrypt",
+      "title": "Encrypt and Decrypt a String",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "Encrypt a UTF-8 string with Node.js crypto using an authenticated cipher and decrypt it back to the original value.",
+      "functionName": "encrypt",
+      "starterCode": "import crypto from \"node:crypto\";\n\nfunction encrypt(text, key) {\n  // TODO\n}\n\nfunction decrypt(payload, key) {\n  // TODO\n}",
+      "sampleInput": {
+        "text": "secret message"
+      },
+      "expectedOutput": {
+        "decrypted": "secret message"
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "hashing-encryption-bcrypt",
+        "encrypt",
+        "and",
+        "decrypt",
+        "string"
+      ],
+      "hint": "Use AES-GCM with a random IV and preserve the authentication tag.",
+      "sourceQuestions": [
+        "Encrypt a string in node js"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-bcrypt-hash-compare-ba177791",
+      "topic": "Hashing, Encryption & bcrypt",
+      "title": "Hash and Verify a Password with bcrypt",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Hash a password with bcrypt and verify a login candidate with bcrypt.compare(). Never decrypt or store the plaintext password.",
+      "functionName": "hashPassword",
+      "starterCode": "import bcrypt from \"bcrypt\";\n\nasync function hashPassword(password) {\n  // TODO\n}\n\nasync function verifyPassword(password, hash) {\n  // TODO\n}",
+      "sampleInput": {
+        "password": "StrongPass123!"
+      },
+      "expectedOutput": {
+        "hashCreated": true,
+        "correctPasswordMatches": true,
+        "wrongPasswordMatches": false
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "hashing-encryption-bcrypt",
+        "hash",
+        "and",
+        "verify",
+        "password",
+        "with",
+        "bcrypt"
+      ],
+      "hint": "Use a reasonable salt-round value and await both operations.",
+      "sourceQuestions": [
+        "how to use hashed data"
+      ],
+      "implementationType": "function",
+      "status": "ready"
+    },
+    {
+      "id": "node-fs-write-hashed-data-90ae4361",
+      "topic": "Hashing, Encryption & bcrypt",
+      "title": "Write hashed data to a file using fs mofule",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "write hashed data to a file using fs mofule",
+      "functionName": "hashedDataFileFsMofule",
+      "starterCode": "async function hashedDataFileFsMofule(input) {\n  // TODO: implement\n}",
+      "sampleInput": {
+        "description": "Use the scenario described in the task."
+      },
+      "expectedOutput": {
+        "description": "The requested behavior is completed without unhandled errors."
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "hashing-encryption-bcrypt",
+        "write",
+        "hashed",
+        "data",
+        "file",
+        "using",
+        "module"
+      ],
+      "hint": "Break the task into setup, input handling, core logic, and error handling.",
+      "sourceQuestions": [
+        "write hashed data to a file using fs mofule"
+      ],
+      "implementationType": "script",
+      "status": "ready"
+    },
+    {
+      "id": "node-middleware-cache-request-url-0220f4c7",
+      "topic": "Caching",
+      "title": "Middleware to Cache incoming request url",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Middleware to Cache incoming request url",
+      "functionName": "middlewareCacheIncomingRequestUrl",
+      "starterCode": "async function middlewareCacheIncomingRequestUrl(input) {\n  // TODO: implement\n}",
+      "sampleInput": {
+        "description": "Use the scenario described in the task."
+      },
+      "expectedOutput": {
+        "description": "The requested behavior is completed without unhandled errors."
+      },
+      "constraints": [
+        "Use modern Node.js APIs.",
+        "Handle expected errors and return an appropriate result."
+      ],
+      "subjects": [
+        "nodejs"
+      ],
+      "tags": [
+        "caching",
+        "middleware",
+        "cache",
+        "incoming",
+        "request",
+        "url"
+      ],
+      "hint": "Break the task into setup, input handling, core logic, and error handling.",
+      "sourceQuestions": [
+        "Middleware to Cache incoming request url"
+      ],
+      "implementationType": "script",
+      "status": "ready"
+    }
+  ]
+}

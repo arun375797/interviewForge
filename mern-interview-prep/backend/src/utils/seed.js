@@ -9,6 +9,7 @@ const {
   generateKeyPoints,
   difficultyFromQuestion,
 } = require('./answerGenerator');
+const { CODE_PRACTICE_QUESTIONS } = require('./curatedCodeQuestions');
 
 const DESCRIPTIONS = {
   javascript:
@@ -20,7 +21,54 @@ const DESCRIPTIONS = {
   dsa: 'Data Structures & Algorithms — complexity, arrays to graphs, with interview-ready explanations.',
 };
 
-async function buildAndInsert() {
+function formatExpectedOutput(value) {
+  if (typeof value === 'string') return value;
+  if (value === undefined) return 'undefined';
+  return JSON.stringify(value, null, 2);
+}
+
+async function seedCodePractice() {
+  console.log('Seeding curated code practice questions...');
+  const operations = [];
+  CODE_PRACTICE_QUESTIONS.forEach((item, index) => {
+    item.subjects.forEach((subject) => {
+      operations.push({
+        insertOne: {
+          document: {
+            subject,
+            topic: item.topic,
+            topicOrder: item.topicOrder || index + 1,
+            question: item.title,
+            answer: formatExpectedOutput(item.expectedOutput),
+            keyPoints: [
+              `Code topic: ${item.topic}`,
+              `Task: ${item.task}`,
+              `Expected output: ${formatExpectedOutput(item.expectedOutput)}`,
+              ...(item.hint ? [`Hint: ${item.hint}`] : []),
+            ],
+            difficulty: item.difficulty || 'medium',
+            tags: [
+              'code-curated',
+              'code-practice',
+              subject,
+              item.topic.toLowerCase(),
+              ...(item.tags || []).slice(0, 6),
+            ],
+            codeOnly: true,
+            order: index + 1,
+          },
+        },
+      });
+    });
+  });
+
+  if (operations.length) {
+    await Question.bulkWrite(operations, { ordered: false });
+  }
+  console.log(`Inserted ${operations.length} code practice question rows.`);
+}
+
+async function buildAndInsert({ includeCodePractice = true } = {}) {
   const dataPath = path.join(__dirname, '../../data/parsed-questions.json');
   if (!fs.existsSync(dataPath)) {
     throw new Error(`Seed data not found at ${dataPath}`);
@@ -40,8 +88,16 @@ async function buildAndInsert() {
       label: subject.label,
       color: subject.color,
       description: DESCRIPTIONS[key] || '',
+      supportsCode: key === 'javascript' || key === 'dsa' || key === 'nodejs' || key === 'react',
+      short: key === 'javascript' ? 'JS' : key === 'nodejs' ? 'Node' : key === 'mongodb' ? 'Mongo' : subject.label,
+      order: ['javascript', 'mongodb', 'react', 'nodejs', 'dsa'].indexOf(key) + 1,
       questionCount: subject.questionCount,
       topicCount: subject.topicCount,
+      topics: (subject.topics || []).map((topic) => ({
+        name: topic.name,
+        order: topic.order || 0,
+        codePractice: false,
+      })),
     });
 
     for (const topic of subject.topics) {
@@ -55,11 +111,6 @@ async function buildAndInsert() {
           keyPoints: generateKeyPoints(q, key, topic.name),
           difficulty: difficultyFromQuestion(q, topic.name),
           tags: [key, topic.name.split(/[,&/]/)[0].trim().toLowerCase()].filter(Boolean),
-          bookmarked: false,
-          mastered: false,
-          learned: false,
-          codeCompleted: false,
-          savedCode: '',
           notes: '',
           order: idx + 1,
         });
@@ -79,7 +130,12 @@ async function buildAndInsert() {
   }
 
   const counts = await Question.aggregate([{ $group: { _id: '$subject', n: { $sum: 1 } } }]);
-  console.log('Seed complete. Counts:', counts);
+  console.log('Interview seed complete. Counts:', counts);
+
+  if (includeCodePractice) {
+    await seedCodePractice();
+  }
+
   return questionDocs.length;
 }
 

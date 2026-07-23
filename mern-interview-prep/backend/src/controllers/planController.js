@@ -1,5 +1,6 @@
 const Plan = require('../models/Plan');
 const Question = require('../models/Question');
+const Subject = require('../models/Subject');
 const {
   CODE_SUBJECTS,
   CODE_KEYWORD_RE,
@@ -11,7 +12,6 @@ const { getProgressOwnerId } = require('../utils/progressScope');
 
 const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 const PLAN_DAYS = [3, 5, 10, 15];
-const STUDY_SUBJECTS = ['javascript', 'mongodb', 'react', 'nodejs', 'dsa'];
 
 function startOfToday() {
   const date = new Date();
@@ -53,7 +53,7 @@ async function loadCodeQuestionIds(subject) {
   };
   const docs = await Question.find(filter)
     .sort({ topicOrder: 1, order: 1 })
-    .select('subject topic topicOrder question answer difficulty tags order codeOnly')
+    .select('subject topic topicOrder question answer difficulty tags order codeOnly notes')
     .lean();
 
   return docs
@@ -67,14 +67,13 @@ async function loadCodeQuestionIds(subject) {
     .map((q) => q._id);
 }
 
-function validateStartPayload({ mode, subject, days }) {
+async function validateStartPayload({ mode, subject, days }) {
   if (!['study', 'code'].includes(mode)) return 'mode must be study or code';
   if (!PLAN_DAYS.includes(Number(days))) return 'days must be 3, 5, 10, or 15';
-  if (mode === 'study' && !STUDY_SUBJECTS.includes(subject)) {
-    return 'study mode supports javascript, mongodb, react, nodejs, and dsa';
-  }
-  if (mode === 'code' && !CODE_SUBJECTS.includes(subject)) {
-    return 'code mode supports javascript and dsa only';
+  const subjectDoc = await Subject.findOne({ key: subject }).select('key supportsCode').lean();
+  if (!subjectDoc) return 'unknown subject';
+  if (mode === 'code' && !(subjectDoc.supportsCode || CODE_SUBJECTS.includes(subject))) {
+    return 'code mode is not enabled for this subject';
   }
   return '';
 }
@@ -155,7 +154,7 @@ exports.startPlan = async (req, res) => {
     const userId = getProgressOwnerId(req);
     const { mode, subject } = req.body;
     const days = Number(req.body.days);
-    const error = validateStartPayload({ mode, subject, days });
+    const error = await validateStartPayload({ mode, subject, days });
     if (error) return res.status(400).json({ message: error });
 
     const questionIds =

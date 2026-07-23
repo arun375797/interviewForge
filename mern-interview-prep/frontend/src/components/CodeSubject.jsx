@@ -6,6 +6,8 @@ import { api, SUBJECT_META } from '../api';
 const CODE_LANGUAGES = [
   { key: 'javascript', label: 'JavaScript' },
   { key: 'dsa', label: 'DSA' },
+  { key: 'nodejs', label: 'Node.js' },
+  { key: 'react', label: 'React' },
 ];
 
 export default function CodeSubject() {
@@ -335,13 +337,20 @@ export default function CodeSubject() {
                             {String(q.order || idx + 1).padStart(2, '0')}
                           </span>
                           <div className="min-w-0">
-                            <p
-                              className={`text-sm font-medium leading-snug sm:text-[15px] ${
-                                q.codeCompleted ? 'text-muted line-through decoration-line' : 'text-ink'
-                              }`}
-                            >
-                              {q.codePrompt?.title || q.question}
-                            </p>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p
+                                className={`text-sm font-medium leading-snug sm:text-[15px] ${
+                                  q.codeCompleted ? 'text-muted line-through decoration-line' : 'text-ink'
+                                }`}
+                              >
+                                {q.codePrompt?.title || q.question}
+                              </p>
+                              {(q.codePrompt?.topic || q.topic) && (
+                                <span className="rounded-md border border-line bg-paper-2 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted">
+                                  {q.codePrompt?.topic || q.topic}
+                                </span>
+                              )}
+                            </div>
                             <p className="overflow-anywhere mt-1.5 text-xs text-muted">{q.codePrompt?.task}</p>
                           </div>
                         </div>

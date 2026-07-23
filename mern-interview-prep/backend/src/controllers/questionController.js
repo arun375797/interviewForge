@@ -31,8 +31,13 @@ const PUBLIC_QUESTION_FILTER = { codeOnly: { $ne: true } };
 exports.getSubjects = async (req, res) => {
   try {
     const userId = getProgressOwnerId(req);
+    // Keep legacy code subjects flagged for environments seeded before supportsCode existed.
+    await Subject.updateMany(
+      { key: { $in: CODE_SUBJECTS }, supportsCode: { $ne: true } },
+      { $set: { supportsCode: true } }
+    );
     const [subjects, liveCounts] = await Promise.all([
-      Subject.find().sort({ label: 1 }).lean(),
+      Subject.find().sort({ order: 1, label: 1 }).lean(),
       aggregateSubjectStats(userId),
     ]);
     const countsBySubject = new Map(liveCounts.map((item) => [item.subject, item]));
@@ -41,7 +46,7 @@ exports.getSubjects = async (req, res) => {
       return {
         ...subject,
         questionCount: live?.questionCount || 0,
-        topicCount: live?.topicCount || 0,
+        topicCount: Math.max(live?.topicCount || 0, subject.topics?.length || 0),
         bookmarked: live?.bookmarked || 0,
         mastered: live?.mastered || 0,
         learned: live?.learned || 0,
@@ -56,8 +61,41 @@ exports.getSubjects = async (req, res) => {
 exports.getTopics = async (req, res) => {
   try {
     const { subject } = req.params;
-    const topics = await aggregateTopicStats(getProgressOwnerId(req), subject);
-    res.json(topics);
+    const [topics, subjectDoc] = await Promise.all([
+      aggregateTopicStats(getProgressOwnerId(req), subject),
+      Subject.findOne({ key: subject }).select('topics').lean(),
+    ]);
+
+    const catalog = (subjectDoc?.topics || []).filter((topic) => !topic.codePractice);
+    if (!catalog.length) {
+      return res.json(topics);
+    }
+
+    const map = new Map(topics.map((topic) => [topic.name, topic]));
+    for (const topic of catalog) {
+      if (!map.has(topic.name)) {
+        map.set(topic.name, {
+          name: topic.name,
+          topicOrder: topic.order || 0,
+          count: 0,
+          bookmarked: 0,
+          mastered: 0,
+          learned: 0,
+        });
+      } else {
+        const live = map.get(topic.name);
+        map.set(topic.name, {
+          ...live,
+          topicOrder: live.topicOrder ?? topic.order ?? 0,
+        });
+      }
+    }
+
+    res.json(
+      [...map.values()].sort(
+        (a, b) => (a.topicOrder || 0) - (b.topicOrder || 0) || a.name.localeCompare(b.name)
+      )
+    );
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -156,34 +194,90 @@ exports.getQuestionById = async (req, res) => {
 
 exports.createQuestion = async (req, res) => {
   try {
-    const { subject, topic, question, answer, difficulty, keyPoints, notes, tags } = req.body;
+    const {
+      subject,
+      topic,
+      question,
+      answer,
+      difficulty,
+      keyPoints,
+      notes,
+      tags,
+      codeOnly,
+      topicOrder: requestedTopicOrder,
+    } = req.body;
     const hasManualAnswer = typeof answer === 'string' && answer.trim().length > 0;
+    const isCode = Boolean(codeOnly);
     if (!subject || !topic || !question) {
       return res.status(400).json({ message: 'subject, topic, and question are required' });
     }
 
-    const maxOrder = await Question.findOne({ subject, topic }).sort({ order: -1 }).select('order topicOrder');
+    const subjectDoc = await Subject.findOne({ key: subject });
+    if (!subjectDoc) {
+      return res.status(400).json({ message: `Unknown subject "${subject}". Create it first.` });
+    }
+    if (isCode && !subjectDoc.supportsCode) {
+      return res.status(400).json({
+        message: 'This subject does not support code practice. Enable it on the subject first.',
+      });
+    }
+
+    const topicName = String(topic).trim();
+    const questionFilter = {
+      subject,
+      topic: topicName,
+      ...(isCode ? { codeOnly: true } : { codeOnly: { $ne: true } }),
+    };
+    const maxOrder = await Question.findOne(questionFilter).sort({ order: -1 }).select('order topicOrder');
+
+    const catalogTopic = (subjectDoc.topics || []).find(
+      (item) => item.name === topicName && Boolean(item.codePractice) === isCode
+    );
     const topicOrder =
-      maxOrder?.topicOrder ||
-      (await Question.findOne({ subject, topic }).select('topicOrder'))?.topicOrder ||
-      99;
+      Number.isFinite(Number(requestedTopicOrder))
+        ? Number(requestedTopicOrder)
+        : maxOrder?.topicOrder ||
+          catalogTopic?.order ||
+          99;
+
+    if (!catalogTopic) {
+      subjectDoc.topics.push({
+        name: topicName,
+        order: topicOrder,
+        codePractice: isCode,
+      });
+      subjectDoc.topicCount = new Set(subjectDoc.topics.map((item) => item.name)).size;
+      await subjectDoc.save();
+    }
 
     const doc = await Question.create({
       subject,
-      topic,
+      topic: topicName,
       topicOrder,
       question,
-      answer: hasManualAnswer ? answer : generateAnswer(question, subject, topic),
-      answerManuallyAdded: hasManualAnswer,
-      keyPoints: keyPoints?.length ? keyPoints : generateKeyPoints(question, subject, topic),
-      difficulty: difficulty || difficultyFromQuestion(question, topic),
-      tags: tags || [subject],
+      answer: hasManualAnswer
+        ? answer
+        : isCode
+          ? String(answer || question).trim() || question
+          : generateAnswer(question, subject, topicName),
+      answerManuallyAdded: hasManualAnswer || isCode,
+      keyPoints: keyPoints?.length
+        ? keyPoints
+        : isCode
+          ? []
+          : generateKeyPoints(question, subject, topicName),
+      difficulty: difficulty || difficultyFromQuestion(question, topicName),
+      tags: tags || (isCode ? [subject, 'code-practice'] : [subject]),
       notes: notes || '',
+      codeOnly: isCode,
       order: (maxOrder?.order || 0) + 1,
     });
 
-    await Subject.findOneAndUpdate({ key: subject }, { $inc: { questionCount: 1 } });
-    res.status(201).json(mergeQuestionWithProgress(doc.toObject(), null));
+    if (!isCode) {
+      await Subject.findOneAndUpdate({ key: subject }, { $inc: { questionCount: 1 } });
+    }
+    const merged = mergeQuestionWithProgress(doc.toObject(), null);
+    res.status(201).json(isCode ? toCodeQuestion(merged) || merged : merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -203,6 +297,7 @@ exports.updateQuestion = async (req, res) => {
       'tags',
       'order',
       'topicOrder',
+      'codeOnly',
     ];
     const updates = {};
     for (const key of allowed) {
@@ -211,6 +306,15 @@ exports.updateQuestion = async (req, res) => {
     if (req.body.answer !== undefined && req.body.answerManuallyAdded === undefined) {
       updates.answerManuallyAdded = true;
     }
+    if (updates.subject) {
+      const subjectDoc = await Subject.findOne({ key: updates.subject });
+      if (!subjectDoc) {
+        return res.status(400).json({ message: `Unknown subject "${updates.subject}"` });
+      }
+      if (updates.codeOnly && !subjectDoc.supportsCode) {
+        return res.status(400).json({ message: 'Subject does not support code practice' });
+      }
+    }
 
     const item = await Question.findByIdAndUpdate(req.params.id, updates, {
       new: true,
@@ -218,7 +322,7 @@ exports.updateQuestion = async (req, res) => {
     });
     if (!item) return res.status(404).json({ message: 'Question not found' });
     const merged = await formatQuestionResponse(getProgressOwnerId(req), item._id);
-    res.json(merged);
+    res.json(item.codeOnly ? toCodeQuestion(merged) || merged : merged);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -449,9 +553,25 @@ function isValidCodeSubject(subject) {
   return !subject || CODE_SUBJECTS.includes(subject);
 }
 
+async function resolveCodeSubjects(subject) {
+  if (subject) {
+    const doc = await Subject.findOne({ key: subject }).select('key supportsCode').lean();
+    if (doc?.supportsCode || CODE_SUBJECTS.includes(subject)) {
+      return [subject];
+    }
+    return [];
+  }
+  const supported = await Subject.find({ supportsCode: true }).select('key').lean();
+  const keys = supported.map((item) => item.key);
+  return keys.length ? keys : CODE_SUBJECTS;
+}
+
 async function loadCodeQuestions(userId, { subject, topic, completed, manualAnswer, search, includeSavedCode = false } = {}) {
+  const codeSubjects = await resolveCodeSubjects(subject);
+  if (!codeSubjects.length) return [];
+
   const filter = {
-    subject: subject || { $in: CODE_SUBJECTS },
+    subject: subject || { $in: codeSubjects },
     $or: [{ question: CODE_KEYWORD_RE }, { codeOnly: true }],
   };
   if (manualAnswer === 'true') filter.answerManuallyAdded = true;
@@ -459,7 +579,7 @@ async function loadCodeQuestions(userId, { subject, topic, completed, manualAnsw
 
   const docs = await Question.find(filter)
     .sort({ topicOrder: 1, order: 1 })
-    .select('subject topic topicOrder question answer answerManuallyAdded difficulty tags order createdAt updatedAt codeOnly')
+    .select('subject topic topicOrder question answer answerManuallyAdded difficulty tags order createdAt updatedAt codeOnly notes')
     .lean();
 
   const query = search?.trim().toLowerCase();
@@ -491,8 +611,11 @@ async function loadCodeQuestions(userId, { subject, topic, completed, manualAnsw
 exports.getCodeProgress = async (req, res) => {
   try {
     const { subject } = req.query;
-    if (!isValidCodeSubject(subject)) {
-      return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
+    if (!isValidCodeSubject(subject) && subject) {
+      const allowed = await resolveCodeSubjects(subject);
+      if (!allowed.length) {
+        return res.status(400).json({ message: 'Code practice is not enabled for this subject' });
+      }
     }
 
     const items = await loadCodeQuestions(getProgressOwnerId(req), { subject });
@@ -511,8 +634,11 @@ exports.getCodeProgress = async (req, res) => {
 exports.getCodeTopics = async (req, res) => {
   try {
     const { subject } = req.query;
-    if (!isValidCodeSubject(subject)) {
-      return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
+    if (!isValidCodeSubject(subject) && subject) {
+      const allowed = await resolveCodeSubjects(subject);
+      if (!allowed.length) {
+        return res.status(400).json({ message: 'Code practice is not enabled for this subject' });
+      }
     }
 
     const items = await loadCodeQuestions(getProgressOwnerId(req), { subject });
@@ -555,8 +681,11 @@ exports.getCodeQuestions = async (req, res) => {
       limit = 40,
     } = req.query;
 
-    if (!isValidCodeSubject(subject)) {
-      return res.status(400).json({ message: 'Code practice supports javascript and dsa only' });
+    if (!isValidCodeSubject(subject) && subject) {
+      const allowed = await resolveCodeSubjects(subject);
+      if (!allowed.length) {
+        return res.status(400).json({ message: 'Code practice is not enabled for this subject' });
+      }
     }
 
     const allItems = await loadCodeQuestions(getProgressOwnerId(req), {

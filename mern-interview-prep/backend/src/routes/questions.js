@@ -1,11 +1,21 @@
 const express = require('express');
 const ctrl = require('../controllers/questionController');
+const subjects = require('../controllers/subjectController');
 const learning = require('../controllers/learningController');
 const { requireAdmin } = require('../controllers/authController');
 
 const router = express.Router();
 
 router.get('/subjects', ctrl.getSubjects);
+router.get('/subjects/admin/all', requireAdmin, subjects.getSubjectsAdmin);
+router.post('/subjects', requireAdmin, subjects.createSubject);
+router.put('/subjects/:key', requireAdmin, subjects.updateSubject);
+router.delete('/subjects/:key', requireAdmin, subjects.deleteSubject);
+router.get('/subjects/:key/admin/topics', requireAdmin, subjects.getSubjectTopicsAdmin);
+router.post('/subjects/:key/topics', requireAdmin, subjects.createTopic);
+router.put('/subjects/:key/topics/rename', requireAdmin, subjects.renameTopic);
+router.put('/subjects/:key/topics/reorder', requireAdmin, subjects.reorderTopics);
+router.delete('/subjects/:key/topics', requireAdmin, subjects.deleteTopic);
 router.get('/subjects/:subject/topics', ctrl.getTopics);
 router.get('/stats', ctrl.getStats);
 router.get('/learn/progress', ctrl.getLearnProgress);

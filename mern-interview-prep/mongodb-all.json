@@ -1,0 +1,1066 @@
+{
+  "meta": {
+    "label": "MongoDB",
+    "subject": "mongodb",
+    "generatedAt": "2026-07-12T02:56:46.401Z",
+    "source": "mern-interview-prep site data",
+    "counts": {
+      "interviewTopics": 8,
+      "interviewQuestions": 85,
+      "codePractice": 0,
+      "typingSnippets": 100
+    }
+  },
+  "interview": {
+    "label": "MongoDB",
+    "color": "#0F766E",
+    "topicCount": 8,
+    "questionCount": 85,
+    "topics": [
+      {
+        "order": 1,
+        "name": "Aggregation Pipeline",
+        "count": 10,
+        "questions": [
+          "$lookup - practice",
+          "single purpose aggr.",
+          "$pop vs $pull.",
+          "aggregate workouts",
+          "$setUnion",
+          "aggregation pipeline",
+          "group",
+          "Journaling, $lookup - query elements",
+          "$facet, TTL, $fill",
+          "$facet"
+        ]
+      },
+      {
+        "order": 2,
+        "name": "CRUD, Queries & Operators",
+        "count": 20,
+        "questions": [
+          "$expr",
+          "addToSet",
+          "elemMatch",
+          "find the 2nd hightest salary",
+          "Write a query to find the count of the employee who have same salary",
+          "Write a query to increase the salary of employee by 10% who is working in hr depart",
+          "Write a query to find the employee name which is start with “A",
+          "distinct",
+          "query - find persons with more than 2 skills,",
+          "query - find most common skill,",
+          "covered query",
+          "bulk write",
+          "query - avg price where 2000>year2020.",
+          "bulkWrite, distinct",
+          "to find the sum of total salary in a object",
+          "upsert vs save",
+          "$exists",
+          "$all vs $in",
+          "Find non repeating elements in an array",
+          "$elemMatch"
+        ]
+      },
+      {
+        "order": 3,
+        "name": "Indexing & Query Performance",
+        "count": 17,
+        "questions": [
+          "TTL index",
+          "hashed index",
+          "compound index",
+          "drawbacks of indexing,",
+          "indexing",
+          "ttl",
+          "Create index syntax",
+          "Database profiler",
+          "multikey index vs compound index,",
+          "Covered queries",
+          "indexing and its type",
+          "create index",
+          "disadvantages of index",
+          "Geo spatial indexing",
+          "Geospatial index",
+          "types of indexing",
+          "how indexing works?,"
+        ]
+      },
+      {
+        "order": 4,
+        "name": "MongoDB Basics, Documents & BSON",
+        "count": 17,
+        "questions": [
+          "max size of mongo doc",
+          "gridFS",
+          "how to modify a collection name?",
+          "embedded data vs references",
+          "need to practice db practicals",
+          "journaling,",
+          "Mongodb -",
+          "Mongo:-",
+          "Mongo utilities",
+          "Denormalization - read more",
+          "BSON",
+          "ODM",
+          "8. Database & ORM Integration",
+          "SQL vs NoSQL Databases",
+          "Using ORMs (Sequelize, Mongoose)",
+          "How to modify collection name",
+          "BSON datatypes"
+        ]
+      },
+      {
+        "order": 5,
+        "name": "Replication, Sharding & Operations",
+        "count": 8,
+        "questions": [
+          "clustered collection - learn more,",
+          "clustered collection",
+          "sharding",
+          "Replica set",
+          "shading vs replication - need clarity,",
+          "create a capped collection",
+          "Backup of mongodb",
+          "Shard key"
+        ]
+      },
+      {
+        "order": 6,
+        "name": "Schema Design, Relationships & Modeling",
+        "count": 6,
+        "questions": [
+          "type of data modeling",
+          "type of relations",
+          "one-to-one",
+          "one-to-many",
+          "many-to-many",
+          "Data modeling and anti-patterns"
+        ]
+      },
+      {
+        "order": 7,
+        "name": "SQL-style & Interview Query Practice",
+        "count": 4,
+        "questions": [
+          "avg age of each qualification",
+          "Difference between min and max salary",
+          "10% salary increment to every employees",
+          "Avg salary of each dept- syntax issue"
+        ]
+      },
+      {
+        "order": 8,
+        "name": "Transactions, CAP, ACID & Consistency",
+        "count": 3,
+        "questions": [
+          "CAP theorem",
+          "Partition tolerance",
+          "CAP, ACID"
+        ]
+      }
+    ]
+  },
+  "codePractice": [],
+  "typing": [
+    {
+      "category": "mongodb",
+      "topic": "MongoDB & Database",
+      "question": "promise.allSettled",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing",
+      "source": "parsed-questions/javascript"
+    },
+    {
+      "category": "mongodb",
+      "topic": "MongoDB & Database",
+      "question": "$lookup - practice",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation",
+      "source": "parsed-questions/javascript"
+    },
+    {
+      "category": "mongodb",
+      "topic": "MongoDB & Database",
+      "question": "find the 2nd hightest salary",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries",
+      "source": "parsed-questions/javascript"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Database, ODM, MongoDB & Query Topics",
+      "question": "Using ORMs (Sequelize, Mongoose)",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose",
+      "source": "parsed-questions/nodejs"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 1",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 2",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 3",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 4",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 5",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 6",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 7",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 8",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 9",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 10",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 11",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 12",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 13",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 14",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 15",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 16",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 17",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 18",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 19",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 20",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 21",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 22",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 23",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 24",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 25",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 26",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 27",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 28",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 29",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 30",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 31",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 32",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 33",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 34",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 35",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 36",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 37",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 38",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 39",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 40",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 41",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 42",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 43",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 44",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 45",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 46",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 47",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 48",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 49",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 50",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 51",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 52",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 53",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 54",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 55",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 56",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 57",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 58",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 59",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 60",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 61",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 62",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 63",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 64",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 65",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 66",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 67",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 68",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 69",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 70",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 71",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 72",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 73",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 74",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 75",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 76",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 77",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 78",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 79",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 80",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 81",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 82",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 83",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 84",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 85",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 86",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 87",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 88",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 89",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 90",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 91",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Aggregation",
+      "question": "Use an aggregation pipeline to count users by role.",
+      "explanation": "$match filters documents and $group creates summary counts by role.",
+      "text": "const pipeline = [\n  { $match: { active: true } },\n  { $group: { _id: \"$role\", count: { $sum: 1 } } },\n  { $sort: { count: -1 } },\n];\n\nconst stats = await db.collection(\"users\").aggregate(pipeline).toArray();",
+      "label": "Aggregation 92",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Updates",
+      "question": "Update salaries for HR department employees by 10% in MongoDB.",
+      "explanation": "updateMany applies a filter and uses $mul or calculated $set values for bulk updates.",
+      "text": "await db.collection(\"employees\").updateMany(\n  { department: \"HR\" },\n  [{ $set: { salary: { $multiply: [\"$salary\", 1.1] } } }]\n);",
+      "label": "Updates 93",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Mongoose",
+      "question": "Define a Mongoose schema for users with validation.",
+      "explanation": "Schemas define shape, validation, and timestamps. Models wrap collection operations.",
+      "text": "import mongoose from \"mongoose\";\n\nconst userSchema = new mongoose.Schema(\n  {\n    name: { type: String, required: true, trim: true },\n    email: { type: String, required: true, unique: true, lowercase: true },\n    role: { type: String, enum: [\"user\", \"admin\"], default: \"user\" },\n  },\n  { timestamps: true }\n);\n\nexport const User = mongoose.model(\"User\", userSchema);",
+      "label": "Mongoose 94",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Indexing",
+      "question": "Create a compound index for email and createdAt in MongoDB.",
+      "explanation": "Compound indexes speed up queries that filter or sort on multiple fields together.",
+      "text": "await db.collection(\"users\").createIndex(\n  { email: 1, createdAt: -1 },\n  { name: \"email_createdAt_idx\" }\n);",
+      "label": "Indexing 95",
+      "source": "thinkmern-practical-templates"
+    },
+    {
+      "category": "mongodb",
+      "topic": "Queries",
+      "question": "Write a MongoDB query to find active users sorted by newest first.",
+      "explanation": "Use find with a filter, sort descending on createdAt, and limit the result size.",
+      "text": "const users = await db.collection(\"users\")\n  .find({ active: true })\n  .sort({ createdAt: -1 })\n  .limit(20)\n  .toArray();",
+      "label": "Queries 96",
+      "source": "thinkmern-practical-templates"
+    }
+  ]
+}

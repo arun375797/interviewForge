@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
-import { Check, ChevronDown, FileQuestion, Palette, ShieldCheck, Users } from 'lucide-react';
+import { Check, ChevronDown, FileQuestion, Layers, Palette, ShieldCheck, Users } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -158,6 +158,19 @@ export default function HeaderSettingsDropdown() {
                   >
                     <ShieldCheck className="h-4 w-4 shrink-0" />
                     <span>Manage answers</span>
+                  </Link>
+                  <Link
+                    to="/admin/subjects"
+                    role="menuitem"
+                    onClick={() => setOpen(false)}
+                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                      location.pathname === '/admin/subjects'
+                        ? 'bg-paper-2 text-ink'
+                        : 'text-muted hover:bg-paper-2 hover:text-ink'
+                    }`}
+                  >
+                    <Layers className="h-4 w-4 shrink-0" />
+                    <span>Subject management</span>
                   </Link>
                   <Link
                     to="/admin/questions"

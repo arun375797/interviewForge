@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api, SUBJECT_META } from '../api';
 import RichAnswerEditor from './RichAnswerEditor';
@@ -6,6 +6,9 @@ import RichAnswerEditor from './RichAnswerEditor';
 export default function AddQuestion() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
+  const [subjects, setSubjects] = useState(() =>
+    Object.entries(SUBJECT_META).map(([key, meta]) => ({ key, label: meta.label }))
+  );
   const [form, setForm] = useState({
     subject: params.get('subject') || 'javascript',
     topic: params.get('topic') || '',
@@ -16,6 +19,24 @@ export default function AddQuestion() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .getSubjects()
+      .then((data) => {
+        if (!alive || !data?.length) return;
+        setSubjects(data.map((item) => ({ key: item.key, label: item.label })));
+        setForm((prev) => {
+          if (data.some((item) => item.key === prev.subject)) return prev;
+          return { ...prev, subject: data[0].key };
+        });
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -50,9 +71,9 @@ export default function AddQuestion() {
             onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
             className="w-full rounded-xl border border-line bg-paper px-3 py-2.5 outline-none focus:border-accent"
           >
-            {Object.entries(SUBJECT_META).map(([key, meta]) => (
-              <option key={key} value={key}>
-                {meta.label}
+            {subjects.map((item) => (
+              <option key={item.key} value={item.key}>
+                {item.label}
               </option>
             ))}
           </select>

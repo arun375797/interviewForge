@@ -1,0 +1,4348 @@
+{
+  "meta": {
+    "subject": "react",
+    "count": 112,
+    "source": "mern-interview-prep site data",
+    "generatedAt": "2026-07-12"
+  },
+  "questions": [
+    {
+      "id": "react-vite-environment-variables-3313e97c",
+      "topic": "React Project Setup & Vite",
+      "title": "Use Environment Variables in a Vite React App",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Store a public API base URL in a Vite environment file, read it through import.meta.env, and throw a clear startup error when it is missing. Do not place secrets in client-side variables.",
+      "functionName": "API_URL",
+      "starterCode": "const API_URL = import.meta.env.VITE_API_URL;\n\nif (!API_URL) {\n  // TODO: fail with a clear configuration error\n}\n\nexport { API_URL };",
+      "sampleInput": {
+        "VITE_API_URL": "https://api.example.com"
+      },
+      "expectedOutput": {
+        "API_URL": "https://api.example.com"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "react-project-setup-vite",
+        "use",
+        "environment",
+        "variables",
+        "in",
+        "vite",
+        "app"
+      ],
+      "hint": "Only VITE_-prefixed variables are exposed to client code, and exposed values are public.",
+      "sourceQuestions": [
+        "store credentials in ENV",
+        "use .env",
+        "use .env file",
+        "use .env in FE also",
+        "Use env for storing credentials or tokens"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-virtual-dom-render-need-more-clarity-fbb68bf9",
+      "topic": "Virtual DOM",
+      "title": "Render(): Need more clarity",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "render(): Need more clarity",
+      "functionName": "RenderNeedMoreClarity",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RenderNeedMoreClarity() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "virtual-dom",
+        "render",
+        "need",
+        "more",
+        "clarity"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "render(): Need more clarity"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-components-fundamentals-create-a-custom-components-40056c9f",
+      "topic": "Components Fundamentals",
+      "title": "Create a custom components",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create a custom components",
+      "functionName": "CustomComponents",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function CustomComponents() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "components-fundamentals",
+        "custom",
+        "components"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create a custom components"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-components-fundamentals-render-a-component-once-page-resiz-eb9f7e73",
+      "topic": "Components Fundamentals",
+      "title": "Render a component once page resized",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "render a component once page resized",
+      "functionName": "RenderOncePageResized",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RenderOncePageResized() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "components-fundamentals",
+        "render",
+        "component",
+        "once",
+        "page",
+        "resized"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "render a component once page resized"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-components-fundamentals-render-the-data-in-component-f9df6e03",
+      "topic": "Components Fundamentals",
+      "title": "Render the data in component",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "render the data in component",
+      "functionName": "RenderData",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RenderData() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "components-fundamentals",
+        "render",
+        "data",
+        "in",
+        "component"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "render the data in component"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useeffect-create-a-time-useeffect-0528939b",
+      "topic": "useEffect",
+      "title": "Create a time using useEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "create a time using useEffect",
+      "functionName": "TimeUseEffect",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function TimeUseEffect() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useeffect",
+        "time"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "create a time using useEffect"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useeffect-unmounted-event-useeffect-88e7b3fd",
+      "topic": "useEffect",
+      "title": "Unmounted event using useEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "unmounted event using useEffect",
+      "functionName": "UnmountedEventUseEffect",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function UnmountedEventUseEffect() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useeffect",
+        "unmounted",
+        "event"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "unmounted event using useEffect"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useref-how-to-change-the-color-of-the-text-dynamically-use-e196c4b4",
+      "topic": "useRef",
+      "title": "Change the color of the text dynamically using useRef",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "How to change the color of the text dynamically using useRef",
+      "functionName": "ChangeColorTextDynamicallyUseRef",
+      "starterCode": "import { useRef } from \"react\";\n\nexport default function ChangeColorTextDynamicallyUseRef() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useref",
+        "change",
+        "color",
+        "of",
+        "text",
+        "dynamically"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "How to change the color of the text dynamically using useRef"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useref-change-color-3766dd73",
+      "topic": "useRef",
+      "title": "Change the color of the text using useRef",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Change the color of the text using useRef",
+      "functionName": "ChangeColorTextUseRef",
+      "starterCode": "import { useRef } from \"react\";\n\nexport default function ChangeColorTextUseRef() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useref",
+        "change",
+        "color",
+        "of",
+        "text"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Change the color of the text using useRef",
+        "Change the colour of the text using useRef"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useref-change-the-colour-of-the-text-dynamically-useref-50486dbc",
+      "topic": "useRef",
+      "title": "Change the colour of the text dynamically using useRef",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Change the colour of the text dynamically using useRef",
+      "functionName": "ChangeColourTextDynamicallyUseRef",
+      "starterCode": "import { useRef } from \"react\";\n\nexport default function ChangeColourTextDynamicallyUseRef() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useref",
+        "change",
+        "colour",
+        "of",
+        "text",
+        "dynamically"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Change the colour of the text dynamically using useRef"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useref-find-the-avg-of-2-numbers-ref-3c180b42",
+      "topic": "useRef",
+      "title": "Find the avg of 2 numbers using ref",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Find the avg of 2 numbers using ref",
+      "functionName": "FindAvg2NumbersRef",
+      "starterCode": "import { useRef } from \"react\";\n\nexport default function FindAvg2NumbersRef() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useref",
+        "find",
+        "avg",
+        "of",
+        "2",
+        "numbers",
+        "ref"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Find the avg of 2 numbers using ref"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useref-focus-input-77e36d5c",
+      "topic": "useRef",
+      "title": "Focus the add todo input field upon loading of the page (useEffect + useRef)",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Focus the add todo input field upon loading of the page (useEffect + useRef)",
+      "functionName": "FocusTodoInputFieldUpon",
+      "starterCode": "import { useRef } from \"react\";\n\nexport default function FocusTodoInputFieldUpon() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useref",
+        "focus",
+        "add",
+        "todo",
+        "input",
+        "field",
+        "upon"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Focus the add todo input field upon loading of the page (useEffect + useRef)"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usememo-movie-list-4216fc42",
+      "topic": "useMemo",
+      "title": "Implement useMemo in the movie list fetching api",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Implement useMemo in the movie list fetching api",
+      "functionName": "UseMemoMovieListFetchingApi",
+      "starterCode": "import { useMemo, useState } from \"react\";\n\nexport default function UseMemoMovieListFetchingApi() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usememo",
+        "in",
+        "movie",
+        "list",
+        "fetching",
+        "api"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Implement useMemo in the movie list fetching api"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usememo-square-5a82b391",
+      "topic": "useMemo",
+      "title": "Memoize an Expensive Square Calculation",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a component that calculates the square of a number with useMemo. Recalculate only when the number changes, not when unrelated state changes.",
+      "functionName": "SquareCalculator",
+      "starterCode": "import { useMemo, useState } from \"react\";\n\nexport default function SquareCalculator() {\n  const [number, setNumber] = useState(0);\n  const [theme, setTheme] = useState(\"light\");\n  const square = useMemo(() => {\n    // TODO\n  }, [number]);\n  return <section>{/* inputs and result */}</section>;\n}",
+      "sampleInput": {
+        "number": 6
+      },
+      "expectedOutput": {
+        "square": 36
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usememo",
+        "memoize",
+        "expensive",
+        "square",
+        "calculation"
+      ],
+      "hint": "Return number * number from the memo callback and depend only on number.",
+      "sourceQuestions": [
+        "Make a component to find the square of a number using useMemo? If we pass same value, it shouldn't calculate it."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usecallback-counter-c6c64168",
+      "topic": "useCallback",
+      "title": "Create counter app using using useCallback",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create counter app using using useCallback",
+      "functionName": "CounterUseCallback",
+      "starterCode": "import { useCallback, useState } from \"react\";\n\nexport default function CounterUseCallback() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usecallback",
+        "counter",
+        "app"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create counter app using using useCallback"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usecallback-implement-usecallback-in-netflix-project-859083b0",
+      "topic": "useCallback",
+      "title": "Implement useCallback in netflix project",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Implement useCallback in netflix project",
+      "functionName": "UseCallbackNetflixProject",
+      "starterCode": "import { useCallback, useState } from \"react\";\n\nexport default function UseCallbackNetflixProject() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usecallback",
+        "in",
+        "netflix",
+        "project"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Implement useCallback in netflix project"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usecallback-implement-usecallback-properly-9f156217",
+      "topic": "useCallback",
+      "title": "Implement useCallback properly",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Implement useCallback properly",
+      "functionName": "UseCallbackProperly",
+      "starterCode": "import { useCallback, useState } from \"react\";\n\nexport default function UseCallbackProperly() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usecallback",
+        "properly"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Implement useCallback properly"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usereducer-list-28c66e8d",
+      "topic": "useReducer",
+      "title": "Add item to list using useReducer hook",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Add item to list using useReducer hook",
+      "functionName": "ItemListUseReducer",
+      "starterCode": "import { useReducer } from \"react\";\n\nexport default function ItemListUseReducer() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usereducer",
+        "add",
+        "item",
+        "to",
+        "list",
+        "hook"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Add item to list using useReducer hook",
+        "Add Items to a List Using useReducer",
+        "Create a component to add items to a list using useReducer"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usereducer-counter-16cebeea",
+      "topic": "useReducer",
+      "title": "Create a counter using useReducer",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a counter using useReducer",
+      "functionName": "CounterUseReducer",
+      "starterCode": "import { useReducer } from \"react\";\n\nexport default function CounterUseReducer() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usereducer",
+        "counter"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create a counter using useReducer",
+        "Create auto inc/dec counter using useState or useReducer",
+        "replace useState with useReducer"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usereducer-replace-usstate-by-usereducer-151174e5",
+      "topic": "useReducer",
+      "title": "Replace usstate by usereducer",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "replace usstate by usereducer",
+      "functionName": "ReplaceUsstateByUsereducer",
+      "starterCode": "import { useReducer } from \"react\";\n\nexport default function ReplaceUsstateByUsereducer() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usereducer",
+        "replace",
+        "usstate",
+        "by"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "replace usstate by usereducer"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usereducer-simple-calculator-usereducer-1d802f04",
+      "topic": "useReducer",
+      "title": "Simple calculator using useReducer",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Simple calculator using useReducer",
+      "functionName": "SimpleCalculatorUseReducer",
+      "starterCode": "import { useReducer } from \"react\";\n\nexport default function SimpleCalculatorUseReducer() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usereducer",
+        "simple",
+        "calculator"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Simple calculator using useReducer"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-context-counter-f0eff557",
+      "topic": "useContext",
+      "title": "Calculator using useContext",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Calculator using useContext",
+      "functionName": "CalculatorUseContext",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nexport default function CalculatorUseContext() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usecontext",
+        "calculator"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Calculator using useContext",
+        "Create an increment and decrement counter using useContext",
+        "Implement a counter using useContext"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usecontext-global-state-management-system-usecontext-and-u-853f55e3",
+      "topic": "useContext",
+      "title": "Global state management system using useContext and useReducer",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "global state management system using useContext and useReducer",
+      "functionName": "GlobalStateManagementSystemUseContext",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nexport default function GlobalStateManagementSystemUseContext() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usecontext",
+        "global",
+        "state",
+        "management",
+        "system",
+        "usereducer"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "global state management system using useContext and useReducer"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-usecontext-implementation-usecontext-303bb06f",
+      "topic": "useContext",
+      "title": "Implementation using useContext(partial)",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "implementation using useContext(partial)",
+      "functionName": "ImplementationUseContextPartial",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nexport default function ImplementationUseContextPartial() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "usecontext",
+        "implementation",
+        "partial"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "implementation using useContext(partial)"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-custom-hooks-create-custom-hook-p-594147c7",
+      "topic": "Custom Hooks",
+      "title": "Create custom hook",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create custom hook",
+      "functionName": "Custom",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function Custom() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "custom-hooks",
+        "custom",
+        "hook"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create custom hook-P"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-custom-hook-case-39bfb493",
+      "topic": "Custom Hooks",
+      "title": "Create custom hook -convert string to capital letter",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "create custom hook -convert string to capital letter",
+      "functionName": "CustomConvertStringCapitalLetter",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function CustomConvertStringCapitalLetter() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "custom-hooks",
+        "custom",
+        "hook",
+        "convert",
+        "string",
+        "to",
+        "capital"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "create custom hook -convert string to capital letter"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-custom-hook-generic-099ffb90",
+      "topic": "Custom Hooks",
+      "title": "Create a Reusable Custom Hook",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a custom hook that encapsulates reusable stateful logic, then consume it from two components without sharing UI markup.",
+      "functionName": "useToggle",
+      "starterCode": "import { useState } from \"react\";\n\nexport function useToggle(initialValue = false) {\n  // TODO: return value and toggle function\n}\n\nexport default function Example() {\n  // TODO: consume the hook\n}",
+      "sampleInput": {
+        "initialValue": false,
+        "actions": [
+          "toggle"
+        ]
+      },
+      "expectedOutput": {
+        "value": true
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "custom-hooks",
+        "reusable",
+        "custom",
+        "hook"
+      ],
+      "hint": "Custom hook names must begin with use and may call other hooks.",
+      "sourceQuestions": [
+        "create a custom hook",
+        "create a custom hooks",
+        "create custom hook(partial)",
+        "Creating a Custom Hook"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-custom-hook-localstorage-7d5c018f",
+      "topic": "Custom Hooks",
+      "title": "Create a useLocalStorage Hook",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create useLocalStorage(key, initialValue) with a useState-like API. Initialize from localStorage, serialize updates, and handle invalid JSON safely.",
+      "functionName": "useLocalStorage",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport function useLocalStorage(key, initialValue) {\n  // TODO\n}",
+      "sampleInput": {
+        "key": "theme",
+        "initialValue": "light",
+        "nextValue": "dark"
+      },
+      "expectedOutput": {
+        "state": "dark",
+        "storedValue": "\"dark\""
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "custom-hooks",
+        "uselocalstorage",
+        "hook"
+      ],
+      "hint": "Use a lazy state initializer and JSON.parse/stringify inside try/catch.",
+      "sourceQuestions": [
+        "Create a custom hook called useLocalStorage(key, initialValue) that works similarly to useState, but persists the value in localStorage"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-lifecycle-unmount-cleanup-ae0920d1",
+      "topic": "Component Lifecycle, Cleanup & Side Effects",
+      "title": "Handle Unmount Cleanup with useEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Subscribe to an external source when the component mounts and unsubscribe when it unmounts using the cleanup function returned by useEffect.",
+      "functionName": "Subscriber",
+      "starterCode": "import { useEffect } from \"react\";\n\nexport default function Subscriber({ source }) {\n  useEffect(() => {\n    // TODO: subscribe\n    return () => {\n      // TODO: unsubscribe\n    };\n  }, [source]);\n  return null;\n}",
+      "sampleInput": {
+        "lifecycle": [
+          "mount",
+          "unmount"
+        ]
+      },
+      "expectedOutput": {
+        "subscribeCalls": 1,
+        "unsubscribeCalls": 1
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "component-lifecycle-cleanup-side-effects",
+        "handle",
+        "unmount",
+        "cleanup",
+        "useeffect"
+      ],
+      "hint": "Return cleanup from the same effect that creates the subscription.",
+      "sourceQuestions": [
+        "componentWillUnmount using useEffect",
+        "how to handle mounting, updating & unmounting using useEffect",
+        "how to handle unmounting using useEffect"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-lifecycle-useeffect-ae741c99",
+      "topic": "Component Lifecycle, Cleanup & Side Effects",
+      "title": "Model Component Lifecycle with useEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Demonstrate mount, dependency-based update, and unmount behavior using separate useEffect calls with correct dependency arrays and cleanup.",
+      "functionName": "LifecycleDemo",
+      "starterCode": "import { useEffect } from \"react\";\n\nexport default function LifecycleDemo({ value }) {\n  // TODO: mount/unmount effect\n  // TODO: value update effect\n  return <p>{value}</p>;\n}",
+      "sampleInput": {
+        "values": [
+          1,
+          2
+        ],
+        "then": "unmount"
+      },
+      "expectedOutput": {
+        "mountRuns": 1,
+        "updateRuns": 2,
+        "cleanupRuns": 1
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "component-lifecycle-cleanup-side-effects",
+        "model",
+        "component",
+        "lifecycle",
+        "useeffect"
+      ],
+      "hint": "An empty dependency array models mount/unmount; [value] responds to value changes.",
+      "sourceQuestions": [
+        "lifecycle events using useEffect",
+        "lifecycle events using useEffect, how dependency array changes the behavior of it",
+        "lifecycle methods using useEffect",
+        "workout: lifecycle events using useEffect"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-stopwatch-e589f4de",
+      "topic": "Timers, Intervals & Memory Leaks",
+      "title": "Build a Start/Stop Stopwatch",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Build a stopwatch with Start, Stop, and Reset controls. Ensure only one interval runs and clean it up when the component unmounts.",
+      "functionName": "Stopwatch",
+      "starterCode": "import { useEffect, useRef, useState } from \"react\";\n\nexport default function Stopwatch() {\n  const [seconds, setSeconds] = useState(0);\n  const timerRef = useRef(null);\n  // TODO: implement start, stop, reset, and cleanup\n  return <section />;\n}",
+      "sampleInput": {
+        "actions": [
+          "start",
+          "wait 2 seconds",
+          "stop"
+        ]
+      },
+      "expectedOutput": {
+        "seconds": 2,
+        "running": false
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "timers-intervals-memory-leaks",
+        "start",
+        "stop",
+        "stopwatch"
+      ],
+      "hint": "Keep the interval id in a ref so starting does not cause a rerender.",
+      "sourceQuestions": [
+        "implement a basic stopwatch",
+        "Stop and start functionality"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-useeffect-timer-da1054fb",
+      "topic": "Timers, Intervals & Memory Leaks",
+      "title": "Create a Timer with useEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a timer that increments once per second. Start the interval on mount and clear it during cleanup to prevent duplicate timers and memory leaks.",
+      "functionName": "Timer",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function Timer() {\n  const [seconds, setSeconds] = useState(0);\n  useEffect(() => {\n    // TODO: start interval and return cleanup\n  }, []);\n  return <p>{seconds}</p>;\n}",
+      "sampleInput": {
+        "elapsedSeconds": 3
+      },
+      "expectedOutput": {
+        "displayedSeconds": 3
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "timers-intervals-memory-leaks",
+        "timer",
+        "useeffect"
+      ],
+      "hint": "Use setInterval with a functional state update and clearInterval in the returned function.",
+      "sourceQuestions": [
+        "Create a timer using react",
+        "Create a timer using useEffect"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-form-validation-33148df6",
+      "topic": "Forms & Form Validation",
+      "title": "Build a Validated React Form",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a controlled form with email and password fields. Validate required values, email format, and a minimum password length before submission.",
+      "functionName": "SignupForm",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function SignupForm() {\n  const [form, setForm] = useState({ email: \"\", password: \"\" });\n  const [errors, setErrors] = useState({});\n\n  const handleSubmit = (event) => {\n    event.preventDefault();\n    // TODO: validate and submit\n  };\n\n  return <form onSubmit={handleSubmit}>{/* fields and error messages */}</form>;\n}",
+      "sampleInput": {
+        "email": "arun@example.com",
+        "password": "strongPass1"
+      },
+      "expectedOutput": {
+        "valid": true,
+        "submitted": true
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-form-validation",
+        "validated",
+        "form"
+      ],
+      "hint": "Build a new errors object and submit only when it has no keys.",
+      "sourceQuestions": [
+        "add form validation for forms",
+        "add proper form validations",
+        "do proper form validation",
+        "Form validations are missing"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-input-match-ee3f2e44",
+      "topic": "Forms & Form Validation",
+      "title": "Check the text entered in 2 input fields are matching or not",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Check the text entered in 2 input fields are matching or not",
+      "functionName": "CheckTextEntered2Input",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function CheckTextEntered2Input() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-form-validation",
+        "check",
+        "text",
+        "entered",
+        "in",
+        "2",
+        "input"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Check the text entered in 2 input fields are matching or not",
+        "Check whether the text entered in input fields are matching or not",
+        "Check whetherthe text entered in 2 input fields are matching or not"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-forms-form-validation-check-whether-text-entered-in-2-inut-b4cfbda3",
+      "topic": "Forms & Form Validation",
+      "title": "Check whether text entered in 2 inut fields are matching or not",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "check whether text entered in 2 inut fields are matching or not",
+      "functionName": "CheckWhetherTextEntered2",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function CheckWhetherTextEntered2() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-form-validation",
+        "check",
+        "whether",
+        "text",
+        "entered",
+        "in",
+        "2"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "check whether text entered in 2 inut fields are matching or not"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-forms-form-validation-create-input-field-34d4a064",
+      "topic": "Forms & Form Validation",
+      "title": "Create input field",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "create input field",
+      "functionName": "InputField",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function InputField() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-form-validation",
+        "input",
+        "field"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "create input field,"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-validation-e4099e6d",
+      "topic": "Forms & Form Validation",
+      "title": "Implement input validation(Todo)",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "implement input validation(Todo)",
+      "functionName": "InputValidationTodo",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function InputValidationTodo() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-form-validation",
+        "input",
+        "validation",
+        "todo"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "implement input validation(Todo)",
+        "add validations for todo"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-render-array-objects-43327c08",
+      "topic": "Forms & Form Validation",
+      "title": "Show the fields in an array of objects using map",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "show the fields in an array of objects using map",
+      "functionName": "ShowFieldsArrayObjectsMap",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ShowFieldsArrayObjectsMap() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-form-validation",
+        "show",
+        "fields",
+        "in",
+        "array",
+        "of",
+        "objects"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "show the fields in an array of objects using map",
+        "Render an array of objects (Practical)"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-controlled-uncontrolled-convert-1e09b239",
+      "topic": "Uncontrolled Components",
+      "title": "Convert controlled in to Uncontrolled Components",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Convert controlled in to Uncontrolled Components",
+      "functionName": "ConvertControlledUncontrolledComponents",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ConvertControlledUncontrolledComponents() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "uncontrolled-components",
+        "convert",
+        "controlled",
+        "in",
+        "to",
+        "uncontrolled",
+        "components"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Convert controlled in to Uncontrolled Components",
+        "Convert Uncontrolled component into controlled component"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-ref-read-update-input-6873cb96",
+      "topic": "Refs, createRef & forwardRef",
+      "title": "Read and Update an Input with a Ref",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an uncontrolled input, read its current value with a ref, and provide a button that focuses and updates the DOM input value.",
+      "functionName": "RefInput",
+      "starterCode": "import { useRef } from \"react\";\n\nexport default function RefInput() {\n  const inputRef = useRef(null);\n  const handleClick = () => {\n    // TODO: focus and update inputRef.current\n  };\n  return <section><input ref={inputRef} /><button onClick={handleClick}>Update</button></section>;\n}",
+      "sampleInput": {
+        "buttonClick": true
+      },
+      "expectedOutput": {
+        "focused": true,
+        "inputValue": "Updated"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "refs-createref-forwardref",
+        "read",
+        "update",
+        "input",
+        "ref"
+      ],
+      "hint": "DOM nodes assigned to refs are available through inputRef.current.",
+      "sourceQuestions": [
+        "update inputRef"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-imperative-handle-c95abcba",
+      "topic": "useImperativeHandle",
+      "title": "Use imperative handle hook",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Use imperative handle hook",
+      "functionName": "ImperativeHandle",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ImperativeHandle() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "useimperativehandle",
+        "use",
+        "imperative",
+        "handle",
+        "hook"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Use imperative handle hook",
+        "useImperativehandle"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-parent-to-child-bd07fcc5",
+      "topic": "Parent-to-Child Communication",
+      "title": "Passing data from parent to child",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "passing data from parent to child",
+      "functionName": "PassingDataParentChild",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function PassingDataParentChild() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "parent-to-child-communication",
+        "passing",
+        "data",
+        "from",
+        "parent",
+        "to",
+        "child"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "passing data from parent to child"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-parent-to-child-communication-toggle-check-by-button-click-0e569ced",
+      "topic": "Parent-to-Child Communication",
+      "title": "Toggle check by button click(parent-child relation)",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "toggle check by button click(parent-child relation)",
+      "functionName": "ToggleCheckByButtonClick",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ToggleCheckByButtonClick() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "parent-to-child-communication",
+        "toggle",
+        "check",
+        "by",
+        "button",
+        "click",
+        "parent"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "toggle check by button click(parent-child relation)."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-parent-to-child-communication-update-child-component-s-sta-b8d6a4ad",
+      "topic": "Parent-to-Child Communication",
+      "title": "Update child component's state from parent componeent",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "update child component's state from parent componeent",
+      "functionName": "UpdateChildSStateParent",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function UpdateChildSStateParent() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "parent-to-child-communication",
+        "update",
+        "child",
+        "component",
+        "s",
+        "state",
+        "from"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "update child component's state from parent componeent"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-child-to-parent-communication-display-user-input-from-chil-41ee8003",
+      "topic": "Child-to-Parent Communication",
+      "title": "Display user input from child component in parent component from",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "display user input from child component in parent component from",
+      "functionName": "DisplayUserInputChildParent",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function DisplayUserInputChildParent() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "child-to-parent-communication",
+        "display",
+        "user",
+        "input",
+        "from",
+        "child",
+        "component"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "display user input from child component in parent component from -P"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-child-to-parent-communication-pass-data-from-a-child-compo-2a2e2875",
+      "topic": "Child-to-Parent Communication",
+      "title": "Pass data from a child component to parent using props",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "workout: pass data from a child component to parent using props",
+      "functionName": "PassDataChildParentProps",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function PassDataChildParentProps() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "child-to-parent-communication",
+        "pass",
+        "data",
+        "from",
+        "child",
+        "component",
+        "to"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "workout: pass data from a child component to parent using props"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-child-to-parent-communication-pass-data-from-child-compone-273c60ca",
+      "topic": "Child-to-Parent Communication",
+      "title": "Pass data from child component to parent component",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "pass data from child component to parent component",
+      "functionName": "PassDataChildParent",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function PassDataChildParent() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "child-to-parent-communication",
+        "pass",
+        "data",
+        "from",
+        "child",
+        "component",
+        "to"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "pass data from child component to parent component"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-child-to-parent-c0f3e083",
+      "topic": "Child-to-Parent Communication",
+      "title": "Send Data from a Child to a Parent",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Pass a callback prop from a parent component to a child. When the child submits text, update and display that text in the parent.",
+      "functionName": "Child",
+      "starterCode": "import { useState } from \"react\";\n\nfunction Child({ onSend }) {\n  // TODO: collect a value and call onSend(value)\n}\n\nexport default function Parent() {\n  const [message, setMessage] = useState(\"\");\n  return <section><Child onSend={setMessage} /><p>{message}</p></section>;\n}",
+      "sampleInput": {
+        "childInput": "Hello parent"
+      },
+      "expectedOutput": {
+        "parentDisplay": "Hello parent"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "child-to-parent-communication",
+        "send",
+        "data",
+        "from",
+        "child",
+        "to",
+        "parent"
+      ],
+      "hint": "Functions can be passed as props just like other values.",
+      "sourceQuestions": [
+        "Practical: Send data from child to parent using useRef.",
+        "data passing from child to parent using props",
+        "how to pass data from child to parent?,",
+        "How to send data from child to parent",
+        "Pass data from child to parent",
+        "pass data from child to parent component",
+        "pass data from child to parents",
+        "passing data from child to parent",
+        "passing data from child to parent- scenarios",
+        "Passing data from parent to child and child to parent",
+        "passing data from parent to child, (child to parent also)",
+        "Practical: Send data from child to parent using callback functions",
+        "Send data from child to parent",
+        "send data from child to parent component",
+        "send data from child to parent using context",
+        "workout: pass data from child to parent using props",
+        "workout: passing data from child to parent using props",
+        "Send data from child to parent component using redux"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-prop-drilling-prevent-prop-drilling-e7fd3c4f",
+      "topic": "Prop Drilling",
+      "title": "Prevent prop drilling",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "prevent prop drilling",
+      "functionName": "PreventPropDrilling",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function PreventPropDrilling() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "prop-drilling",
+        "prevent",
+        "prop",
+        "drilling"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "prevent prop drilling"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-events-event-handling-change-div-colour-when-clicking-butt-33d98e9a",
+      "topic": "Events & Event Handling",
+      "title": "Change div colour when clicking button",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "change div colour when clicking button",
+      "functionName": "ChangeDivColourWhenClicking",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ChangeDivColourWhenClicking() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "events-event-handling",
+        "change",
+        "div",
+        "colour",
+        "when",
+        "clicking",
+        "button"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "change div colour when clicking button"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-events-event-handling-prevent-default-purpose-55eca2b4",
+      "topic": "Events & Event Handling",
+      "title": "Prevent default - purpose",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "prevent default - purpose",
+      "functionName": "PreventDefaultPurpose",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function PreventDefaultPurpose() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "events-event-handling",
+        "prevent",
+        "default",
+        "purpose"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "prevent default - purpose"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-router-setup-76f0cd31",
+      "topic": "React Router Fundamentals",
+      "title": "Create a route",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a route",
+      "functionName": "App",
+      "starterCode": "import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n\nexport default function App() {\n  // TODO: configure the requested routes\n  return <BrowserRouter><Routes>{/* routes */}</Routes></BrowserRouter>;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "react-router-fundamentals",
+        "route"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create a route"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-react-router-fundamentals-theme-switcher-problem-787feebb",
+      "topic": "React Router Fundamentals",
+      "title": "Theme switcher problem",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Theme switcher problem",
+      "functionName": "App",
+      "starterCode": "import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n\nexport default function App() {\n  // TODO: configure the requested routes\n  return <BrowserRouter><Routes>{/* routes */}</Routes></BrowserRouter>;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "react-router-fundamentals",
+        "theme",
+        "switcher",
+        "problem"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Theme switcher problem"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-protected-route-c2e23c59",
+      "topic": "Protected Routes",
+      "title": "Implement a Protected Route",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a route guard that renders child content for authenticated users and redirects unauthenticated users to /login.",
+      "functionName": "ProtectedRoute",
+      "starterCode": "import { Navigate, Outlet } from \"react-router-dom\";\n\nexport default function ProtectedRoute({ isAuthenticated }) {\n  // TODO\n}",
+      "sampleInput": {
+        "isAuthenticated": false,
+        "requestedPath": "/dashboard"
+      },
+      "expectedOutput": {
+        "redirectTo": "/login"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "protected-routes",
+        "protected",
+        "route"
+      ],
+      "hint": "Return <Outlet /> or <Navigate to=\"/login\" replace />.",
+      "sourceQuestions": [
+        "couldn’t complete a workout given regarding route protection",
+        "Add protected routes",
+        "Protected route",
+        "protected routes",
+        "Restrict admin routes in the frontend"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-context-theme-5acabdda",
+      "topic": "Context API",
+      "title": "Build a Theme Switcher with Context API",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a ThemeContext provider that stores light/dark mode and exposes a toggle function. Consume it in a nested component.",
+      "functionName": "ThemeContext",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nconst ThemeContext = createContext(null);\n\nfunction ThemeProvider({ children }) {\n  // TODO\n}\n\nfunction ThemeButton() {\n  // TODO: consume and toggle theme\n}",
+      "sampleInput": {
+        "initialTheme": "light",
+        "action": "toggle"
+      },
+      "expectedOutput": {
+        "theme": "dark"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "context-api",
+        "theme",
+        "switcher",
+        "context",
+        "api"
+      ],
+      "hint": "Provide both theme and toggleTheme in the context value.",
+      "sourceQuestions": [
+        "Context API toggle theme example",
+        "Implementation toggle theme functionality using context api",
+        "Toggle theme - done"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-context-api-create-context-not-complete-bd187407",
+      "topic": "Context API",
+      "title": "Create context workout not complete",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "create context workout not complete",
+      "functionName": "ContextWorkoutNotComplete",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nexport default function ContextWorkoutNotComplete() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "context-api",
+        "context",
+        "practical",
+        "not",
+        "complete"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "create context workout not complete"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-context-api-how-to-implement-the-context-api-c48943e0",
+      "topic": "Context API",
+      "title": "Implement the using context api",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "How to implement the using context api",
+      "functionName": "ContextApi",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nexport default function ContextApi() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "context-api",
+        "context",
+        "api"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "How to implement the using context api"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-context-user-data-d0ba4a7a",
+      "topic": "Context API",
+      "title": "Update data in context",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "update data in context",
+      "functionName": "UpdateDataContext",
+      "starterCode": "import { createContext, useContext, useState } from \"react\";\n\nexport default function UpdateDataContext() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "context-api",
+        "update",
+        "data",
+        "in",
+        "context"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "update data in context"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-fundamentals-create-a-component-to-add-an-item-to-a--aeebff40",
+      "topic": "Redux Fundamentals",
+      "title": "Create a component to add an item to a list by clicking a button using Redux – ❌ Not done",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a component to add an item to a list by clicking a button using Redux – ❌ Not done",
+      "functionName": "createAComponentToAddAn",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-fundamentals",
+        "component",
+        "to",
+        "add",
+        "item",
+        "list",
+        "by"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create a component to add an item to a list by clicking a button using Redux – ❌ Not done"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-add-item-25869af5",
+      "topic": "Redux Fundamentals",
+      "title": "Create a component to add an item to a list using Redux",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a component to add an item to a list using Redux",
+      "functionName": "createAComponentToAddAn",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-fundamentals",
+        "component",
+        "to",
+        "add",
+        "item",
+        "list",
+        "redux"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create a component to add an item to a list using Redux"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-store-actions-reducers-create-an-action-6f735da8",
+      "topic": "Redux Store, Actions & Reducers",
+      "title": "Create an action",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an action",
+      "functionName": "createAnAction",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-store-actions-reducers",
+        "action"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create an action"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-store-actions-reducers-implement-a-reducer-to-handle-7e4419f0",
+      "topic": "Redux Store, Actions & Reducers",
+      "title": "Implement a reducer to handle multiple action types",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "implement a reducer to handle multiple action types",
+      "functionName": "implementAReducerToHandleMultiple",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-store-actions-reducers",
+        "reducer",
+        "to",
+        "handle",
+        "multiple",
+        "action",
+        "types"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "implement a reducer to handle multiple action types"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-store-actions-reducers-methods-to-store-and-update-d-04332836",
+      "topic": "Redux Store, Actions & Reducers",
+      "title": "Methods to store and update data using Context API",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Methods to store and update data using Context API",
+      "functionName": "methodsToStoreAndUpdateData",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-store-actions-reducers",
+        "methods",
+        "to",
+        "store",
+        "update",
+        "data",
+        "context"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Methods to store and update data using Context API."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-counter-0dbbfb4a",
+      "topic": "Redux Toolkit, Slices & configureStore",
+      "title": "Build a Counter with Redux Toolkit",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a counter slice with increment and decrement reducers, configure the store, provide it to React, and dispatch actions from a component.",
+      "functionName": "counterSlice",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\nconst counterSlice = createSlice({\n  name: \"counter\",\n  initialState: { value: 0 },\n  reducers: {\n    // TODO\n  }\n});\n\n// TODO: configure and export store/actions",
+      "sampleInput": {
+        "actions": [
+          "increment",
+          "increment",
+          "decrement"
+        ]
+      },
+      "expectedOutput": {
+        "value": 1
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-toolkit-slices-configurestore",
+        "counter",
+        "redux",
+        "toolkit"
+      ],
+      "hint": "Redux Toolkit reducers may use mutation-like syntax because Immer creates immutable updates.",
+      "sourceQuestions": [
+        "create auto inc/dec counter using redux",
+        "create a counter using redux",
+        "Create auto inc/dec counter using redux and range is 0-10",
+        "Create auto inc/dec counter with/without range 0-10 using/without using redux",
+        "Implement a counter using Redux",
+        "Counter app using redux toolkit",
+        "Create a component to add an item to a list using Redux – Code is almost correct, but encountered an issue in the slice."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-todo-620b86a7",
+      "topic": "Redux Toolkit, Slices & configureStore",
+      "title": "Create a todo app using redux toolkit",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a todo app using redux toolkit",
+      "functionName": "createATodoAppUsingRedux",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-toolkit-slices-configurestore",
+        "todo",
+        "app",
+        "redux",
+        "toolkit"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create a todo app using redux toolkit"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-middleware-thunk-saga-add-middlewares-in-redux-99a20627",
+      "topic": "Redux Middleware, Thunk & Saga",
+      "title": "Add middlewares in redux",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "add middlewares in redux",
+      "functionName": "addMiddlewaresInRedux",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-middleware-thunk-saga",
+        "add",
+        "middlewares",
+        "in",
+        "redux"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "add middlewares in redux"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-middleware-thunk-saga-add-multiple-middleware-apply--63982fd4",
+      "topic": "Redux Middleware, Thunk & Saga",
+      "title": "Add multiple middleware apply Middleware",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "add multiple middleware apply Middleware",
+      "functionName": "addMultipleMiddlewareApplyMiddleware",
+      "starterCode": "import { configureStore, createSlice } from \"@reduxjs/toolkit\";\n\n// TODO: create the slice, store, and React integration",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "redux-middleware-thunk-saga",
+        "add",
+        "multiple",
+        "middleware",
+        "apply"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "add multiple middleware apply Middleware"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-redux-async-thunk-9a2eacf0",
+      "topic": "Async Redux & createAsyncThunk",
+      "title": "Fetch Data with createAsyncThunk",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "Create an async thunk that fetches users and a slice that handles pending, fulfilled, and rejected states through extraReducers.",
+      "functionName": "fetchUsers",
+      "starterCode": "import { createAsyncThunk, createSlice } from \"@reduxjs/toolkit\";\n\nexport const fetchUsers = createAsyncThunk(\"users/fetch\", async (_, thunkAPI) => {\n  // TODO\n});\n\nconst usersSlice = createSlice({\n  name: \"users\",\n  initialState: { items: [], status: \"idle\", error: null },\n  reducers: {},\n  extraReducers: (builder) => {\n    // TODO\n  }\n});",
+      "sampleInput": {
+        "response": [
+          {
+            "id": 1,
+            "name": "Asha"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "status": "succeeded",
+        "itemCount": 1
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "async-redux-create-async-thunk",
+        "fetch",
+        "data",
+        "async",
+        "thunk"
+      ],
+      "hint": "Use rejectWithValue for expected API failures and handle all three lifecycle actions.",
+      "sourceQuestions": [
+        "createAsyncThunk",
+        "implement createAsyncThunk."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-async-redux-create-async-thunk-handle-asynchronous-actions-6d43fa13",
+      "topic": "Async Redux & createAsyncThunk",
+      "title": "Handle asynchronous actions in Redux",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "handle asynchronous actions in Redux",
+      "functionName": "HandleAsynchronousActionsRedux",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function HandleAsynchronousActionsRedux() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "async-redux-create-async-thunk",
+        "handle",
+        "asynchronous",
+        "actions",
+        "in",
+        "redux"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "handle asynchronous actions in Redux"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-async-redux-create-async-thunk-handling-async-actions-redu-b2496f68",
+      "topic": "Async Redux & createAsyncThunk",
+      "title": "Handling async actions using Redux Thunk",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "Handling async actions using Redux Thunk",
+      "functionName": "HandlingAsyncActionsReduxThunk",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function HandlingAsyncActionsReduxThunk() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "async-redux-create-async-thunk",
+        "handling",
+        "async",
+        "actions",
+        "redux",
+        "thunk"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Handling async actions using Redux Thunk"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-async-redux-create-async-thunk-where-we-should-do-api-call-faacac03",
+      "topic": "Async Redux & createAsyncThunk",
+      "title": "Where we should do api call in redux",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "Where we should do api call in redux",
+      "functionName": "WhereWeShouldDoApi",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function WhereWeShouldDoApi() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "async-redux-create-async-thunk",
+        "where",
+        "we",
+        "should",
+        "do",
+        "api",
+        "call"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Where we should do api call in redux"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-debounced-api-search-b01775f8",
+      "topic": "Performance Optimization",
+      "title": "Build a Debounced API Search",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "Create a search input that waits before requesting results. Cancel the previous timer and abort stale requests when the query changes.",
+      "functionName": "SearchUsers",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function SearchUsers() {\n  const [query, setQuery] = useState(\"\");\n  const [results, setResults] = useState([]);\n\n  useEffect(() => {\n    // TODO: debounce and cancel stale request\n  }, [query]);\n\n  return <section>{/* input and results */}</section>;\n}",
+      "sampleInput": {
+        "typedValues": [
+          "r",
+          "re",
+          "rea",
+          "react"
+        ],
+        "delayMs": 400
+      },
+      "expectedOutput": {
+        "requestsMade": 1,
+        "finalQuery": "react"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "performance-optimization",
+        "debounced",
+        "api",
+        "search"
+      ],
+      "hint": "Return cleanup that clears the timeout and aborts the request.",
+      "sourceQuestions": [
+        "Implement debouncing",
+        "Implement the search using api with debouncing"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-lazy-load-component-95ad373f",
+      "topic": "Code Splitting, Lazy Loading & Suspense",
+      "title": "Lazy Load a Component with Suspense",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Load a component with React.lazy and render fallback UI with Suspense until the module is ready.",
+      "functionName": "Reports",
+      "starterCode": "import { lazy, Suspense } from \"react\";\n\nconst Reports = lazy(() => import(\"./Reports.jsx\"));\n\nexport default function App() {\n  return (\n    // TODO: wrap Reports with Suspense and a fallback\n    <Reports />\n  );\n}",
+      "sampleInput": {
+        "moduleDelayMs": 500
+      },
+      "expectedOutput": {
+        "whileLoading": "Loading…",
+        "afterLoading": "Reports component"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "code-splitting-lazy-loading-suspense",
+        "lazy",
+        "load",
+        "component",
+        "suspense"
+      ],
+      "hint": "Suspense requires a fallback prop.",
+      "sourceQuestions": [
+        "Create lazy load component",
+        "Implement lazy loading",
+        "Implement lazy loading. Load the component after 5 sec"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-code-splitting-lazy-loading-suspense-lazy-loading-code-ced06c9b",
+      "topic": "Code Splitting, Lazy Loading & Suspense",
+      "title": "Lazy loading code",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Lazy loading code",
+      "functionName": "LazyLoadingCode",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function LazyLoadingCode() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "code-splitting-lazy-loading-suspense",
+        "lazy",
+        "loading",
+        "code"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Lazy loading code"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-hoc-props-proxy-0c1165ce",
+      "topic": "Higher-Order Components",
+      "title": "Create props for HOC",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create props for HOC",
+      "functionName": "withFeature",
+      "starterCode": "function withFeature(WrappedComponent) {\n  return function EnhancedComponent(props) {\n    // TODO: enhance and render WrappedComponent\n    return <WrappedComponent {...props} />;\n  };\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "higher-order-components",
+        "props",
+        "for",
+        "hoc"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create props for HOC",
+        "Create props Proxy for HOC",
+        "Create Props Proxy for HOCForwardref"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-hoc-basic-30c334e6",
+      "topic": "Higher-Order Components",
+      "title": "Create a Basic Higher-Order Component",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a higher-order component that injects a loading prop and renders fallback content while loading, otherwise rendering the wrapped component with all original props.",
+      "functionName": "withLoading",
+      "starterCode": "function withLoading(WrappedComponent) {\n  return function WithLoading({ isLoading, ...props }) {\n    // TODO\n  };\n}",
+      "sampleInput": {
+        "isLoading": true
+      },
+      "expectedOutput": {
+        "rendered": "Loading…"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "higher-order-components",
+        "basic",
+        "higher",
+        "order",
+        "component"
+      ],
+      "hint": "Return a new component and forward remaining props with the spread operator.",
+      "sourceQuestions": [
+        "HOC Example"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-render-props-composition-patterns-render-props-example-usa-32ca3b84",
+      "topic": "Render Props, Composition & Patterns",
+      "title": "Render Props (example usage)",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Render Props (example usage)",
+      "functionName": "RenderPropsExampleUsage",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RenderPropsExampleUsage() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "render-props-composition-patterns",
+        "render",
+        "props",
+        "example",
+        "usage"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Render Props (example usage)"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-authentication-handle-delete-of-already-logged-in-user-db08ea83",
+      "topic": "Authentication",
+      "title": "Handle delete of already logged in user",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "handle delete of already logged in user",
+      "functionName": "HandleDeleteAlreadyLoggedUser",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function HandleDeleteAlreadyLoggedUser() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "authentication",
+        "handle",
+        "delete",
+        "of",
+        "already",
+        "logged",
+        "in"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "handle delete of already logged in user"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-authentication-prevent-showing-login-signup-if-user-alread-f55e48c4",
+      "topic": "Authentication",
+      "title": "Prevent showing login/ signup if user already logged in",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "prevent showing login/ signup if user already logged in",
+      "functionName": "PreventShowingLoginSignupIf",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function PreventShowingLoginSignupIf() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "authentication",
+        "prevent",
+        "showing",
+        "login",
+        "signup",
+        "if",
+        "user"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "prevent showing login/ signup if user already logged in"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-authentication-remove-token-from-source-code-30e65e66",
+      "topic": "Authentication",
+      "title": "Remove token from source code",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "remove token from source code",
+      "functionName": "RemoveTokenSourceCode",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RemoveTokenSourceCode() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "authentication",
+        "remove",
+        "token",
+        "from",
+        "source",
+        "code"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "remove token from source code"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-authentication-restrict-the-auth-pages-once-user-is-authen-41b4a59d",
+      "topic": "Authentication",
+      "title": "Restrict the auth pages once user is authenticated",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Restrict the auth pages once user is authenticated",
+      "functionName": "RestrictAuthPagesOnceUser",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RestrictAuthPagesOnceUser() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "authentication",
+        "restrict",
+        "auth",
+        "pages",
+        "once",
+        "user",
+        "is"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Restrict the auth pages once user is authenticated"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-refresh-token-1eaa65bb",
+      "topic": "JWT, Access Tokens & Refresh Tokens",
+      "title": "Implement Refresh Token",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "Implement Refresh Token",
+      "functionName": "RefreshToken",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function RefreshToken() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "jwt-access-tokens-refresh-tokens",
+        "refresh",
+        "token"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Implement Refresh Token"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-jwt-access-tokens-refresh-tokens-protect-admin-urls-jwt-c832db7a",
+      "topic": "JWT, Access Tokens & Refresh Tokens",
+      "title": "Protect admin urls using JWT",
+      "type": "coding",
+      "difficulty": "advanced",
+      "task": "protect admin urls using JWT",
+      "functionName": "ProtectAdminUrlsJWT",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ProtectAdminUrlsJWT() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "jwt-access-tokens-refresh-tokens",
+        "protect",
+        "admin",
+        "urls",
+        "jwt"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "protect admin urls using JWT"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-persist-localstorage-81c55f2c",
+      "topic": "Browser Storage & Token Security",
+      "title": "Save todos in local storage",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Save todos in local storage",
+      "functionName": "SaveTodosLocalStorage",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function SaveTodosLocalStorage() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "browser-storage-token-security",
+        "save",
+        "todos",
+        "in",
+        "localstorage"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Save todos in local storage",
+        "Persist the todos"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-browser-storage-token-security-store-items-to-localstorage-aa6a6fa8",
+      "topic": "Browser Storage & Token Security",
+      "title": "Store Items to local storage",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Store Items to local storage",
+      "functionName": "StoreItemsLocalStorage",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function StoreItemsLocalStorage() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "browser-storage-token-security",
+        "store",
+        "items",
+        "to",
+        "localstorage"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Store Items to local storage"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-browser-storage-token-security-env-to-store-tokens-fdb6b82c",
+      "topic": "Browser Storage & Token Security",
+      "title": "Use ENV to store tokens",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "use ENV to store tokens",
+      "functionName": "ENVStoreTokens",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ENVStoreTokens() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "browser-storage-token-security",
+        "use",
+        "env",
+        "to",
+        "store",
+        "tokens"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "use ENV to store tokens"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-fetch-api-integration-differences-and-cases-for-fetch-vs-a-7c74058c",
+      "topic": "Fetch & API Integration",
+      "title": "Differences and use cases for fetch vs axios in making API calls",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Differences and use cases for fetch vs axios in making API calls",
+      "functionName": "DifferencesCasesForFetchVs",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function DifferencesCasesForFetchVs() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "fetch-api-integration",
+        "differences",
+        "use",
+        "cases",
+        "for",
+        "fetch",
+        "vs"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Differences and use cases for fetch vs axios in making API calls."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-api-fetch-useeffect-19437875",
+      "topic": "Fetch & API Integration",
+      "title": "Fetch API Data with useEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Fetch a user list when the component mounts. Display loading, success, and error states, and prevent state updates after cancellation.",
+      "functionName": "Users",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function Users() {\n  const [users, setUsers] = useState([]);\n  const [status, setStatus] = useState(\"loading\");\n\n  useEffect(() => {\n    const controller = new AbortController();\n    // TODO: fetch data and handle errors\n    return () => controller.abort();\n  }, []);\n\n  return <section>{/* render state */}</section>;\n}",
+      "sampleInput": {
+        "endpoint": "/api/users"
+      },
+      "expectedOutput": {
+        "status": "success",
+        "rendered": "user list"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "fetch-api-integration",
+        "fetch",
+        "api",
+        "data",
+        "useeffect"
+      ],
+      "hint": "Use an AbortController and distinguish AbortError from real failures.",
+      "sourceQuestions": [
+        "Fetch data from the api using useEffect(partially done)"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-fetch-api-integration-fetch-data-from-api-useffect-2b086726",
+      "topic": "Fetch & API Integration",
+      "title": "Fetch data from api using UsEffect",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Fetch data from api using UsEffect",
+      "functionName": "FetchDataApiUsEffect",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function FetchDataApiUsEffect() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "fetch-api-integration",
+        "fetch",
+        "data",
+        "from",
+        "api",
+        "useffect"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Fetch data from api using UsEffect"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-server-search-users-4edef25c",
+      "topic": "Fetch & API Integration",
+      "title": "Implement server side search for users",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "implement server side search for users",
+      "functionName": "ServerSideSearchForUsers",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function ServerSideSearchForUsers() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "fetch-api-integration",
+        "server",
+        "side",
+        "search",
+        "for",
+        "users"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "implement server side search for users",
+        "implement server side user search"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-fetch-api-integration-prevent-the-unwanted-api-calls-from--d70e3518",
+      "topic": "Fetch & API Integration",
+      "title": "Prevent the unwanted api calls from admin side (check the useEffect)",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "prevent the unwanted api calls from admin side (check the useEffect)",
+      "functionName": "PreventUnwantedApiCallsAdmin",
+      "starterCode": "import { useEffect, useState } from \"react\";\n\nexport default function PreventUnwantedApiCallsAdmin() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "fetch-api-integration",
+        "prevent",
+        "unwanted",
+        "api",
+        "calls",
+        "from",
+        "admin"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "prevent the unwanted api calls from admin side (check the useEffect)"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-axios-interceptors-avoid-loose-api-calls-in-components-cre-ad433e61",
+      "topic": "Axios & Interceptors",
+      "title": "Avoid loose API calls in components; create axios instance",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "avoid loose API calls in components; create axios instance",
+      "functionName": "AvoidLooseAPICallsComponents",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function AvoidLooseAPICallsComponents() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "axios-interceptors",
+        "avoid",
+        "loose",
+        "api",
+        "calls",
+        "in",
+        "components"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "avoid loose API calls in components; create axios instance"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-edit-32753c12",
+      "topic": "Todo Applications",
+      "title": "Add edit option for todo",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Add edit option for todo",
+      "functionName": "EditOptionForTodo",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function EditOptionForTodo() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "todo-applications",
+        "add",
+        "edit",
+        "option",
+        "for",
+        "todo"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Add edit option for todo",
+        "Edit Todos could be an addon"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-basic-db25184c",
+      "topic": "Todo Applications",
+      "title": "Build a Basic Todo Application",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a todo application where users can enter a non-empty task, add it to a list, and display all tasks using stable keys.",
+      "functionName": "TodoApp",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [text, setText] = useState(\"\");\n  const [todos, setTodos] = useState([]);\n\n  const addTodo = () => {\n    // TODO: validate and append a todo immutably\n  };\n\n  return <section>{/* input, button, and list */}</section>;\n}",
+      "sampleInput": {
+        "text": "Learn React"
+      },
+      "expectedOutput": {
+        "todos": [
+          {
+            "text": "Learn React",
+            "done": false
+          }
+        ]
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "todo-applications",
+        "basic",
+        "todo",
+        "application"
+      ],
+      "hint": "Trim the input and append a new object with a stable id.",
+      "sourceQuestions": [
+        "add edit feature in todo app",
+        "Create new todo app ( please don’t use any AI tool )",
+        "Edit option in toDo list",
+        "implement a completed button to mark the task as completed and count the number of completed tasks in todo application",
+        "prevent duplicate task in todo app",
+        "Prevent duplicates in a Todo application (Live Coding)",
+        "show the count of available tasks in todo list: Practical",
+        "Design To-Do App."
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-mark-complete-c48afcac",
+      "topic": "Todo Applications",
+      "title": "Mark Todos Complete and Count Completed Tasks",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Add a control that toggles a todo between pending and completed. Display the number of completed todos and update state without mutation.",
+      "functionName": "TodoApp",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function TodoApp() {\n  const [todos, setTodos] = useState([{ id: 1, text: \"Learn hooks\", done: false }]);\n\n  const toggleTodo = (id) => {\n    // TODO\n  };\n\n  const completedCount = 0; // TODO\n  return <section>{/* render controls and completed count */}</section>;\n}",
+      "sampleInput": {
+        "todoId": 1,
+        "action": "toggle"
+      },
+      "expectedOutput": {
+        "todo": {
+          "id": 1,
+          "done": true
+        },
+        "completedCount": 1
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "todo-applications",
+        "mark",
+        "todos",
+        "complete",
+        "count",
+        "completed",
+        "tasks"
+      ],
+      "hint": "Use map() to create a new array and filter() to calculate the count.",
+      "sourceQuestions": [
+        "component to display count of completed and pending tasks",
+        "Task: design a component that displays the count of completed todo items",
+        "Mark todo as completed"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-applications-update-the-todo-array-like-newly-added-i-eaa8d093",
+      "topic": "Todo Applications",
+      "title": "Update the todo array like newly added items to the bottom",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Update the todo array like newly added items to the bottom",
+      "functionName": "UpdateTodoArrayLikeNewly",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function UpdateTodoArrayLikeNewly() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "todo-applications",
+        "update",
+        "todo",
+        "array",
+        "like",
+        "newly",
+        "added"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Update the todo array like newly added items to the bottom"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-counter-basic-7e04e199",
+      "topic": "Counters & Interactive UI",
+      "title": "Build an Increment and Decrement Counter",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Build a counter that displays the current value and provides increment and decrement buttons. Use functional state updates.",
+      "functionName": "Counter",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <section>\n      <p>Count: {count}</p>\n      {/* TODO: add increment and decrement buttons */}\n    </section>\n  );\n}",
+      "sampleInput": {
+        "initialCount": 0,
+        "actions": [
+          "increment",
+          "increment",
+          "decrement"
+        ]
+      },
+      "expectedOutput": {
+        "displayedCount": 1
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "counters-interactive-ui",
+        "increment",
+        "decrement",
+        "counter"
+      ],
+      "hint": "Call setCount(value => value + 1) and setCount(value => value - 1).",
+      "sourceQuestions": [
+        "workout: conditionally render the count in red color when the value is an odd number in a counter app",
+        "Create a button that shows 0 initially and when we click it will increment by 2",
+        "increment and decrement",
+        "Increment problem"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-toggle-button-cf956031",
+      "topic": "Counters & Interactive UI",
+      "title": "Create an on-off toggle button",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create an on-off toggle button",
+      "functionName": "OnOffToggleButton",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function OnOffToggleButton() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "counters-interactive-ui",
+        "on",
+        "off",
+        "toggle",
+        "button"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create an on-off toggle button"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-ui-alert-message-3a701751",
+      "topic": "Counters & Interactive UI",
+      "title": "Show a Dismissible Alert Message",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Display a success or error alert after a user action and allow the user to dismiss it. Use semantic roles for accessibility.",
+      "functionName": "AlertDemo",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function AlertDemo() {\n  const [alert, setAlert] = useState(null);\n  // TODO\n  return <section />;\n}",
+      "sampleInput": {
+        "action": "save succeeds"
+      },
+      "expectedOutput": {
+        "role": "status",
+        "message": "Saved successfully"
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "counters-interactive-ui",
+        "show",
+        "dismissible",
+        "alert",
+        "message"
+      ],
+      "hint": "Use role=\"status\" for success and role=\"alert\" for errors.",
+      "sourceQuestions": [
+        "Show alerts"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-nested-dropdown-f5156882",
+      "topic": "Lists, Search & Pagination",
+      "title": "Create nested dropdown and map the array of object",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Create nested dropdown and map the array of object",
+      "functionName": "NestedDropdownMapArrayObject",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function NestedDropdownMapArrayObject() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "lists-search-pagination",
+        "nested",
+        "dropdown",
+        "map",
+        "array",
+        "of",
+        "object"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Create nested dropdown and map the array of object",
+        "Create nested dropdown and map the array of objet based on the selection of 1st dropdown"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-filter-search-list-378db0ea",
+      "topic": "Lists, Search & Pagination",
+      "title": "Filter a List from a Search Input",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Render a list of users and filter it case-insensitively from a controlled search input without mutating the source list.",
+      "functionName": "SearchableList",
+      "starterCode": "import { useMemo, useState } from \"react\";\n\nexport default function SearchableList({ users }) {\n  const [query, setQuery] = useState(\"\");\n  const filtered = useMemo(() => {\n    // TODO\n  }, [users, query]);\n  return <section>{/* input and filtered list */}</section>;\n}",
+      "sampleInput": {
+        "users": [
+          "Asha",
+          "Arun",
+          "Maya"
+        ],
+        "query": "ar"
+      },
+      "expectedOutput": {
+        "visible": [
+          "Arun"
+        ]
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "lists-search-pagination",
+        "filter",
+        "list",
+        "from",
+        "search",
+        "input"
+      ],
+      "hint": "Compare lowercase values and render the derived array.",
+      "sourceQuestions": [
+        "Implement filter"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-pagination-user-list-32e3d2ea",
+      "topic": "Lists, Search & Pagination",
+      "title": "Paginate a User List",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Display users page by page. Track the current page, calculate page boundaries, and disable navigation at the first and last page.",
+      "functionName": "UserList",
+      "starterCode": "import { useMemo, useState } from \"react\";\n\nexport default function UserList({ users, pageSize = 5 }) {\n  const [page, setPage] = useState(1);\n  const visibleUsers = useMemo(() => {\n    // TODO\n  }, [users, page, pageSize]);\n  return <section>{/* list and pagination controls */}</section>;\n}",
+      "sampleInput": {
+        "userCount": 12,
+        "pageSize": 5,
+        "page": 2
+      },
+      "expectedOutput": {
+        "visibleIndexes": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "totalPages": 3
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "lists-search-pagination",
+        "paginate",
+        "user",
+        "list"
+      ],
+      "hint": "Use slice((page - 1) * pageSize, page * pageSize).",
+      "sourceQuestions": [
+        "Add pagination on the user list",
+        "Implement pagination"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-forms-signup-login-projects-add-validation-for-form-3c661c38",
+      "topic": "Forms & Signup/Login Projects",
+      "title": "Add validation for form",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "add validation for form",
+      "functionName": "ValidationForForm",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ValidationForForm() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "forms-signup-login-projects",
+        "add",
+        "validation",
+        "for",
+        "form"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "add validation for form"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-todo-delete-confirm-dd64bdc1",
+      "topic": "Mini Projects & Project Architecture",
+      "title": "Add confirmation before deleting an item",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Add confirmation before deleting an item",
+      "functionName": "ConfirmationBeforeDeletingItem",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ConfirmationBeforeDeletingItem() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "mini-projects-project-architecture",
+        "add",
+        "confirmation",
+        "before",
+        "deleting",
+        "item"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Add confirmation before deleting an item"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-mini-projects-project-architecture-add-or-delete-an-item-a-c496c5d1",
+      "topic": "Mini Projects & Project Architecture",
+      "title": "Add or delete an item at any position",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Add or delete an item at any position",
+      "functionName": "DeleteItemAtAnyPosition",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function DeleteItemAtAnyPosition() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "mini-projects-project-architecture",
+        "add",
+        "delete",
+        "item",
+        "at",
+        "any",
+        "position"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Add or delete an item at any position"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-project-feedback-messages-64a0e81e",
+      "topic": "Mini Projects & Project Architecture",
+      "title": "Display Clear Success and Error Feedback",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Add reusable success and error messages to an asynchronous form or project action. Clear stale messages before a new request and expose accessible status text.",
+      "functionName": "ActionForm",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ActionForm() {\n  const [message, setMessage] = useState({ type: \"\", text: \"\" });\n  // TODO: update message during success and failure flows\n  return <section aria-live=\"polite\">{message.text}</section>;\n}",
+      "sampleInput": {
+        "result": "failure"
+      },
+      "expectedOutput": {
+        "messageType": "error",
+        "visible": true
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "mini-projects-project-architecture",
+        "display",
+        "clear",
+        "success",
+        "error",
+        "feedback"
+      ],
+      "hint": "Use one structured message state and aria-live for screen-reader announcements.",
+      "sourceQuestions": [
+        "Add proper error messages",
+        "show proper messages",
+        "show proper messages to users"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-mini-projects-project-architecture-make-an-offer-button-ol-dee77274",
+      "topic": "Mini Projects & Project Architecture",
+      "title": "Make an offer button - OLX",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Make an offer button - OLX",
+      "functionName": "OfferButtonOLX",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function OfferButtonOLX() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "mini-projects-project-architecture",
+        "make",
+        "offer",
+        "button",
+        "olx"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Make an offer button - OLX"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-typescript-with-react-typescript-code-268553d8",
+      "topic": "TypeScript with React",
+      "title": "Use typescript code in react",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "use typescript code in react",
+      "functionName": "TypescriptCode",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function TypescriptCode() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "typescript-with-react",
+        "use",
+        "typescript",
+        "code",
+        "in"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "use typescript code in react,"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-css-responsive-design-ui-libraries-add-a-style-to-each-of--1bbe8088",
+      "topic": "CSS, Responsive Design & UI Libraries",
+      "title": "Add a style to each of the title fields",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "add a style to each of the title fields",
+      "functionName": "StyleEachTitleFields",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function StyleEachTitleFields() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "css-responsive-design-ui-libraries",
+        "add",
+        "style",
+        "to",
+        "each",
+        "of",
+        "title"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "add a style to each of the title fields"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-css-responsive-design-ui-libraries-change-the-colour-of-an-c20a801b",
+      "topic": "CSS, Responsive Design & UI Libraries",
+      "title": "Change the colour of an html element on parent when click on a button in child component and it should be done using context",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Change the colour of an html element on parent when click on a button in child component and it should be done using context",
+      "functionName": "ChangeColourHtmlElementOn",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function ChangeColourHtmlElementOn() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "css-responsive-design-ui-libraries",
+        "change",
+        "colour",
+        "of",
+        "html",
+        "element",
+        "on"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Change the colour of an html element on parent when click on a button in child component and it should be done using context"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-react-logging-c240b7fc",
+      "topic": "Testing & Debugging",
+      "title": "Add Structured Client-Side Logging",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "task": "Create a small logger utility with info and error methods, include useful context, and call it from an async React action without exposing passwords or tokens.",
+      "functionName": "logger",
+      "starterCode": "export const logger = {\n  info(message, context = {}) {\n    // TODO\n  },\n  error(message, context = {}) {\n    // TODO\n  }\n};",
+      "sampleInput": {
+        "level": "error",
+        "message": "Request failed",
+        "context": {
+          "status": 500
+        }
+      },
+      "expectedOutput": {
+        "logged": true,
+        "secretFieldsExcluded": true
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "testing-debugging",
+        "add",
+        "structured",
+        "client",
+        "side",
+        "logging"
+      ],
+      "hint": "Centralize logging and sanitize sensitive fields before output or transmission.",
+      "sourceQuestions": [
+        "Add logging",
+        "Use logging libraries"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    },
+    {
+      "id": "react-jwt-middleware-console-acecdb4d",
+      "topic": "Related Cross-Stack Concepts",
+      "title": "Write a middleware to console the Jwt token",
+      "type": "coding",
+      "difficulty": "beginner",
+      "task": "Write a middleware to console the Jwt token",
+      "functionName": "WriteMiddlewareConsoleJwtToken",
+      "starterCode": "import { useState } from \"react\";\n\nexport default function WriteMiddlewareConsoleJwtToken() {\n  // TODO: implement the requested behavior\n  return <section />;\n}",
+      "sampleInput": {
+        "userAction": "Perform the interaction described in the task."
+      },
+      "expectedOutput": {
+        "uiBehavior": "The rendered UI and state match the task requirements."
+      },
+      "constraints": [
+        "Use functional React components unless the task specifically requires a class component or error boundary.",
+        "Do not mutate props or state directly.",
+        "Use stable keys when rendering lists and clean up subscriptions, timers, or requests when required."
+      ],
+      "subjects": [
+        "react"
+      ],
+      "tags": [
+        "related-cross-stack-concepts",
+        "write",
+        "middleware",
+        "to",
+        "console",
+        "jwt",
+        "token"
+      ],
+      "hint": "Break the UI into small components, keep state at the closest common owner, and update state immutably.",
+      "sourceQuestions": [
+        "Write a middleware to console the Jwt token"
+      ],
+      "implementationType": "component-or-hook",
+      "status": "ready"
+    }
+  ]
+}

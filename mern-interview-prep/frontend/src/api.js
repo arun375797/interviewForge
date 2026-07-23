@@ -156,6 +156,48 @@ export const api = {
       cache: 'no-store',
     }),
   getSubjects: () => request('/questions/subjects'),
+  getAdminSubjects: () => request('/questions/subjects/admin/all', { cache: 'no-store' }),
+  createSubject: (body) =>
+    request('/questions/subjects', { method: 'POST', body: JSON.stringify(body) }),
+  updateSubject: (key, body) =>
+    request(`/questions/subjects/${encodeURIComponent(key)}`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }),
+  deleteSubject: (key, { cascade = false } = {}) =>
+    request(
+      `/questions/subjects/${encodeURIComponent(key)}?cascade=${cascade ? 'true' : 'false'}`,
+      { method: 'DELETE' }
+    ),
+  getAdminSubjectTopics: (key, params = {}) => {
+    const q = new URLSearchParams(
+      Object.entries(params).filter(([, v]) => v !== undefined && v !== '' && v !== null)
+    ).toString();
+    return request(
+      `/questions/subjects/${encodeURIComponent(key)}/admin/topics${q ? `?${q}` : ''}`,
+      { cache: 'no-store' }
+    );
+  },
+  createTopic: (key, body) =>
+    request(`/questions/subjects/${encodeURIComponent(key)}/topics`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+  renameTopic: (key, body) =>
+    request(`/questions/subjects/${encodeURIComponent(key)}/topics/rename`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }),
+  reorderTopics: (key, body) =>
+    request(`/questions/subjects/${encodeURIComponent(key)}/topics/reorder`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }),
+  deleteTopic: (key, body) =>
+    request(`/questions/subjects/${encodeURIComponent(key)}/topics`, {
+      method: 'DELETE',
+      body: JSON.stringify(body),
+    }),
   getTopics: (subject) => request(`/questions/subjects/${subject}/topics`),
   getStats: () => request('/questions/stats'),
   getRandom: (params = {}) => {
@@ -352,3 +394,21 @@ export const SUBJECT_META = {
     blurb: 'Structures, algorithms & complexity',
   },
 };
+
+/** Merge static defaults with a live subject document from the API. */
+export function resolveSubjectMeta(subjectOrKey, liveSubject) {
+  const key =
+    typeof subjectOrKey === 'string'
+      ? subjectOrKey
+      : subjectOrKey?.key || liveSubject?.key || '';
+  const live = liveSubject || (typeof subjectOrKey === 'object' ? subjectOrKey : null);
+  const fallback = SUBJECT_META[key] || {};
+  return {
+    key,
+    label: live?.label || fallback.label || key,
+    short: live?.short || fallback.short || live?.label || key,
+    accent: live?.color || fallback.accent || '#0F766E',
+    blurb: live?.description || fallback.blurb || '',
+    supportsCode: Boolean(live?.supportsCode ?? (key === 'javascript' || key === 'dsa')),
+  };
+}

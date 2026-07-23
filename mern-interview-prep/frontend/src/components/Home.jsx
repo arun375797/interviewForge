@@ -141,6 +141,7 @@ export default function Home({ subjects, stats, loading }) {
               return <div key={i} className="skeleton h-40 rounded-2xl" />;
             }
             const meta = SUBJECT_META[s.key] || {};
+            const accent = s.color || meta.accent || '#0f766e';
             return (
               <Link
                 key={s.key}
@@ -149,15 +150,15 @@ export default function Home({ subjects, stats, loading }) {
               >
                 <div
                   className="absolute -right-6 -top-6 h-28 w-28 rounded-full opacity-20 blur-2xl transition group-hover:opacity-35"
-                  style={{ background: meta.accent || s.color }}
+                  style={{ background: accent }}
                 />
                 <div className="relative flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <p
                       className="font-mono text-xs uppercase tracking-[0.18em]"
-                      style={{ color: meta.accent || s.color }}
+                      style={{ color: accent }}
                     >
-                      {meta.short || s.label}
+                      {s.short || meta.short || s.label}
                     </p>
                     <h3 className="overflow-anywhere mt-2 font-display text-2xl font-semibold">{s.label}</h3>
                     <p className="overflow-anywhere mt-2 max-w-sm text-sm text-muted">{s.description || meta.blurb}</p>

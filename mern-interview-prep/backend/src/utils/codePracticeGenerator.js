@@ -1,5 +1,5 @@
-const CODE_SUBJECTS = ['javascript', 'dsa'];
-const { findCuratedCodeQuestion } = require('./curatedCodeQuestions');
+const CODE_SUBJECTS = ['javascript', 'dsa', 'nodejs', 'react'];
+const { findCuratedCodeQuestion, getCodeTopicOrder, TOPIC_ORDER } = require('./curatedCodeQuestions');
 
 const CODE_KEYWORD_RE =
   /(implement|write|program|code|function|algorithm|find|reverse|sort|search|sum|count|remove|check|print|return|array|string|number|palindrome|anagram|prime|fibonacci|factorial|duplicate|maximum|minimum|largest|smallest|merge|stack|queue|tree|graph|traversal|binary|linear|matrix|two sum|parentheses|bracket|vowel|flatten|loop|while|for\s*loop|even|odd)/i;
@@ -7,32 +7,7 @@ const CODE_KEYWORD_RE =
 const CODE_THEORY_RE =
   /\bevent\s*loop\b|\beventloop\b|phases?\s+in\s+(an?\s+)?event\s*loop|\bwhat\s+is\b|\bdefine\b|\bexplain\b|\bdifference\s+between\b|\badvantages?\b|\bdisadvantages?\b|\bapplications?\b|\btypes?\s+of\b|\bwhy\b|\bwhen\s+to\s+use\b|\btime\s+complexity\b|\bspace\s+complexity\b|\buse\s+case\b|\buse\s+of\b|\busage\b|\breal-world\b|\bsuitable\b|\boverflow\b|\bunderflow\b|stackoverflow|heapoverflow|\bconcept\b|\bclarity\b|\bstable\s+sorting\b|\bworst-case\b|\bbest-case\b|practical\s+implementation\s+of\s+(array|stack|queue|linked\s*list)$/i;
 
-const CODE_TOPIC_ORDER = {
-  'Searching & Finding': 1,
-  'Sum Problems': 2,
-  'Frequency Problems': 3,
-  'Remove/Delete Problems': 4,
-  'Insert/Delete Operations': 5,
-  Rearrangement: 6,
-  'Pair/Triplet Problems': 7,
-  'Other Array Problems': 8,
-  'String Basic Manipulations': 9,
-  'String Reversal Problems': 10,
-  'String Case Conversion': 11,
-  'String Counting Problems': 12,
-  'String Character Problems': 13,
-  'Other String Problems': 14,
-  'Prime Number Questions': 15,
-  'Palindrome Questions': 16,
-  'Number-Based Questions': 17,
-  'Special Number Problems': 18,
-  'Mathematical Problems': 19,
-  'Object Basic Operations': 20,
-  'Object Advanced Concepts': 21,
-  'Object Problems': 22,
-  'Array of Objects': 23,
-  'Functions & Advanced Concepts': 24,
-  Loops: 25,
+const FALLBACK_TOPIC_ORDER = {
   'Loops & Control Flow Practice': 101,
   'Array Basics & Traversal': 102,
   'Array Reverse & Transformation': 103,
@@ -55,6 +30,8 @@ const CODE_TOPIC_ORDER = {
   'Matrix & Grid Problems': 120,
   'Heap & Priority Queue Problems': 121,
 };
+
+const CODE_TOPIC_ORDER = { ...FALLBACK_TOPIC_ORDER, ...TOPIC_ORDER };
 
 function inferCodeTopic(question, originalTopic = '', subject = '') {
   const q = question.toLowerCase();
@@ -160,17 +137,32 @@ function challenge({
   };
 }
 
+function curatedStarter(item) {
+  const functionName = item.functionName || 'solve';
+  const provided = String(item.starterCode || '').trim();
+  if (provided) {
+    if (/const\s+sampleInput\b|return\s+/.test(provided)) return provided;
+    return `${provided}
+
+const sampleInput = ${jsValue(item.sampleInput)};
+return typeof ${functionName} === 'function' ? ${functionName}(sampleInput) : sampleInput;`;
+  }
+  return starter(functionName, item.sampleInput, item.hint);
+}
+
 function curatedChallenge(item) {
   return {
     title: item.title,
     topic: item.topic,
     originalTopic: item.topic,
-    topicOrder: CODE_TOPIC_ORDER[item.topic] || 99,
+    topicOrder: item.topicOrder || getCodeTopicOrder(item.topic) || CODE_TOPIC_ORDER[item.topic] || 99,
     language: 'javascript',
     task: item.task,
     sampleInput: item.sampleInput,
     expectedOutput: item.expectedOutput,
-    starterCode: starter(item.functionName, item.sampleInput, item.hint),
+    constraints: item.constraints || [],
+    hint: item.hint || '',
+    starterCode: curatedStarter(item),
   };
 }
 
@@ -609,9 +601,27 @@ const TEMPLATES = [
 ];
 
 function getCodeChallenge(doc) {
-  if (!CODE_SUBJECTS.includes(doc.subject)) return null;
   const curated = findCuratedCodeQuestion(doc.subject, doc.question);
   if (curated) return curatedChallenge(curated);
+
+  if (doc.codeOnly) {
+    const title = cleanTitle(doc.question);
+    return {
+      title,
+      topic: doc.topic || 'Code Practice',
+      originalTopic: doc.topic || 'Code Practice',
+      topicOrder: doc.topicOrder || CODE_TOPIC_ORDER[doc.topic] || 99,
+      language: 'javascript',
+      task: (doc.answer && String(doc.answer).trim()) || title,
+      sampleInput: '',
+      expectedOutput: '',
+      constraints: [],
+      hint: doc.notes || '',
+      starterCode: `// ${title}\n`,
+    };
+  }
+
+  if (!CODE_SUBJECTS.includes(doc.subject)) return null;
   const questionText = doc.question;
   if (CODE_THEORY_RE.test(questionText)) return null;
   if (!CODE_KEYWORD_RE.test(questionText)) return null;

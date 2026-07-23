@@ -13,6 +13,9 @@ function formatExpectedOutput(value) {
 async function upsertCodePracticeQuestions() {
   await connectDB();
 
+  // Replace curated code-only rows so topics/titles match the latest practice bank.
+  await Question.deleteMany({ codeOnly: true, tags: 'code-curated' });
+
   let createdOrUpdated = 0;
   const operations = [];
 
@@ -29,25 +32,24 @@ async function upsertCodePracticeQuestions() {
             $set: {
               subject,
               topic: item.topic,
-              topicOrder: index + 1,
+              topicOrder: item.topicOrder || index + 1,
               question: item.title,
               answer: formatExpectedOutput(item.expectedOutput),
               keyPoints: [
                 `Code topic: ${item.topic}`,
                 `Task: ${item.task}`,
                 `Expected output: ${formatExpectedOutput(item.expectedOutput)}`,
+                ...(item.hint ? [`Hint: ${item.hint}`] : []),
               ],
-              difficulty: 'medium',
-              tags: ['code-curated', 'code-practice', subject, item.topic.toLowerCase()],
+              difficulty: item.difficulty || 'medium',
+              tags: [
+                'code-curated',
+                'code-practice',
+                subject,
+                item.topic.toLowerCase(),
+                ...(item.tags || []).slice(0, 6),
+              ],
               codeOnly: true,
-            },
-            $setOnInsert: {
-              bookmarked: false,
-              mastered: false,
-              learned: false,
-              codeCompleted: false,
-              savedCode: '',
-              notes: '',
               order: index + 1,
             },
           },
@@ -68,8 +70,16 @@ async function upsertCodePracticeQuestions() {
     { $sort: { _id: 1 } },
   ]);
 
+  const byTopic = await Question.aggregate([
+    { $match: { codeOnly: true, tags: 'code-curated', subject: 'javascript' } },
+    { $group: { _id: '$topic', count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 10 },
+  ]);
+
   console.log(`Upserted ${createdOrUpdated} Code-only practice questions.`);
   console.log('Curated Code-only counts:', bySubject);
+  console.log('Top JS practice topics:', byTopic);
   await mongoose.disconnect();
 }
 

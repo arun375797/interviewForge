@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Code2, Keyboard, TerminalSquare } from 'lucide-react';
 import { api, SUBJECT_META } from '../api';
 
-const CODE_LANGUAGES = [
+const FALLBACK_CODE_LANGUAGES = [
   {
     key: 'javascript',
     label: 'JavaScript',
@@ -13,6 +13,16 @@ const CODE_LANGUAGES = [
     key: 'dsa',
     label: 'DSA',
     description: 'Practical algorithm and data-structure problems with runnable JavaScript.',
+  },
+  {
+    key: 'nodejs',
+    label: 'Node.js',
+    description: 'Node.js and Express practical exercises for servers, routes, and middleware.',
+  },
+  {
+    key: 'react',
+    label: 'React',
+    description: 'Component, hooks, forms, routing, and state-management practice exercises.',
   },
 ];
 
@@ -26,16 +36,30 @@ export default function Code() {
     let alive = true;
     setLoading(true);
     setError('');
-    Promise.all(
-      CODE_LANGUAGES.map(async (lang) => {
-        const [progress, topics] = await Promise.all([
-          api.getCodeProgress({ subject: lang.key }),
-          api.getCodeTopics({ subject: lang.key }),
-        ]);
-        return { ...lang, progress, topics };
-      })
-    )
-      .then((data) => {
+
+    api
+      .getSubjects()
+      .then(async (subjects) => {
+        const codeSubjects = (subjects || [])
+          .filter((item) => item.supportsCode || item.key === 'javascript' || item.key === 'dsa')
+          .map((item) => ({
+            key: item.key,
+            label: item.label || SUBJECT_META[item.key]?.label || item.key,
+            description:
+              item.description ||
+              SUBJECT_META[item.key]?.blurb ||
+              'Practical coding problems with runnable JavaScript.',
+          }));
+        const languages = codeSubjects.length ? codeSubjects : FALLBACK_CODE_LANGUAGES;
+        const data = await Promise.all(
+          languages.map(async (lang) => {
+            const [progress, topics] = await Promise.all([
+              api.getCodeProgress({ subject: lang.key }),
+              api.getCodeTopics({ subject: lang.key }),
+            ]);
+            return { ...lang, progress, topics };
+          })
+        );
         if (alive) setCards(data);
       })
       .catch((err) => {
